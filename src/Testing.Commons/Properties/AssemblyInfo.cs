@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Testing.Commons")]
-[assembly: AssemblyDescription("Generic library that helps with testing.")]
+[assembly: AssemblyDescription("Utility classes and extensions to facilitate common testing operations.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Testing.Commons")]
