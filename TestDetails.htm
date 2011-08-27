@@ -1,0 +1,413 @@
+<html>
+<body>
+<div id="report" xmlns="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <script type="text/javascript">
+				function toggleDiv(imgId, divId)
+				{
+					eDiv = document.getElementById(divId);
+					eImg = document.getElementById(imgId);
+
+					if ( eDiv.style.display == "none" )
+					{
+						eDiv.style.display="block";
+						eImg.src="/images/arrow_minus_small.gif";
+				 	}
+					else
+					{
+						eDiv.style.display = "none";
+						eImg.src="/images/arrow_plus_small.gif";
+					}
+				}
+				
+				function toggleTr(imgId, trId)
+				{
+					eTr = document.getElementById(trId);
+					eImg = document.getElementById(imgId);
+
+					if ( eTr.style.display == "none" )
+					{
+						/* Setting a TR to display:block doesn't work in proper browsers
+						but IE6's dodgy CSS implementation doesn't know table-row so
+						we need to try...catch it */
+						try
+						{
+							eTr.style.display="table-row";
+						}
+						catch(e)
+						{
+							eTr.style.display="block";
+						}
+						eImg.src="/images/arrow_minus_small.gif";
+				 	}
+					else
+					{
+						eTr.style.display = "none";
+						eImg.src="/images/arrow_plus_small.gif";
+					}
+				}
+			</script>
+  <style type="text/css">
+				* { font: small Verdana }
+				* table { border-collapse:collapse; table-layout: fixed;}
+				* tr { height: 25px; vertical-align: middle; }
+				* th { text-align: center; border-bottom: 1px solid black; border-top: 1px solid black;}
+				* div { box-sizing: content-box; -moz-box-sizing: content-box; }
+				* img { display: inline-block; vertical-align: middle; }
+
+				.col1 { width: 100%; overflow: hidden; min-width: 190px;}
+				.col2 { width: 350px; min-width: 170px; }
+				.col3 { width: 70px; text-align: center; min-width: 40px; max-width: 70px; }
+
+				th.col2 { border-right: 1px solid black; border-left: 1px solid black; -moz-box-sizing: content-box;}
+				td.col2 div { margin: 0px; padding: 0px; float: left; height: 15px; }
+
+				.testAssembly { border: 2px solid black; padding: 5px 2px 5px 2px; margin-bottom: 10px; min-width: 400px}
+				.testAssembly table { width: 100%; min-width: 400px; }
+
+				.testAssembly .testTable { margin: 0 auto; left: 25px; width: 95%; border: 1px solid gray;}
+				.testTable td { border: 1px solid gray; overflow: hidden; padding: 2px 5px 2px 5px; background-color: inherit;}
+				.testName { width: 40%; white-space: nowrap;}
+				.testMsg { width: 60%; }
+				.testMsg div { overflow: auto; width: 100%;}
+
+				tr.succeeded { background-color: rgb(145,222,121);}
+				tr.failed { background-color: rgb(245,147,147);}
+				tr.ignored { background-color: rgb(252,242,80);}
+				tr.unknown { background-color: gray;}
+
+				div.succeeded { border: 1px solid green; background-color: rgb(59,216,23);}
+				div.failed { border: 1px solid rgb(177,26,26); background-color: rgb(228,95,95);}
+				div.ignored { border: 1px solid rgb(233,221,26); background-color: yellow;}
+				div.unknown { border: 1px solid black; background-color: gray;}
+
+				.category { padding-left: 21px; font-style: oblique; font-size: smaller;}
+				.clickable { cursor: pointer; }
+			</style>
+  <div style="margin-bottom: 5px;" onclick="toggleDiv('img-ID0A50AB','ID0A50AB')" class="clickable"> <strong>Testing.Commons.Tests.dll</strong> - 36 tests (36 passed, 0 failed, 0 didn't run)</div>
+  <div class="testAssembly" id="ID0A50AB">
+    <table>
+      <tr>
+        <th class="col1">Test Fixture</th>
+        <th class="col2">Results</th>
+        <th class="col3">Passes</th>
+      </tr>
+      <tr>
+        <td class="col1">
+          <span onclick="toggleTr('img-ID0ASG0TG','ID0ASG0TG')" class="clickable">DateExtensionsTester</span>
+        </td>
+        <td class="col2">
+          <div style="width:114.66666666666667px;" class="succeeded"> </div>
+          <div style="width:114.66666666666667px;" class="succeeded"> </div>
+          <div style="width:114.66666666666667px;" class="succeeded"> </div>
+        </td>
+        <td class="col3">(3/3)</td>
+      </tr>
+      <tr id="ID0ASG0TG" style="display:none;">
+        <td colspan="3">
+          <table class="testTable">
+            <tr class="succeeded">
+              <td class="testName"> Date_CreateIncorrectDay_Exception</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Date_Creation_CorrectData</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Date_Creation_SameAsDateTime</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td class="col1">
+          <span onclick="toggleTr('img-ID0AVC0WC','ID0AVC0WC')" class="clickable">EnumerableExtensionsTester</span>
+        </td>
+        <td class="col2">
+          <div style="width:114.66666666666667px;" class="succeeded"> </div>
+          <div style="width:114.66666666666667px;" class="succeeded"> </div>
+          <div style="width:114.66666666666667px;" class="succeeded"> </div>
+        </td>
+        <td class="col3">(3/3)</td>
+      </tr>
+      <tr id="ID0AVC0WC" style="display:none;">
+        <td colspan="3">
+          <table class="testTable">
+            <tr class="succeeded">
+              <td class="testName"> Iterate_ReturnsEnumerableByRunningThoughIt</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> ThrowingEnumerables_WhenIterated_Throw</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> ThrowingEnumerables_WhenNotIterated_DoNotThrow</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td class="col1">
+          <span onclick="toggleTr('img-ID0AXH0YH','ID0AXH0YH')" class="clickable">GenerateTester</span>
+        </td>
+        <td class="col2">
+          <div style="width:68px;" class="succeeded"> </div>
+          <div style="width:68px;" class="succeeded"> </div>
+          <div style="width:68px;" class="succeeded"> </div>
+          <div style="width:68px;" class="succeeded"> </div>
+          <div style="width:68px;" class="succeeded"> </div>
+        </td>
+        <td class="col3">(5/5)</td>
+      </tr>
+      <tr id="ID0AXH0YH" style="display:none;">
+        <td colspan="3">
+          <table class="testTable">
+            <tr class="succeeded">
+              <td class="testName"> Single_BoundsUnordered_Exception</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Single_OrderedBounds_ADateBetweenBounds</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Stream_BoundsUnordered_Exception</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Stream_OrderedBound_FiniteSucession</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Stream_OrderedBound_InfiniteSucession</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td class="col1">
+          <span onclick="toggleTr('img-ID0A1D02D','ID0A1D02D')" class="clickable">MustTester</span>
+        </td>
+        <td class="col2">
+          <div style="width:41.75px;" class="succeeded"> </div>
+          <div style="width:41.75px;" class="succeeded"> </div>
+          <div style="width:41.75px;" class="succeeded"> </div>
+          <div style="width:41.75px;" class="succeeded"> </div>
+          <div style="width:41.75px;" class="succeeded"> </div>
+          <div style="width:41.75px;" class="succeeded"> </div>
+          <div style="width:41.75px;" class="succeeded"> </div>
+          <div style="width:41.75px;" class="succeeded"> </div>
+        </td>
+        <td class="col3">(8/8)</td>
+      </tr>
+      <tr id="ID0A1D02D" style="display:none;">
+        <td colspan="3">
+          <table class="testTable">
+            <tr class="succeeded">
+              <td class="testName"> Must_Be_CanBeExtended_ByAddingExtensionsMethodsToEntryPoint</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Must_Have_CanBeExtended_ByAddingExtensionsMethodsToEntryPoint</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Must_Match_CanBeExtended_ByAddingExtensionsMethodsToEntryPoint</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Must_NotBe_CanBeExtended_ByAddingExtensionsMethodsToEntryPoint</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Must_NotHave_CanBeExtended_ByAddingExtensionsMethodsToEntryPoint</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Must_NotMatch_CanBeExtended_ByAddingExtensionsMethodsToEntryPoint</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Must_NotSatisfy_CanBeExtended_ByAddingExtensionsMethodsToEntryPoint</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Must_Satisfy_CanBeExtended_ByAddingExtensionsMethodsToEntryPoint</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td class="col1">
+          <span onclick="toggleTr('img-ID0ANBAC0OBAC','ID0ANBAC0OBAC')" class="clickable">OffsetExtensionsTester</span>
+        </td>
+        <td class="col2">
+          <div style="width:114.66666666666667px;" class="succeeded"> </div>
+          <div style="width:114.66666666666667px;" class="succeeded"> </div>
+          <div style="width:114.66666666666667px;" class="succeeded"> </div>
+        </td>
+        <td class="col3">(3/3)</td>
+      </tr>
+      <tr id="ID0ANBAC0OBAC" style="display:none;">
+        <td colspan="3">
+          <table class="testTable">
+            <tr class="succeeded">
+              <td class="testName"> Offset_Creation_CorrectData</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Offset_CreationOfUTC_CorrectData</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Offset_InvalidOffset_Exception</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td class="col1">
+          <span onclick="toggleTr('img-ID0ASCAC0TCAC','ID0ASCAC0TCAC')" class="clickable">SpanExtensionsTester</span>
+        </td>
+        <td class="col2">
+          <div style="width:48px;" class="succeeded"> </div>
+          <div style="width:48px;" class="succeeded"> </div>
+          <div style="width:48px;" class="succeeded"> </div>
+          <div style="width:48px;" class="succeeded"> </div>
+          <div style="width:48px;" class="succeeded"> </div>
+          <div style="width:48px;" class="succeeded"> </div>
+          <div style="width:48px;" class="succeeded"> </div>
+        </td>
+        <td class="col3">(7/7)</td>
+      </tr>
+      <tr id="ID0ASCAC0TCAC" style="display:none;">
+        <td colspan="3">
+          <table class="testTable">
+            <tr class="succeeded">
+              <td class="testName"> Span_DaysCreation_AsExpected</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Span_FluentCreation_AsExpected</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Span_FluentCreationWithWeeks_UseAdd</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Span_HoursCreation_AsExpected</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Span_MinutesCreation_AsExpected</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Span_SecondsCreation_AsExpected</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Span_WeeksCreation_AsExpected</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td class="col1">
+          <span onclick="toggleTr('img-ID0AXEAC0YEAC','ID0AXEAC0YEAC')" class="clickable">TimeExtensionsTester</span>
+        </td>
+        <td class="col2">
+          <div style="width:48px;" class="succeeded"> </div>
+          <div style="width:48px;" class="succeeded"> </div>
+          <div style="width:48px;" class="succeeded"> </div>
+          <div style="width:48px;" class="succeeded"> </div>
+          <div style="width:48px;" class="succeeded"> </div>
+          <div style="width:48px;" class="succeeded"> </div>
+          <div style="width:48px;" class="succeeded"> </div>
+        </td>
+        <td class="col3">(7/7)</td>
+      </tr>
+      <tr id="ID0AXEAC0YEAC" style="display:none;">
+        <td colspan="3">
+          <table class="testTable">
+            <tr class="succeeded">
+              <td class="testName"> Time_Creation_h_CorrectData</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Time_Creation_hm_CorrectData</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Time_Creation_hms_CorrectData</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Time_Creation_NoMembers_IsADate</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Time_Creation_WithSpan_CorrectData</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Time_Creation_WithSpan_DaysDiscarded</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+            <tr class="succeeded">
+              <td class="testName"> Time_Creation_WithTimeOfDay_CorrectData</td>
+              <td class="testMsg">
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div></body>
+</html>
+</body>
+</html>
