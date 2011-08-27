@@ -7,8 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Commons.Tests", "sr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{81126CF1-49ED-41CC-9244-358ABBC98A86}"
 	ProjectSection(SolutionItems) = preProject
-		..\Testing.Commons - Copy\Testing.Commons.build = ..\Testing.Commons - Copy\Testing.Commons.build
-		..\Testing.Commons - Copy\Testing.Commons.nuspec = ..\Testing.Commons - Copy\Testing.Commons.nuspec
+		Testing.Commons.build = Testing.Commons.build
+		Testing.Commons.logo.png = Testing.Commons.logo.png
+		Testing.Commons.nuspec = Testing.Commons.nuspec
 	EndProjectSection
 EndProject
 Global
