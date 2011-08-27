@@ -39,8 +39,18 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnumerableExtensionsTester.cs" />
     <Compile Include="MustTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Time\DateExtensionsTester.cs" />
+    <Compile Include="Time\GenerateTester.cs" />
+    <Compile Include="Time\OffsetExtensionsTester.cs" />
+    <Compile Include="Time\SpanExtensionsTester.cs" />
+    <Compile Include="Time\Support\OffsetConstraint.cs" />
+    <Compile Include="Time\Support\DateConstraint.cs" />
+    <Compile Include="Time\Support\MustExtensions.cs" />
+    <Compile Include="Time\Support\SpanConstraint.cs" />
+    <Compile Include="Time\TimeExtensionsTester.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Testing.Commons\Testing.Commons.csproj">

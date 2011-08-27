@@ -1,5 +1,4 @@
-﻿using Dgg.Testing;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Testing.Commons.Tests
 {
@@ -18,6 +17,13 @@ namespace Testing.Commons.Tests
 		{
 			Assert.That(() => Must.Have.Extended(), Throws.Nothing);
 			Assert.That(() => Must.Have.Extended(3), Throws.Nothing);
+		}
+
+		[Test]
+		public void Must_Satisfy_CanBeExtended_ByAddingExtensionsMethodsToEntryPoint()
+		{
+			Assert.That(() => Must.Satisfy.Extended(), Throws.Nothing);
+			Assert.That(() => Must.Satisfy.Extended(3), Throws.Nothing);
 		}
 
 		[Test]
@@ -42,6 +48,13 @@ namespace Testing.Commons.Tests
 		}
 
 		[Test]
+		public void Must_NotSatisfy_CanBeExtended_ByAddingExtensionsMethodsToEntryPoint()
+		{
+			Assert.That(() => Must.Not.Satisfy.Extended(), Throws.Nothing);
+			Assert.That(() => Must.Not.Satisfy.Extended(3), Throws.Nothing);
+		}
+
+		[Test]
 		public void Must_NotMatch_CanBeExtended_ByAddingExtensionsMethodsToEntryPoint()
 		{
 			Assert.That(() => Must.Not.Match.Extended(), Throws.Nothing);
@@ -57,6 +70,9 @@ namespace Testing.Commons.Tests
 		public static void Extended(this Must.HaveEntryPoint entry) { }
 		public static void Extended(this Must.HaveEntryPoint entry, int argument) { }
 
+		public static void Extended(this Must.SatisfyEntryPoint entry) { }
+		public static void Extended(this Must.SatisfyEntryPoint entry, int argument) { }
+
 		public static void Extended(this Must.MatchEntryPoint entry) { }
 		public static void Extended(this Must.MatchEntryPoint entry, int argument) { }
 
@@ -65,6 +81,9 @@ namespace Testing.Commons.Tests
 
 		public static void Extended(this Must.NotHaveEntryPoint entry) { }
 		public static void Extended(this Must.NotHaveEntryPoint entry, int argument) { }
+
+		public static void Extended(this Must.NotSatisfyEntryPoint entry) { }
+		public static void Extended(this Must.NotSatisfyEntryPoint entry, int argument) { }
 
 		public static void Extended(this Must.NotMatchEntryPoint entry) { }
 		public static void Extended(this Must.NotMatchEntryPoint entry, int argument) { }
