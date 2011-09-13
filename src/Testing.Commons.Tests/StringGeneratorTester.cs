@@ -62,5 +62,25 @@ namespace Testing.Commons.Tests
 			Assert.That(subject.RepeatPattern("abc", 5), Is.EqualTo(
 				"abcab"));
 		}
+
+		#region documentation
+
+		[Test]
+		public void Documentation_Wiki_RepeatPattern()
+		{
+			var subject = new StringGenerator();
+			Assert.That(subject.RepeatPattern("abc", 5), Is.EqualTo("abcab"));
+			Assert.That(subject.RepeatPattern("abc", 2), Is.EqualTo("ab"));
+		}
+
+		[Test]
+		public void Documentation_Wiki_Numeric()
+		{
+			var subject = new StringGenerator();
+			Assert.That(subject.Numeric(3), Is.EqualTo("012"));
+			Assert.That(subject.Numeric(23), Is.EqualTo("01234567890123456789012"));
+		}
+
+		#endregion
 	}
 }

@@ -25,11 +25,17 @@ namespace Testing.Commons.Tests
 		}
 
 		[TestCase('a', "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa")]
+		[TestCase('A', "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa")]
 		[TestCase('b', "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb")]
+		[TestCase('B', "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb")]
 		[TestCase('c', "cccccccc-cccc-cccc-cccc-cccccccccccc")]
+		[TestCase('C', "cccccccc-cccc-cccc-cccc-cccccccccccc")]
 		[TestCase('d', "dddddddd-dddd-dddd-dddd-dddddddddddd")]
+		[TestCase('D', "dddddddd-dddd-dddd-dddd-dddddddddddd")]
 		[TestCase('e', "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee")]
+		[TestCase('E', "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee")]
 		[TestCase('f', "ffffffff-ffff-ffff-ffff-ffffffffffff")]
+		[TestCase('F', "ffffffff-ffff-ffff-ffff-ffffffffffff")]
 		public void Build_CharLetter_GuidCreatedRegardlessOfCase(char lowerCaseFigure, string guid)
 		{
 			Assert.That(GuidBuilder.Build(lowerCaseFigure), Is.EqualTo(new Guid(guid)));
@@ -104,6 +110,27 @@ namespace Testing.Commons.Tests
 				.Property("ActualValue").EqualTo(notAFigure)
 				.And.Message.StringContaining(notAFigureRepresentation)
 				.And.Message.StringContaining(figureDomain);
+		}
+
+		#endregion
+
+		#region documentation
+
+		[Test]
+		public void Documentation_Wiki_ForCharacters()
+		{
+			Assert.That(GuidBuilder.Build('7'), Is.EqualTo(new Guid("77777777-7777-7777-7777-777777777777")));
+			Assert.That(GuidBuilder.Build('a'), Is.EqualTo(new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa")));
+			Assert.That(GuidBuilder.Build('B'), Is.EqualTo(new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb")));
+		}
+
+		[Test]
+		public void Documentation_Wiki_ForNumbers()
+		{
+			Assert.That(GuidBuilder.Build(1), Is.EqualTo(new Guid("11111111-1111-1111-1111-111111111111")));
+			Assert.That(GuidBuilder.Build(11), Is.EqualTo(new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb")));
+			Assert.That(GuidBuilder.Build(0x3), Is.EqualTo(new Guid("33333333-3333-3333-3333-333333333333")));
+			Assert.That(GuidBuilder.Build(0xd), Is.EqualTo(new Guid("dddddddd-dddd-dddd-dddd-dddddddddddd")));
 		}
 
 		#endregion
