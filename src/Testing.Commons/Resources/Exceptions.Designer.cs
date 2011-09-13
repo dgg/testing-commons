@@ -68,5 +68,14 @@ namespace Testing.Commons.Resources {
                 return ResourceManager.GetString("InvertedRangeTemplate", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The start value of the range must not be greater than its end value..
+        /// </summary>
+        internal static string UnorderedRangeBounds {
+            get {
+                return ResourceManager.GetString("UnorderedRangeBounds", resourceCulture);
+            }
+        }
     }
 }

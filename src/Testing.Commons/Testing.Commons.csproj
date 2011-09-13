@@ -40,13 +40,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enumerable.Extensions.cs" />
+    <Compile Include="GuidBuilder.cs" />
     <Compile Include="Must.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Range.cs" />
     <Compile Include="Resources\Exceptions.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Exceptions.resx</DependentUpon>
     </Compile>
+    <Compile Include="StringGenerator.cs" />
     <Compile Include="Time\Date.Extensions.cs" />
     <Compile Include="Time\Generate.cs" />
     <Compile Include="Time\Offset.Extensions.cs" />

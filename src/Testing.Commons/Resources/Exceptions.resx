@@ -120,4 +120,7 @@
   <data name="InvertedRangeTemplate" xml:space="preserve">
     <value>The end date has to occur later than the start date '{0}'.</value>
   </data>
+  <data name="UnorderedRangeBounds" xml:space="preserve">
+    <value>The start value of the range must not be greater than its end value.</value>
+  </data>
 </root>

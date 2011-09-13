@@ -3,7 +3,7 @@
     <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
         <id>Testing.Commons</id>
         <title>Testing Commons</title>
-        <version>0.1.0.0</version>
+        <version>0.2.0.0</version>
         <authors>Daniel González García</authors>
         <licenseUrl>http://www.opensource.org/licenses/bsd-license.php</licenseUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -12,6 +12,7 @@
             Testing.Commons contains classes and extensions that help testing code in general and more specific areas such as configuration and web artifacts.
         </summary>
         <projectUrl>http://www.assembla.com/spaces/testing-commons</projectUrl>
+		<tags>.net C# testing</tags>
 	</metadata>
 	<files>
 		<file src="lib\**\Testing.Commons.dll" target="lib" />
