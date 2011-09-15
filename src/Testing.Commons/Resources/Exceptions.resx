@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="InvertedRangeTemplate" xml:space="preserve">
+  <data name="InvertedRange_Template" xml:space="preserve">
     <value>The end date has to occur later than the start date '{0}'.</value>
+  </data>
+  <data name="MissingExternalConfigurationAssemblyAttribute_Template" xml:space="preserve">
+    <value>The test method needs to be decorated with a '{0}' attribute.</value>
+  </data>
+  <data name="MissingExternalConfigurationAssemblyFile_Template" xml:space="preserve">
+    <value>The file '{0}' does not exist.</value>
+  </data>
+  <data name="NotAnExternalConfigurationAssembly_Template" xml:space="preserve">
+    <value>The file '{0}' is not an assembly.</value>
   </data>
   <data name="UnorderedRangeBounds" xml:space="preserve">
     <value>The start value of the range must not be greater than its end value.</value>

@@ -63,9 +63,36 @@ namespace Testing.Commons.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The end date has to occur later than the start date &apos;{0}&apos;..
         /// </summary>
-        internal static string InvertedRangeTemplate {
+        internal static string InvertedRange_Template {
             get {
-                return ResourceManager.GetString("InvertedRangeTemplate", resourceCulture);
+                return ResourceManager.GetString("InvertedRange_Template", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The test method needs to be decorated with a &apos;{0}&apos; attribute..
+        /// </summary>
+        internal static string MissingExternalConfigurationAssemblyAttribute_Template {
+            get {
+                return ResourceManager.GetString("MissingExternalConfigurationAssemblyAttribute_Template", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The file &apos;{0}&apos; does not exist..
+        /// </summary>
+        internal static string MissingExternalConfigurationAssemblyFile_Template {
+            get {
+                return ResourceManager.GetString("MissingExternalConfigurationAssemblyFile_Template", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The file &apos;{0}&apos; is not an assembly..
+        /// </summary>
+        internal static string NotAnExternalConfigurationAssembly_Template {
+            get {
+                return ResourceManager.GetString("NotAnExternalConfigurationAssembly_Template", resourceCulture);
             }
         }
         

@@ -35,10 +35,23 @@
       <HintPath>..\..\tools\NUnit\framework\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\ConfigurationTester.cs" />
+    <Compile Include="Configuration\ExceptionMessagesTester.cs" />
+    <Compile Include="Configuration\Support\CachingConfiguration.cs" />
+    <Compile Include="Configuration\Support\CachingConfigurationSection.cs" />
+    <Compile Include="Configuration\Support\CollectionCountValidator.cs" />
+    <Compile Include="Configuration\Support\DependantCacheElement.cs" />
+    <Compile Include="Configuration\Support\DependantCachesCollection.cs" />
+    <Compile Include="Configuration\Support\DependenciesCacheElement.cs" />
+    <Compile Include="Configuration\Support\DependenciesCollection.cs" />
+    <Compile Include="Configuration\Support\ExpirationElement.cs" />
+    <Compile Include="Configuration\Support\ExpirationsCollection.cs" />
+    <Compile Include="Configuration\Support\ICachingConfiguration.cs" />
     <Compile Include="EnumerableExtensionsTester.cs" />
     <Compile Include="GuidBuilderTester.cs" />
     <Compile Include="MustTester.cs" />
@@ -60,6 +73,26 @@
       <Project>{45732451-E1A2-4CAC-88C9-D52F055883D3}</Project>
       <Name>Testing.Commons</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Configuration\ConfigFiles\CachingCorrectConfig.dll" />
+    <None Include="Configuration\ConfigFiles\CachingIncorrectConfig_InvalidAttributeValue.dll" />
+    <None Include="Configuration\ConfigFiles\CachingIncorrectConfig_MissingChildrenElement.dll" />
+    <None Include="Configuration\ConfigFiles\CachingIncorrectConfig_MissingRequiredAttribute.dll" />
+    <None Include="Configuration\ConfigFiles\CachingIncorrectConfig_MissingRequiredElement.dll" />
+    <None Include="Configuration\ConfigFiles\CachingIncorrectConfig_UndefinedElement.dll" />
+    <None Include="Configuration\ConfigFiles\CachingIncorrectConfig_WrongAttributeValue.dll" />
+    <None Include="Configuration\ConfigFiles\notAnAssembly.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\ConfigFiles\CachingCorrectConfig.dll.config" />
+    <None Include="Configuration\ConfigFiles\CachingIncorrectConfig_InvalidAttributeValue.dll.config" />
+    <None Include="Configuration\ConfigFiles\CachingIncorrectConfig_MissingChildrenElement.dll.config" />
+    <None Include="Configuration\ConfigFiles\CachingIncorrectConfig_MissingRequiredAttribute.dll.config" />
+    <None Include="Configuration\ConfigFiles\CachingIncorrectConfig_MissingRequiredElement.dll.config" />
+    <None Include="Configuration\ConfigFiles\CachingIncorrectConfig_UndefinedElement.dll.config" />
+    <None Include="Configuration\ConfigFiles\CachingIncorrectConfig_WrongAttributeValue.dll.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
