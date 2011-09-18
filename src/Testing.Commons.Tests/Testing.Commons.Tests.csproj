@@ -38,6 +38,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\ConfigurationTester.cs" />
@@ -67,6 +68,9 @@
     <Compile Include="Time\Support\MustExtensions.cs" />
     <Compile Include="Time\Support\SpanConstraint.cs" />
     <Compile Include="Time\TimeExtensionsTester.cs" />
+    <Compile Include="Web\ProfileTestProviderTester.cs" />
+    <Compile Include="Web\Subjects\ACustomEnum.cs" />
+    <Compile Include="Web\Subjects\ProfileSubjects.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Testing.Commons\Testing.Commons.csproj">
@@ -76,6 +80,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="Configuration\ConfigFiles\CachingCorrectConfig.dll" />
     <None Include="Configuration\ConfigFiles\CachingIncorrectConfig_InvalidAttributeValue.dll" />
     <None Include="Configuration\ConfigFiles\CachingIncorrectConfig_MissingChildrenElement.dll" />
@@ -84,6 +89,9 @@
     <None Include="Configuration\ConfigFiles\CachingIncorrectConfig_UndefinedElement.dll" />
     <None Include="Configuration\ConfigFiles\CachingIncorrectConfig_WrongAttributeValue.dll" />
     <None Include="Configuration\ConfigFiles\notAnAssembly.txt" />
+    <None Include="profile.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\ConfigFiles\CachingCorrectConfig.dll.config" />

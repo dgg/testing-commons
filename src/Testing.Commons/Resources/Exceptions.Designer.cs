@@ -97,6 +97,15 @@ namespace Testing.Commons.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Only subscriptions and unsubscriptions of events are supported..
+        /// </summary>
+        internal static string ParseableEventOperation {
+            get {
+                return ResourceManager.GetString("ParseableEventOperation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The start value of the range must not be greater than its end value..
         /// </summary>
         internal static string UnorderedRangeBounds {

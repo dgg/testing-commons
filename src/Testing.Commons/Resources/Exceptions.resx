@@ -129,6 +129,9 @@
   <data name="NotAnExternalConfigurationAssembly_Template" xml:space="preserve">
     <value>The file '{0}' is not an assembly.</value>
   </data>
+  <data name="ParseableEventOperation" xml:space="preserve">
+    <value>Only subscriptions and unsubscriptions of events are supported.</value>
+  </data>
   <data name="UnorderedRangeBounds" xml:space="preserve">
     <value>The start value of the range must not be greater than its end value.</value>
   </data>

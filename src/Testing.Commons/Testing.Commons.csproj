@@ -38,8 +38,10 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Anonymous.Extensions.cs" />
     <Compile Include="Configuration\ConfigurationAssemblyAttribute.cs" />
     <Compile Include="Configuration\ExceptionMessagePart.cs" />
     <Compile Include="Configuration\ExternalConfiguration.cs" />
@@ -60,6 +62,10 @@
     <Compile Include="Time\Offset.Extensions.cs" />
     <Compile Include="Time\Span.Extensions.cs" />
     <Compile Include="Time\Time.Extensions.cs" />
+    <Compile Include="Type.Extensions.cs" />
+    <Compile Include="Web\ProfileTestProvider.cs" />
+    <Compile Include="Web\Support\EventName.cs" />
+    <Compile Include="Web\Support\EventOperation.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Exceptions.resx">
