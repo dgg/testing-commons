@@ -11,6 +11,12 @@ namespace Testing.Commons.Tests.Web
 	[TestFixture]
 	public class ProfileTestProviderTester
 	{
+		[SetUp]
+		public void Setup()
+		{
+			ProfileTestProvider.SetAsDefault();
+		}
+
 		[Test]
 		public void StubValues_KeyValueParams_PreparesValuesToBeRetrieved()
 		{
@@ -26,7 +32,7 @@ namespace Testing.Commons.Tests.Web
 				new KeyValuePair<string, object>(ProfileSubject.A_NULLABLE_DATE, aDateTime),
 				new KeyValuePair<string, object>(ProfileSubject.AN_INTERVAL, anInterval)
 				);
-
+			
 			var subject = new ProfileSubject("anyName");
 			Assert.That(subject.AString, Is.EqualTo(aString));
 			Assert.That(subject.AnEnum, Is.EqualTo(ACustomEnum.B));

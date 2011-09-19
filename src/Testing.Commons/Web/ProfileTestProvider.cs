@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Reflection;
 using System.Web.Profile;
 
 namespace Testing.Commons.Web
@@ -266,6 +267,30 @@ namespace Testing.Commons.Web
 
 			var settingsValue = new SettingsPropertyValue(settings) { PropertyValue = value };
 			Properties.Add(settingsValue);
+		}
+
+		private static readonly FieldInfo s_Provider = typeof(ProfileManager).GetField("s_Provider", BindingFlags.Static | BindingFlags.NonPublic);
+		/// <summary>
+		/// Sets the default provider (<see cref="ProfileManager.Provider"/>) to a test provider.
+		/// </summary>
+		/// <remarks>Invoke it once per test fixture to ease configuration of the profile system while testing.
+		/// <para>The test provider must have been added to the collection of available providers and should be named <c>test</c>.</para>
+		/// </remarks>
+		public static void SetAsDefault()
+		{
+			SetAsDefault("test");
+		}
+
+		/// <summary>
+		/// Sets the default provider (<see cref="ProfileManager.Provider"/>) to a test provider.
+		/// </summary>
+		/// <remarks>Invoke it once per test fixture to ease configuration of the profile system while testing.
+		/// <para>The test provider must have been added to the collection of available providers and should be named <paramref name="testProviderName"/>.</para>
+		/// </remarks>
+		/// <param name="testProviderName">Name of the test provider.</param>
+		public static void SetAsDefault(string testProviderName)
+		{
+			s_Provider.SetValue(null, ProfileManager.Providers[testProviderName]);
 		}
 	}
 }
