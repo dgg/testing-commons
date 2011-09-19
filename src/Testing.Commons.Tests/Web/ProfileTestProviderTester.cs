@@ -145,7 +145,19 @@ namespace Testing.Commons.Tests.Web
 		}
 
 		[Test]
-		public void AssertPropertyValue_AllowsCheckingTheValueSet()
+		public void AssertPropertyValue_ProfileNotSaved_ProviderIsNotWareOfValue()
+		{
+			ProfileTestProvider provider = (ProfileTestProvider)ProfileManager.Provider;
+			provider.StubValues(new{AString = "previous"});
+			var subject = new ProfileSubject("anyName") { AString = "set" };
+
+			// subject.Save();
+			
+			provider.AssertPropertyValue(ProfileSubject.A_STRING, value => Assert.That(value, Is.Not.EqualTo("set")));
+		}
+
+		[Test]
+		public void AssertPropertyValue_ProfileSaved_AllowsCheckingTheValueSet()
 		{
 			string aString = "aString";
 			DateTime aDateTime = 5.September(2011);
@@ -159,7 +171,7 @@ namespace Testing.Commons.Tests.Web
 				AnEnum = ACustomEnum.B,
 				AnInterval = anInterval
 			}
-				// important to save the values to the profile system
+			// important to save the values to the profile system
 			.Save();
 
 			ProfileTestProvider provider = (ProfileTestProvider)ProfileManager.Provider;
@@ -187,7 +199,7 @@ namespace Testing.Commons.Tests.Web
 		}
 
 		[Test]
-		public void AssertPropertyValue_UndefinedValue_Exception()
+		public void AssertPropertyValue_UndefinedValue_NoException()
 		{
 			new ProfileSubject("anyName")
 			{
