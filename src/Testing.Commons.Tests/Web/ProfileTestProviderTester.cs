@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
 using System.Web.Profile;
 using NUnit.Framework;
 using Testing.Commons.Tests.Web.Subjects;
@@ -32,7 +34,7 @@ namespace Testing.Commons.Tests.Web
 				new KeyValuePair<string, object>(ProfileSubject.A_NULLABLE_DATE, aDateTime),
 				new KeyValuePair<string, object>(ProfileSubject.AN_INTERVAL, anInterval)
 				);
-			
+
 			var subject = new ProfileSubject("anyName");
 			Assert.That(subject.AString, Is.EqualTo(aString));
 			Assert.That(subject.AnEnum, Is.EqualTo(ACustomEnum.B));
@@ -148,11 +150,11 @@ namespace Testing.Commons.Tests.Web
 		public void AssertPropertyValue_ProfileNotSaved_ProviderIsNotWareOfValue()
 		{
 			ProfileTestProvider provider = (ProfileTestProvider)ProfileManager.Provider;
-			provider.StubValues(new{AString = "previous"});
+			provider.StubValues(new { AString = "previous" });
 			var subject = new ProfileSubject("anyName") { AString = "set" };
 
 			// subject.Save();
-			
+
 			provider.AssertPropertyValue(ProfileSubject.A_STRING, value => Assert.That(value, Is.Not.EqualTo("set")));
 		}
 
@@ -171,7 +173,7 @@ namespace Testing.Commons.Tests.Web
 				AnEnum = ACustomEnum.B,
 				AnInterval = anInterval
 			}
-			// important to save the values to the profile system
+				// important to save the values to the profile system
 			.Save();
 
 			ProfileTestProvider provider = (ProfileTestProvider)ProfileManager.Provider;
@@ -210,6 +212,49 @@ namespace Testing.Commons.Tests.Web
 			ProfileTestProvider provider = (ProfileTestProvider)ProfileManager.Provider;
 			Assert.That(() => provider.AssertPropertyValue("notDefinedInConfiguration", _ => { }),
 				Throws.Nothing);
+		}
+
+		[Test]
+		public void Properties_ExposesAllValues()
+		{
+			string aString = "aString";
+			DateTime aDateTime = 5.September(2011);
+			TimeSpan anInterval = 4.Days();
+			byte enumB = 1;
+
+			new ProfileSubject("anyName")
+			{
+				AString = aString,
+				ANullableDate = aDateTime,
+				AnEnum = ACustomEnum.B,
+				AnInterval = anInterval
+			}
+				// important to save the values to the profile system
+			.Save();
+
+			ProfileTestProvider provider = (ProfileTestProvider)ProfileManager.Provider;
+
+			Assert.That(new object[] { aString, aDateTime, enumB, anInterval },
+				Is.SubsetOf(provider.Properties.Cast<SettingsPropertyValue>().Select(v => v.PropertyValue)));
+		}
+
+		[Test]
+		public void Properties_ExposesAllNames()
+		{
+			new ProfileSubject("anyName")
+			{
+				AString = "aString",
+				ANullableDate = 5.September(2011),
+				AnEnum = ACustomEnum.B,
+				AnInterval = 4.Days()
+			}
+				// important to save the values to the profile system
+			.Save();
+
+			ProfileTestProvider provider = (ProfileTestProvider)ProfileManager.Provider;
+
+			Assert.That(new[] { "AString", "ANullableDate", "AnEnum", "AnInterval" },
+				Is.SubsetOf(provider.Properties.Cast<SettingsPropertyValue>().Select(v => v.Name)));
 		}
 	}
 }
