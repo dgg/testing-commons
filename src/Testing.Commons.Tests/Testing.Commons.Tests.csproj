@@ -68,6 +68,10 @@
     <Compile Include="Time\Support\MustExtensions.cs" />
     <Compile Include="Time\Support\SpanConstraint.cs" />
     <Compile Include="Time\TimeExtensionsTester.cs" />
+    <Compile Include="Web\ControlLifecycleTester.cs" />
+    <Compile Include="Web\Subjects\ControlSpy.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Web\ProfileTestProviderTester.cs" />
     <Compile Include="Web\Subjects\ACustomEnum.cs" />
     <Compile Include="Web\Subjects\ProfileSubjects.cs" />

@@ -63,6 +63,7 @@
     <Compile Include="Time\Span.Extensions.cs" />
     <Compile Include="Time\Time.Extensions.cs" />
     <Compile Include="Type.Extensions.cs" />
+    <Compile Include="Web\ControlLifecycle.cs" />
     <Compile Include="Web\ProfileTestProvider.cs" />
     <Compile Include="Web\Support\EventName.cs" />
     <Compile Include="Web\Support\EventOperation.cs" />
