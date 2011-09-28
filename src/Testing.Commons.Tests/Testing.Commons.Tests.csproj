@@ -54,6 +54,7 @@
     <Compile Include="Configuration\Support\ExpirationsCollection.cs" />
     <Compile Include="Configuration\Support\ICachingConfiguration.cs" />
     <Compile Include="EnumerableExtensionsTester.cs" />
+    <Compile Include="Globalization\CultureReseterTester.cs" />
     <Compile Include="GuidBuilderTester.cs" />
     <Compile Include="MustTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

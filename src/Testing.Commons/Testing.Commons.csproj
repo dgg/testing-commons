@@ -47,6 +47,7 @@
     <Compile Include="Configuration\ExternalConfiguration.cs" />
     <Compile Include="Configuration\Messages\Message.Extensions.cs" />
     <Compile Include="Enumerable.Extensions.cs" />
+    <Compile Include="Globalization\CultureReseter.cs" />
     <Compile Include="GuidBuilder.cs" />
     <Compile Include="Must.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
