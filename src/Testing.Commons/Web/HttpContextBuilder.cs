@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
-using System.Linq;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Reflection.Emit;
 using System.Text;
 using System.Threading;
 using System.Web;
@@ -13,11 +11,14 @@ using System.Web.SessionState;
 namespace Testing.Commons.Web
 {
 	/// <summary>
-	/// 
+	/// Allows building custom instances of <see cref="HttpContext"/>
 	/// </summary>
 	public class HttpContextBuilder
 	{
 
+		/// <summary>
+		/// Creates a new instance of the builder.
+		/// </summary>
 		public HttpContextBuilder()
 		{
 			_session = new SessionStateItemCollection();
@@ -28,6 +29,12 @@ namespace Testing.Commons.Web
 		}
 
 		private readonly SessionStateItemCollection _session;
+		/// <summary>
+		/// Adds an item to <see cref="HttpContext.Session"/>.
+		/// </summary>
+		/// <param name="key">The name of the item to add to the session-state collection.</param>
+		/// <param name="value">The value of the item to add to the session-state collection.</param>
+		/// <returns>This instance of the builder.</returns>
 		public HttpContextBuilder AddToSession(string key, object value)
 		{
 			_session[key] = value;
@@ -35,12 +42,23 @@ namespace Testing.Commons.Web
 		}
 
 		private readonly IDictionary _items;
+		/// <summary>
+		/// Adds an element to <see cref="HttpContext.Items"/>.
+		/// </summary>
+		/// <param name="key">The <see cref="Object"/> to use as the key of the element to add.</param>
+		/// <param name="value">The <see cref="Object"/> to use as the value of the element to add. </param>
+		/// <returns>This instance of the builder.</returns>
 		public HttpContextBuilder AddToItems(object key, object value)
 		{
 			_items.Add(key, value);
 			return this;
 		}
 
+		/// <summary>
+		/// Adds multiple elements to <see cref="HttpContext.Items"/>.
+		/// </summary>
+		/// <param name="items">The elements to be added.</param>
+		/// <returns>This instance of the builder.</returns>
 		public HttpContextBuilder AddToItems(IDictionary items)
 		{
 			foreach (object key in items.Keys)
@@ -51,6 +69,12 @@ namespace Testing.Commons.Web
 		}
 
 		private readonly SessionStateItemCollection _application;
+		/// <summary>
+		/// Adds an object to <see cref="HttpContext.Application"/>.
+		/// </summary>
+		/// <param name="key">The name of the object to be added to the collection.</param>
+		/// <param name="value">The value of the object.</param>
+		/// <returns>This instance of the builder.</returns>
 		public HttpContextBuilder AddToApplication(string key, object value)
 		{
 			_application[key] = value;
@@ -58,15 +82,27 @@ namespace Testing.Commons.Web
 		}
 
 		StringBuilder _output;
+		/// <summary>
+		/// Gives access to the output of <see cref="HttpContext.Response"/>.
+		/// </summary>
+		/// <param name="sb">The StringBuilder to write to.</param>
+		/// <returns>This instance of the builder.</returns>
 		public HttpContextBuilder OuputWrittenTo(StringBuilder sb)
 		{
+			new StringWriter(sb);
 			_output = sb;
 			return this;
 		}
 
 		private readonly HttpRequestModel _model;
+		/// <summary>
+		/// Allows customizing elements of <see cref="HttpContext.Request"/>.
+		/// </summary>
 		public HttpRequestBuilder Request { get { return new HttpRequestBuilder(this, _model); } }
 
+		/// <summary>
+		/// The custom built instance.
+		/// </summary>
 		public HttpContext Context
 		{
 			get
@@ -143,7 +179,7 @@ namespace Testing.Commons.Web
 			}
 		}
 
-		public static T getStaticFieldValue<T>(string fieldName, Type type)
+		private static T getStaticFieldValue<T>(string fieldName, Type type)
 		{
 			FieldInfo field = type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Static);
 			if (field != null)
@@ -153,7 +189,7 @@ namespace Testing.Commons.Web
 			return default(T);
 		}
 
-		public static void setPrivateInstanceFieldValue(string memberName, object source, object value)
+		private static void setPrivateInstanceFieldValue(string memberName, object source, object value)
 		{
 			Type type = source.GetType();
 			FieldInfo field = type.GetField(memberName,

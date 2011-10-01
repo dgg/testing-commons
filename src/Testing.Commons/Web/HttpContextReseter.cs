@@ -18,11 +18,21 @@ namespace Testing.Commons.Web
 			return new HttpContextReseter(builder.Context);
 		}
 
+		/// <summary>
+		/// Sets the instance built by the <paramref name="builder"/>
+		/// </summary>
+		/// <param name="builder">Builder of the <see cref="HttpContext"/> instance.</param>
+		/// <returns>A scope object that resets the <see cref="HttpContext.Current"/> after is disposed.</returns>
 		public static HttpContextReseter Set(HttpRequestBuilder builder)
 		{
 			return new HttpContextReseter(builder.Context);
 		}
 
+		/// <summary>
+		/// Sets the instance in <paramref name="context"/>
+		/// </summary>
+		/// <param name="context"><see cref="HttpContext"/> instance.</param>
+		/// <returns>A scope object that resets the <see cref="HttpContext.Current"/> after is disposed.</returns>
 		public static HttpContextReseter Set(HttpContext context)
 		{
 			return new HttpContextReseter(context);
