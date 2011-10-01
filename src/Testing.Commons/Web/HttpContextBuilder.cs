@@ -4,6 +4,7 @@ using System.Linq;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading;
 using System.Web;
@@ -133,7 +134,7 @@ namespace Testing.Commons.Web
 
 		private void iniApplication(HttpContext context)
 		{
-			Type appFactoryType = Type.GetType("System.Web.HttpApplicationFactory, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
+			Type appFactoryType = Type.GetType("System.Web.HttpApplicationFactory, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
 			object appFactory = getStaticFieldValue<object>("_theApplicationFactory", appFactoryType);
 			setPrivateInstanceFieldValue("_state", appFactory, context.Application);
 			foreach (string key in _application.Keys)
