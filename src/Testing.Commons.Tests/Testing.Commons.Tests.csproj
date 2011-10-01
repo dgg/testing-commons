@@ -70,6 +70,9 @@
     <Compile Include="Time\Support\SpanConstraint.cs" />
     <Compile Include="Time\TimeExtensionsTester.cs" />
     <Compile Include="Web\ControlLifecycleTester.cs" />
+    <Compile Include="Web\Subjects\MessageHandler.cs" />
+    <Compile Include="Web\Subjects\DisplayNameLiteral.cs" />
+    <Compile Include="Web\HttpContextBuilderSamplesTester.cs" />
     <Compile Include="Web\HttpContextBuilderTester.cs" />
     <Compile Include="Web\HttpContextReseterTester.cs" />
     <Compile Include="Web\QueryBuilderTester.cs" />
@@ -78,6 +81,11 @@
     </Compile>
     <Compile Include="Web\ProfileTestProviderTester.cs" />
     <Compile Include="Web\Subjects\ACustomEnum.cs" />
+    <Compile Include="Web\Subjects\Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
     <Compile Include="Web\Subjects\ProfileSubjects.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -86,7 +94,13 @@
       <Name>Testing.Commons</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Subjects\Messages.es-ES.resx" />
+    <EmbeddedResource Include="Web\Subjects\Messages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Configuration\ConfigFiles\CachingCorrectConfig.dll" />
