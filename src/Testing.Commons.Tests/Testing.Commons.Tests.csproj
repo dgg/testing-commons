@@ -70,8 +70,8 @@
     <Compile Include="Time\Support\SpanConstraint.cs" />
     <Compile Include="Time\TimeExtensionsTester.cs" />
     <Compile Include="Web\ControlLifecycleTester.cs" />
+    <Compile Include="Web\HttpContextBuilderTester.cs" />
     <Compile Include="Web\HttpContextReseterTester.cs" />
-    <Compile Include="Web\HttpContextFactoryTester.cs" />
     <Compile Include="Web\QueryBuilderTester.cs" />
     <Compile Include="Web\Subjects\ControlSpy.cs">
       <SubType>ASPXCodeBehind</SubType>

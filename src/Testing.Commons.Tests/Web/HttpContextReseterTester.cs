@@ -12,7 +12,7 @@ namespace Testing.Commons.Tests.Web
 		{
 			Assert.That(HttpContext.Current, Is.Null, "we are outside a web application");
 
-			using (HttpContextReseter.Set(new HttpContextFactory(false)))
+			using (HttpContextReseter.Set(new HttpContextBuilder()))
 			{
 				Assert.That(HttpContext.Current, Is.Not.Null, "as if we were inside a limited web application");
 			}

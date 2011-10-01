@@ -9,13 +9,23 @@ namespace Testing.Commons.Web
 	public class HttpContextReseter : IDisposable
 	{
 		/// <summary>
-		/// Sets the instance built by the <paramref name="factory"/>
+		/// Sets the instance built by the <paramref name="builder"/>
 		/// </summary>
-		/// <param name="factory">Builder of the <see cref="HttpContext"/> instance.</param>
+		/// <param name="builder">Builder of the <see cref="HttpContext"/> instance.</param>
 		/// <returns>A scope object that resets the <see cref="HttpContext.Current"/> after is disposed.</returns>
-		public static HttpContextReseter Set(HttpContextFactory factory)
+		public static HttpContextReseter Set(HttpContextBuilder builder)
 		{
-			return new HttpContextReseter(factory.Context);
+			return new HttpContextReseter(builder.Context);
+		}
+
+		public static HttpContextReseter Set(HttpRequestBuilder builder)
+		{
+			return new HttpContextReseter(builder.Context);
+		}
+
+		public static HttpContextReseter Set(HttpContext context)
+		{
+			return new HttpContextReseter(context);
 		}
 		
 		private HttpContextReseter(HttpContext context)
