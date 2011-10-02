@@ -4,6 +4,8 @@ using System.Reflection;
 
 namespace Testing.Commons.Web.Support
 {
+	// code based on Castle.Facilities.EventWiring.NaiveMethodNameExtractor
+	// Copyright 2004-2011 Castle Project - http://www.castleproject.org/
 	internal class EventOperation
 	{
 		internal enum OpCodeValues : ushort

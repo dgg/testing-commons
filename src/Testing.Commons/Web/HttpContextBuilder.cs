@@ -10,6 +10,10 @@ using System.Web.SessionState;
 
 namespace Testing.Commons.Web
 {
+	// code based on http://jasonbock.net/jb/CodeMockHttpContext.aspx and http://haacked.com/archive/2007/06/19/unit-tests-web-code-without-a-web-server-using-httpsimulator.aspx
+	// jasonbocks' contains no copyright
+	// Phil Haack's copyright: Copyright (c) 2005 - 2010, Phil Haack
+
 	/// <summary>
 	/// Allows building custom instances of <see cref="HttpContext"/>
 	/// </summary>
