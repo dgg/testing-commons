@@ -34,18 +34,26 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\tools\NUnit\framework\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Rhino.Mocks">
+      <HintPath>..\..\packages\RhinoMocks.3.6\lib\Rhino.Mocks.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArrangingTestTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Subjects\SubjectWithDependencies.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Testing.Commons.NUnit\Testing.Commons.NUnit.csproj">
       <Project>{D1EC2C82-5C90-43B7-BDAB-A37C8C355EF6}</Project>
       <Name>Testing.Commons.NUnit</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
