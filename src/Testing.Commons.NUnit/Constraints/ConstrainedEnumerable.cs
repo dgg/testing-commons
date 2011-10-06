@@ -35,10 +35,10 @@ namespace Testing.Commons.NUnit.Constraints
 		Array _collection;
 		
 		/// <summary>
-		/// Test whether the constraint is satisfied by a given value
+		/// Test whether the constraint is satisfied by a given value.
 		/// </summary>
-		/// <param name="current">The value to be tested</param>
-		/// <returns>True for success, false for failure</returns>
+		/// <param name="current">The value to be tested.</param>
+		/// <returns>True for success, false for failure.</returns>
 		public override bool Matches(object current)
 		{
 			actual = current;
@@ -65,9 +65,9 @@ namespace Testing.Commons.NUnit.Constraints
 		}
 
 		/// <summary>
-		/// Write the constraint description to a MessageWriter
+		/// Write the constraint description to a MessageWriter.
 		/// </summary>
-		/// <param name="writer">The writer on which the description is displayed</param>
+		/// <param name="writer">The writer on which the description is displayed.</param>
 		public override void WriteDescriptionTo(MessageWriter writer)
 		{
 			_inner.WriteDescriptionTo(writer);

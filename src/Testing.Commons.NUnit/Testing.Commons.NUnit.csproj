@@ -32,6 +32,9 @@
     <DocumentationFile>bin\Release\Testing.Commons.NUnit.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ExpectedObjects">
+      <HintPath>..\..\packages\ExpectedObjects.1.0.0.2\lib\ExpectedObjects.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\lib\NUnit\nunit.framework.dll</HintPath>
     </Reference>
@@ -42,7 +45,10 @@
   <ItemGroup>
     <Compile Include="ArrangingTest.cs" />
     <Compile Include="Constraints\ConstrainedEnumerable.cs" />
+    <Compile Include="Constraints\ExpectedConstraint.cs" />
+    <Compile Include="Constraints\MatchingConstraint.cs" />
     <Compile Include="Constraints\Must.Extensions.cs" />
+    <Compile Include="Constraints\NotMatchingConstraint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -51,7 +57,9 @@
       <Name>Testing.Commons</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

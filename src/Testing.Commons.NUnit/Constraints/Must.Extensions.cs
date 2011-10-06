@@ -29,5 +29,15 @@ namespace Testing.Commons.NUnit.Constraints
 		{
 			return new ConstrainedEnumerable(constraints);
 		}
+
+		public static Constraint Expected(Must.MatchEntryPoint entry, object expected)
+		{
+			return new MatchingConstraint(expected);
+		}
+
+		public static Constraint Expected(Must.NotMatchEntryPoint entry, object expected)
+		{
+			return new NotConstraint(new NotMatchingConstraint(expected));
+		}
 	}
 }
