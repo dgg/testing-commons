@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 using Testing.Commons.NUnit.Constraints;
 using Testing.Commons.NUnit.Tests.Constraints.Support;
 using Testing.Commons.NUnit.Tests.Subjects;
@@ -187,16 +188,10 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			var subject = new MatchingConstraint(new { A = "differentValue" });
 
 			Assert.That(GetMessage(subject, new { A = "b" }),
-				Is.
-				StringStarting(TextMessageWriter.Pfx_Expected).And
-				.StringContaining(".A").And				// member name
-				.StringContaining(valueOf("b")).And				// actual value
-				.StringContaining(valueOf("differentValue")));	// expected value
-		}
-
-		private string valueOf(string str)
-		{
-			return string.Format("\"{0}\"", str);
+				Is.StringStarting(TextMessageWriter.Pfx_Expected) &
+				offendingMember("A")&
+				actualValue("b") &
+				expectedValue("differentValue"));
 		}
 
 		[Test]
@@ -205,15 +200,10 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			var subject = new MatchingConstraint(new { A = "a", B = 1 });
 
 			Assert.That(GetMessage(subject, new { A = "a" }),
-				Is.StringStarting(TextMessageWriter.Pfx_Expected).And
-				.StringContaining(".B").And				// member name
-				.StringContaining("member was missing").And				// actual value
-				.StringContaining(valueOf(1)));	// expected value
-		}
-
-		private string valueOf(object i)
-		{
-			return string.Format("[{0}]", i);
+				Is.StringStarting(TextMessageWriter.Pfx_Expected) &
+				offendingMember("B") &
+				missingMember() &
+				expectedValue(1));
 		}
 
 		[Test]
@@ -240,11 +230,11 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			};
 
 			var subject = new MatchingConstraint(expected);
-			Assert.That(GetMessage(subject, actual), Is
-				.StringStarting(TextMessageWriter.Pfx_Expected).And
-				.StringContaining(".E").And
-				.StringContaining(valueOf(TimeSpan.Zero)).And
-				.StringContaining(valueOf(TimeSpan.MaxValue)));
+			Assert.That(GetMessage(subject, actual),
+				Is.StringStarting(TextMessageWriter.Pfx_Expected) &
+				offendingMember("E") &
+				actualValue(TimeSpan.Zero) &
+				expectedValue(TimeSpan.MaxValue));
 		}
 
 		[Test]
@@ -273,16 +263,17 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 
 			var subject = new MatchingConstraint(expected);
 			Assert.That(GetMessage(subject, complex), 
-				Is.StringStarting(TextMessageWriter.Pfx_Expected).And
-				.StringContaining("CustomerWithCollection.Addresses").And // member container
-				.StringContaining("[1]").And // index of offending collection item
-				.StringContaining(valueOf(0)).And	// expected value
-				.StringContaining("member was missing")
+				Is.StringStarting(TextMessageWriter.Pfx_Expected) &
+				memberContainer("CustomerWithCollection.Addresses") &
+				indexOfOffendingCollectionItem(1) &
+				offendingMember("NotThere") &
+				expectedValue(0) &
+				missingMember()
 				);
 		}
 
 		[Test]
-		public void WriteMessageTo_WithCollectionMemberWithSameShapeAndDifferntValues_False()
+		public void WriteMessageTo_WithCollectionMemberWithSameShapeAndDifferentValues_False()
 		{
 			var complex = new CustomerWithCollection
 			{
@@ -307,13 +298,71 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 
 			var subject = new MatchingConstraint(expected);
 			Assert.That(GetMessage(subject, complex),
-				Is.StringStarting(TextMessageWriter.Pfx_Expected).And
-				.StringContaining("CustomerWithCollection.Addresses").And // member container
-				.StringContaining("[1]").And // index of offending collection item
-				.StringContaining(valueOf("notSameValue")).And	// expected value
-				.StringContaining("zip_2") // actual value
+				Is.StringStarting(TextMessageWriter.Pfx_Expected) &
+				memberContainer("CustomerWithCollection.Addresses") &
+				indexOfOffendingCollectionItem(1) &
+				offendingMember("Zipcode") &
+				expectedValue("notSameValue") &
+				actualValue("zip_2")
 				);
 		}
+
+
+		private Constraint actualValue(string value)
+		{
+			return Is.StringContaining(valueOf(value));
+		}
+
+		private Constraint actualValue(object value)
+		{
+			return Is.StringContaining(valueOf(value));
+		}
+
+		private Constraint expectedValue(string value)
+		{
+			return Is.StringContaining(valueOf(value));
+		}
+
+		private Constraint expectedValue(object value)
+		{
+			return Is.StringContaining(valueOf(value));
+		}
+
+		private Constraint indexOfOffendingCollectionItem(int i)
+		{
+			return Is.StringContaining(indexOf(i));
+		}
+
+		private Constraint memberContainer(string containerName)
+		{
+			return Is.StringContaining(containerName);	
+		}
+
+		private Constraint offendingMember(string memberName)
+		{
+			return Is.StringContaining("." + memberName);
+		}
+
+		private Constraint missingMember()
+		{
+			return Is.StringContaining("member was missing");
+		}
+
+		private string valueOf(string str)
+		{
+			return string.Format("\"{0}\"", str);
+		}
+
+		private string valueOf(object i)
+		{
+			return string.Format("[{0}]", i);
+		}
+
+		private string indexOf(int i)
+		{
+			return string.Format("[{0}]", i);
+		}
+
 		#endregion
 
 	}
