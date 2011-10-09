@@ -13,11 +13,18 @@ namespace Testing.Commons.NUnit.Constraints
 		/// <param name="writer">The writer on which the description is displayed.</param>
 		public override void WriteDescriptionTo(MessageWriter writer)
 		{
-			string results = _writer.GetFormattedResults();
-			string resultWithLeadingAndWithoutTrailing = Environment.NewLine +
-				results.Remove(results.Length - 2, 2);
+			_exposed.WriteExpected(writer);
+		}
 
-			writer.Write(resultWithLeadingAndWithoutTrailing);
+		public override void WriteActualValueTo(MessageWriter writer)
+		{
+			_exposed.WriteActual(writer);
+		}
+
+		public override void WriteMessageTo(MessageWriter writer)
+		{
+			_exposed.WriteMember(writer);
+			base.WriteMessageTo(writer);
 		}
 	}
 }

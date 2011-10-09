@@ -187,11 +187,12 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		{
 			var subject = new MatchingConstraint(new { A = "differentValue" });
 
-			Assert.That(GetMessage(subject, new { A = "b" }),
-				Is.StringStarting(TextMessageWriter.Pfx_Expected) &
-				offendingMember("A")&
-				actualValue("b") &
-				expectedValue("differentValue"));
+			string message = GetMessage(subject, new { A = "b" });
+			Assert.That(message,
+				offendingMember("A") &
+				expectedValue("differentValue") &
+				actualValue("b")
+				);
 		}
 
 		[Test]
@@ -200,10 +201,10 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			var subject = new MatchingConstraint(new { A = "a", B = 1 });
 
 			Assert.That(GetMessage(subject, new { A = "a" }),
-				Is.StringStarting(TextMessageWriter.Pfx_Expected) &
 				offendingMember("B") &
-				missingMember() &
-				expectedValue(1));
+				expectedValue(1) &
+				missingActualMember()
+				);
 		}
 
 		[Test]
@@ -231,7 +232,6 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 
 			var subject = new MatchingConstraint(expected);
 			Assert.That(GetMessage(subject, actual),
-				Is.StringStarting(TextMessageWriter.Pfx_Expected) &
 				offendingMember("E") &
 				actualValue(TimeSpan.Zero) &
 				expectedValue(TimeSpan.MaxValue));
@@ -263,12 +263,11 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 
 			var subject = new MatchingConstraint(expected);
 			Assert.That(GetMessage(subject, complex), 
-				Is.StringStarting(TextMessageWriter.Pfx_Expected) &
 				memberContainer("CustomerWithCollection.Addresses") &
 				indexOfOffendingCollectionItem(1) &
 				offendingMember("NotThere") &
 				expectedValue(0) &
-				missingMember()
+				missingActualMember()
 				);
 		}
 
@@ -298,7 +297,6 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 
 			var subject = new MatchingConstraint(expected);
 			Assert.That(GetMessage(subject, complex),
-				Is.StringStarting(TextMessageWriter.Pfx_Expected) &
 				memberContainer("CustomerWithCollection.Addresses") &
 				indexOfOffendingCollectionItem(1) &
 				offendingMember("Zipcode") &
@@ -310,22 +308,22 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 
 		private Constraint actualValue(string value)
 		{
-			return Is.StringContaining(valueOf(value));
+			return Is.StringContaining(TextMessageWriter.Pfx_Actual + valueOf(value));
 		}
 
 		private Constraint actualValue(object value)
 		{
-			return Is.StringContaining(valueOf(value));
+			return Is.StringContaining(TextMessageWriter.Pfx_Actual + valueOf(value));
 		}
 
 		private Constraint expectedValue(string value)
 		{
-			return Is.StringContaining(valueOf(value));
+			return Is.StringContaining(TextMessageWriter.Pfx_Expected + valueOf(value));
 		}
 
 		private Constraint expectedValue(object value)
 		{
-			return Is.StringContaining(valueOf(value));
+			return Is.StringContaining(TextMessageWriter.Pfx_Expected + valueOf(value));
 		}
 
 		private Constraint indexOfOffendingCollectionItem(int i)
@@ -343,9 +341,9 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			return Is.StringContaining("." + memberName);
 		}
 
-		private Constraint missingMember()
+		private Constraint missingActualMember()
 		{
-			return Is.StringContaining("member was missing");
+			return Is.StringContaining(TextMessageWriter.Pfx_Actual +  "member was missing");
 		}
 
 		private string valueOf(string str)
@@ -355,7 +353,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 
 		private string valueOf(object i)
 		{
-			return string.Format("[{0}]", i);
+			return string.Format("{0}", i);
 		}
 
 		private string indexOf(int i)
