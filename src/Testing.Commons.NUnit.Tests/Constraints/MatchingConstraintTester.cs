@@ -178,12 +178,64 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			var subject = new MatchingConstraint(expected);
 			Assert.That(subject.Matches(complex), Is.False);
 		}
+
+		[Test]
+		public void Matches_WithCollectionMemberAgainstAnonymousWithoutCollection_True()
+		{
+			var withAddresses = new CustomerWithCollection
+			{
+				Name = "name",
+				PhoneNumber = "number",
+				Addresses = new[]
+				{
+					new Address { AddressLineOne = "1_1", AddressLineTwo = "1_2", City = "city_1", State = "state_1", Zipcode = "zip_1"},
+					new Address { AddressLineOne = "2_1", AddressLineTwo = "2_2", City = "city_2", State = "state_2", Zipcode = "zip_2"}
+				}
+			};
+
+			var withoutAddresses = new
+			{
+				Name = "name",
+				PhoneNumber = "number",
+			};
+
+			var subject = new MatchingConstraint(withoutAddresses);
+
+			Assert.That(subject.Matches(withAddresses), Is.True);
+
+		}
+
+		[Test]
+		public void Matches_WithCollectionMemberAgainstSameTypeWithoutCollection_False()
+		{
+			var withAddresses = new CustomerWithCollection
+			{
+				Name = "name",
+				PhoneNumber = "number",
+				Addresses = new[]
+				{
+					new Address { AddressLineOne = "1_1", AddressLineTwo = "1_2", City = "city_1", State = "state_1", Zipcode = "zip_1"},
+					new Address { AddressLineOne = "2_1", AddressLineTwo = "2_2", City = "city_2", State = "state_2", Zipcode = "zip_2"}
+				}
+			};
+
+			var withoutAddresses = new CustomerWithCollection
+			{
+				Name = "name",
+				PhoneNumber = "number",
+			};
+
+			var subject = new MatchingConstraint(withoutAddresses);
+
+			Assert.That(subject.Matches(withAddresses), Is.False);
+
+		}
 		#endregion
 
 		#region WriteMessageTo
 
 		[Test]
-		public void WriteMessageTo_ExpectedWithSameShapeAndDifferentValues_ExpectedContainsMemberDiscrepancies()
+		public void WriteMessageTo_ExpectedWithSameShapeAndDifferentValues_ContainsMemberDiscrepancy()
 		{
 			var subject = new MatchingConstraint(new { A = "differentValue" });
 
@@ -196,7 +248,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		}
 
 		[Test]
-		public void WriteMessageTo_ExpectedIsSupersetOfActual_ExpectedContainsMemberDiscrepancies()
+		public void WriteMessageTo_ExpectedIsSupersetOfActual_ContainsMemberDiscrepancy()
 		{
 			var subject = new MatchingConstraint(new { A = "a", B = 1 });
 
@@ -208,7 +260,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		}
 
 		[Test]
-		public void WriteMessageTo_DifferentDeepValue_ExpectedContainsMemberDiscrepancies()
+		public void WriteMessageTo_DifferentDeepValue_ContainsMemberDiscrepancy()
 		{
 			var actual = new
 			{
@@ -238,7 +290,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		}
 
 		[Test]
-		public void WriteMessageTo_WithCollectionMemberWithDifferentShape_ExpectedIndexedMemberDiscrepancy()
+		public void WriteMessageTo_WithCollectionMemberWithDifferentShape_ContainsIndexedDiscrepancy()
 		{
 			var complex = new CustomerWithCollection
 			{
@@ -262,7 +314,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			};
 
 			var subject = new MatchingConstraint(expected);
-			Assert.That(GetMessage(subject, complex), 
+			Assert.That(GetMessage(subject, complex),
 				memberContainer("CustomerWithCollection.Addresses") &
 				indexOfOffendingCollectionItem(1) &
 				offendingMember("NotThere") &
@@ -272,7 +324,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		}
 
 		[Test]
-		public void WriteMessageTo_WithCollectionMemberWithSameShapeAndDifferentValues_False()
+		public void WriteMessageTo_WithCollectionMemberWithSameShapeAndDifferentValues_ContainsIndexedDiscrepancy()
 		{
 			var complex = new CustomerWithCollection
 			{
@@ -305,6 +357,61 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 				);
 		}
 
+		[Test]
+		public void WriteMessageTo_WithCollectionMemberAgainstSameTypeWithoutCollection_ContainsMemberDiscrepancy()
+		{
+			var withAddresses = new CustomerWithCollection
+			{
+				Name = "name",
+				PhoneNumber = "number",
+				Addresses = new[]
+				{
+					new Address { AddressLineOne = "1_1", AddressLineTwo = "1_2", City = "city_1", State = "state_1", Zipcode = "zip_1"},
+					new Address { AddressLineOne = "2_1", AddressLineTwo = "2_2", City = "city_2", State = "state_2", Zipcode = "zip_2"}
+				}
+			};
+
+			var withoutAddresses = new CustomerWithCollection
+			{
+				Name = "name",
+				PhoneNumber = "number",
+			};
+
+			var subject = new MatchingConstraint(withoutAddresses);
+			Assert.That(GetMessage(subject, withAddresses),
+				memberContainer("Addresses") &
+				expectedValue(null) &
+				actualValue(Is.StringContaining("<")));
+		}
+
+		[Test]
+		public void WriteMessageTo_WithCollectionMemberWithLessMembers_ContainsIndexedDiscrepancy()
+		{
+			var withAddresses = new CustomerWithCollection
+			{
+				Name = "name",
+				PhoneNumber = "number",
+				Addresses = new[]
+				{
+					new Address { AddressLineOne = "1_1", AddressLineTwo = "1_2", City = "city_1", State = "state_1", Zipcode = "zip_1"},
+					new Address { AddressLineOne = "2_1", AddressLineTwo = "2_2", City = "city_2", State = "state_2", Zipcode = "zip_2"}
+				}
+			};
+
+			var lessAddresses = new
+			{
+				Name = "name",
+				PhoneNumber = "number",
+				Addresses = new object[] { new { AddressLineOne = "1_1" } }
+			};
+
+			var subject = new MatchingConstraint(lessAddresses);
+			Assert.That(GetMessage(subject, withAddresses),
+				memberContainer("Addresses") &
+				indexOfOffendingCollectionItem(1) &
+				missingExpectedMember() &
+				actualValue(Is.StringContaining("Address")));
+		}
 
 		private Constraint actualValue(string value)
 		{
@@ -314,6 +421,11 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		private Constraint actualValue(object value)
 		{
 			return Is.StringContaining(TextMessageWriter.Pfx_Actual + valueOf(value));
+		}
+
+		private Constraint actualValue(Constraint constraint)
+		{
+			return Is.StringContaining(TextMessageWriter.Pfx_Actual) & constraint;
 		}
 
 		private Constraint expectedValue(string value)
@@ -333,7 +445,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 
 		private Constraint memberContainer(string containerName)
 		{
-			return Is.StringContaining(containerName);	
+			return Is.StringContaining(containerName);
 		}
 
 		private Constraint offendingMember(string memberName)
@@ -343,17 +455,22 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 
 		private Constraint missingActualMember()
 		{
-			return Is.StringContaining(TextMessageWriter.Pfx_Actual +  "member was missing");
+			return Is.StringContaining(TextMessageWriter.Pfx_Actual + "member was missing");
+		}
+
+		private Constraint missingExpectedMember()
+		{
+			return Is.StringContaining(TextMessageWriter.Pfx_Expected + "nothing");
 		}
 
 		private string valueOf(string str)
 		{
-			return string.Format("\"{0}\"", str);
+			return str == null ? "null" : string.Format("\"{0}\"", str);
 		}
 
 		private string valueOf(object i)
 		{
-			return string.Format("{0}", i);
+			return i == null ? "null" : string.Format("{0}", i);
 		}
 
 		private string indexOf(int i)
@@ -362,6 +479,5 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		}
 
 		#endregion
-
 	}
 }

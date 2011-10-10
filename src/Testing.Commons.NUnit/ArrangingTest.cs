@@ -21,6 +21,16 @@ namespace Testing.Commons.NUnit
 		}
 
 		/// <summary>
+		/// Invokes the "cleanup" part after every test.
+		/// </summary>
+		/// <remarks>Annotated with the <see cref="TearDownAttribute"/> which means that it will be run after each test.</remarks>
+		[TearDown]
+		public void Cleanup()
+		{
+			doCleanup();
+		}
+
+		/// <summary>
 		/// The System Under Test (SUT)
 		/// </summary>
 		protected TSubject Subject { get; set; }
@@ -30,5 +40,10 @@ namespace Testing.Commons.NUnit
 		/// </summary>
 		/// <returns>An instance of the SUT.</returns>
 		protected abstract TSubject initSubject();
+
+		/// <summary>
+		/// Override thos method to perform cleanup tasks after every test.
+		/// </summary>
+		protected virtual void doCleanup() { }
 	}
 }
