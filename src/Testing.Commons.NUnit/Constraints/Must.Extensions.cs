@@ -51,7 +51,7 @@ namespace Testing.Commons.NUnit.Constraints
 		/// <param name="property">A member expression representing a property.</param>
 		/// <param name="constraint">The constraint to apply to the property.</param>
 		/// <returns>Instance built.</returns>
-		public static Constraint Property<T>(this Must.HaveEntryPoint entry, Expression<Func<T, object>> property,  Constraint constraint)
+		public static LambdaPropertyConstraint<T> Property<T>(this Must.HaveEntryPoint entry, Expression<Func<T, object>> property, Constraint constraint)
 		{
 			return new LambdaPropertyConstraint<T>(property, constraint);
 		}
@@ -68,24 +68,60 @@ namespace Testing.Commons.NUnit.Constraints
 			return new NotConstraint(new LambdaPropertyConstraint<T>(property, constraint));
 		}
 
-		public static Constraint PropertyChanged<T>(this Must.RaiseEntryPoint entry, T subject, Expression<Func<T, object>> property) where T : INotifyPropertyChanged
+		/// <summary>
+		/// Builds an instance of <see cref="PropertyChangedConstraint{TSubject}"/> that allows checking whether a type raises a
+		/// <see cref="INotifyPropertyChanged.PropertyChanged"/> when a property is set.
+		/// </summary>
+		/// <typeparam name="TSubject">Type that raises the <see cref="INotifyPropertyChanged.PropertyChanged"/> event.</typeparam>
+		/// <param name="entry">Extension entry point.</param>
+		/// <param name="subject"> Instance of the event raising type.</param>
+		/// <param name="property">Expression that represents the name of a property.</param>
+		/// <returns>Instance built.</returns>
+		public static PropertyChangedConstraint<TSubject> PropertyChanged<TSubject>(this Must.RaiseEntryPoint entry, TSubject subject, Expression<Func<TSubject, object>> property) where TSubject : INotifyPropertyChanged
 		{
-			return new PropertyChangedConstraint<T>(subject, property);
+			return new PropertyChangedConstraint<TSubject>(subject, property);
 		}
 
-		public static Constraint PropertyChanged<T>(this Must.NotRaiseEntryPoint entry, T subject, Expression<Func<T, object>> property) where T : INotifyPropertyChanged
+		/// <summary>
+		/// Builds a negated instance of <see cref="PropertyChangedConstraint{TSubject}"/> that allows checking whether a type raises a
+		/// <see cref="INotifyPropertyChanged.PropertyChanged"/> when a property is set.
+		/// </summary>
+		/// <param name="entry">Extension entry point.</param>
+		/// <param name="subject"> Instance of the event raising type.</param>
+		/// <param name="property">Expression that represents the name of a property.</param>
+		/// <typeparam name="TSubject">Type that raises the <see cref="INotifyPropertyChanged.PropertyChanged"/> event.</typeparam>
+		/// <returns>Instance built.</returns>
+		public static Constraint PropertyChanged<TSubject>(this Must.NotRaiseEntryPoint entry, TSubject subject, Expression<Func<TSubject, object>> property) where TSubject : INotifyPropertyChanged
 		{
-			return new NotConstraint(new PropertyChangedConstraint<T>(subject, property));
+			return new NotConstraint(new PropertyChangedConstraint<TSubject>(subject, property));
 		}
 
-		public static Constraint PropertyChanging<T>(this Must.RaiseEntryPoint entry, T subject, Expression<Func<T, object>> property) where T : INotifyPropertyChanging
+		/// <summary>
+		/// Builds an instance of <see cref="PropertyChangingConstraint{TSubject}"/> that allows checking whether a type raises a
+		/// <see cref="INotifyPropertyChanging.PropertyChanging"/> when a property is set.
+		/// </summary>
+		/// <param name="entry">Extension entry point.</param>
+		/// <param name="subject"> Instance of the event raising type.</param>
+		/// <param name="property">Expression that represents the name of a property.</param>
+		/// <typeparam name="TSubject">Type that raises the <see cref="INotifyPropertyChanging.PropertyChanging"/> event.</typeparam>
+		/// <returns>Instance built.</returns>
+		public static PropertyChangingConstraint<TSubject> PropertyChanging<TSubject>(this Must.RaiseEntryPoint entry, TSubject subject, Expression<Func<TSubject, object>> property) where TSubject : INotifyPropertyChanging
 		{
-			return new PropertyChangingConstraint<T>(subject, property);
+			return new PropertyChangingConstraint<TSubject>(subject, property);
 		}
 
-		public static Constraint PropertyChanging<T>(this Must.NotRaiseEntryPoint entry, T subject, Expression<Func<T, object>> property) where T : INotifyPropertyChanging
+		/// <summary>
+		/// Builds a negated instance of <see cref="PropertyChangingConstraint{TSubject}"/> that allows checking whether a type raises a
+		/// <see cref="INotifyPropertyChanging.PropertyChanging"/> when a property is set.
+		/// </summary>
+		/// <param name="entry">Extension entry point.</param>
+		/// <param name="subject"> Instance of the event raising type.</param>
+		/// <param name="property">Expression that represents the name of a property.</param>
+		/// <typeparam name="TSubject">Type that raises the <see cref="INotifyPropertyChanging.PropertyChanging"/> event.</typeparam>
+		/// <returns>Instance built.</returns>
+		public static Constraint PropertyChanging<TSubject>(this Must.NotRaiseEntryPoint entry, TSubject subject, Expression<Func<TSubject, object>> property) where TSubject : INotifyPropertyChanging
 		{
-			return new NotConstraint(new PropertyChangingConstraint<T>(subject, property));
+			return new NotConstraint(new PropertyChangingConstraint<TSubject>(subject, property));
 		}
 	}
 }

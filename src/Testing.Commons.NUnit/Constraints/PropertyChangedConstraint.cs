@@ -1,57 +1,43 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
-using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
 namespace Testing.Commons.NUnit.Constraints
 {
-	public class PropertyChangedConstraint<T> : Constraint where T : INotifyPropertyChanged
+	/// <summary>
+	/// Allows checking whether a type raises a <see cref="INotifyPropertyChanged.PropertyChanged"/> when a property is set.
+	/// </summary>
+	/// <typeparam name="TSubject">Type that raises the <see cref="INotifyPropertyChanged.PropertyChanged"/> event.</typeparam>
+	public class PropertyChangedConstraint<TSubject> : RaisingConstraint<TSubject, PropertyChangedEventArgs> where TSubject : INotifyPropertyChanged
 	{
-		private readonly T _source;
-		private readonly Constraint _matchingPropertyName;
+		/// <summary>
+		/// Instantiate the constraint
+		/// </summary>
+		/// <param name="subject"> Instance of the event raising type.</param>
+		/// <param name="property">Expression that represents the name of a property.</param>
+		public PropertyChangedConstraint(TSubject subject, Expression<Func<TSubject, object>> property)
+			: base(subject, property, c => Must.Have.Property<PropertyChangedEventArgs>(e => e.PropertyName, c)) { }
 
-		public PropertyChangedConstraint(T source, Expression<Func<T, object>> property)
-		{
-			_source = source;
-			_matchingPropertyName = Must.Have.Property<PropertyChangedEventArgs>(e => e.PropertyName, Is.EqualTo(Name.Of(property)));
-		}
-
-		bool _eventRaised;
-
-		bool _matched;
+		/// <summary>
+		/// Test whether the constraint is satisfied by an
+		/// ActualValueDelegate that returns the value to be tested.
+		/// The default implementation simply evaluates the delegate
+		/// but derived classes may override it to provide for delayed 
+		/// processing.
+		/// </summary>
+		/// <param name="del">An ActualValueDelegate</param>
+		/// <returns>True for success, false for failure</returns>
 		public override bool Matches(ActualValueDelegate del)
 		{
-			_matched = false;
-			_source.PropertyChanged += (sender, e) =>
-			{
-				_eventRaised = true;
-				_matched = _matchingPropertyName.Matches(e);
-			};
+			Subject.PropertyChanged += (sender, e) => OnEventRaised(e);
 			del();
-			return _matched;
-		}
-		public override bool Matches(object current)
-		{
-			return _matched;
+			return Matched;
 		}
 
-		public override void WriteDescriptionTo(MessageWriter writer)
-		{
-			writer.Write("raise event 'PropertyChanged' and ");
-			_matchingPropertyName.WriteDescriptionTo(writer);
-		}
-
-		public override void WriteActualValueTo(MessageWriter writer)
-		{
-			if (!_eventRaised)
-			{
-				writer.Write("event 'PropertyChanged' not raised");
-			}
-			else
-			{
-				_matchingPropertyName.WriteActualValueTo(writer);
-			}
-		}
+		/// <summary>
+		/// Name of the event.
+		/// </summary>
+		protected override string EventName { get { return "PropertyChanged"; } }
 	}
 }
