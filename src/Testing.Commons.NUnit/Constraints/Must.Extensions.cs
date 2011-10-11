@@ -70,7 +70,22 @@ namespace Testing.Commons.NUnit.Constraints
 
 		public static Constraint PropertyChanged<T>(this Must.RaiseEntryPoint entry, T subject, Expression<Func<T, object>> property) where T : INotifyPropertyChanged
 		{
-			return new RaisesPropertyChangedConstraint<T>(subject, property);
+			return new PropertyChangedConstraint<T>(subject, property);
+		}
+
+		public static Constraint PropertyChanged<T>(this Must.NotRaiseEntryPoint entry, T subject, Expression<Func<T, object>> property) where T : INotifyPropertyChanged
+		{
+			return new NotConstraint(new PropertyChangedConstraint<T>(subject, property));
+		}
+
+		public static Constraint PropertyChanging<T>(this Must.RaiseEntryPoint entry, T subject, Expression<Func<T, object>> property) where T : INotifyPropertyChanging
+		{
+			return new PropertyChangingConstraint<T>(subject, property);
+		}
+
+		public static Constraint PropertyChanging<T>(this Must.NotRaiseEntryPoint entry, T subject, Expression<Func<T, object>> property) where T : INotifyPropertyChanging
+		{
+			return new NotConstraint(new PropertyChangingConstraint<T>(subject, property));
 		}
 	}
 }
