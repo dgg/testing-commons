@@ -14,5 +14,15 @@ namespace Testing.Commons.NUnit.Tests.Constraints.Support
 
 			return writer.ToString();
 		}
+
+		protected string GetMessage<T>(T subject, ActualValueDelegate actual) where T : Constraint
+		{
+			TextMessageWriter writer = new TextMessageWriter();
+
+			subject.Matches(actual);
+			subject.WriteMessageTo(writer);
+
+			return writer.ToString();
+		}
 	}
 }

@@ -134,6 +134,31 @@
 		public static MatchEntryPoint Match { get { return _matchEntryPoint; } }
 
 		/// <summary>
+		/// Allows meaningful extensions for constraints for event raising types.
+		/// </summary>
+		public class RaiseEntryPoint
+		{
+			internal RaiseEntryPoint() { }
+		}
+
+		/// <summary>
+		/// Allows meaningful negative extensions for constraints for event raising types.
+		/// </summary>
+		public class NotRaiseEntryPoint
+		{
+			internal NotRaiseEntryPoint() { }
+		}
+
+		private static readonly RaiseEntryPoint _raiseEntryPoint = new RaiseEntryPoint();
+		/// <summary>
+		/// Allows meaningful extensions for types raising events.
+		/// </summary>
+		/// <example>In NUnit:
+		/// <code>Assert.That(()=>instance.Property = value, Must.Raise.SomeEvent(instance, i => i.Property))</code>.
+		/// </example>
+		public static RaiseEntryPoint Raise { get { return _raiseEntryPoint; } }
+
+		/// <summary>
 		/// Allows easy extensibility of negative assertions for testing frameworks.
 		/// </summary>
 		/// <example>In NUnit:
@@ -187,6 +212,15 @@
 			/// <code>Assert.That("asd", Must.Not.Match.String("ds*"))</code>
 			/// where <c>.String()</c> returns a custom assertion.</example>
 			public static NotMatchEntryPoint Match { get { return _matchEntryPoint; } }
+
+			private static readonly NotRaiseEntryPoint _raiseEntryPoint = new NotRaiseEntryPoint();
+			/// <summary>
+			/// Allows meaningful negative extensions for constraints for event raising types.
+			/// </summary>
+			/// <example>In NUnit:
+			/// <code>Assert.That(()=>instance.Property = value, Must.Not.Raise.SomeEvent(instance, i => i.Property))</code>.
+			/// </example>
+			public static NotRaiseEntryPoint Raise { get { return _raiseEntryPoint; } }
 		}
 		// ReSharper restore MemberHidesStaticFromOuterClass
 	}

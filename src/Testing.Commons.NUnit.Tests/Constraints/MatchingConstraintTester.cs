@@ -479,5 +479,17 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		}
 
 		#endregion
+
+		[Test]
+		public void CanBeNewedUp()
+		{
+			Assert.That(new { A = "a", B = "b" }, new MatchingConstraint(new { A = "a" }));
+		}
+
+		[Test]
+		public void CanBeCreatedWithExtension()
+		{
+			Assert.That(new { A = "a", B = "b" }, Must.Match.Expected(new { A = "a" }));
+		}
 	}
 }

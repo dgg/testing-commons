@@ -44,7 +44,9 @@
   <ItemGroup>
     <Compile Include="ArrangingTestTester.cs" />
     <Compile Include="Constraints\ConstrainedEnumerableTester.cs" />
+    <Compile Include="Constraints\LambdaPropertyConstraintTester.cs" />
     <Compile Include="Constraints\MatchingConstraintTester.ProblemExploration.cs" />
+    <Compile Include="Constraints\RaisesPropertyChangedConstraintTester.cs" />
     <Compile Include="Constraints\Support\ConstraintTesterBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Subjects\Address.cs" />
@@ -52,6 +54,7 @@
     <Compile Include="Subjects\CustomerWithCollection.cs" />
     <Compile Include="Subjects\FlatCustomer.cs" />
     <Compile Include="Constraints\MatchingConstraintTester.cs" />
+    <Compile Include="Subjects\IRaisingSubject.cs" />
     <Compile Include="Subjects\SubjectWithDependencies.cs" />
   </ItemGroup>
   <ItemGroup>

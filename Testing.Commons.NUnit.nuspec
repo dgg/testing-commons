@@ -14,7 +14,8 @@
         <projectUrl>http://www.assembla.com/spaces/testing-commons</projectUrl>
 		<tags>.net C# testing NUnit</tags>
 		<dependencies>
-			<dependency id="testing.commons" version="1.0.0.0" />
+			<dependency id="testing.commons" version="1.0.1.0" />
+			<dependency id="ExpectedObjects" version="1.0.0.2" />
 		</dependencies>
 	</metadata>
 	<files>
