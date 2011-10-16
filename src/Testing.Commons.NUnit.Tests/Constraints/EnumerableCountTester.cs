@@ -9,7 +9,7 @@ using Testing.Commons.NUnit.Tests.Constraints.Support;
 namespace Testing.Commons.NUnit.Tests.Constraints
 {
 	[TestFixture]
-	public class EnumerableCountTester : ConstraintTesterBase
+	public class EnumerableCountContraintTester : ConstraintTesterBase
 	{
 		#region Exploratory
 
@@ -99,7 +99,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		}
 
 		[Test]
-		public void WriteMessageTo_NulEnumerable_ExpectedContainsIEnumerable()
+		public void WriteMessageTo_NullEnumerable_ExpectedContainsIEnumerable()
 		{
 			var subject = new EnumerableCountConstraint(null);
 			Assert.That(GetMessage(subject, (IEnumerable)null),
@@ -107,7 +107,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		}
 
 		[Test]
-		public void WriteMessageTo_NulEnumerable_ActualConstainsNull()
+		public void WriteMessageTo_NullEnumerable_ActualConstainsNull()
 		{
 			var subject = new EnumerableCountConstraint(null);
 			Assert.That(GetMessage(subject, (IEnumerable)null),
@@ -125,9 +125,9 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		[Test]
 		public void WriteMessageTo_EnumerableWithNotMatchingCount_ActualContainsCollectionValues()
 		{
-			IEnumerable e = new[] { 1, 2, 3 }.Where(i => i <= 2);
+			IEnumerable e = new[] { '1', '2', '3' }.Where(i => i <= '2');
 			var subject = new EnumerableCountConstraint(Is.GreaterThan(4));
-			Assert.That(GetMessage(subject, e), Is.StringContaining(TextMessageWriter.Pfx_Actual + "< 1, 2 >"));
+			Assert.That(GetMessage(subject, e), Is.StringContaining(TextMessageWriter.Pfx_Actual + "2 -> < '1', '2' >"));
 		}
 
 		#endregion
@@ -143,7 +143,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		public void CanBeCreatedWithExtension()
 		{
 			IEnumerable e = new[] { 1, 2, 3 }.Where(i => i <= 2);
-			Assert.That(e, Must.Have.Count(Is.LessThan(3)));
+			Assert.That(e, Must.Have.Count(Is.LessThan(1)));
 		}
 	}
 }

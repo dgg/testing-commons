@@ -29,6 +29,8 @@ namespace Testing.Commons.NUnit.Constraints
 
 		public override void WriteActualValueTo(MessageWriter writer)
 		{
+			_decoree.WriteActualValueTo(writer);
+			CustomTextMessageWriter.WriteActualConnector(writer);
 			writer.WriteActualValue(((IEnumerable)actual).Cast<object>().ToArray());
 		}
 	}

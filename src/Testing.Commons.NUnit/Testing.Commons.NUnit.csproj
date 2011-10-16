@@ -46,6 +46,7 @@
     <Compile Include="ArrangingTest.cs" />
     <Compile Include="Constraints\ConstrainedEnumerable.cs" />
     <Compile Include="Constraints\CountConstraint.Extensions.cs" />
+    <Compile Include="Constraints\CustomTextMessageWriter.cs" />
     <Compile Include="Constraints\EnumerableCountConstraint.cs" />
     <Compile Include="Constraints\ExposingWriter.cs" />
     <Compile Include="Constraints\LambdaPropertyConstraint.cs" />

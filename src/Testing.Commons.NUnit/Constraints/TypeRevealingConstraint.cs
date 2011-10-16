@@ -17,7 +17,7 @@ namespace Testing.Commons.NUnit.Constraints
 			{
 				writer.WritePredicate("instance of");
 				writer.WriteActualValue((actual == null) ? null : actual.GetType());
-				writer.Write(" => ");
+				CustomTextMessageWriter.WriteActualConnector(writer);
 				writer.WriteValue(actual);
 			}
 			else
