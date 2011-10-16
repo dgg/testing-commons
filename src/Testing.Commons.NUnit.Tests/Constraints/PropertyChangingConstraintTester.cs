@@ -111,24 +111,5 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 
 			Assert.That(() => raising.I = 3, Must.Raise.PropertyChanging(raising, r => r.I));
 		}
-
-		[Test]
-		public void Negate_EventIsNotRaised_Passes()
-		{
-			IRaisingSubject raising = MockRepository.GenerateMock<IRaisingSubject>();
-			
-			Assert.That(() => raising.I = 3, Must.Not.Raise.PropertyChanging(raising, r => r.I));
-		}
-
-		[Test]
-		public void Negate_PropertyNameIsWrong_Passes()
-		{
-			IRaisingSubject raising = MockRepository.GenerateMock<IRaisingSubject>();
-			raising.Stub(r => r.I = Arg<int>.Is.Anything)
-				.WhenCalled(i => raising.Raise(r => r.PropertyChanging += null,
-					raising, new PropertyChangingEventArgs("Wrong")));
-
-			Assert.That(() => raising.I = 3, Must.Not.Raise.PropertyChanging(raising, r => r.I));
-		}
 	}
 }

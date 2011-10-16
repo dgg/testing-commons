@@ -57,18 +57,6 @@ namespace Testing.Commons.NUnit.Constraints
 		}
 
 		/// <summary>
-		/// Builds an instance of <see cref="LambdaPropertyConstraint{T}"/> to check the negated <paramref name="constraint"/> over the value of the property expressed by <paramref name="property"/>
-		/// </summary>
-		/// <param name="entry">Extension entry point.</param>
-		/// <param name="property">A member expression representing a property.</param>
-		/// <param name="constraint">The constraint which negation to apply to the property.</param>
-		/// <returns>Instance built.</returns>
-		public static Constraint Property<T>(this Must.NotHaveEntryPoint entry, Expression<Func<T, object>> property, Constraint constraint)
-		{
-			return new NotConstraint(new LambdaPropertyConstraint<T>(property, constraint));
-		}
-
-		/// <summary>
 		/// Builds an instance of <see cref="PropertyChangedConstraint{TSubject}"/> that allows checking whether a type raises a
 		/// <see cref="INotifyPropertyChanged.PropertyChanged"/> when a property is set.
 		/// </summary>
@@ -80,20 +68,6 @@ namespace Testing.Commons.NUnit.Constraints
 		public static PropertyChangedConstraint<TSubject> PropertyChanged<TSubject>(this Must.RaiseEntryPoint entry, TSubject subject, Expression<Func<TSubject, object>> property) where TSubject : INotifyPropertyChanged
 		{
 			return new PropertyChangedConstraint<TSubject>(subject, property);
-		}
-
-		/// <summary>
-		/// Builds a negated instance of <see cref="PropertyChangedConstraint{TSubject}"/> that allows checking whether a type raises a
-		/// <see cref="INotifyPropertyChanged.PropertyChanged"/> when a property is set.
-		/// </summary>
-		/// <param name="entry">Extension entry point.</param>
-		/// <param name="subject"> Instance of the event raising type.</param>
-		/// <param name="property">Expression that represents the name of a property.</param>
-		/// <typeparam name="TSubject">Type that raises the <see cref="INotifyPropertyChanged.PropertyChanged"/> event.</typeparam>
-		/// <returns>Instance built.</returns>
-		public static Constraint PropertyChanged<TSubject>(this Must.NotRaiseEntryPoint entry, TSubject subject, Expression<Func<TSubject, object>> property) where TSubject : INotifyPropertyChanged
-		{
-			return new NotConstraint(new PropertyChangedConstraint<TSubject>(subject, property));
 		}
 
 		/// <summary>
@@ -111,17 +85,14 @@ namespace Testing.Commons.NUnit.Constraints
 		}
 
 		/// <summary>
-		/// Builds a negated instance of <see cref="PropertyChangingConstraint{TSubject}"/> that allows checking whether a type raises a
-		/// <see cref="INotifyPropertyChanging.PropertyChanging"/> when a property is set.
+		/// Builds an instance of <see cref="EnumerableCountConstraint"/> that allows asserting on the number of elements of any instance of <see cref="System.Collections.IEnumerable"/>.
 		/// </summary>
 		/// <param name="entry">Extension entry point.</param>
-		/// <param name="subject"> Instance of the event raising type.</param>
-		/// <param name="property">Expression that represents the name of a property.</param>
-		/// <typeparam name="TSubject">Type that raises the <see cref="INotifyPropertyChanging.PropertyChanging"/> event.</typeparam>
+		/// <param name="countConstraint">The constraint to be applied to the element count.</param>
 		/// <returns>Instance built.</returns>
-		public static Constraint PropertyChanging<TSubject>(this Must.NotRaiseEntryPoint entry, TSubject subject, Expression<Func<TSubject, object>> property) where TSubject : INotifyPropertyChanging
+		public static Constraint Count(this Must.HaveEntryPoint entry, Constraint countConstraint)
 		{
-			return new NotConstraint(new PropertyChangingConstraint<TSubject>(subject, property));
+			return new EnumerableCountConstraint(countConstraint);
 		}
 	}
 }

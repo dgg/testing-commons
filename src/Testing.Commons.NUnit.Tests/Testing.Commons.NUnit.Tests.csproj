@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="ArrangingTestTester.cs" />
     <Compile Include="Constraints\ConstrainedEnumerableTester.cs" />
+    <Compile Include="Constraints\EnumerableCountTester.cs" />
     <Compile Include="Constraints\PropertyChangingConstraintTester.cs" />
     <Compile Include="Constraints\LambdaPropertyConstraintTester.cs" />
     <Compile Include="Constraints\MatchingConstraintTester.ProblemExploration.cs" />
