@@ -175,6 +175,9 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 				}
 			};
 
+			Assert.That(complex, Must.Match.Expected(expected));
+			
+
 			var subject = new MatchingConstraint(expected);
 			Assert.That(subject.Matches(complex), Is.False);
 		}
