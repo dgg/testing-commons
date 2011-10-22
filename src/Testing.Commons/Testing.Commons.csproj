@@ -38,7 +38,10 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Anonymous.Extensions.cs" />
@@ -57,6 +60,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Exceptions.resx</DependentUpon>
     </Compile>
+    <Compile Include="Serialization\RoundtripBinarySerializer.cs" />
+    <Compile Include="Serialization\RoundtripDataContractSerializer.cs" />
+    <Compile Include="Serialization\RoundtripJsonSerializer.cs" />
+    <Compile Include="Serialization\RoundtripXmlSerializer.cs" />
     <Compile Include="StringGenerator.cs" />
     <Compile Include="Time\Date.Extensions.cs" />
     <Compile Include="Time\Generate.cs" />
