@@ -48,7 +48,7 @@ namespace Testing.Commons.Tests.Serialization
 				Serializable deserialized = subject.Deserialize();
 
 				Assert.That(deserialized, Is.Not.SameAs(serialized)
-					.And.Property("S").EqualTo("S")
+					.And.Property("S").EqualTo("s")
 					.And.Property("D").EqualTo(3m));
 			}
 		}
