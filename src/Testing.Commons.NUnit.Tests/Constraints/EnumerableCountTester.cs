@@ -143,7 +143,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		public void CanBeCreatedWithExtension()
 		{
 			IEnumerable e = new[] { 1, 2, 3 }.Where(i => i <= 2);
-			Assert.That(e, Must.Have.Count(Is.LessThan(1)));
+			Assert.That(e, Must.Have.Count(Is.LessThan(3)));
 		}
 	}
 }

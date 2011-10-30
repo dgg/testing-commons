@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using System.Web.Script.Serialization;
 using NUnit.Framework.Constraints;
+using Testing.Commons.Serialization;
 
 namespace Testing.Commons.NUnit.Constraints
 {
@@ -93,6 +95,51 @@ namespace Testing.Commons.NUnit.Constraints
 		public static Constraint Count(this Must.HaveEntryPoint entry, Constraint countConstraint)
 		{
 			return new EnumerableCountConstraint(countConstraint);
+		}
+
+		public static Constraint BinarySerializable<T>(this Must.BeEntryPoint entryPoint, Constraint constraintOverDeserialized)
+		{
+			return new SerializationConstraint<T>(new BinaryRoundtripSerializer<T>(), constraintOverDeserialized);
+		}
+
+		public static Constraint XmlSerializable<T>(this Must.BeEntryPoint entryPoint, Constraint constraintOverDeserialized)
+		{
+			return new SerializationConstraint<T>(new XmlRoundtripSerializer<T>(), constraintOverDeserialized);
+		}
+
+		public static Constraint DataContractSerializable<T>(this Must.BeEntryPoint entryPoint, Constraint constraintOverDeserialized)
+		{
+			return new SerializationConstraint<T>(new DataContractRoundtripSerializer<T>(), constraintOverDeserialized);
+		}
+
+		public static Constraint JsonSerializable<T>(this Must.BeEntryPoint entryPoint, Constraint constraintOverDeserialized, params JavaScriptConverter[] converters)
+		{
+			return new SerializationConstraint<T>(new JsonRoundtripSerializer<T>(converters), constraintOverDeserialized);
+		}
+
+		public static Constraint Serializable<T>(this Must.BeEntryPoint entryPoint, IRoundTripSerializer<T> serializer, Constraint constraintOverDeserialized)
+		{
+			return new SerializationConstraint<T>(serializer, constraintOverDeserialized);
+		}
+
+		public static Constraint XmlDeserializable<T>(this Must.BeEntryPoint entryPoint, Constraint constraintOverDeserialized)
+		{
+			return new DeserializationConstraint<T>(new XmlDeserializer(), constraintOverDeserialized);
+		}
+
+		public static Constraint DataContractDeserializable<T>(this Must.BeEntryPoint entryPoint, Constraint constraintOverDeserialized)
+		{
+			return new DeserializationConstraint<T>(new DataContractDeserializer(), constraintOverDeserialized);
+		}
+
+		public static Constraint JsonDeserializable<T>(this Must.BeEntryPoint entryPoint, Constraint constraintOverDeserialized, params JavaScriptConverter[] converters)
+		{
+			return new DeserializationConstraint<T>(new JsonDeserializer(converters), constraintOverDeserialized);
+		}
+
+		public static Constraint JsonDeserializable<T>(this Must.BeEntryPoint entryPoint, IDeserializer deserializer, Constraint constraintOverDeserialized)
+		{
+			return new DeserializationConstraint<T>(deserializer, constraintOverDeserialized);
 		}
 	}
 }

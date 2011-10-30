@@ -107,7 +107,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			IRaisingSubject raising = MockRepository.GenerateMock<IRaisingSubject>();
 			raising.Stub(r => r.I = Arg<int>.Is.Anything)
 				.WhenCalled(i => raising.Raise(r => r.PropertyChanging += null,
-					raising, new PropertyChangingEventArgs("wrongValue")));
+					raising, new PropertyChangingEventArgs("I")));
 
 			Assert.That(() => raising.I = 3, Must.Raise.PropertyChanging(raising, r => r.I));
 		}

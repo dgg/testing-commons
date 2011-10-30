@@ -60,10 +60,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Exceptions.resx</DependentUpon>
     </Compile>
-    <Compile Include="Serialization\RoundtripBinarySerializer.cs" />
-    <Compile Include="Serialization\RoundtripDataContractSerializer.cs" />
-    <Compile Include="Serialization\RoundtripJsonSerializer.cs" />
-    <Compile Include="Serialization\RoundtripXmlSerializer.cs" />
+    <Compile Include="Serialization\DataContractDeserializer.cs" />
+    <Compile Include="Serialization\JsonDeserializer.cs" />
+    <Compile Include="Serialization\IDeserializer.cs" />
+    <Compile Include="Serialization\IRoundTripSerializer.cs" />
+    <Compile Include="Serialization\BinaryRoundtripSerializer.cs" />
+    <Compile Include="Serialization\DataContractRoundtripSerializer.cs" />
+    <Compile Include="Serialization\JsonRoundtripSerializer.cs" />
+    <Compile Include="Serialization\XmlDeserializer.cs" />
+    <Compile Include="Serialization\XmlRoundtripSerializer.cs" />
     <Compile Include="StringGenerator.cs" />
     <Compile Include="Time\Date.Extensions.cs" />
     <Compile Include="Time\Generate.cs" />

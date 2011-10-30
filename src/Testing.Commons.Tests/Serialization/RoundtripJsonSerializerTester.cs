@@ -10,7 +10,7 @@ namespace Testing.Commons.Tests.Serialization
 		[Test]
 		public void Serialize_SerializableType_AStringRepresentationOfSerializedObject()
 		{
-			using (var subject = new RoundtripJsonSerializer<Serializable>())
+			using (var subject = new JsonRoundtripSerializer<Serializable>())
 			{
 				string representation = subject.Serialize(new Serializable { S = "s", D = 3m });
 
@@ -21,7 +21,7 @@ namespace Testing.Commons.Tests.Serialization
 		[Test]
 		public void Deserialize_BeforeSerializing_Null()
 		{
-			using (var subject = new RoundtripJsonSerializer<Serializable>())
+			using (var subject = new JsonRoundtripSerializer<Serializable>())
 			{
 				Assert.That(subject.Deserialize(), Is.Null);
 			}
@@ -30,7 +30,7 @@ namespace Testing.Commons.Tests.Serialization
 		[Test]
 		public void Deserialize_AfterSerializingSerializableType_InitialObject()
 		{
-			using (var subject = new RoundtripJsonSerializer<Serializable>())
+			using (var subject = new JsonRoundtripSerializer<Serializable>())
 			{
 				var serialized = new Serializable { S = "s", D = 3m };
 				subject.Serialize(serialized);

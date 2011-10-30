@@ -11,7 +11,7 @@ namespace Testing.Commons.Tests.Serialization
 		[Test]
 		public void Serialize_SerializableType_AStringRepresentationOfSerializedObject()
 		{
-			using (var subject = new RoundtripBinarySerializer<Serializable>())
+			using (var subject = new BinaryRoundtripSerializer<Serializable>())
 			{
 				string representation = subject.Serialize(new Serializable { S = "s", D = 3m });
 
@@ -22,7 +22,7 @@ namespace Testing.Commons.Tests.Serialization
 		[Test]
 		public void Serialize_NonSerializableType_Exception()
 		{
-			using (var subject = new RoundtripBinarySerializer<NonSerializable>())
+			using (var subject = new BinaryRoundtripSerializer<NonSerializable>())
 			{
 				Assert.That(() => subject.Serialize(new NonSerializable("s")), Throws.InstanceOf<SerializationException>());
 			}
@@ -31,7 +31,7 @@ namespace Testing.Commons.Tests.Serialization
 		[Test]
 		public void Deserialize_BeforeSerializing_Exception()
 		{
-			using (var subject = new RoundtripBinarySerializer<Serializable>())
+			using (var subject = new BinaryRoundtripSerializer<Serializable>())
 			{
 				Assert.That(() => subject.Deserialize(), Throws.InstanceOf<SerializationException>());
 			}
@@ -40,7 +40,7 @@ namespace Testing.Commons.Tests.Serialization
 		[Test]
 		public void Deserialize_AfterSerializingSerializableType_InitialObject()
 		{
-			using (var subject = new RoundtripBinarySerializer<Serializable>())
+			using (var subject = new BinaryRoundtripSerializer<Serializable>())
 			{
 				var serialized = new Serializable { S = "s", D = 3m };
 				subject.Serialize(serialized);
@@ -48,7 +48,7 @@ namespace Testing.Commons.Tests.Serialization
 				Serializable deserialized = subject.Deserialize();
 
 				Assert.That(deserialized, Is.Not.SameAs(serialized)
-					.And.Property("S").EqualTo("s")
+					.And.Property("S").EqualTo("S")
 					.And.Property("D").EqualTo(3m));
 			}
 		}
