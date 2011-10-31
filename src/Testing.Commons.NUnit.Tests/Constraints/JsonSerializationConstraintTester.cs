@@ -106,7 +106,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		public void CanBeCreatedWithExtension()
 		{
 			Assert.That(new Serializable { D = 3m, S = "s" },
-				Must.Be.XmlSerializable<Serializable>(
+				Must.Be.JsonSerializable<Serializable>(
 					Has.Property("S").EqualTo("s")
 					.And.Property("D").EqualTo(3m)));
 		}

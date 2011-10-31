@@ -46,6 +46,8 @@
     <Compile Include="ArrangingTestTester.cs" />
     <Compile Include="Constraints\BinarySerializationConstraintTester.cs" />
     <Compile Include="Constraints\ConstrainedEnumerableTester.cs" />
+    <Compile Include="Constraints\DeserializationConstraintTester.cs" />
+    <Compile Include="Constraints\SerializationConstraintTester.cs" />
     <Compile Include="Constraints\JsonSerializationConstraintTester.cs" />
     <Compile Include="Constraints\DataContractDeserializationConstraintTester.cs" />
     <Compile Include="Constraints\DataContractSerializationConstraintTester.cs" />

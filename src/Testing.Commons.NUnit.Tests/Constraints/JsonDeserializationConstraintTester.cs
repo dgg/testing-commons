@@ -100,19 +100,19 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		public void CanBeNewedUp()
 		{
 			Assert.That(Serializable.JsonString("s", 3m),
-			            new DeserializationConstraint<Serializable>(
-			            	new JsonDeserializer(),
-			            	Has.Property("S").EqualTo("s")
-			            		.And.Property("D").EqualTo(3m)));
+				new DeserializationConstraint<Serializable>(
+					new JsonDeserializer(),
+					Has.Property("S").EqualTo("s")
+						.And.Property("D").EqualTo(3m)));
 		}
 
 		[Test]
 		public void CanBeCreatedWithExtension()
 		{
 			Assert.That(Serializable.JsonString("s", 3m),
-			            Must.Be.JsonDeserializable<Serializable>(
-			            	Has.Property("S").EqualTo("s")
-			            		.And.Property("D").EqualTo(3m)));
+				Must.Be.JsonDeserializable<Serializable>(
+					Has.Property("S").EqualTo("s")
+					.And.Property("D").EqualTo(3m)));
 		}
 	}
 }
