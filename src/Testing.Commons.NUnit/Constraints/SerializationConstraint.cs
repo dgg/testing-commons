@@ -10,7 +10,7 @@ namespace Testing.Commons.NUnit.Constraints
 	/// <typeparam name="T">Type to be serialized and deserialized.</typeparam>
 	public class SerializationConstraint<T> : Constraint
 	{
-		private readonly IRoundTripSerializer<T> _serializer;
+		private readonly IRoundtripSerializer<T> _serializer;
 		private readonly Constraint _constraintOverDeserialized;
 		private Exception _ex;
 
@@ -19,7 +19,7 @@ namespace Testing.Commons.NUnit.Constraints
 		/// </summary>
 		/// <param name="serializer">Serializer used to serialize/deserialize the tested value.</param>
 		/// <param name="constraintOverDeserialized">Constraint to apply to the deserialized object.</param>
-		public SerializationConstraint(IRoundTripSerializer<T> serializer, Constraint constraintOverDeserialized)
+		public SerializationConstraint(IRoundtripSerializer<T> serializer, Constraint constraintOverDeserialized)
 		{
 			_serializer = serializer;
 			_constraintOverDeserialized = ((IResolveConstraint)constraintOverDeserialized).Resolve();

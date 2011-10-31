@@ -154,7 +154,7 @@ namespace Testing.Commons.NUnit.Constraints
 		/// <param name="serializer"></param>
 		/// <param name="constraintOverDeserialized">Constraint to apply to the deserialized object.</param>
 		/// <returns>Instance built.</returns>
-		public static Constraint Serializable<T>(this Must.BeEntryPoint entry, IRoundTripSerializer<T> serializer, Constraint constraintOverDeserialized)
+		public static Constraint Serializable<T>(this Must.BeEntryPoint entry, IRoundtripSerializer<T> serializer, Constraint constraintOverDeserialized)
 		{
 			return new SerializationConstraint<T>(serializer, constraintOverDeserialized);
 		}

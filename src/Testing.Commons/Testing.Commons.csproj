@@ -63,7 +63,7 @@
     <Compile Include="Serialization\DataContractDeserializer.cs" />
     <Compile Include="Serialization\JsonDeserializer.cs" />
     <Compile Include="Serialization\IDeserializer.cs" />
-    <Compile Include="Serialization\IRoundTripSerializer.cs" />
+    <Compile Include="Serialization\IRoundtripSerializer.cs" />
     <Compile Include="Serialization\BinaryRoundtripSerializer.cs" />
     <Compile Include="Serialization\DataContractRoundtripSerializer.cs" />
     <Compile Include="Serialization\JsonRoundtripSerializer.cs" />

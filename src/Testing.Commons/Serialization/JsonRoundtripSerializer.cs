@@ -8,7 +8,7 @@ namespace Testing.Commons.Serialization
 	/// </summary>
 	/// <remarks>It uses <see cref="JavaScriptSerializer"/> to perform the serialization and deserialization.</remarks>
 	/// <typeparam name="T">Type to be serialized and deserialized.</typeparam>
-	public class JsonRoundtripSerializer<T> : IRoundTripSerializer<T>
+	public class JsonRoundtripSerializer<T> : IRoundtripSerializer<T>
 	{
 		private readonly JavaScriptSerializer _serializer;
 		private readonly StringBuilder _sb;

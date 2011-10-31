@@ -8,7 +8,7 @@ namespace Testing.Commons.Serialization
 	/// </summary>
 	/// <remarks>It uses <see cref="DataContractSerializer"/> to perform the serialization and deserialization.</remarks>
 	/// <typeparam name="T">Type to be serialized and deserialized.</typeparam>
-	public class DataContractRoundtripSerializer<T> : IRoundTripSerializer<T>
+	public class DataContractRoundtripSerializer<T> : IRoundtripSerializer<T>
 	{
 		private readonly MemoryStream _stream;
 		private readonly DataContractSerializer _serializer;

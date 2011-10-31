@@ -6,7 +6,7 @@ namespace Testing.Commons.Serialization
 	/// Allows testing a single cycle of serialization and deserialization.
 	/// </summary>
 	/// <typeparam name="T">Type to be serialized and deserialized.</typeparam>
-	public interface IRoundTripSerializer<T> : IDisposable
+	public interface IRoundtripSerializer<T> : IDisposable
 	{
 		/// <summary>
 		/// Serializes the specified object, writting the output to the returned string.

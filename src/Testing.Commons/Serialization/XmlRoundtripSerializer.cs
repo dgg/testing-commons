@@ -10,7 +10,7 @@ namespace Testing.Commons.Serialization
 	/// </summary>
 	/// <remarks>It uses <see cref="XmlSerializer"/> to perform the serialization and deserialization.</remarks>
 	/// <typeparam name="T">Type to be serialized and deserialized.</typeparam>
-	public class XmlRoundtripSerializer<T> : IRoundTripSerializer<T>
+	public class XmlRoundtripSerializer<T> : IRoundtripSerializer<T>
 	{
 		private readonly MemoryStream _stream;
 
