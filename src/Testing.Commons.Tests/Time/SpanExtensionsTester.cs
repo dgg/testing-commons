@@ -1,4 +1,5 @@
-﻿using Testing.Commons.Tests.Time.Support;
+﻿using System;
+using Testing.Commons.Tests.Time.Support;
 using Testing.Commons.Time;
 using NUnit.Framework;
 
@@ -61,6 +62,22 @@ namespace Testing.Commons.Tests.Time
 			var ts = 2.Weeks() + 5.Days().Hours(4).Minutes(3).Seconds(2).Milliseconds(1);
 
 			Assert.That(ts, Must.Be.SpanWith(19, 4, 3, 2, 1));
+		}
+
+		[Test]
+		public void After_FastForwardsInstant()
+		{
+			DateTimeOffset now = 15.November(2011).At(hour: 22, minute: 55).In(1.Hours());
+			Assert.That(10.Minutes().After(now),
+				Must.Be.OffsetWith(2011, 11, 15, 23, 5, offset : TimeSpan.FromHours(1)));
+		}
+
+		[Test]
+		public void Before_RewindsInstant()
+		{
+			DateTimeOffset now = 15.November(2011).At(hour: 22, minute: 55).In(1.Hours());
+			Assert.That(10.Minutes().Before(now),
+				Must.Be.OffsetWith(2011, 11, 15, 22, 45, offset: TimeSpan.FromHours(1)));
 		}
 	}
 }

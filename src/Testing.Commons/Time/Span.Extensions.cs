@@ -128,5 +128,27 @@ namespace Testing.Commons.Time
 		{
 			return new TimeSpan(ts.Days, ts.Hours, ts.Minutes, ts.Seconds, milliseconds);
 		}
+
+		/// <summary>
+		/// Subtracts a specified time interval from the specified date and time, and yields a new date and time.
+		/// </summary>
+		/// <param name="ts">The time interval to subtract .</param>
+		/// <param name="dt">The date and time object to subtract from.</param>
+		/// <returns>A new instance whose value is the difference of the values of <paramref name="dt"/> and <paramref name="ts"/>.</returns>
+		public static DateTimeOffset Before(this TimeSpan ts, DateTimeOffset dt)
+		{
+			return dt - ts;
+		}
+
+		/// <summary>
+		/// Adds a specified time interval to the specified date and time, and yields a new a date and time.
+		/// </summary>
+		/// <param name="ts">The time interval to add.</param>
+		/// <param name="dt">The object to add the time interval to.</param>
+		/// <returns>A new instance whose value is the sum of the values of <paramref name="dt"/> and <paramref name="ts"/>.</returns>
+		public static DateTimeOffset After(this TimeSpan ts, DateTimeOffset dt)
+		{
+			return dt + ts;
+		}
 	}
 }
