@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
+﻿using NSubstitute;
+using NUnit.Framework;
 using NUnit.Framework.Constraints;
-using Rhino.Mocks;
 using Testing.Commons.NUnit.Constraints;
 using Testing.Commons.NUnit.Tests.Constraints.Support;
 
@@ -68,15 +68,15 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		[Test]
 		public void Match_FirstItemDoesNotMatchConstraint_SubsequentConstraintsNotEvaluated()
 		{
-			Constraint failing = MockRepository.GeneratePartialMock<Constraint>(),
-				notEvaluated = MockRepository.GenerateStrictMock<Constraint>();
+			Constraint failing = Substitute.For<Constraint>(),
+				notEvaluated = Substitute.For<Constraint>();
 
 			var subject = new ConstrainedEnumerable(failing, notEvaluated);
-			failing.Expect(c => c.Matches(-1)).Return(false);
+			failing.Matches(-1).Returns(false);
 
 			subject.Matches(new[] { -1, 2 });
 
-			notEvaluated.AssertWasNotCalled(c => c.Matches(2));
+			notEvaluated.DidNotReceive().Matches(2);
 		}
 
 		[Test]
@@ -115,17 +115,17 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		public void Match_SecondItemDoesNotMatchConstraint_SubsequentConstraintsNotEvaluated()
 		{
 			Constraint
-				passing = MockRepository.GeneratePartialMock<Constraint>(),
-				failing = MockRepository.GeneratePartialMock<Constraint>(),
-				notEvaluated = MockRepository.GenerateStrictMock<Constraint>();
+				passing = Substitute.For<Constraint>(),
+				failing = Substitute.For<Constraint>(),
+				notEvaluated = Substitute.For<Constraint>();
 
 			var subject = new ConstrainedEnumerable(failing, notEvaluated);
-			passing.Expect(c => c.Matches(1)).Return(true);
-			failing.Expect(c => c.Matches(-2)).Return(false);
+			passing.Matches(1).Returns(true);
+			failing.Matches(-2).Returns(false);
 
 			subject.Matches(new[] { 1, -2, 3 });
 
-			notEvaluated.AssertWasNotCalled(c => c.Matches(3));
+			notEvaluated.DidNotReceive().Matches(3);
 		}
 
 		[Test]

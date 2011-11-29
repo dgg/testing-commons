@@ -1,6 +1,8 @@
-﻿using NUnit.Framework;
+﻿using System.Linq;
+using NSubstitute;
+using NSubstitute.Core;
+using NUnit.Framework;
 using NUnit.Framework.Constraints;
-using Rhino.Mocks;
 using Testing.Commons.NUnit.Constraints;
 using Testing.Commons.NUnit.Tests.Constraints.Subjects;
 using Testing.Commons.NUnit.Tests.Constraints.Support;
@@ -18,18 +20,22 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		{
 			var serializable = new Serializable { D = 3m, S = "s" };
 
-			var serializer = MockRepository.GenerateStrictMock<IRoundtripSerializer<Serializable>>();
-			using (serializer.GetMockRepository().Ordered())
-			{
-				serializer.Expect(s => s.Serialize(serializable)).Return(null);
-				serializer.Expect(s => s.Deserialize()).Return(null);
-				serializer.Expect(s => s.Dispose());
-			}
-
+			var serializer = Substitute.For<IRoundtripSerializer<Serializable>>();
+			
 			var subject = new SerializationConstraint<Serializable>(serializer, Is.Null);
 			subject.Matches(serializable);
 
-			serializer.VerifyAllExpectations();
+			ICall[] receivedCalls = serializer.ReceivedCalls().ToArray();
+
+			// first call: .Serialize(serializable)
+			Assert.That(receivedCalls[0].GetMethodInfo().Name, Is.EqualTo("Serialize"));
+			Assert.That(receivedCalls[0].GetArguments()[0], Is.SameAs(serializable));
+
+			// second call: Deserialize()
+			Assert.That(receivedCalls[1].GetMethodInfo().Name, Is.EqualTo("Deserialize"));
+
+			// third call: Dispose()
+			Assert.That(receivedCalls[2].GetMethodInfo().Name, Is.EqualTo("Dispose"));
 		}
 
 		[Test]
@@ -38,14 +44,14 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			var serializable = new Serializable { D = 3m, S = "s" };
 			var deserialized = new Serializable();
 
-			var serializer = MockRepository.GenerateStub<IRoundtripSerializer<Serializable>>();
-			var constraint = MockRepository.GeneratePartialMock<Constraint>();
-			serializer.Stub(s => s.Deserialize()).Return(deserialized);
+			var serializer = Substitute.For<IRoundtripSerializer<Serializable>>();
+			var constraint = Substitute.For<Constraint>();
+			serializer.Deserialize().Returns(deserialized);
 
 			var subject = new SerializationConstraint<Serializable>(serializer, constraint);
 			subject.Matches(serializable);
 
-			constraint.AssertWasCalled(c => c.Matches(deserialized));
+			constraint.Received().Matches(deserialized);
 		}
 
 		#endregion
@@ -55,8 +61,8 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		{
 			var serializable = new Serializable { D = 3m, S = "s" };
 
-			var serializer = MockRepository.GenerateStub<IRoundtripSerializer<Serializable>>();
-			serializer.Stub(s => s.Deserialize()).Return(serializable);
+			var serializer = Substitute.For<IRoundtripSerializer<Serializable>>();
+			serializer.Deserialize().Returns(serializable);
 
 			Assert.That(serializable,
 				new SerializationConstraint<Serializable>(serializer,
@@ -69,8 +75,8 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		{
 			var serializable = new Serializable { D = 3m, S = "s" };
 
-			var serializer = MockRepository.GenerateStub<IRoundtripSerializer<Serializable>>();
-			serializer.Stub(s => s.Deserialize()).Return(serializable);
+			var serializer = Substitute.For<IRoundtripSerializer<Serializable>>();
+			serializer.Deserialize().Returns(serializable);
 
 			Assert.That(serializable,
 				Must.Be.Serializable(serializer, 

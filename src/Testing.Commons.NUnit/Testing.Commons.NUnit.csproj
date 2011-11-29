@@ -45,10 +45,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArrangingTest.cs" />
+    <Compile Include="Constraints\ChainedConstraints.cs" />
+    <Compile Include="Constraints\ComparableConstraint.cs" />
     <Compile Include="Constraints\ConstrainedEnumerable.cs" />
     <Compile Include="Constraints\CountConstraint.Extensions.cs" />
     <Compile Include="Constraints\CustomTextMessageWriter.cs" />
     <Compile Include="Constraints\EnumerableCountConstraint.cs" />
+    <Compile Include="Constraints\ComparableImplementationConstraint.cs" />
     <Compile Include="Constraints\ExposingWriter.cs" />
     <Compile Include="Constraints\LambdaPropertyConstraint.cs" />
     <Compile Include="Constraints\MatchingConstraint.cs" />

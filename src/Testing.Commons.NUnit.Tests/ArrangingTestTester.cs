@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
-using Rhino.Mocks;
-using Rhino.Mocks.Exceptions;
+﻿using System;
+using NSubstitute;
+using NUnit.Framework;
 using Testing.Commons.NUnit.Tests.Subjects;
 
 namespace Testing.Commons.NUnit.Tests
@@ -43,8 +43,8 @@ namespace Testing.Commons.NUnit.Tests
 		protected override ISubjectWithDependencies initSubject()
 		{
 			// dependencies are initialized inside the arrange method
-			_one = MockRepository.GenerateStub<IDependencyOne>();
-			_two = MockRepository.GenerateStub<IDependencyTwo>();
+			_one =  Substitute.For<IDependencyOne>();
+			_two = Substitute.For<IDependencyTwo>();
 
 			return new SubjectWithDependencies(_one, _two);
 		}
@@ -56,7 +56,7 @@ namespace Testing.Commons.NUnit.Tests
 			Subject.DoSomethingWithOne();
 
 			// Assert
-			_one.AssertWasCalled(o => o.DoSomething());
+			_one.Received().DoSomething();
 		}
 
 		[Test]
@@ -66,7 +66,7 @@ namespace Testing.Commons.NUnit.Tests
 			Subject.DoSomethingWithTwo();
 
 			// Assert
-			_two.AssertWasCalled(o => o.DoSomethingElse());
+			_two.Received().DoSomethingElse();
 		}
 
 		[Test]
@@ -76,19 +76,19 @@ namespace Testing.Commons.NUnit.Tests
 			Subject.DosomethingWithBoth();
 
 			// Assert
-			_one.AssertWasCalled(o => o.DoSomething());
-			_two.AssertWasCalled(o => o.DoSomethingElse());
+			_one.Received().DoSomething();
+			_two.Received().DoSomethingElse();
 		}
 
 		[Test]
 		public void IndividualTests_CanOverrideDependencyBehavior()
 		{
 			// init the subject in a custom method
-			initSubjectWith(MockRepository.GenerateStrictMock<IDependencyTwo>());
+			initSubjectWith((IDependencyTwo)null);
 
 			// no expectation on a strict mock makes the mock throw
 
-			Assert.That(() => Subject.DoSomethingWithTwo(), Throws.InstanceOf<ExpectationViolationException>());
+			Assert.That(() => Subject.DoSomethingWithTwo(), Throws.InstanceOf<NullReferenceException>());
 		}
 
 		private void initSubjectWith(IDependencyTwo dependencyTwo)

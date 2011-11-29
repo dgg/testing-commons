@@ -204,5 +204,15 @@ namespace Testing.Commons.NUnit.Constraints
 		{
 			return new DeserializationConstraint<T>(deserializer, constraintOverDeserialized);
 		}
+
+		public static Constraint ComparableSpecificationAgainst<T>(this Must.SatisfyEntryPoint entry, T strictlyLessThan, T strictlyGreaterThan)
+		{
+			return new ComparableImplementationConstraint<T>(strictlyLessThan, strictlyGreaterThan);
+		}
+
+		public static Constraint ComparableSpecificationAgainst<T>(this Must.SatisfyEntryPoint entry, T strictlyLessThan, T strictlyGreaterThan, T equal)
+		{
+			return new ComparableImplementationConstraint<T>(strictlyLessThan, strictlyGreaterThan, equal);
+		}
 	}
 }

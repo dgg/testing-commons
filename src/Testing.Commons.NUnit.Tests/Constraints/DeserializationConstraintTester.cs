@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
+﻿using NSubstitute;
+using NUnit.Framework;
 using NUnit.Framework.Constraints;
-using Rhino.Mocks;
 using Testing.Commons.NUnit.Constraints;
 using Testing.Commons.NUnit.Tests.Constraints.Subjects;
 using Testing.Commons.NUnit.Tests.Constraints.Support;
@@ -19,14 +19,14 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			string serializationRepresentation = "representation";
 			var deserialized = new Serializable { D = 3m, S = "s" };
 
-			var deserializer = MockRepository.GenerateStub<IDeserializer>();
-			var constraint = MockRepository.GeneratePartialMock<Constraint>();
-			deserializer.Stub(s => s.Deserialize<Serializable>(serializationRepresentation)).Return(deserialized);
+			var deserializer = Substitute.For<IDeserializer>();
+			var constraint = Substitute.For<Constraint>();
+			deserializer.Deserialize<Serializable>(serializationRepresentation).Returns(deserialized);
 
 			var subject = new DeserializationConstraint<Serializable>(deserializer, constraint);
 			subject.Matches(serializationRepresentation);
 
-			constraint.AssertWasCalled(c => c.Matches(deserialized));
+			constraint.Received().Matches(deserialized);
 		}
 
 		#endregion
@@ -37,8 +37,8 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			string serializationRepresentation = "representation";
 			var deserialized = new Serializable { D = 3m, S = "s" };
 
-			var deserializer = MockRepository.GenerateStub<IDeserializer>();
-			deserializer.Stub(s => s.Deserialize<Serializable>(serializationRepresentation)).Return(deserialized);
+			var deserializer = Substitute.For<IDeserializer>();
+			deserializer.Deserialize<Serializable>(serializationRepresentation).Returns(deserialized);
 
 			Assert.That(serializationRepresentation,
 				new DeserializationConstraint<Serializable>(deserializer,
@@ -52,14 +52,13 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			string serializationRepresentation = "representation";
 			var deserialized = new Serializable { D = 3m, S = "s" };
 
-			var deserializer = MockRepository.GenerateStub<IDeserializer>();
-			deserializer.Stub(s => s.Deserialize<Serializable>(serializationRepresentation)).Return(deserialized);
+			var deserializer = Substitute.For<IDeserializer>();
+			deserializer.Deserialize<Serializable>(serializationRepresentation).Returns(deserialized);
 
 			Assert.That(serializationRepresentation,
 				Must.Be.Deserializable<Serializable>(deserializer, 
 					Has.Property("S").EqualTo("s")
 					.And.Property("D").EqualTo(3m)));
 		}
-
 	}
 }

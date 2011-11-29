@@ -31,11 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NSubstitute">
+      <HintPath>..\..\packages\NSubstitute.1.3.0.0\lib\NET40\NSubstitute.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\tools\NUnit\framework\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Rhino.Mocks">
-      <HintPath>..\..\packages\RhinoMocks.3.6\lib\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="ArrangingTestTester.cs" />
     <Compile Include="Constraints\BinarySerializationConstraintTester.cs" />
+    <Compile Include="Constraints\ComparisonImplementationConstraint.cs" />
     <Compile Include="Constraints\ConstrainedEnumerableTester.cs" />
     <Compile Include="Constraints\DeserializationConstraintTester.cs" />
     <Compile Include="Constraints\SerializationConstraintTester.cs" />
@@ -64,8 +65,11 @@
     <Compile Include="Constraints\Support\ConstraintTesterBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Subjects\Address.cs" />
+    <Compile Include="Subjects\Comparision\Offending\NeverEqual.cs" />
     <Compile Include="Subjects\Customer.cs" />
     <Compile Include="Subjects\CustomerWithCollection.cs" />
+    <Compile Include="Subjects\Equality\Offending\EqualsToNull.cs" />
+    <Compile Include="Subjects\Equality\Offending\NotEqualToItself.cs" />
     <Compile Include="Subjects\FlatCustomer.cs" />
     <Compile Include="Constraints\MatchingConstraintTester.cs" />
     <Compile Include="Subjects\IRaisingSubject.cs" />
