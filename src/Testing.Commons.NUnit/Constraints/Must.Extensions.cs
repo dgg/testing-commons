@@ -207,12 +207,22 @@ namespace Testing.Commons.NUnit.Constraints
 
 		public static Constraint ComparableSpecificationAgainst<T>(this Must.SatisfyEntryPoint entry, T strictlyLessThan, T strictlyGreaterThan)
 		{
-			return new ComparableImplementationConstraint<T>(strictlyLessThan, strictlyGreaterThan);
+			return new ImplementsComparableConstraint<T>(strictlyLessThan, strictlyGreaterThan);
 		}
 
 		public static Constraint ComparableSpecificationAgainst<T>(this Must.SatisfyEntryPoint entry, T strictlyLessThan, T strictlyGreaterThan, T equal)
 		{
-			return new ComparableImplementationConstraint<T>(strictlyLessThan, strictlyGreaterThan, equal);
+			return new ImplementsComparableConstraint<T>(strictlyLessThan, strictlyGreaterThan, equal);
+		}
+
+		public static Constraint ComparisonSpecificationAgainst<T>(this Must.SatisfyEntryPoint entry, T strictlyLessThan, T strictlyGreaterThan)
+		{
+			return new ImplementsComparisonConstraint<T>(strictlyLessThan, strictlyGreaterThan);
+		}
+
+		public static Constraint ComparisonSpecificationAgainst<T, U>(this Must.SatisfyEntryPoint entry, U equal, U strictlyLessThan, U strictlyGreaterThan)
+		{
+			return new ImplementsComparisonConstraint<T, U>(equal, strictlyLessThan, strictlyGreaterThan);
 		}
 	}
 }

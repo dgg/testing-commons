@@ -3,16 +3,16 @@ using NUnit.Framework.Constraints;
 
 namespace Testing.Commons.NUnit.Constraints
 {
-	public class ComparableImplementationConstraint<T> : Constraint
+	public class ImplementsComparableConstraint<T> : Constraint
 	{
 		private readonly T _strictlyLessThan;
 		private readonly T _strictlyGreaterThan;
 		private readonly T _equal;
 		ChainedConstraints _rules;
 
-		public ComparableImplementationConstraint(T strictlyLessThan, T strictlyGreaterThan) : this(strictlyLessThan, strictlyGreaterThan, default(T)) { }
+		public ImplementsComparableConstraint(T strictlyLessThan, T strictlyGreaterThan) : this(strictlyLessThan, strictlyGreaterThan, default(T)) { }
 
-		public ComparableImplementationConstraint(T strictlyLessThan, T strictlyGreaterThan, T equal)
+		public ImplementsComparableConstraint(T strictlyLessThan, T strictlyGreaterThan, T equal)
 		{
 			_strictlyLessThan = strictlyLessThan;
 			_strictlyGreaterThan = strictlyGreaterThan;
@@ -30,11 +30,11 @@ namespace Testing.Commons.NUnit.Constraints
 				() => ComparableConstraint<T>.GreaterThan(_strictlyLessThan),
 				() => ComparableConstraint<T>.GreaterThanOrEqual(_strictlyLessThan),
 				() => ComparableConstraint<T>.LessThan(_strictlyGreaterThan),
-				() => ComparableConstraint<T>.LessThanOrEqual(_strictlyGreaterThan)
+				() => ComparableConstraint<T>.LessThanOrEqual(_strictlyGreaterThan),
+				ComparableConstraint<T>.LessThanNull
 				);
 			return _rules.Evaluate(actual);
 		}
-
 
 		public override void WriteDescriptionTo(MessageWriter writer) { }
 

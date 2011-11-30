@@ -4,43 +4,16 @@ using NUnit.Framework.Constraints;
 
 namespace Testing.Commons.NUnit.Constraints
 {
-	internal class ComparableConstraint<T> : Constraint
+	internal class ComparableConstraint<T> : ContractConstraint<T>
 	{
-		private readonly T _expected;
-		private readonly Constraint _inner;
-		private readonly string _messageConnector;
-
 		internal ComparableConstraint(T expected, Constraint inner, string messageConnector)
-		{
-			_expected = expected;
-			_inner = inner;
-			_messageConnector = messageConnector;
-		}
+			: base(expected, inner, messageConnector) { }
 
 		public override bool Matches(object current)
 		{
 			actual = current;
 			IComparable<T> comparable = (IComparable<T>)actual;
 			return _inner.Matches(comparable.CompareTo(_expected));
-		}
-
-		public override void WriteDescriptionTo(MessageWriter writer)
-		{
-			_inner.WriteDescriptionTo(writer);
-		}
-
-		public override void WriteMessageTo(MessageWriter writer)
-		{
-			writer.WriteValue(actual);
-			writer.Write(_messageConnector);
-			writer.WriteValue(_expected);
-			writer.WriteLine();
-			base.WriteMessageTo(writer);
-		}
-
-		public override void WriteActualValueTo(MessageWriter writer)
-		{
-			_inner.WriteActualValueTo(writer);
 		}
 
 		public static ComparableConstraint<T> EqualTo(T expected)
@@ -66,6 +39,18 @@ namespace Testing.Commons.NUnit.Constraints
 		public static ComparableConstraint<T> LessThanOrEqual(T expected)
 		{
 			return new ComparableConstraint<T>(expected, Is.LessThanOrEqualTo(0), " must be less than or equal to ");
+		}
+
+		public static ComparableConstraint<T> LessThanNull()
+		{
+			Type t = typeof(T);
+			return (t.IsValueType) ? new AlwaysMatching() : LessThan(default(T));
+		}
+ 
+		class AlwaysMatching : ComparableConstraint<T>
+		{
+			internal AlwaysMatching() : base(default(T), null, string.Empty) { }
+			public override bool Matches(object current) { return true; }
 		}
 	}
 }
