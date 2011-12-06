@@ -12,7 +12,7 @@
             Testing.Commons contains classes and extensions that help testing code in general and more specific areas such as configuration and web artifacts.
         </summary>
         <projectUrl>http://www.assembla.com/spaces/testing-commons</projectUrl>
-		<iconUrl>http://nuget.org/Media/Default/Packages/Testing.Commons/1.0.0.0/Testing.Commons.logo.png</iconUrl>
+		<iconUrl>https://nugetgallery.blob.core.windows.net/icons/Testing.Commons.1.0.0.0.png</iconUrl>		
 		<tags>.net C# testing</tags>
 	</metadata>
 	<files>

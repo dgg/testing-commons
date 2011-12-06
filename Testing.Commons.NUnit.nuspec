@@ -12,7 +12,7 @@
             Testing.Commons.NUnit contains diverse addons used when testing using NUnit.
         </summary>
         <projectUrl>http://www.assembla.com/spaces/testing-commons</projectUrl>
-		<iconUrl>http://nuget.org/Media/Default/Packages/Testing.Commons.NUnit/0.8.0.0/Testing.Commons.NUnit.logo.png</iconUrl>
+		<iconUrl>https://nugetgallery.blob.core.windows.net/icons/Testing.Commons.NUnit.1.1.0.0.png</iconUrl>
 		<tags>.net C# testing NUnit</tags>
 		<dependencies>
 			<dependency id="testing.commons" version="1.1.0.0" />
