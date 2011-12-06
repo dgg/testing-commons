@@ -205,21 +205,55 @@ namespace Testing.Commons.NUnit.Constraints
 			return new DeserializationConstraint<T>(deserializer, constraintOverDeserialized);
 		}
 
+		/// <summary>
+		/// Builds an instance of <see cref="ImplementsComparableConstraint{T}"/> that allows checking the implementation of
+		/// <see cref="IComparable{T}"/> when <typeparamref name="T"/> is the same type.
+		/// </summary>
+		/// <param name="entry">Extension entry point.</param>
+		/// <param name="strictlyLessThan">An instance of <typeparamref name="T"/> that is strictly less than the value tested.</param>
+		/// <param name="strictlyGreaterThan">An instance of <typeparamref name="T"/> that is strictly greater than the value tested.</param>
+		/// <returns>Instance built.</returns>
 		public static Constraint ComparableSpecificationAgainst<T>(this Must.SatisfyEntryPoint entry, T strictlyLessThan, T strictlyGreaterThan)
 		{
 			return new ImplementsComparableConstraint<T>(strictlyLessThan, strictlyGreaterThan);
 		}
 
+		/// <summary>
+		/// Builds an instance of <see cref="ImplementsComparableConstraint{T}"/> that allows checking the implementation of
+		/// <see cref="IComparable{T}"/> when <typeparamref name="T"/> is another type.
+		/// </summary>
+		/// <param name="entry">Extension entry point.</param>
+		/// <param name="strictlyLessThan">An instance of <typeparamref name="T"/> that is strictly less than the value tested.</param>
+		/// <param name="strictlyGreaterThan">An instance of <typeparamref name="T"/> that is strictly greater than the value tested.</param>
+		/// <param name="equal">An instance of <typeparamref name="T"/> that has the same value as the value tested.</param>
+		/// <returns>Instance built.</returns>
 		public static Constraint ComparableSpecificationAgainst<T>(this Must.SatisfyEntryPoint entry, T strictlyLessThan, T strictlyGreaterThan, T equal)
 		{
 			return new ImplementsComparableConstraint<T>(strictlyLessThan, strictlyGreaterThan, equal);
 		}
 
+		/// <summary>
+		/// Builds an instance of <see cref="ImplementsComparisonConstraint{T}"/> that allows checking the implementation of
+		/// comparison operators against the same type.
+		/// </summary>
+		/// <param name="entry">Extension entry point.</param>
+		/// <param name="strictlyLessThan">An instance of <typeparamref name="T"/> that is strictly less than the value tested.</param>
+		/// <param name="strictlyGreaterThan">An instance of <typeparamref name="T"/> that is strictly greater than the value tested.</param>
+		/// <returns>Instance built.</returns>
 		public static Constraint ComparisonSpecificationAgainst<T>(this Must.SatisfyEntryPoint entry, T strictlyLessThan, T strictlyGreaterThan)
 		{
 			return new ImplementsComparisonConstraint<T>(strictlyLessThan, strictlyGreaterThan);
 		}
 
+		/// <summary>
+		/// Builds an instance of <see cref="ImplementsComparisonConstraint{T, U}"/> that allows checking the implementation of
+		/// comparison operators against another type.
+		/// </summary>
+		/// <param name="entry">Extension entry point.</param>
+		/// <param name="strictlyLessThan">An instance of <typeparamref name="U"/> that is strictly less than the value tested.</param>
+		/// <param name="strictlyGreaterThan">An instance of <typeparamref name="U"/> that is strictly greater than the value tested.</param>
+		/// <param name="equal">An instance of <typeparamref name="U"/> that has the same value as the value tested.</param>
+		/// <returns>Instance built.</returns>
 		public static Constraint ComparisonSpecificationAgainst<T, U>(this Must.SatisfyEntryPoint entry, U equal, U strictlyLessThan, U strictlyGreaterThan)
 		{
 			return new ImplementsComparisonConstraint<T, U>(equal, strictlyLessThan, strictlyGreaterThan);

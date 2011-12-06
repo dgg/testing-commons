@@ -4,6 +4,9 @@ using NUnit.Framework.Constraints;
 
 namespace Testing.Commons.NUnit.Constraints
 {
+	/// <summary>
+	/// Checks the result of CompareTo() on the same type and provides construction methods for better legibility.
+	/// </summary>
 	internal class ComparableConstraint<T> : ContractConstraint<T>
 	{
 		internal ComparableConstraint(T expected, Constraint inner, string messageConnector)
@@ -46,7 +49,10 @@ namespace Testing.Commons.NUnit.Constraints
 			Type t = typeof(T);
 			return (t.IsValueType) ? new AlwaysMatching() : LessThan(default(T));
 		}
- 
+
+		/// <summary>
+		/// Always matches, used when the type is a value type and no comparison to NULL need to be performed
+		/// </summary>
 		class AlwaysMatching : ComparableConstraint<T>
 		{
 			internal AlwaysMatching() : base(default(T), null, string.Empty) { }

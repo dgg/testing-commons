@@ -2,6 +2,9 @@ using NUnit.Framework.Constraints;
 
 namespace Testing.Commons.NUnit.Constraints
 {
+	/// <summary>
+	/// Base class that extracts how messages are displayed when checking a contract
+	/// </summary>
 	internal abstract class ContractConstraint<T> : Constraint
 	{
 		protected readonly T _expected;

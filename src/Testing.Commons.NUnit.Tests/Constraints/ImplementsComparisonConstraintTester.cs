@@ -13,7 +13,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		[Test]
 		public void Matches_CorrectImplementationReference_True()
 		{
-			ComparisonAgainstReference.GTOET = ComparisonAgainstReference.LTOET = ComparisonAgainstReference.GT = ComparisonAgainstReference.LT = true;
+			ComparisonAgainstReference.Setup(c => c.Gtoet(true).Ltoet(true).Gt(true).Lt(true));
 			var target = new ComparisonAgainstReference("target");
 			string eq = "eq", lt = "lt", gt = "gt";
 
@@ -25,9 +25,9 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		[Test]
 		public void Matches_CorrectImplementationValue_True()
 		{
-			ComparisonAgainstValue.GTOET = ComparisonAgainstValue.LTOET = ComparisonAgainstValue.GT = ComparisonAgainstValue.LT = true;
 			var target = new ComparisonAgainstValue("target");
 			int eq = 20, lt = 10, gt = 30;
+			ComparisonAgainstValue.Setup(c => c.Gtoet(true).Ltoet(true).Gt(true).Lt(true));
 
 			var subject = new ImplementsComparisonConstraint<ComparisonAgainstValue, int>(lt, gt, eq);
 
@@ -37,7 +37,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		[Test]
 		public void Matches_CorrectImplementationInverseReference_True()
 		{
-			ComparisonAgainstReference.GTOET = ComparisonAgainstReference.LTOET = ComparisonAgainstReference.GT = ComparisonAgainstReference.LT = true;
+			ComparisonAgainstReference.SetupInverse(c => c.Gtoet(true).Ltoet(true).Gt(true).Lt(true));
 			var target = "target";
 			ComparisonAgainstReference eq = new ComparisonAgainstReference("eq"), lt = new ComparisonAgainstReference("lt"), gt = new ComparisonAgainstReference("gt");
 			var subject = new ImplementsComparisonConstraint<string, ComparisonAgainstReference>(lt, gt, eq);
@@ -48,10 +48,10 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		[Test]
 		public void Matches_CorrectImplementationSelf_True()
 		{
-			ComparisonAgainstSelf.GTOET = ComparisonAgainstSelf.LTOET = ComparisonAgainstSelf.GT = ComparisonAgainstSelf.LT = true;
 			ComparisonAgainstSelf target = new ComparisonAgainstSelf("target"),
 				lt = new ComparisonAgainstSelf("lt"),
 				gt = new ComparisonAgainstSelf("gt");
+			ComparisonAgainstSelf.Setup(c => c.Gtoet(true).Ltoet(true).Gt(true).Lt(true));
 
 			var subject = new ImplementsComparisonConstraint<ComparisonAgainstSelf>(lt, gt);
 
@@ -61,12 +61,10 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		[Test]
 		public void Matches_NotGreaterThanLess_False()
 		{
-			ComparisonAgainstSelf.GTOET = ComparisonAgainstSelf.LTOET = true;
-			ComparisonAgainstSelf.GT = false;
-
 			ComparisonAgainstSelf target = new ComparisonAgainstSelf("target"),
 				lt = new ComparisonAgainstSelf("lt"),
 				gt = new ComparisonAgainstSelf("gt");
+			ComparisonAgainstSelf.Setup(c => c.Gtoet(true).Ltoet(true));
 
 			var subject = new ImplementsComparisonConstraint<ComparisonAgainstSelf>(lt, gt);
 
@@ -76,12 +74,10 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		[Test]
 		public void Matches_NotLessThanGreater_False()
 		{
-			ComparisonAgainstSelf.GTOET = ComparisonAgainstSelf.LTOET = ComparisonAgainstSelf.GT = true;
-			ComparisonAgainstSelf.LT = false;
-
 			ComparisonAgainstSelf target = new ComparisonAgainstSelf("target"),
 				lt = new ComparisonAgainstSelf("lt"),
 				gt = new ComparisonAgainstSelf("gt");
+			ComparisonAgainstSelf.Setup(c => c.Gtoet(true).Ltoet(true).Gt(true));
 
 			var subject = new ImplementsComparisonConstraint<ComparisonAgainstSelf>(lt, gt);
 
@@ -91,9 +87,8 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		[Test]
 		public void Matches_NotGreaterThanOtherLess_False()
 		{
-			ComparisonAgainstReference.GTOET = ComparisonAgainstReference.LTOET = true;
-			ComparisonAgainstReference.GT = false;
-
+			ComparisonAgainstReference.Setup(c => c.Gtoet(true).Ltoet(true));
+			
 			var target = new ComparisonAgainstReference("target");
 			string eq = "eq", lt = "lt", gt = "gt";
 
@@ -105,11 +100,9 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		[Test]
 		public void Matches_NotLessThanOtherGreater_False()
 		{
-			ComparisonAgainstValue.GTOET = ComparisonAgainstValue.LTOET = ComparisonAgainstValue.GT = true;
-			ComparisonAgainstValue.LT = false;
-
 			var target = new ComparisonAgainstValue("target");
 			int eq = 20, lt = 10, gt = 30;
+			ComparisonAgainstValue.Setup(c => c.Gtoet(true).Ltoet(true).Gt(true));
 
 			var subject = new ImplementsComparisonConstraint<ComparisonAgainstValue, int>(lt, gt, eq);
 
@@ -119,9 +112,6 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		[Test]
 		public void Matches_TargetNotImplementingComparisonOperator_Exception()
 		{
-			ComparisonAgainstValue.GTOET = ComparisonAgainstValue.LTOET = ComparisonAgainstValue.GT = true;
-			ComparisonAgainstValue.LT = false;
-
 			var target = new ComparisonAgainstValue("target");
 			string eq = "eq", lt = "lt", gt = "gt";
 
@@ -132,33 +122,83 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		}
 
 		[Test]
-		public void Match_NotLessThanNullSelf_False()
-		{
-			Assert.Fail("missing");			
-		}
-
-		[Test]
 		public void Match_NotGreaterThanNullSelf_False()
 		{
-			Assert.Fail("missing");
+			ComparisonAgainstSelf target = new ComparisonAgainstSelf("target"),
+				lt = new ComparisonAgainstSelf("lt"),
+				gt = new ComparisonAgainstSelf("gt");
+			ComparisonAgainstSelf.Setup(c =>
+				c.Gtoet(target, target, true)
+				.Ltoet(target, target, true)
+				.Ltoet(target, gt, true)
+				.Lt(target, gt, true)
+				.Gt(target, lt, true)
+				.Gtoet(target, lt, true)
+				.Gt(target, null, false));
+
+			var subject = new ImplementsComparisonConstraint<ComparisonAgainstSelf>(lt, gt);
+
+			Assert.That(subject.Matches(target), Is.False);
 		}
 
 		[Test]
-		public void Match_NotLessThanNullOther_False()
+		public void Match_LessThanNullSelf_False()
 		{
-			Assert.Fail("missing");
+			ComparisonAgainstSelf target = new ComparisonAgainstSelf("target"),
+				lt = new ComparisonAgainstSelf("lt"),
+				gt = new ComparisonAgainstSelf("gt");
+			ComparisonAgainstSelf.Setup(c =>
+				c.Gtoet(target, target, true)
+				.Ltoet(target, target, true)
+				.Ltoet(target, gt, true)
+				.Lt(target, gt, true)
+				.Gt(target, lt, true)
+				.Gtoet(target, lt, true)
+				.Gt(target, null, true)
+				.Lt(null, lt, false));
+
+			var subject = new ImplementsComparisonConstraint<ComparisonAgainstSelf>(lt, gt);
+
+			Assert.That(subject.Matches(target), Is.False);
 		}
 
 		[Test]
 		public void Match_NotGreaterThanNullOther_False()
 		{
-			Assert.Fail("missing");
+			var target = new ComparisonAgainstReference("target");
+			string lt = "lt", gt = "gt", eq = "eq";
+			ComparisonAgainstReference.Setup(c =>
+				c.Gtoet(target, eq, true)
+				.Ltoet(target, eq, true)
+				.Ltoet(target, gt, true)
+				.Lt(target, gt, true)
+				.Gt(target, lt, true)
+				.Gtoet(target, lt, true)
+				.Gt(target, null, false));
+
+			var subject = new ImplementsComparisonConstraint<ComparisonAgainstReference, string>(lt, gt, eq);
+
+			Assert.That(subject.Matches(target), Is.False);
 		}
 
 		[Test]
-		public void Match_NotEqualToNullSelf_False()
+		public void Match_LessThanNullOther_False()
 		{
-			Assert.Fail("missing");
+			var target = new ComparisonAgainstReference("target");
+			string lt = "lt", gt = "gt", eq = "eq";
+			ComparisonAgainstReference.Setup(c =>
+				c.Gtoet(target, eq, true)
+				.Ltoet(target, eq, true)
+				.Ltoet(target, gt, true)
+				.Lt(target, gt, true)
+				.Gt(target, lt, true)
+				.Gtoet(target, lt, true)
+				.Gt(target, null, true)
+				.Lt(null, lt, false));
+
+			var subject = new ImplementsComparisonConstraint<ComparisonAgainstReference, string>(lt, gt, eq);
+
+			Assert.That(subject.Matches(target), Is.False);
 		}
 
 		#endregion
@@ -168,12 +208,10 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		[Test]
 		public void WriteMessageTo_NotGreaterThanLess_WritesContractAndFailureAndFailureDetails()
 		{
-			ComparisonAgainstSelf.GTOET = ComparisonAgainstSelf.LTOET = true;
-			ComparisonAgainstSelf.GT = false;
-
 			ComparisonAgainstSelf target = new ComparisonAgainstSelf("target"),
 				lt = new ComparisonAgainstSelf("lt"),
 				gt = new ComparisonAgainstSelf("gt");
+			ComparisonAgainstSelf.Setup(c => c.Gtoet(true).Ltoet(true));
 
 			var subject = new ImplementsComparisonConstraint<ComparisonAgainstSelf>(lt, gt);
 
@@ -188,12 +226,10 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		[Test]
 		public void WriteMessageTo_NotLessThanGreater_WritesContractAndFailureAndFailureDetails()
 		{
-			ComparisonAgainstSelf.GTOET = ComparisonAgainstSelf.LTOET = ComparisonAgainstSelf.GT = true;
-			ComparisonAgainstSelf.LT = false;
-
 			ComparisonAgainstSelf target = new ComparisonAgainstSelf("target"),
 				lt = new ComparisonAgainstSelf("lt"),
 				gt = new ComparisonAgainstSelf("gt");
+			ComparisonAgainstSelf.Setup(c => c.Gtoet(true).Ltoet(true).Gt(true));
 
 			var subject = new ImplementsComparisonConstraint<ComparisonAgainstSelf>(lt, gt);
 
@@ -208,8 +244,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		[Test]
 		public void WriteMessageTo_NotGreaterThanOtherLess_WritesContractAndFailureAndFailureDetails()
 		{
-			ComparisonAgainstReference.GTOET = ComparisonAgainstReference.LTOET = true;
-			ComparisonAgainstReference.GT = false;
+			ComparisonAgainstReference.Setup(c => c.Gtoet(true).Ltoet(true));
 
 			var target = new ComparisonAgainstReference("target");
 			string eq = "eq", lt = "lt", gt = "gt";
@@ -227,11 +262,9 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		[Test]
 		public void WriteMessageTo_NotLessThanOtherGreater_WritesContractAndFailureAndFailureDetails()
 		{
-			ComparisonAgainstValue.GTOET = ComparisonAgainstValue.LTOET = ComparisonAgainstValue.GT = true;
-			ComparisonAgainstValue.LT = false;
-
 			var target = new ComparisonAgainstValue("target");
 			int eq = 20, lt = 10, gt = 30;
+			ComparisonAgainstValue.Setup(c => c.Gtoet(true).Ltoet(true).Gt(true));
 
 			var subject = new ImplementsComparisonConstraint<ComparisonAgainstValue, int>(lt, gt, eq);
 
@@ -242,16 +275,116 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 				.And.StringContaining(TextMessageWriter.Pfx_Actual + "False")
 				);
 		}
+		
+		[Test]
+		public void WriteMessageTo_NotGreaterThanNullSelf_WritesContractAndFailureAndFailureDetails()
+		{
+			ComparisonAgainstSelf target = new ComparisonAgainstSelf("target"),
+				lt = new ComparisonAgainstSelf("lt"),
+				gt = new ComparisonAgainstSelf("gt");
+			ComparisonAgainstSelf.Setup(c =>
+				c.Gtoet(target, target, true)
+				.Ltoet(target, target, true)
+				.Ltoet(target, gt, true)
+				.Lt(target, gt, true)
+				.Gt(target, lt, true)
+				.Gtoet(target, lt, true)
+				.Gt(target, null, false));
+
+			var subject = new ImplementsComparisonConstraint<ComparisonAgainstSelf>(lt, gt);
+
+			Assert.That(GetMessage(subject, target), Is
+				.StringContaining("comparison operators to <ComparisonAgainstSelf>.")
+				.And.StringContaining("<target> must be > (greater than) null")
+				.And.StringContaining(TextMessageWriter.Pfx_Expected + "True")
+				.And.StringContaining(TextMessageWriter.Pfx_Actual + "False")
+				);
+		}
+
+		[Test]
+		public void WriteMessageTo_LessThanNullSelf_WritesContractAndFailureAndFailureDetails()
+		{
+			ComparisonAgainstSelf target = new ComparisonAgainstSelf("target"),
+				lt = new ComparisonAgainstSelf("lt"),
+				gt = new ComparisonAgainstSelf("gt");
+			ComparisonAgainstSelf.Setup(c =>
+				c.Gtoet(target, target, true)
+				.Ltoet(target, target, true)
+				.Ltoet(target, gt, true)
+				.Lt(target, gt, true)
+				.Gt(target, lt, true)
+				.Gtoet(target, lt, true)
+				.Gt(target, null, true)
+				.Lt(null, lt, false));
+
+			var subject = new ImplementsComparisonConstraint<ComparisonAgainstSelf>(lt, gt);
+
+			Assert.That(GetMessage(subject, target), Is
+				.StringContaining("comparison operators to <ComparisonAgainstSelf>.")
+				.And.StringContaining("null must be < (less than) <lt>")
+				.And.StringContaining(TextMessageWriter.Pfx_Expected + "True")
+				.And.StringContaining(TextMessageWriter.Pfx_Actual + "False")
+				);
+		}
+
+		[Test]
+		public void WriteMessageTo_NotGreaterThanNullOther_WritesContractAndFailureAndFailureDetails()
+		{
+			var target = new ComparisonAgainstReference("target");
+			string lt = "lt", gt = "gt", eq = "eq";
+			ComparisonAgainstReference.Setup(c =>
+				c.Gtoet(target, eq, true)
+				.Ltoet(target, eq, true)
+				.Ltoet(target, gt, true)
+				.Lt(target, gt, true)
+				.Gt(target, lt, true)
+				.Gtoet(target, lt, true)
+				.Gt(target, null, false));
+
+			var subject = new ImplementsComparisonConstraint<ComparisonAgainstReference, string>(lt, gt, eq);
+
+			Assert.That(GetMessage(subject, target), Is
+				.StringContaining("comparison operators to <String>.")
+				.And.StringContaining("<target> must be > (greater than) null")
+				.And.StringContaining(TextMessageWriter.Pfx_Expected + "True")
+				.And.StringContaining(TextMessageWriter.Pfx_Actual + "False")
+				);
+		}
+
+		[Test]
+		public void WriteMessageTo_LessThanNullOther_WritesContractAndFailureAndFailureDetails()
+		{
+			var target = new ComparisonAgainstReference("target");
+			string lt = "lt", gt = "gt", eq = "eq";
+			ComparisonAgainstReference.Setup(c =>
+				c.Gtoet(target, eq, true)
+				.Ltoet(target, eq, true)
+				.Ltoet(target, gt, true)
+				.Lt(target, gt, true)
+				.Gt(target, lt, true)
+				.Gtoet(target, lt, true)
+				.Gt(target, null, true)
+				.Lt(null, lt, false));
+
+			var subject = new ImplementsComparisonConstraint<ComparisonAgainstReference, string>(lt, gt, eq);
+
+			Assert.That(GetMessage(subject, target), Is
+				.StringContaining("comparison operators to <String>.")
+				.And.StringContaining("null must be < (less than) \"lt\"")
+				.And.StringContaining(TextMessageWriter.Pfx_Expected + "True")
+				.And.StringContaining(TextMessageWriter.Pfx_Actual + "False")
+				);
+		}
 
 		#endregion
 
 		[Test]
 		public void CanBeNewedUp_ComparableToSelf()
 		{
-			ComparisonAgainstSelf.GTOET = ComparisonAgainstSelf.LTOET = ComparisonAgainstSelf.GT = ComparisonAgainstSelf.LT = true;
 			ComparisonAgainstSelf target = new ComparisonAgainstSelf("target"),
 				lt = new ComparisonAgainstSelf("lt"),
 				gt = new ComparisonAgainstSelf("gt");
+			ComparisonAgainstSelf.Setup(c => c.Gtoet(true).Ltoet(true).Gt(true).Lt(true));
 
 			Assert.That(target, new ImplementsComparisonConstraint<ComparisonAgainstSelf>(lt, gt));
 		}
@@ -259,9 +392,9 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		[Test]
 		public void CanBeNewedUp_ComparableToOther()
 		{
-			ComparisonAgainstValue.GTOET = ComparisonAgainstValue.LTOET = ComparisonAgainstValue.GT = ComparisonAgainstValue.LT = true;
 			var target = new ComparisonAgainstValue("target");
 			int eq = 20, lt = 10, gt = 30;
+			ComparisonAgainstValue.Setup(c => c.Gtoet(true).Ltoet(true).Gt(true).Lt(true));
 
 			Assert.That(target, new ImplementsComparisonConstraint<ComparisonAgainstValue, int>(lt, gt, eq));
 		}
@@ -269,10 +402,10 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		[Test]
 		public void CanBeCreatedWithExtension_ComparableToSelf()
 		{
-			ComparisonAgainstSelf.GTOET = ComparisonAgainstSelf.LTOET = ComparisonAgainstSelf.GT = ComparisonAgainstSelf.LT = true;
 			ComparisonAgainstSelf target = new ComparisonAgainstSelf("target"),
 				lt = new ComparisonAgainstSelf("lt"),
 				gt = new ComparisonAgainstSelf("gt");
+			ComparisonAgainstSelf.Setup(c => c.Gtoet(true).Ltoet(true).Gt(true).Lt(true));
 
 			Assert.That(target, Must.Satisfy.ComparisonSpecificationAgainst(lt, gt));
 		}
@@ -280,10 +413,9 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		[Test]
 		public void CanBeCreatedWithExtension_ComparableToOther()
 		{
-			ComparisonAgainstReference.GTOET = ComparisonAgainstReference.LTOET = ComparisonAgainstReference.GT = ComparisonAgainstReference.LT = true;
+			ComparisonAgainstReference.Setup(c => c.Gtoet(true).Ltoet(true).Gt(true).Lt(true));
 			var target = new ComparisonAgainstReference("target");
 			string eq = "eq", lt = "lt", gt = "gt";
-
 
 			Assert.That(target, Must.Satisfy.ComparisonSpecificationAgainst<ComparisonAgainstReference, string>(lt, gt, eq));
 		}

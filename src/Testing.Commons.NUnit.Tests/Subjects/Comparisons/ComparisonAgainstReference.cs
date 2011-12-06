@@ -1,49 +1,63 @@
+using System;
+
 namespace Testing.Commons.NUnit.Tests.Subjects.Comparisons
 {
 	internal class ComparisonAgainstReference : NamedSubject
 	{
 		public ComparisonAgainstReference(string name) : base(name) { }
 
-		public static bool GT, LT, GTOET, LTOET;
-
 		public static bool operator >(ComparisonAgainstReference left, string right)
 		{
-			return GT;
+			return _comparison.GT(left, right);
 		}
 
 		public static bool operator <(ComparisonAgainstReference left, string right)
 		{
-			return LT;
+			return _comparison.LT(left, right);
 		}
 
 		public static bool operator >=(ComparisonAgainstReference left, string right)
 		{
-			return GTOET;
+			return _comparison.GTOET(left, right);
 		}
 
 		public static bool operator <=(ComparisonAgainstReference left, string right)
 		{
-			return LTOET;
+			return _comparison.LTOET(left, right);
 		}
 
-		public static bool operator >(string right, ComparisonAgainstReference left)
+		public static bool operator >(string l, ComparisonAgainstReference r)
 		{
-			return GT;
+			return _inverse.GT(l, r);
 		}
 
-		public static bool operator <(string right, ComparisonAgainstReference left)
+		public static bool operator <(string l, ComparisonAgainstReference r)
 		{
-			return LT;
+			return _inverse.LT(l, r);
 		}
 
-		public static bool operator >=(string right, ComparisonAgainstReference left)
+		public static bool operator >=(string l, ComparisonAgainstReference r)
 		{
-			return GTOET;
+			return _inverse.GTOET(l, r);
 		}
 
-		public static bool operator <=(string right, ComparisonAgainstReference left)
+		public static bool operator <=(string l, ComparisonAgainstReference r)
 		{
-			return LTOET;
+			return _inverse.LTOET(l, r);
+		}
+
+		private static ComparisonSubject<ComparisonAgainstReference, string> _comparison;
+		public static void Setup(Action<ComparisonSubject<ComparisonAgainstReference, string>> comparison)
+		{
+			_comparison = new ComparisonSubject<ComparisonAgainstReference, string>();
+			comparison(_comparison);
+		}
+
+		private static ComparisonSubject<string, ComparisonAgainstReference> _inverse;
+		public static void SetupInverse(Action<ComparisonSubject<string, ComparisonAgainstReference>> comparison)
+		{
+			_inverse = new ComparisonSubject<string, ComparisonAgainstReference>();
+			comparison(_inverse);
 		}
 	}
 }

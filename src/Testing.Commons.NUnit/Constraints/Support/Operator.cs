@@ -3,12 +3,12 @@ using System.Linq.Expressions;
 
 namespace Testing.Commons.NUnit.Constraints.Support
 {
-	/// Based on:
-	/// "Miscellaneous Utility Library" Software Licence
-	///
-	///Version 1.0
-	///Copyright (c) 2004-2008 Jon Skeet and Marc Gravell.
-	///All rights reserved.
+	// Based on:
+	// "Miscellaneous Utility Library" Software Licence
+	//
+	// Version 1.0
+	// Copyright (c) 2004-2008 Jon Skeet and Marc Gravell.
+	// All rights reserved.
 
 	/// <summary>
 	/// Provides standard operators over a single type

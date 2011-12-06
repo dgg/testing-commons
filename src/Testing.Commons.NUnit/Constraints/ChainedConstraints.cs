@@ -3,6 +3,9 @@ using NUnit.Framework.Constraints;
 
 namespace Testing.Commons.NUnit.Constraints
 {
+	/// <summary>
+	/// Allows delegating matching while maintaining the control over what the failure message will be.
+	/// </summary>
 	internal class ChainedConstraints
 	{
 		private readonly Func<Constraint>[] _rules;

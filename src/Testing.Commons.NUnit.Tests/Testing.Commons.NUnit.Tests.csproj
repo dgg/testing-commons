@@ -70,6 +70,7 @@
     <Compile Include="Subjects\Comparisons\ComparisonAgainstReference.cs" />
     <Compile Include="Subjects\Comparisons\ComparisonAgainstSelf.cs" />
     <Compile Include="Subjects\Comparisons\ComparisonAgainstValue.cs" />
+    <Compile Include="Subjects\Comparisons\ComparisonSubject.cs" />
     <Compile Include="Subjects\NamedSubject.cs" />
     <Compile Include="Subjects\Customer.cs" />
     <Compile Include="Subjects\CustomerWithCollection.cs" />
