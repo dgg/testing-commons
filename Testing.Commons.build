@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<Configuration>Release</Configuration>
 		<solutionFile>Testing.Commons.sln</solutionFile>
-		<nunitPath>tools\NUnit\</nunitPath>
+		<nunitPath>tools\NUnit.Runners.lite.2.6.0.12051\</nunitPath>
 		<nunitSummaryPath>tools\NUnitSummary\</nunitSummaryPath>
 		<projectPath>src\Testing.Commons\</projectPath>
 		<testProjectPath>src\Testing.Commons.Tests\</testProjectPath>
@@ -32,11 +32,9 @@
 	<Target Name="build" DependsOnTargets="runTests">
 		<RemoveDir Directories="$(releasePath)" />
 		<Copy SourceFiles="@(assemblyFile)" DestinationFolder="$(releasePath)" />
-		<!--Copy SourceFiles="@(assemblyFile)" DestinationFolder="gems\lib" /-->
 		<Copy SourceFiles="@(assemblyFile)" DestinationFolder="$(nuGetReleaseLib)" />
 		<Copy SourceFiles="@(testResults)" DestinationFolder="$(releasePath)" />
 		<Copy Condition="'$(Configuration)'=='Release'" SourceFiles="@(docFile)" DestinationFolder="$(releasePath)" />
-		<!--Copy Condition="'$(Configuration)'=='Release'" SourceFiles="@(docFile)" DestinationFolder="gems\lib" /-->
 		<Copy Condition="'$(Configuration)'=='Release'" SourceFiles="@(docFile)" DestinationFolder="$(nuGetReleaseLib)" />
 		<Copy Condition="'$(Configuration)'=='Debug'" SourceFiles="@(pdbFile)" DestinationFolder="$(releasePath)" />
 		<Copy SourceFiles="$(nuGetManifest)" DestinationFolder="$(nuGetReleasePath)" />

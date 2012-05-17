@@ -15,7 +15,7 @@ namespace Testing.Commons.NUnit.Constraints
 		public override bool Matches(object current)
 		{
 			actual = current;
-			IComparable<T> comparable = (IComparable<T>)actual;
+			var comparable = (IComparable<T>)actual;
 			return _inner.Matches(comparable.CompareTo(_expected));
 		}
 

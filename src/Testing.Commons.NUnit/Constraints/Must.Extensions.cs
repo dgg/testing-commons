@@ -258,5 +258,18 @@ namespace Testing.Commons.NUnit.Constraints
 		{
 			return new ImplementsComparisonConstraint<T, U>(equal, strictlyLessThan, strictlyGreaterThan);
 		}
+
+		/// <summary>
+		/// Builds an instance of <see cref="ImplementsEquatableConstraint{T}"/> that allows checking the implementation of
+		/// <see cref="IEquatable{T}"/> when <typeparamref name="T"/> is the same type.
+		/// </summary>
+		/// <param name="entry">Extension entry point.</param>
+		/// <param name="equalTo">An instance of <typeparamref name="T"/> that is equal to the value tested.</param>
+		/// <param name="notEqualTo">An instance of <typeparamref name="T"/> that is not equal to the value tested.</param>
+		/// <returns>Instance built.</returns>
+		public static Constraint EquatableSpecificationAgainst<T>(this Must.SatisfyEntryPoint entry, T equalTo, T notEqualTo)
+		{
+			return new ImplementsEquatableConstraint<T>(equalTo, notEqualTo);
+		}
 	}
 }

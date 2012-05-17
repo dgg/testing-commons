@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<Configuration>Release</Configuration>
 		<solutionFile>Testing.Commons.sln</solutionFile>
-		<nunitPath>tools\NUnit\</nunitPath>
+		<nunitPath>tools\NUnit.Runners.lite.2.6.0.12051\</nunitPath>
 		<nunitSummaryPath>tools\NUnitSummary\</nunitSummaryPath>
 		<projectPath>src\Testing.Commons.NUnit\</projectPath>
 		<testProjectPath>src\Testing.Commons.NUnit.Tests\</testProjectPath>
