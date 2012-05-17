@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Anonymous.Extensions.cs" />
+    <Compile Include="Async\PseudoTask.cs" />
     <Compile Include="Configuration\ConfigurationAssemblyAttribute.cs" />
     <Compile Include="Configuration\ExceptionMessagePart.cs" />
     <Compile Include="Configuration\ExternalConfiguration.cs" />

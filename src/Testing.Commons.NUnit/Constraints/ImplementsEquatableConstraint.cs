@@ -3,6 +3,7 @@ using NUnit.Framework.Constraints;
 
 namespace Testing.Commons.NUnit.Constraints
 {
+	/*
 	/// <summary>
 	/// Allows checking whether a type properly implements <see cref="IEquatable{T}"/>.
 	/// </summary>
@@ -75,5 +76,5 @@ namespace Testing.Commons.NUnit.Constraints
 			writer.WriteLine("A type that implements IEquatable<{0}> contract.", typeof(T).Name);
 			_rules.Offender.WriteMessageTo(writer);
 		}
-	}
+	}*/
 }

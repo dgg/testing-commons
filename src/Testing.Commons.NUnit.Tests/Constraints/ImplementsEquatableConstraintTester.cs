@@ -8,6 +8,8 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 	[TestFixture]
 	public class ImplementsEquatableConstraintTester : ConstraintTesterBase
 	{
+
+		/*
 		#region Matches
 
 		[Test]
@@ -77,6 +79,6 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 				.Setup(notEq, false);
 
 			Assert.That(target, Must.Satisfy.EquatableSpecificationAgainst(eq, notEq));
-		}
+		}*/
 	}
 }
