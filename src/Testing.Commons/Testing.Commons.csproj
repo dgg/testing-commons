@@ -81,6 +81,7 @@
     <Compile Include="Web\HttpContextReseter.cs" />
     <Compile Include="Web\HttpRequestBuilder.cs" />
     <Compile Include="Web\HttpRequestModel.cs" />
+    <Compile Include="KeyValue.cs" />
     <Compile Include="Web\ProfileTestProvider.cs" />
     <Compile Include="Web\QueryBuilder.cs" />
     <Compile Include="Web\Support\EventName.cs" />
