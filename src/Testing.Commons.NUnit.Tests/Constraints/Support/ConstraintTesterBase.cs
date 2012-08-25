@@ -7,7 +7,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints.Support
 	{
 		protected string GetMessage<T>(T subject, object actual) where T : Constraint
 		{
-			TextMessageWriter writer  = new TextMessageWriter();
+			var writer  = new TextMessageWriter();
 
 			subject.Matches(actual);
 			subject.WriteMessageTo(writer);
@@ -17,7 +17,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints.Support
 
 		protected string GetMessage<T>(T subject, ActualValueDelegate actual) where T : Constraint
 		{
-			TextMessageWriter writer = new TextMessageWriter();
+			var writer = new TextMessageWriter();
 
 			subject.Matches(actual);
 			subject.WriteMessageTo(writer);

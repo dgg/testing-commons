@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="ArrangingTestTester.cs" />
     <Compile Include="Constraints\BinarySerializationConstraintTester.cs" />
+    <Compile Include="Constraints\DelegatingConstraintTester.cs" />
     <Compile Include="Constraints\ImplementsComparableConstraintTester.cs" />
     <Compile Include="Constraints\ConstrainedEnumerableTester.cs" />
     <Compile Include="Constraints\DeserializationConstraintTester.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Constraints\DataContractDeserializationConstraintTester.cs" />
     <Compile Include="Constraints\DataContractSerializationConstraintTester.cs" />
     <Compile Include="Constraints\JsonDeserializationConstraintTester.cs" />
+    <Compile Include="Constraints\Support\UppercaseConstraint.cs" />
     <Compile Include="Constraints\XmlDeserializationConstraintTester.cs" />
     <Compile Include="Constraints\XmlSerializationConstraintTester.cs" />
     <Compile Include="Constraints\EnumerableCountTester.cs" />
