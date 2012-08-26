@@ -11,7 +11,7 @@ namespace Testing.Commons.NUnit.Constraints
 	/// <summary>
 	/// Provides a set of static methods to create custom constraints.
 	/// </summary>
-	public static class MustExtensions
+	public static partial class MustExtensions
 	{
 		/// <summary>
 		/// Builds an instance of <see cref="Testing.Commons.NUnit.Constraints.ConstrainedEnumerable"/> with the provided constraints.

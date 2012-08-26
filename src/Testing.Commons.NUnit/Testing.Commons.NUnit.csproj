@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="ArrangingTest.cs" />
     <Compile Include="Constraints\ChainedConstraints.cs" />
+    <Compile Include="Constraints\Closeness.cs" />
     <Compile Include="Constraints\ComparableConstraint.cs" />
     <Compile Include="Constraints\ComparisonConstraint.cs" />
     <Compile Include="Constraints\DelegatingConstraint.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Constraints\LambdaPropertyConstraint.cs" />
     <Compile Include="Constraints\MatchingConstraint.cs" />
     <Compile Include="Constraints\Must.Extensions.cs" />
+    <Compile Include="Constraints\Must.Extensions.Time.cs" />
     <Compile Include="Constraints\Name.cs" />
     <Compile Include="Constraints\PropertyChangedConstraint.cs" />
     <Compile Include="Constraints\PropertyChangingConstraint.cs" />
