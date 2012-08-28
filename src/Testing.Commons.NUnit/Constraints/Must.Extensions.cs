@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Web.Script.Serialization;
 using NUnit.Framework.Constraints;
@@ -56,34 +55,6 @@ namespace Testing.Commons.NUnit.Constraints
 		public static LambdaPropertyConstraint<T> Property<T>(this Must.HaveEntryPoint entry, Expression<Func<T, object>> property, Constraint constraint)
 		{
 			return new LambdaPropertyConstraint<T>(property, constraint);
-		}
-
-		/// <summary>
-		/// Builds an instance of <see cref="PropertyChangedConstraint{TSubject}"/> that allows checking whether a type raises a
-		/// <see cref="INotifyPropertyChanged.PropertyChanged"/> when a property is set.
-		/// </summary>
-		/// <typeparam name="TSubject">Type that raises the <see cref="INotifyPropertyChanged.PropertyChanged"/> event.</typeparam>
-		/// <param name="entry">Extension entry point.</param>
-		/// <param name="subject"> Instance of the event raising type.</param>
-		/// <param name="property">Expression that represents the name of a property.</param>
-		/// <returns>Instance built.</returns>
-		public static PropertyChangedConstraint<TSubject> PropertyChanged<TSubject>(this Must.RaiseEntryPoint entry, TSubject subject, Expression<Func<TSubject, object>> property) where TSubject : INotifyPropertyChanged
-		{
-			return new PropertyChangedConstraint<TSubject>(subject, property);
-		}
-
-		/// <summary>
-		/// Builds an instance of <see cref="PropertyChangingConstraint{TSubject}"/> that allows checking whether a type raises a
-		/// <see cref="INotifyPropertyChanging.PropertyChanging"/> when a property is set.
-		/// </summary>
-		/// <param name="entry">Extension entry point.</param>
-		/// <param name="subject"> Instance of the event raising type.</param>
-		/// <param name="property">Expression that represents the name of a property.</param>
-		/// <typeparam name="TSubject">Type that raises the <see cref="INotifyPropertyChanging.PropertyChanging"/> event.</typeparam>
-		/// <returns>Instance built.</returns>
-		public static PropertyChangingConstraint<TSubject> PropertyChanging<TSubject>(this Must.RaiseEntryPoint entry, TSubject subject, Expression<Func<TSubject, object>> property) where TSubject : INotifyPropertyChanging
-		{
-			return new PropertyChangingConstraint<TSubject>(subject, property);
 		}
 
 		/// <summary>

@@ -20,6 +20,14 @@ namespace Testing.Commons.NUnit.Constraints
 			: base(subject, property, c => Must.Have.Property<PropertyChangingEventArgs>(e => e.PropertyName, c)) { }
 
 		/// <summary>
+		/// Instantiate the constraint
+		/// </summary>
+		/// <param name="subject"> Instance of the event raising type.</param>
+		/// <param name="eventArgsConstraint">Constraint to be applied to the event arg property.</param>
+		public PropertyChangingConstraint(TSubject subject, Constraint eventArgsConstraint)
+			: base(subject, eventArgsConstraint, c => Must.Have.Property<PropertyChangingEventArgs>(e => e.PropertyName, c)) { }
+
+		/// <summary>
 		/// Test whether the constraint is satisfied by an
 		/// ActualValueDelegate that returns the value to be tested.
 		/// The default implementation simply evaluates the delegate

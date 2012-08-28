@@ -94,7 +94,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		[Test]
 		public void CanBeNewedUp()
 		{
-			IRaisingSubject raising = Substitute.For<IRaisingSubject>();
+			var raising = Substitute.For<IRaisingSubject>();
 			raising
 				.When(r => r.I = Arg.Any<int>())
 				.Do(ci => raising.PropertyChanged += Raise.Event<PropertyChangedEventHandler>(raising, new PropertyChangedEventArgs("I")));
@@ -103,13 +103,34 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		}
 
 		[Test]
-		public void CanBeCreatedWithExtension()
+		public void CanBeCreatedWithExtension() 
 		{
-			IRaisingSubject raising = Substitute.For<IRaisingSubject>();
+			var raising = Substitute.For<IRaisingSubject>();
 			raising.When(r => r.I = Arg.Any<int>())
-				.Do(ci => raising.PropertyChanging += Raise.Event<PropertyChangingEventHandler>(raising, new PropertyChangingEventArgs("I")));
+				.Do(ci => raising.PropertyChanged += Raise.Event<PropertyChangedEventHandler>(raising, new PropertyChangedEventArgs("I")));
 
-			Assert.That(() => raising.I = 3, Must.Raise.PropertyChanging(raising, r => r.I));
+			Assert.That(() => raising.I = 3, Must.Raise.PropertyChanged(raising, r => r.I));
+		}
+
+		[Test]
+		public void AllowsPropertyChanged_ToBeDifferentFromTheMemberName()
+		{
+			var raising = Substitute.For<IRaisingSubject>();
+			raising.When(r => r.I = Arg.Any<int>())
+				.Do(ci => raising.PropertyChanged += Raise.Event<PropertyChangedEventHandler>(raising,
+					new PropertyChangedEventArgs("somethingElse")));
+
+			Assert.That(() => raising.I = 3, Must.Raise.PropertyChanged(raising, Is.EqualTo("somethingElse")));
+		}
+
+		[Test]
+		public void AllowsChecking_PropertyChanged_WasNotRaised()
+		{
+			var raising = Substitute.For<IRaisingSubject>();
+			raising.When(r => r.I = Arg.Any<int>())
+				.Do(_ => { });
+
+			Assert.That(() => raising.I = 3, Must.Not.Raise.PropertyChanged(raising));
 		}
 	}
 }

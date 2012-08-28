@@ -106,5 +106,26 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 
 			Assert.That(() => raising.I = 3, Must.Raise.PropertyChanging(raising, r => r.I));
 		}
+
+		[Test]
+		public void AllowsPropertyChanging_ToBeDifferentFromTheMemberName()
+		{
+			var raising = Substitute.For<IRaisingSubject>();
+			raising.When(r => r.I = Arg.Any<int>())
+				.Do(ci => raising.PropertyChanging += Raise.Event<PropertyChangingEventHandler>(raising,
+					new PropertyChangingEventArgs("somethingElse")));
+
+			Assert.That(() => raising.I = 3, Must.Raise.PropertyChanging(raising, Is.EqualTo("somethingElse")));
+		}
+
+		[Test]
+		public void AllowsChecking_PropertyChanging_WasNotRaised()
+		{
+			var raising = Substitute.For<IRaisingSubject>();
+			raising.When(r => r.I = Arg.Any<int>())
+				.Do(_ => { });
+
+			Assert.That(() => raising.I = 3, Must.Not.Raise.PropertyChanging(raising));
+		}
 	}
 }
