@@ -242,5 +242,30 @@ namespace Testing.Commons.NUnit.Constraints
 		{
 			return new ImplementsEquatableConstraint<T>(equalTo, notEqualTo);
 		}*/
+
+		/// <summary>
+		/// Builds an instance of <see cref="ConjunctionConstraint"/> that allows joining multiple constraints
+		/// while reporting the specific constraint that failed.
+		/// </summary>
+		/// <param name="entry">Extension entry point.</param>
+		/// <param name="constraints">The list of constraints to evaluate.</param>
+		/// <returns>Instance built.</returns>
+		public static Constraint Conjunction(this Must.SatisfyEntryPoint entry, params Constraint[] constraints)
+		{
+			return new ConjunctionConstraint(constraints);
+		}
+
+		/// <summary>
+		/// Builds an instance of <see cref="ConjunctionConstraint"/> that allows joining multiple constraints
+		/// while reporting the specific constraint that failed.
+		/// </summary>
+		/// <param name="entry">Extension entry point.</param>
+		/// <param name="constraints">The list of constraints to evaluate.</param>
+		/// <returns>Instance built.</returns>
+		public static Constraint Conjunction(this Must.SatisfyEntryPoint entry, IEnumerable<Constraint> constraints)
+		{
+			return new ConjunctionConstraint(constraints);
+		}
+
 	}
 }

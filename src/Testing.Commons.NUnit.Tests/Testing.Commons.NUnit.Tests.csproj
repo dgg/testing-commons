@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="ArrangingTestTester.cs" />
     <Compile Include="Constraints\BinarySerializationConstraintTester.cs" />
+    <Compile Include="Constraints\ConjunctionContraintTester.cs" />
     <Compile Include="Constraints\DateConstraintsTester.cs" />
     <Compile Include="Constraints\DelegatingConstraintTester.cs" />
     <Compile Include="Constraints\ImplementsComparableConstraintTester.cs" />

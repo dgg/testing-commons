@@ -50,6 +50,7 @@
     <Compile Include="Constraints\Closeness.cs" />
     <Compile Include="Constraints\ComparableConstraint.cs" />
     <Compile Include="Constraints\ComparisonConstraint.cs" />
+    <Compile Include="Constraints\ConjunctionConstraint.cs" />
     <Compile Include="Constraints\Must.Extensions.Events.cs" />
     <Compile Include="Constraints\DelegatingConstraint.cs" />
     <Compile Include="Constraints\EquatableConstraint.cs" />
