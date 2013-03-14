@@ -10,6 +10,7 @@ namespace Testing.Commons.NUnit.Constraints
 	public class ConjunctionConstraint : Constraint
 	{
 		private readonly IEnumerable<Constraint> _constraints;
+		public static readonly string Pfx_Specific = "\tSpecifically: ";
 
 		/// <summary>
 		/// Creates the instance of the constraint.
@@ -58,7 +59,7 @@ namespace Testing.Commons.NUnit.Constraints
 		{
 			writeConjuction(writer);
 			writer.WriteLine();
-			writer.Write("\tSpecifically: ");
+			writer.Write(Pfx_Specific);
 			_failing.WriteDescriptionTo(writer);
 		}
 
@@ -66,6 +67,14 @@ namespace Testing.Commons.NUnit.Constraints
 		{
 			Constraint aggregate = _constraints.Aggregate((c1, c2) => c1 & c2);
 			aggregate.WriteDescriptionTo(writer);
+		}
+
+		public override void WriteActualValueTo(MessageWriter writer)
+		{
+			base.WriteActualValueTo(writer);
+			writer.WriteLine();
+			writer.Write(Pfx_Specific);
+			_failing.WriteActualValueTo(writer);
 		}
 	}
 }

@@ -2,6 +2,7 @@
 using NUnit.Framework.Constraints;
 using Testing.Commons.NUnit.Constraints;
 using Testing.Commons.NUnit.Tests.Constraints.Support;
+using Testing.Commons.NUnit.Tests.Subjects;
 
 namespace Testing.Commons.NUnit.Tests.Constraints
 {
@@ -125,6 +126,19 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 				//Is.Empty
 				Is.StringContaining(TextMessageWriter.Pfx_Actual + "4")
 			);
+		}
+
+		[Test]
+		public void WriteMessageTo_FailingConstraintThatEvaluatesAMember_ActualConstainsActualAndMember()
+		{
+			var customer = new FlatCustomer { Name = "name", PhoneNumber = "123456" };
+			var subject = Must.Satisfy.Conjunction(
+				Must.Have.Property<FlatCustomer>(c => c.Name, Is.StringContaining("me")),
+				Must.Have.Property<FlatCustomer>(c => c.PhoneNumber, Is.StringContaining("-")),
+				Is.Not.Null);
+
+			Assert.That(GetMessage(subject, customer), Is.StringContaining(typeof(FlatCustomer).Name).And
+				.StringContaining("123456"));
 		}
 
 		#endregion
