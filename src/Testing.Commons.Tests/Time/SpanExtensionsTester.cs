@@ -11,7 +11,7 @@ namespace Testing.Commons.Tests.Time
 		[Test]
 		public void Span_WeeksCreation_AsExpected()
 		{
-			var ts = 2.Weeks();
+			TimeSpan ts = 2.Weeks();
 
 			Assert.That(ts, Must.Be.SpanWith(days: 14));
 		}
@@ -19,7 +19,7 @@ namespace Testing.Commons.Tests.Time
 		[Test]
 		public void Span_DaysCreation_AsExpected()
 		{
-			var ts = 3.Days();
+			TimeSpan ts = 3.Days();
 
 			Assert.That(ts, Must.Be.SpanWith(days : 3));
 		}
@@ -27,7 +27,7 @@ namespace Testing.Commons.Tests.Time
 		[Test]
 		public void Span_HoursCreation_AsExpected()
 		{
-			var ts = 3.Hours();
+			TimeSpan ts = 3.Hours();
 
 			Assert.That(ts, Must.Be.SpanWith(hours: 3));
 		}
@@ -35,7 +35,7 @@ namespace Testing.Commons.Tests.Time
 		[Test]
 		public void Span_MinutesCreation_AsExpected()
 		{
-			var ts = 3.Minutes();
+			TimeSpan ts = 3.Minutes();
 
 			Assert.That(ts, Must.Be.SpanWith(minutes: 3));
 		}
@@ -43,7 +43,7 @@ namespace Testing.Commons.Tests.Time
 		[Test]
 		public void Span_SecondsCreation_AsExpected()
 		{
-			var ts = 3.Seconds();
+			TimeSpan ts = 3.Seconds();
 
 			Assert.That(ts, Must.Be.SpanWith(seconds: 3));
 		}
@@ -51,7 +51,7 @@ namespace Testing.Commons.Tests.Time
 		[Test]
 		public void Span_FluentCreation_AsExpected()
 		{
-			var ts = 5.Days().Hours(4).Minutes(3).Seconds(2).Milliseconds(1);
+			TimeSpan ts = 5.Days().Hours(4).Minutes(3).Seconds(2).Milliseconds(1);
 
 			Assert.That(ts, Must.Be.SpanWith(5, 4, 3, 2, 1));
 		}
@@ -59,9 +59,17 @@ namespace Testing.Commons.Tests.Time
 		[Test]
 		public void Span_FluentCreationWithWeeks_UseAdd()
 		{
-			var ts = 2.Weeks() + 5.Days().Hours(4).Minutes(3).Seconds(2).Milliseconds(1);
+			TimeSpan ts = 2.Weeks() + 5.Days().Hours(4).Minutes(3).Seconds(2).Milliseconds(1);
 
 			Assert.That(ts, Must.Be.SpanWith(19, 4, 3, 2, 1));
+		}
+
+		[Test]
+		public void Span_AnotherFluentFlavor_AsExpected()
+		{
+			TimeSpan ts = 5.Days(4.Hours(3.Minutes(2.Seconds(1.Milliseconds()))));
+
+			Assert.That(ts, Must.Be.SpanWith(5, 4, 3, 2, 1));
 		}
 
 		[Test]

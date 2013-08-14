@@ -20,6 +20,18 @@ namespace Testing.Commons.Time
 		}
 
 		/// <summary>
+		/// Adds the specified <see cref="TimeSpan"/> to the one represented by the specified number of weeks, where a week is assumed to have 7 days.
+		/// </summary>
+		/// <remarks>Enables method chaining in order to expressively create instances.</remarks>
+		/// <param name="value">A number of weeks.</param>
+		/// <param name="ts">The time interval to add.</param>
+		/// <returns>An object that represents value plus the value of <paramref name="ts"/>.</returns>
+		public static TimeSpan Weeks(this int value, TimeSpan ts)
+		{
+			return Weeks(value).Add(ts);
+		}
+
+		/// <summary>
 		/// Returns a <see cref="TimeSpan"/> that represents a specified number of days.
 		/// </summary>
 		/// <param name="value">A number of days.</param>
@@ -27,6 +39,18 @@ namespace Testing.Commons.Time
 		public static TimeSpan Days(this int value)
 		{
 			return TimeSpan.FromDays(value);
+		}
+
+		/// <summary>
+		/// Adds the specified <see cref="TimeSpan"/> to the one represented by the specified number of days.
+		/// </summary>
+		/// <remarks>Enables method chaining in order to expressively create instances.</remarks>
+		/// <param name="value">A number of days.</param>
+		/// <param name="ts">The time interval to add.</param>
+		/// <returns>An object that represents value plus the value of <paramref name="ts"/>.</returns>
+		public static TimeSpan Days(this int value, TimeSpan ts)
+		{
+			return Days(value).Add(ts);
 		}
 
 		/// <summary>
@@ -40,6 +64,18 @@ namespace Testing.Commons.Time
 		}
 
 		/// <summary>
+		/// Adds the specified <see cref="TimeSpan"/> to the one represented by the specified number of hours.
+		/// </summary>
+		/// <remarks>Enables method chaining in order to expressively create instances.</remarks>
+		/// <param name="value">A number of hours.</param>
+		/// <param name="ts">The time interval to add.</param>
+		/// <returns>An object that represents value plus the value of <paramref name="ts"/>.</returns>
+		public static TimeSpan Hours(this int value, TimeSpan ts)
+		{
+			return Hours(value).Add(ts);
+		}
+
+		/// <summary>
 		/// Returns a <see cref="TimeSpan"/> that represents a specified number of minutes.
 		/// </summary>
 		/// <param name="value">A number of minutes.</param>
@@ -47,6 +83,18 @@ namespace Testing.Commons.Time
 		public static TimeSpan Minutes(this int value)
 		{
 			return TimeSpan.FromMinutes(value);
+		}
+
+		/// <summary>
+		/// Adds the specified <see cref="TimeSpan"/> to the one represented by the specified number of minutes.
+		/// </summary>
+		/// <remarks>Enables method chaining in order to expressively create instances.</remarks>
+		/// <param name="value">A number of minutes.</param>
+		/// <param name="ts">The time interval to add.</param>
+		/// <returns>An object that represents value plus the value of <paramref name="ts"/>.</returns>
+		public static TimeSpan Minutes(this int value, TimeSpan ts)
+		{
+			return Minutes(value).Add(ts);
 		}
 
 		/// <summary>
@@ -60,6 +108,18 @@ namespace Testing.Commons.Time
 		}
 
 		/// <summary>
+		/// Adds the specified <see cref="TimeSpan"/> to the one represented by the specified number of seconds.
+		/// </summary>
+		/// <remarks>Enables method chaining in order to expressively create instances.</remarks>
+		/// <param name="value">A number of seconds.</param>
+		/// <param name="ts">The time interval to add.</param>
+		/// <returns>An object that represents value plus the value of <paramref name="ts"/>.</returns>
+		public static TimeSpan Seconds(this int value, TimeSpan ts)
+		{
+			return TimeSpan.FromSeconds(value).Add(ts);
+		}
+
+		/// <summary>
 		/// Returns a <see cref="TimeSpan"/> that represents a specified number of milliseconds.
 		/// </summary>
 		/// <param name="value">A number of value.</param>
@@ -67,6 +127,18 @@ namespace Testing.Commons.Time
 		public static TimeSpan Milliseconds(this int value)
 		{
 			return TimeSpan.FromMilliseconds(value);
+		}
+
+		/// <summary>
+		/// Returns a <see cref="TimeSpan"/> that represents a specified number of milliseconds.
+		/// </summary>
+		/// <remarks>Enables method chaining in order to expressively create instances.</remarks>
+		/// <param name="value">A number of value.</param>
+		/// <param name="ts">The time interval to add.</param>
+		/// <returns>An object that represents value plus the value of <paramref name="ts"/>.</returns>
+		public static TimeSpan Milliseconds(this int value, TimeSpan ts)
+		{
+			return Milliseconds(value).Add(ts);
 		}
 
 		/// <summary>
