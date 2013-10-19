@@ -15,7 +15,7 @@ namespace Testing.Commons.NUnit.Constraints
 		/// <param name="subject"> Instance of the type not raising the event.</param>
 		public NoPropertyChangingConstraint(TSubject subject)
 			: base(subject) { }
-
+		
 		/// <summary>
 		/// Test whether the constraint is satisfied by an
 		/// ActualValueDelegate that returns the value to be tested.
@@ -25,14 +25,14 @@ namespace Testing.Commons.NUnit.Constraints
 		/// </summary>
 		/// <param name="del">An ActualValueDelegate</param>
 		/// <returns>True for success, false for failure</returns>
-		public override bool Matches(ActualValueDelegate del)
+		public override bool Matches<T>(ActualValueDelegate<T> del)
 		{
 			Subject.PropertyChanging += (sender, e) => OnEventRaised(e);
 			del();
 			// does not matter what is sent to the base as long as 'del' is executed
 			return base.Matches(del);
 		}
-
+		
 		/// <summary>
 		/// Name of the event.
 		/// </summary>

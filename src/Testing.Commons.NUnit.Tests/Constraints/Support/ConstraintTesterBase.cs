@@ -15,7 +15,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints.Support
 			return writer.ToString();
 		}
 
-		protected string GetMessage<T>(T subject, ActualValueDelegate actual) where T : Constraint
+		protected string GetMessage<T>(T subject, ActualValueDelegate<object> actual) where T : Constraint
 		{
 			var writer = new TextMessageWriter();
 

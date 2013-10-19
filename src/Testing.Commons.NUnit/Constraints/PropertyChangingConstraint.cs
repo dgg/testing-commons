@@ -36,7 +36,7 @@ namespace Testing.Commons.NUnit.Constraints
 		/// </summary>
 		/// <param name="del">An ActualValueDelegate</param>
 		/// <returns>True for success, false for failure</returns>
-		public override bool Matches(ActualValueDelegate del)
+		public override bool Matches<T>(ActualValueDelegate<T> del)
 		{
 			Subject.PropertyChanging += (sender, e) => OnEventRaised(e);
 			del();
