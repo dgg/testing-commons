@@ -1,23 +1,23 @@
 <?xml version="1.0"?>
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-        <id>Testing.Commons.NUnit</id>
-        <title>Testing Commons NUnit</title>
-        <version>1.7.1.0</version>
-        <authors>Daniel González García</authors>
-        <licenseUrl>http://www.opensource.org/licenses/bsd-license.php</licenseUrl>
-        <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Utility classes and extensions to facilitate common testing operations when using NUnit.</description>
-        <summary>
-            Testing.Commons.NUnit contains diverse addons used when testing using NUnit.
-        </summary>
-        <projectUrl>http://www.assembla.com/spaces/testing-commons</projectUrl>
+	<metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+		<id>Testing.Commons.NUnit</id>
+		<title>Testing Commons NUnit</title>
+		<version>1.8.0.0</version>
+		<authors>Daniel González García</authors>
+		<licenseUrl>http://www.opensource.org/licenses/bsd-license.php</licenseUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Utility classes and extensions to facilitate common testing operations when using NUnit.</description>
+		<summary>
+			Testing.Commons.NUnit contains diverse addons used when testing using NUnit.
+		</summary>
+		<projectUrl>http://www.assembla.com/spaces/testing-commons</projectUrl>
 		<iconUrl>https://nugetgallery.blob.core.windows.net/icons/Testing.Commons.NUnit.1.1.0.0.png</iconUrl>
 		<tags>.net C# testing NUnit</tags>
 		<dependencies>
 			<dependency id="testing.commons" version="1.1.0.0" />
 			<dependency id="ExpectedObjects" version="1.0.0.2" />
-			<dependency id="NUnit" version="2.6.2" />
+			<dependency id="NUnit" version="2.6.3" />
 		</dependencies>
 	</metadata>
 	<files>
