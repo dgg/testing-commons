@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Testing.Commons.NUnit.logo.png = Testing.Commons.NUnit.logo.png
 		Testing.Commons.NUnit.nuspec = Testing.Commons.NUnit.nuspec
 		Testing.Commons.nuspec = Testing.Commons.nuspec
+		Testing.Commons.ServiceStack.logo.png = Testing.Commons.ServiceStack.logo.png
+		Testing.Commons.ServiceStack.nuspec = Testing.Commons.ServiceStack.nuspec
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Commons.NUnit", "src\Testing.Commons.NUnit\Testing.Commons.NUnit.csproj", "{D1EC2C82-5C90-43B7-BDAB-A37C8C355EF6}"
