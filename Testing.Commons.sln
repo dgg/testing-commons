@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Commons", "src\Testing.Commons\Testing.Commons.csproj", "{45732451-E1A2-4CAC-88C9-D52F055883D3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Commons.Tests", "src\Testing.Commons.Tests\Testing.Commons.Tests.csproj", "{87933DC2-247B-47C6-9453-4A825668A2F8}"
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Commons.NUnit", "src\Testing.Commons.NUnit\Testing.Commons.NUnit.csproj", "{D1EC2C82-5C90-43B7-BDAB-A37C8C355EF6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Commons.NUnit.Tests", "src\Testing.Commons.NUnit.Tests\Testing.Commons.NUnit.Tests.csproj", "{91C05746-024C-4232-9A66-442821A52980}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Commons.ServiceStack", "src\Testing.Commons.ServiceStack\Testing.Commons.ServiceStack.csproj", "{7581BF3D-145C-4DF5-9498-4014049CAC98}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{91C05746-024C-4232-9A66-442821A52980}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91C05746-024C-4232-9A66-442821A52980}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91C05746-024C-4232-9A66-442821A52980}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7581BF3D-145C-4DF5-9498-4014049CAC98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7581BF3D-145C-4DF5-9498-4014049CAC98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7581BF3D-145C-4DF5-9498-4014049CAC98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7581BF3D-145C-4DF5-9498-4014049CAC98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
