@@ -13,6 +13,6 @@ function Main () {
     # get first directory
     $psake_dir = $psake_dir[0]
 
-    & $psake_dir\tools\psake.ps1 $base_dir\Testing.Commons.build.ps1 Compile
+    & $psake_dir\tools\psake.ps1 $base_dir\Testing.Commons.build.ps1 Release -properties @{"project"=$project}
 }
 Main
