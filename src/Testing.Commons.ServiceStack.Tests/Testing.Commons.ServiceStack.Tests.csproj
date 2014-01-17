@@ -68,6 +68,8 @@
     <Compile Include="Example\Services\SampleService.cs" />
     <Compile Include="Example\Tests\SampleServiceTester.cs" />
     <Compile Include="Example\Tests\SanityChecker.cs" />
+    <Compile Include="Example\Tests\SingleHostPerFixtureTester.cs" />
+    <Compile Include="Example\Tests\SingleHostPerTestTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
