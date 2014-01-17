@@ -7,8 +7,8 @@
     <ProjectGuid>{E1E90B34-C487-48A5-AC49-1D46F45674CB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Testing.Commons.ServiceStack.Tests</RootNamespace>
-    <AssemblyName>Testing.Commons.ServiceStack.Tests</AssemblyName>
+    <RootNamespace>Testing.Commons.Service_Stack.Tests</RootNamespace>
+    <AssemblyName>Testing.Commons.Service_Stack.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -36,6 +36,9 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack">
       <HintPath>..\..\packages\ServiceStack.3.9.71\lib\net35\ServiceStack.dll</HintPath>
     </Reference>
@@ -53,13 +56,18 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Example\Infrastructure\AppBootstrapper.cs" />
+    <Compile Include="Example\Infrastructure\ApplicationsAppHost.cs" />
+    <Compile Include="Example\Infrastructure\Shared\HostInfo.cs" />
+    <Compile Include="Example\Infrastructure\Shared\IAppBootstrapper.cs" />
+    <Compile Include="Example\Services\Messages\Echo.cs" />
+    <Compile Include="Example\Services\Messages\EchoResponse.cs" />
+    <Compile Include="Example\Services\SampleService.cs" />
+    <Compile Include="Example\Tests\SampleServiceTester.cs" />
+    <Compile Include="Example\Tests\SanityChecker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +78,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Example\Services\DataTypes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

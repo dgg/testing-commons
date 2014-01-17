@@ -9,11 +9,11 @@ namespace Testing.Commons.ServiceStack.v3
 {
 	public class TestHost : AppHostHttpListenerBase
 	{
-		private readonly Func<IAppHost, EndpointHostConfig> _bootstrap;
+		private readonly Action<IAppHost> _bootstrap;
 		private readonly Action<bool> _onDispose;
 
 		public TestHost(string serviceName, IEnumerable<Assembly> assembliesWithServices,
-			Func<IAppHost, EndpointHostConfig> bootstrap, Action<bool> onDispose)
+			Action<IAppHost> bootstrap, Action<bool> onDispose)
 			: base(serviceName, assembliesWithServices.ToArray())
 		{
 			if (bootstrap == null) throw new ArgumentNullException("bootstrap");
@@ -24,8 +24,7 @@ namespace Testing.Commons.ServiceStack.v3
 
 		public override void Configure(Container container)
 		{
-			EndpointHostConfig config = _bootstrap(this);
-			SetConfig(config);
+			_bootstrap(this);
 		}
 
 		protected override void Dispose(bool disposing)
