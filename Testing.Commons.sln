@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Commons.NUnit.Tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Commons.ServiceStack", "src\Testing.Commons.ServiceStack\Testing.Commons.ServiceStack.csproj", "{7581BF3D-145C-4DF5-9498-4014049CAC98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Commons.ServiceStack.Tests", "src\Testing.Commons.ServiceStack.Tests\Testing.Commons.ServiceStack.Tests.csproj", "{E1E90B34-C487-48A5-AC49-1D46F45674CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{7581BF3D-145C-4DF5-9498-4014049CAC98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7581BF3D-145C-4DF5-9498-4014049CAC98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7581BF3D-145C-4DF5-9498-4014049CAC98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1E90B34-C487-48A5-AC49-1D46F45674CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1E90B34-C487-48A5-AC49-1D46F45674CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1E90B34-C487-48A5-AC49-1D46F45674CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1E90B34-C487-48A5-AC49-1D46F45674CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
