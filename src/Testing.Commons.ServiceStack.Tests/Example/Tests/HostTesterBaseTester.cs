@@ -32,7 +32,7 @@ namespace Testing.Commons.Service_Stack.Tests.Example.Tests
 		}
 
 		[Test]
-		public void AllowsSharingConfiguration_BetweenImplementation_AndTests()
+		public void Bootstrap_AllowsSharingConfiguration_BetweenImplementationAndTests()
 		{
 			string text = "something";
 			var client = new RestClient(BaseUrl.ToString());
@@ -47,7 +47,7 @@ namespace Testing.Commons.Service_Stack.Tests.Example.Tests
 		protected override ushort TestPort { get { return 49160; } }
 
 		[Test]
-		public void AllowsChangingPort_InCaseOfConflictInTheMachineRunningTests()
+		public void TestPort_AllowsChangingPort_InCaseOfConflictInTheMachineRunningTests()
 		{
 			var client = new RestClient(BaseUrl.ToString());
 			var request = new RestRequest("/echo", Method.GET);
@@ -59,7 +59,7 @@ namespace Testing.Commons.Service_Stack.Tests.Example.Tests
 		}
 
 		[Test]
-		public void ReplaceADependency_BehaviorOfReplacementInvoked()
+		public void Replacing_ADependency_BehaviorOfReplacementInvoked()
 		{
 			var substitute = Substitute.For<IObserver<int>>();
 			Replacing(substitute);
@@ -69,7 +69,20 @@ namespace Testing.Commons.Service_Stack.Tests.Example.Tests
 				client.Get(new UsingDependency {I = 42});
 			}
 
-			substitute.Received().OnNext(42);
+			substitute.Received(1).OnNext(42);
+		}
+
+		[Test]
+		public void UriFor_ServiceUrls_AreEasier()
+		{
+			string text = "something";
+			using (var client = new JsonServiceClient(BaseUrl.ToString()))
+			{
+				var serviceUri = Urifor("/echo?Text=" + text);
+
+				var response = client.Get<EchoResponse>(serviceUri.ToString());
+				Assert.That(response.Echoed, Is.EqualTo(text));
+			}
 		}
 	}
 }
