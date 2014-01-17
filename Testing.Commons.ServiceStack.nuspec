@@ -12,16 +12,16 @@
 			Testing.Commons.ServiceStack contains infrastructure for integration-testing ServiceStack services.
 		</summary>
 		<projectUrl>http://www.assembla.com/spaces/testing-commons</projectUrl>
-		<iconUrl>https://nugetgallery.blob.core.windows.net/icons/Testing.Commons.ServiceStack.1.0.0.0.png</iconUrl>
+		<iconUrl>https://www.assembla.com/spaces/testing-commons/documents/aqHSekF3ur46ZcacwqjQYw/download/aqHSekF3ur46ZcacwqjQYw</iconUrl>
 		<tags>.net C# testing NUnit</tags>
 		<dependencies>
 			<dependency id="NUnit" version="2.6.3" />
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="v3\TestHost.cs" target="Support/Services" />
-		<file src="v3\TesterBase.cs" target="Support/Services" />
-		<file src="v3\SingleHostPerTest.cs" target="Support/Services" />
-		<file src="v3\SingleHostPerFixture.cs" target="Support/Services" />
+		<file src="content\**\TestHost.cs" target="content" />
+		<file src="content\**\HostTesterBase.cs" target="content" />
+		<file src="content\**\SingleHostPerTest.cs" target="content" />
+		<file src="content\**\SingleHostPerFixture.cs" target="content" />
 	</files>
 </package>
