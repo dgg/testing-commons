@@ -35,6 +35,21 @@ namespace Testing.Commons.Service_Stack.Tests.Example.Tests
 			var response = client.Execute(request);
 
 			Assert.That(response.StatusDescription, Is.EqualTo("SUPER GREEN"));
-		}		
+		}
+
+		protected override ushort TestPort { get { return 49160; } }
+
+		[Test]
+		public void AllowsChangingPort_InCaseOfConflictInTheMachineRunningTests()
+		{
+			var client = new RestClient(BaseUrl.ToString());
+			var request = new RestRequest("/echo", Method.GET);
+
+
+			var response = client.Execute(request);
+			var uri = client.BuildUri(response.Request);
+
+			Assert.That(uri.Port, Is.EqualTo(49160));
+		}
 	}
 }
