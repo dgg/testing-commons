@@ -5,7 +5,7 @@ using ServiceStack.WebHost.Endpoints;
 
 namespace Testing.Commons.ServiceStack.v3
 {
-	public abstract class TesterBase
+	public abstract class HostTesterBase
 	{
 		private TestHost _host;
 		protected TestHost Host { get { return _host; } }
@@ -39,7 +39,7 @@ namespace Testing.Commons.ServiceStack.v3
 			_host = null;
 		}
 
-		public TesterBase Replacing<T>(T dependency)
+		public HostTesterBase Replacing<T>(T dependency)
 		{
 			_host.Register(dependency);
 			return this;
