@@ -66,6 +66,7 @@
     <Compile Include="Example\Services\Messages\Echo.cs" />
     <Compile Include="Example\Services\Messages\EchoResponse.cs" />
     <Compile Include="Example\Services\SampleService.cs" />
+    <Compile Include="Example\Tests\HostTesterBaseTester.cs" />
     <Compile Include="Example\Tests\SampleServiceTester.cs" />
     <Compile Include="Example\Tests\SanityChecker.cs" />
     <Compile Include="Example\Tests\SingleHostPerFixtureTester.cs" />
