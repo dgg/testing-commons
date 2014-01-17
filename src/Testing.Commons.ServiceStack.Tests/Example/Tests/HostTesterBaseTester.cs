@@ -76,9 +76,9 @@ namespace Testing.Commons.Service_Stack.Tests.Example.Tests
 		public void UriFor_ServiceUrls_AreEasier()
 		{
 			string text = "something";
-			using (var client = new JsonServiceClient(BaseUrl.ToString()))
+			using (var client = new JsonServiceClient())
 			{
-				var serviceUri = Urifor("/echo?Text=" + text);
+				var serviceUri = UriFor("/echo?Text=" + text);
 
 				var response = client.Get<EchoResponse>(serviceUri.ToString());
 				Assert.That(response.Echoed, Is.EqualTo(text));

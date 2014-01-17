@@ -45,7 +45,7 @@ namespace Testing.Commons.ServiceStack.v3
 			return this;
 		}
 
-		protected Uri Urifor(string restRelativeUri)
+		protected Uri UriFor(string restRelativeUri)
 		{
 			return new Uri(BaseUrl, restRelativeUri);
 		}
@@ -58,7 +58,7 @@ namespace Testing.Commons.ServiceStack.v3
 				restRelativeUri = string.Format(restRelativeUriTemplate, args);
 			}
 
-			return Urifor(restRelativeUri).ToString();
+			return UriFor(restRelativeUri).ToString();
 		}
 	}
 }
