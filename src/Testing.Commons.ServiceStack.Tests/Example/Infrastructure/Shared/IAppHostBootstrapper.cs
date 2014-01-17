@@ -8,7 +8,7 @@ namespace Testing.Commons.Service_Stack.Tests.Example.Infrastructure.Shared
 	// Used by the application's AppHost as well as tests' TestHost
 	// centralizes the configuration so that both AppHosts have the same properties.
 	// Sometimes, the boostrapper has to be disposable
-	public interface IAppBootstrapper : IDisposable
+	public interface IAppHostBootstrapper : IDisposable
 	{
 		void Bootstrap<T>(T host) where T : IAppHost;
 	}

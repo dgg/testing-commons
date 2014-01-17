@@ -59,13 +59,16 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Example\Infrastructure\AppBootstrapper.cs" />
+    <Compile Include="Example\Infrastructure\AppHostBootstrapper.cs" />
     <Compile Include="Example\Infrastructure\ApplicationsAppHost.cs" />
     <Compile Include="Example\Infrastructure\Shared\HostInfo.cs" />
-    <Compile Include="Example\Infrastructure\Shared\IAppBootstrapper.cs" />
+    <Compile Include="Example\Infrastructure\Shared\IAppHostBootstrapper.cs" />
     <Compile Include="Example\Services\Messages\Echo.cs" />
     <Compile Include="Example\Services\Messages\EchoResponse.cs" />
+    <Compile Include="Example\Services\Messages\UsingDependency.cs" />
+    <Compile Include="Example\Services\Messages\UsingDependencyResponse.cs" />
     <Compile Include="Example\Services\SampleService.cs" />
+    <Compile Include="Example\Services\SampleDependency.cs" />
     <Compile Include="Example\Tests\HostTesterBaseTester.cs" />
     <Compile Include="Example\Tests\SampleServiceTester.cs" />
     <Compile Include="Example\Tests\SanityChecker.cs" />

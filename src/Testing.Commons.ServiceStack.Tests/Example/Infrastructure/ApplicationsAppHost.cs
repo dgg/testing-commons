@@ -9,18 +9,16 @@ namespace Testing.Commons.Service_Stack.Tests.Example.Infrastructure
 		// but since we are hosting it in a "console" for sanity, derives from
 		AppHostHttpListenerBase 
 	{
-		private readonly AppBootstrapper _bootstrapper;
+		private readonly AppHostBootstrapper _bootstrapper;
 
 		public ApplicationsAppHost() : base(HostInfo.ServiceName, HostInfo.AssembliesWithServices)
 		{
-			_bootstrapper =  new AppBootstrapper();
-
+			_bootstrapper =  new AppHostBootstrapper();
 		}
 
 		public override void Configure(Container container)
 		{
-			/*EndpointHostConfig config = */_bootstrapper.Bootstrap(this);
-			//SetConfig(config);
+			_bootstrapper.Bootstrap(this);
 		}
 
 		protected override void Dispose(bool disposing)

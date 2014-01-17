@@ -1,10 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
+using NSubstitute;
 using NUnit.Framework;
 using RestSharp;
+using ServiceStack.ServiceClient.Web;
 using ServiceStack.WebHost.Endpoints;
 using Testing.Commons.ServiceStack.v3;
+using Testing.Commons.Service_Stack.Tests.Example.Infrastructure;
 using Testing.Commons.Service_Stack.Tests.Example.Infrastructure.Shared;
+using Testing.Commons.Service_Stack.Tests.Example.Services.Messages;
 
 namespace Testing.Commons.Service_Stack.Tests.Example.Tests
 {
@@ -17,7 +22,9 @@ namespace Testing.Commons.Service_Stack.Tests.Example.Tests
 
 		protected override void Boootstrap(IAppHost arg)
 		{
-			// normally inside a shared IAppBootstrapper of some kind
+			new AppHostBootstrapper().Bootstrap(arg);
+
+			// normally inside a shared IHostBootstrapper of some kind
 			arg.Config.PostExecuteServiceFilter = (dto, request, response) =>
 			{
 				if (response.StatusCode == 200) response.StatusDescription = "SUPER GREEN";
@@ -45,11 +52,24 @@ namespace Testing.Commons.Service_Stack.Tests.Example.Tests
 			var client = new RestClient(BaseUrl.ToString());
 			var request = new RestRequest("/echo", Method.GET);
 
-
 			var response = client.Execute(request);
 			var uri = client.BuildUri(response.Request);
 
 			Assert.That(uri.Port, Is.EqualTo(49160));
+		}
+
+		[Test]
+		public void ReplaceADependency_BehaviorOfReplacementInvoked()
+		{
+			var substitute = Substitute.For<IObserver<int>>();
+			Replacing(substitute);
+
+			using (var client = new JsonServiceClient(BaseUrl.ToString()))
+			{
+				client.Get(new UsingDependency {I = 42});
+			}
+
+			substitute.Received().OnNext(42);
 		}
 	}
 }

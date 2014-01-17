@@ -4,13 +4,14 @@ using ServiceStack.Configuration;
 using ServiceStack.ServiceHost;
 using ServiceStack.WebHost.Endpoints;
 using Testing.Commons.Service_Stack.Tests.Example.Infrastructure.Shared;
+using Testing.Commons.Service_Stack.Tests.Example.Services;
 
 namespace Testing.Commons.Service_Stack.Tests.Example.Infrastructure
 {
 	// used by the application's AppHost as well as tests' TestHost
 	// centralizes the configuration so that both AppHosts have the same properties.
 	// Sometimes, the boostrapper has to be disposable
-	public class AppBootstrapper : IAppBootstrapper
+	public class AppHostBootstrapper : IAppHostBootstrapper
 	{
 
 		// The method that will be called from the AppHosts in order to get themsselvesconfigured
@@ -25,7 +26,7 @@ namespace Testing.Commons.Service_Stack.Tests.Example.Infrastructure
 		}
 
 		// global configurations
-		private AppBootstrapper bootstrap()
+		private AppHostBootstrapper bootstrap()
 		{
 			// examples would be:
 			// * configuring serialization
@@ -35,13 +36,13 @@ namespace Testing.Commons.Service_Stack.Tests.Example.Infrastructure
 		}
 
 		// configure plugins
-		private AppBootstrapper bootstrap(IList<IPlugin> plugins)
+		private AppHostBootstrapper bootstrap(IList<IPlugin> plugins)
 		{
 			return this;
 		}
 
 		// configure filters
-		private AppBootstrapper bootstrap(
+		private AppHostBootstrapper bootstrap(
 						List<Action<IHttpRequest, IHttpResponse, object>> requestFilters,
 						List<Action<IHttpRequest, IHttpResponse, object>> responseFilters)
 		{
@@ -50,8 +51,10 @@ namespace Testing.Commons.Service_Stack.Tests.Example.Infrastructure
 		}
 
 		// configure IOC
-		private AppBootstrapper bootstrap(Funq.Container container, IContainerAdapter adapter = null)
+		private AppHostBootstrapper bootstrap(Funq.Container container, IContainerAdapter adapter = null)
 		{
+			container.Register<IObserver<int>>(new SampleDependency());
+
 			return this;
 		}
 

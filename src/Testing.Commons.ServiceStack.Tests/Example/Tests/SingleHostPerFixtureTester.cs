@@ -16,7 +16,7 @@ namespace Testing.Commons.Service_Stack.Tests.Example.Tests
 
 		protected override IEnumerable<Assembly> AssembliesWithServices { get { return HostInfo.AssembliesWithServices; } }
 
-		private readonly IAppBootstrapper _bootstrapper = Substitute.For<IAppBootstrapper>();
+		private readonly IAppHostBootstrapper _bootstrapper = Substitute.For<IAppHostBootstrapper>();
 
 		protected override void Boootstrap(IAppHost arg)
 		{

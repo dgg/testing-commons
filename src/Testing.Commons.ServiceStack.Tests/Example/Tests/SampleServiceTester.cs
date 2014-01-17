@@ -16,10 +16,10 @@ namespace Testing.Commons.Service_Stack.Tests.Example.Tests
 
 		protected override IEnumerable<Assembly> AssembliesWithServices { get { return HostInfo.AssembliesWithServices; } }
 
-		private IAppBootstrapper _bootstrapper;
+		private IAppHostBootstrapper _bootstrapper;
 		protected override void Boootstrap(IAppHost arg)
 		{
-			_bootstrapper = new AppBootstrapper();
+			_bootstrapper = new AppHostBootstrapper();
 			_bootstrapper.Bootstrap(arg);
 		}
 
