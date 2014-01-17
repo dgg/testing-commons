@@ -7,9 +7,9 @@
 		<authors>Daniel González García</authors>
 		<licenseUrl>http://www.opensource.org/licenses/bsd-license.php</licenseUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>Utility classes and extensions to facilitate common testing when using ServiceStack.</description>
+		<description>Utility classes and extensions to facilitate common testing when using ServiceStack versions 3.9.*.</description>
 		<summary>
-			Testing.Commons.ServiceStack contains infrastructure for integration-testing ServiceStack services.
+			Testing.Commons.ServiceStack contains infrastructure for integration-testing ServiceStack 3.9.* services.
 		</summary>
 		<projectUrl>http://www.assembla.com/spaces/testing-commons</projectUrl>
 		<iconUrl>https://www.assembla.com/spaces/testing-commons/documents/aqHSekF3ur46ZcacwqjQYw/download/aqHSekF3ur46ZcacwqjQYw</iconUrl>
