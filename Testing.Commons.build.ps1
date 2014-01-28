@@ -50,6 +50,14 @@ function Run-Tests($test_assemblies){
     $nunit_console = "$base_dir\tools\NUnit.Runners.lite\nunit-console.exe"
 
 	exec { & $nunit_console $test_assemblies /nologo /nodots /result="$release_path\TestResult.xml"  }
+
+    $nunit_summary_path = "$base_dir\tools\NUnitSummary"
+    $nunit_summary = Join-Path $nunit_summary_path "nunit-summary.exe"
+    $alternative_details = Join-Path $nunit_summary_path "AlternativeNUnitDetails.xsl"
+    $alternative_details = "-xsl=" + $alternative_details
+
+    exec { & $nunit_summary $release_path\TestResult.xml -html -o="release\TestSummary.htm" }
+    exec { & $nunit_summary $release_path\TestResult.xml -html -o="release\TestDetails.htm" $alternative_details }
 }
 
 function Ensure-Release-Folder()
