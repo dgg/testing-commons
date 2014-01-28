@@ -24,6 +24,7 @@ task Test {
     Ensure-Release-Folder
     $test_assemblies = Calculate-Test-Assemblies $project $base_dir $configuration
     Run-Tests $test_assemblies
+    Report-On-Test-Results
 }
 
 function Calculate-Test-Assemblies ($set, $base, $config)
@@ -50,7 +51,10 @@ function Run-Tests($test_assemblies){
     $nunit_console = "$base_dir\tools\NUnit.Runners.lite\nunit-console.exe"
 
 	exec { & $nunit_console $test_assemblies /nologo /nodots /result="$release_path\TestResult.xml"  }
+}
 
+function Report-On-Test-Results()
+{
     $nunit_summary_path = "$base_dir\tools\NUnitSummary"
     $nunit_summary = Join-Path $nunit_summary_path "nunit-summary.exe"
     $alternative_details = Join-Path $nunit_summary_path "AlternativeNUnitDetails.xsl"
