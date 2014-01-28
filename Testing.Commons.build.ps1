@@ -5,9 +5,7 @@ properties {
     $release_path = "$base_dir\release"
 }
 
-task default -depends Compile
-
-task Release -depends Clean, Compile, Test
+task default -depends Clean #, Compile, Test, Deploy
 
 task Clean {
     exec { msbuild .\Testing.Commons.sln /t:clean /p:configuration=$configuration /m }
@@ -21,10 +19,27 @@ task Compile {
 }
 
 task Test {
-    Ensure-Release-Folder
+    Ensure-Release-Folders
     $test_assemblies = Calculate-Test-Assemblies $project $base_dir $configuration
     Run-Tests $test_assemblies
     Report-On-Test-Results
+}
+
+task Deploy {
+    $release_folders = Ensure-Release-Folders
+
+    $commons = Src-Folder $base_dir $configuration "Testing.Commons"
+    $nunit = Src-Folder $base_dir $configuration "Testing.Commons.NUnit"
+    $serviceStack = Src-Folder $base_dir $configuration "Testing.Commons.ServiceStack"
+       
+    Get-ChildItem -Path ($commons, $nunit, $serviceStack) -Filter 'Testing.*.dll' |
+        Copy-To $release_folders
+    Get-ChildItem -Path ($commons, $nunit, $serviceStack) -Filter 'Testing.*.pdb' |
+        Copy-Item -Destination $release_folders[0]
+    Get-ChildItem -Path ($commons, $nunit, $serviceStack) -Filter 'Testing.*.xml' |
+        Copy-To $release_folders
+    Get-ChildItem $base_dir -Filter '*.nuspec' |
+        Copy-Item -Destination $release_folders[0]
 }
 
 function Calculate-Test-Assemblies ($set, $base, $config)
@@ -44,7 +59,12 @@ function Calculate-Test-Assemblies ($set, $base, $config)
 
 function Test-Assembly($base, $config, $name)
 {
-    return "$base\src\$name.Tests\bin\$configuration\$name.Tests.dll"
+    return "$base\src\$name.Tests\bin\$config\$name.Tests.dll"
+}
+
+function Src-Folder($base, $config, $name)
+{
+    return "$base\src\$name\bin\$config\"
 }
 
 function Run-Tests($test_assemblies){
@@ -64,11 +84,14 @@ function Report-On-Test-Results()
     exec { & $nunit_summary $release_path\TestResult.xml -html -o="release\TestDetails.htm" $alternative_details }
 }
 
-function Ensure-Release-Folder()
+function Ensure-Release-Folders()
 {
-    $exists = Test-Path $release_path
-    if ($exists -eq $false)
-    {
-        md $release_path | Out-Null
-    }
+    $release_folders = ($release_path, "$release_path\lib\net40")
+    foreach ($f in $release_folders) { md $f -force | Out-Null }
+    return $release_folders
+}
+
+function Copy-To($destinations)
+{
+    Process { foreach ($d in $destinations) { Copy-Item -Path $_.FullName -Destination $d } }
 }

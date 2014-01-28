@@ -1,8 +1,10 @@
 [CmdletBinding()]
 Param(
-	[Parameter(Mandatory=$False)]
 	[ValidateSet('All', 'Commons', 'NUnit', 'ServiceStack')]
-	[string]$project = 'All'
+	[string]$project = 'All', 
+    [string]$task,
+    [ValidateSet('Debug', 'Release')]
+	[string]$configuration = 'Release'
 )
 
 function Main () {
@@ -13,6 +15,6 @@ function Main () {
     # get first directory
     $psake_dir = $psake_dir[0]
 
-    & $psake_dir\tools\psake.ps1 $base_dir\Testing.Commons.build.ps1 Release -properties @{"project"=$project}
+    & $psake_dir\tools\psake.ps1 $base_dir\Testing.Commons.build.ps1 $task -properties @{"project"=$project; "configuration"=$configuration}
 }
 Main
