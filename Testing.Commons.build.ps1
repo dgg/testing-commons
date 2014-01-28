@@ -7,13 +7,21 @@ properties {
 
 task default -depends Compile
 
-task Release -depends Compile, Test
+task Release -depends Clean, Compile, Test
 
-task Compile { 
-    msbuild .\Testing.Commons.sln
+task Clean {
+    exec { msbuild .\Testing.Commons.sln /t:clean /p:configuration=$configuration /m }
+    Remove-Item $base_dir\*.htm -Force
+    Remove-Item $base_dir\*.xml -Force
+    Remove-Item $release_path -Recurse -Force -ErrorAction SilentlyContinue | Out-Null
+}
+
+task Compile {
+    exec { msbuild .\Testing.Commons.sln /p:configuration=$configuration /m }
 }
 
 task Test {
+    Ensure-Release-Folder
     $test_assemblies = Calculate-Test-Assemblies $project $base_dir $configuration
     Run-Tests $test_assemblies
 }
@@ -41,5 +49,14 @@ function Test-Assembly($base, $config, $name)
 function Run-Tests($test_assemblies){
     $nunit_console = "$base_dir\tools\NUnit.Runners.lite\nunit-console.exe"
 
-	Exec { & $nunit_console $test_assemblies /nologo /nodots }
+	exec { & $nunit_console $test_assemblies /nologo /nodots /result="$release_path\TestResult.xml"  }
+}
+
+function Ensure-Release-Folder()
+{
+    $exists = Test-Path $release_path
+    if ($exists -eq $false)
+    {
+        md $release_path | Out-Null
+    }
 }
