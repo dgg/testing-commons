@@ -35,11 +35,20 @@ task Deploy {
     Get-ChildItem -Path ($commons, $nunit, $serviceStack) -Filter 'Testing.*.dll' |
         Copy-To $release_folders
     Get-ChildItem -Path ($commons, $nunit, $serviceStack) -Filter 'Testing.*.pdb' |
-        Copy-Item -Destination $release_folders[0]
+        Copy-Item -Destination $release_path
     Get-ChildItem -Path ($commons, $nunit, $serviceStack) -Filter 'Testing.*.xml' |
         Copy-To $release_folders
     Get-ChildItem $base_dir -Filter '*.nuspec' |
-        Copy-Item -Destination $release_folders[0]
+        Copy-Item -Destination $release_path
+}
+
+task Pack {
+    $release_folders = Ensure-Release-Folders
+
+    $nuget = "$base_dir\tools\nuget\nuget.exe"
+
+    Get-ChildItem -File -Filter '*.nuspec' -Path $release_path  | 
+        ForEach-Object { exec { & $nuget pack $_.FullName /o $release_path } }
 }
 
 function Calculate-Test-Assemblies ($set, $base, $config)
