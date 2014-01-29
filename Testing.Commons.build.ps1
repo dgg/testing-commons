@@ -1,11 +1,10 @@
 properties {
-    $project = 'All'
-	$configuration = 'Debug'
+    $configuration = 'Debug'
 	$base_dir  = resolve-path .	
     $release_path = "$base_dir\release"
 }
 
-task default -depends Clean #, Compile, Test, Deploy
+task default -depends Clean, Compile, Test, Deploy, Pack
 
 task Clean {
     exec { msbuild .\Testing.Commons.sln /t:clean /p:configuration=$configuration /m }
@@ -19,31 +18,43 @@ task Compile {
 }
 
 task Test {
-    Ensure-Release-Folders
-    $test_assemblies = Calculate-Test-Assemblies $project $base_dir $configuration
-    Run-Tests $test_assemblies
-    Report-On-Test-Results
+    Ensure-Release-Folders $release_path
+
+    $commons = Test-Assembly $base_dir $configuration 'Testing.Commons'
+    $nunit = Test-Assembly $base_dir $configuration 'Testing.Commons.NUnit'
+    $serviceStack = Test-Assembly $base_dir $configuration 'Testing.Commons.ServiceStack'
+    
+    Run-Tests $base_dir $release_path ($commons, $nunit, $serviceStack)
+    Report-On-Test-Results $base_dir
 }
 
 task Deploy {
-    $release_folders = Ensure-Release-Folders
+    $release_folders = Ensure-Release-Folders  $release_path
 
-    $commons = Src-Folder $base_dir $configuration "Testing.Commons"
-    $nunit = Src-Folder $base_dir $configuration "Testing.Commons.NUnit"
-    $serviceStack = Src-Folder $base_dir $configuration "Testing.Commons.ServiceStack"
-       
+    $commons = Bin-Folder $base_dir $configuration "Testing.Commons"
+    $nunit = Bin-Folder $base_dir $configuration "Testing.Commons.NUnit"
+    $serviceStack = Bin-Folder $base_dir $configuration "Testing.Commons.ServiceStack"
+    $serviceStackSrc = Src-Folder $base_dir "Testing.Commons.ServiceStack"
+
+    $beforeLast = $release_folders.Length-2
     Get-ChildItem -Path ($commons, $nunit, $serviceStack) -Filter 'Testing.*.dll' |
-        Copy-To $release_folders
+        Copy-To $release_folders[0..$beforeLast]
+
     Get-ChildItem -Path ($commons, $nunit, $serviceStack) -Filter 'Testing.*.pdb' |
         Copy-Item -Destination $release_path
-    Get-ChildItem -Path ($commons, $nunit, $serviceStack) -Filter 'Testing.*.xml' |
-        Copy-To $release_folders
+
+    Get-ChildItem -Path ($commons, $nunit) -Filter 'Testing.*.xml' |
+        Copy-To $release_folders[0..$beforeLast]
+
+    Get-ChildItem -Path "$serviceStackSrc\v3" -Filter "*.cs" |
+        Copy-Item -Destination $release_folders[$beforeLast+1]
+
     Get-ChildItem $base_dir -Filter '*.nuspec' |
         Copy-Item -Destination $release_path
 }
 
 task Pack {
-    $release_folders = Ensure-Release-Folders
+    Ensure-Release-Folders $release_path
 
     $nuget = "$base_dir\tools\nuget\nuget.exe"
 
@@ -51,41 +62,33 @@ task Pack {
         ForEach-Object { exec { & $nuget pack $_.FullName /o $release_path } }
 }
 
-function Calculate-Test-Assemblies ($set, $base, $config)
-{
-    $assemblies = @()
-    if ($set -eq 'Commons' -or $set -eq 'All'){
-        $assemblies += Test-Assembly $base $config 'Testing.Commons'
-    }
-    if ($set -eq 'NUnit' -or $set -eq 'All'){
-        $assemblies += Test-Assembly $base $config 'Testing.Commons.NUnit'
-    }
-    if ($set -eq 'ServiceStack' -or $set -eq 'All'){
-        $assemblies += Test-Assembly $base $config 'Testing.Commons.ServiceStack'
-    }
-    return $assemblies
-}
-
 function Test-Assembly($base, $config, $name)
 {
     return "$base\src\$name.Tests\bin\$config\$name.Tests.dll"
 }
 
-function Src-Folder($base, $config, $name)
+function Bin-Folder($base, $config, $name)
 {
-    return "$base\src\$name\bin\$config\"
+    $project = Src-Folder $base $name
+    return Join-Path $project "bin\$config\"
 }
 
-function Run-Tests($test_assemblies){
-    $nunit_console = "$base_dir\tools\NUnit.Runners.lite\nunit-console.exe"
-
-	exec { & $nunit_console $test_assemblies /nologo /nodots /result="$release_path\TestResult.xml"  }
+function Src-Folder($base, $name)
+{
+    return "$base\src\$name\"
 }
 
-function Report-On-Test-Results()
+function Run-Tests($base, $release, $test_assemblies){
+    $nunit_console = "$base\tools\NUnit.Runners.lite\nunit-console.exe"
+
+	exec { & $nunit_console $test_assemblies /nologo /nodots /result="$release\TestResult.xml"  }
+}
+
+function Report-On-Test-Results($base)
 {
-    $nunit_summary_path = "$base_dir\tools\NUnitSummary"
+    $nunit_summary_path = "$base\tools\NUnitSummary"
     $nunit_summary = Join-Path $nunit_summary_path "nunit-summary.exe"
+
     $alternative_details = Join-Path $nunit_summary_path "AlternativeNUnitDetails.xsl"
     $alternative_details = "-xsl=" + $alternative_details
 
@@ -93,10 +96,12 @@ function Report-On-Test-Results()
     exec { & $nunit_summary $release_path\TestResult.xml -html -o="release\TestDetails.htm" $alternative_details }
 }
 
-function Ensure-Release-Folders()
+function Ensure-Release-Folders($base)
 {
-    $release_folders = ($release_path, "$release_path\lib\net40")
-    foreach ($f in $release_folders) { md $f -force | Out-Null }
+    $release_folders = ($base, "$base\lib\net40", "$base\content\Support")
+
+    foreach ($f in $release_folders) { md $f -Force | Out-Null }
+
     return $release_folders
 }
 
