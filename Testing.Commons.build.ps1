@@ -93,7 +93,7 @@ function Report-On-Test-Results($base)
     $alternative_details = "-xsl=" + $alternative_details
 
     exec { & $nunit_summary $release_path\TestResult.xml -html -o="release\TestSummary.htm" }
-    exec { & $nunit_summary $release_path\TestResult.xml -html -o="release\TestDetails.htm" $alternative_details }
+    exec { & $nunit_summary $release_path\TestResult.xml -html -o="release\TestDetails.htm" $alternative_details -noheader }
 }
 
 function Ensure-Release-Folders($base)
