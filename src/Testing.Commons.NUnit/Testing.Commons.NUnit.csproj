@@ -32,8 +32,9 @@
     <DocumentationFile>bin\Release\Testing.Commons.NUnit.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ExpectedObjects">
-      <HintPath>..\..\packages\ExpectedObjects.1.0.0.2\lib\ExpectedObjects.dll</HintPath>
+    <Reference Include="ExpectedObjects, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\ExpectedObjects.1.1.1\lib\net40\ExpectedObjects.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
