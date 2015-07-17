@@ -15,7 +15,7 @@
 		<iconUrl>https://www.assembla.com/spaces/testing-commons/documents/aqHSekF3ur46ZcacwqjQYw/download/aqHSekF3ur46ZcacwqjQYw</iconUrl>
 		<tags>.net C# testing NUnit ServiceStack</tags>
 		<dependencies>
-			<dependency id="NUnit" version="2.6.3" />
+			<dependency id="NUnit" version="2.6.4" />
 		</dependencies>
 	</metadata>
 	<files>
