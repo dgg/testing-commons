@@ -5,7 +5,7 @@ using System.Reflection;
 using Funq;
 using ServiceStack.WebHost.Endpoints;
 
-namespace Testing.Commons.ServiceStack.v3
+namespace Testing.Commons.Service_Stack.v3
 {
 	public class TestHost : AppHostHttpListenerBase
 	{

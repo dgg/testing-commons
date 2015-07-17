@@ -7,7 +7,7 @@
     <ProjectGuid>{7581BF3D-145C-4DF5-9498-4014049CAC98}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Testing.Commons.ServiceStack</RootNamespace>
+    <RootNamespace>Testing.Commons.Service_Stack</RootNamespace>
     <AssemblyName>Testing.Commons.ServiceStack</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

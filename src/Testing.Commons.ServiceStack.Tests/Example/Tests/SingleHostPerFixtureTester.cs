@@ -4,7 +4,7 @@ using System.Reflection;
 using NSubstitute;
 using NUnit.Framework;
 using ServiceStack.WebHost.Endpoints;
-using Testing.Commons.ServiceStack.v3;
+using Testing.Commons.Service_Stack.v3;
 using Testing.Commons.Service_Stack.Tests.Example.Infrastructure.Shared;
 
 namespace Testing.Commons.Service_Stack.Tests.Example.Tests

@@ -5,11 +5,13 @@ using NSubstitute;
 using NUnit.Framework;
 using RestSharp;
 using ServiceStack.ServiceClient.Web;
+using ServiceStack.ServiceHost;
 using ServiceStack.WebHost.Endpoints;
-using Testing.Commons.ServiceStack.v3;
+using Testing.Commons.Service_Stack.v3;
 using Testing.Commons.Service_Stack.Tests.Example.Infrastructure;
 using Testing.Commons.Service_Stack.Tests.Example.Infrastructure.Shared;
 using Testing.Commons.Service_Stack.Tests.Example.Services.Messages;
+using Http = ServiceStack.ServiceHost.Http;
 
 namespace Testing.Commons.Service_Stack.Tests.Example.Tests
 {
@@ -78,11 +80,60 @@ namespace Testing.Commons.Service_Stack.Tests.Example.Tests
 			string text = "something";
 			using (var client = new JsonServiceClient())
 			{
-				var serviceUri = UriFor("/echo?Text=" + text);
+				Uri serviceUri = UriFor("/echo?Text=" + text);
 
 				var response = client.Get<EchoResponse>(serviceUri.ToString());
 				Assert.That(response.Echoed, Is.EqualTo(text));
 			}
+		}
+
+		[Test]
+		public void UriFor_RouteDecoratedDto_AbsoluteUri()
+		{
+			IReturn request = new RouteDecorated();
+
+			Uri u = UriFor(request, Http.Get);
+
+			Assert.That(u.IsAbsoluteUri, Is.True);
+			Assert.That(u.LocalPath, Is.EqualTo("/decorated"));
+		}
+
+		[Test]
+		public void UriFor_RouteDecoratedWithParamsDto_AbsoluteUri()
+		{
+			IReturn request = new RouteDecoratedWithParams(){ Param = "asd"};
+
+			Uri u = UriFor(request, Http.Get);
+
+			Assert.That(u.IsAbsoluteUri, Is.True);
+			Assert.That(u.Host, Is.EqualTo("localhost"));
+			Assert.That(u.Port, Is.EqualTo(base.TestPort));
+
+			Assert.That(u.LocalPath, Is.EqualTo("/decorated/asd"));
+		}
+
+		[Test]
+		public void UriFor_NotDecoreated_AbsoluteUri()
+		{
+			/*string text = "something";
+			var client = new RestClient(BaseUrl.ToString());
+			var request = new RestRequest("/json/metadata?op=RouteDecoratedWithParams", Method.GET);
+
+			var response = client.Execute(request);
+
+			Assert.That(response.Content, Is.Empty*/
+
+
+
+			var request = new NotDecorated();
+
+			Uri u = UriFor(request, Http.Get);
+
+			Assert.That(u.IsAbsoluteUri, Is.True);
+			Assert.That(u.Host, Is.EqualTo("localhost"));
+			Assert.That(u.Port, Is.EqualTo(base.TestPort));
+
+			Assert.That(u.LocalPath, Is.EqualTo("/notdecorated"));
 		}
 	}
 }

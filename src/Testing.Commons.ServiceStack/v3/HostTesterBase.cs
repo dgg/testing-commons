@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using ServiceStack.ServiceClient.Web;
+using ServiceStack.ServiceHost;
 using ServiceStack.WebHost.Endpoints;
 
-namespace Testing.Commons.ServiceStack.v3
+namespace Testing.Commons.Service_Stack.v3
 {
 	public abstract class HostTesterBase
 	{
@@ -59,6 +61,19 @@ namespace Testing.Commons.ServiceStack.v3
 			}
 
 			return UriFor(restRelativeUri).ToString();
+		}
+
+		protected string UrlFor(IReturn request, Http method)
+		{
+			return UriFor(request, method).ToString();
+		}
+
+		protected Uri UriFor(IReturn request, Http method)
+		{
+			string s = EndpointHostConfig.Instance.ServiceEndpointsMetadataConfig.Json.Format;
+
+			string url = request.ToUrl(method.ToString().ToUpperInvariant(), "");
+			return UriFor(s);
 		}
 	}
 }
