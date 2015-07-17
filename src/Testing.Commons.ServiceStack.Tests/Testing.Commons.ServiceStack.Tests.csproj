@@ -37,8 +37,9 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp">
-      <HintPath>..\..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
+    <Reference Include="RestSharp, Version=105.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\RestSharp.105.1.0\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack">
       <HintPath>..\..\packages\ServiceStack.3.9.71\lib\net35\ServiceStack.dll</HintPath>
