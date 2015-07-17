@@ -70,10 +70,11 @@ namespace Testing.Commons.Service_Stack.v3
 
 		protected Uri UriFor(IReturn request, Http method)
 		{
-			string s = EndpointHostConfig.Instance.ServiceEndpointsMetadataConfig.Json.Format;
+			string json = EndpointHostConfig.Instance.ServiceEndpointsMetadataConfig.Json.Format;
 
 			string url = request.ToUrl(method.ToString().ToUpperInvariant(), "");
-			return UriFor(s);
+			url = url.Replace("//", "/" + json + "/");
+			return UriFor(url);
 		}
 	}
 }

@@ -113,18 +113,8 @@ namespace Testing.Commons.Service_Stack.Tests.Example.Tests
 		}
 
 		[Test]
-		public void UriFor_NotDecoreated_AbsoluteUri()
+		public void UriFor_NotDecoreated_AbsoluteDefaultUri()
 		{
-			/*string text = "something";
-			var client = new RestClient(BaseUrl.ToString());
-			var request = new RestRequest("/json/metadata?op=RouteDecoratedWithParams", Method.GET);
-
-			var response = client.Execute(request);
-
-			Assert.That(response.Content, Is.Empty*/
-
-
-
 			var request = new NotDecorated();
 
 			Uri u = UriFor(request, Http.Get);
@@ -133,7 +123,7 @@ namespace Testing.Commons.Service_Stack.Tests.Example.Tests
 			Assert.That(u.Host, Is.EqualTo("localhost"));
 			Assert.That(u.Port, Is.EqualTo(base.TestPort));
 
-			Assert.That(u.LocalPath, Is.EqualTo("/notdecorated"));
+			Assert.That(u.LocalPath, Is.EqualTo("/json/syncreply/NotDecorated"));
 		}
 	}
 }
