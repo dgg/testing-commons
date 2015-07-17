@@ -3,7 +3,7 @@
 	<metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 		<id>Testing.Commons.NUnit</id>
 		<title>Testing Commons NUnit</title>
-		<version>1.9.1.0</version>
+		<version>2.0.0.0</version>
 		<authors>Daniel González García</authors>
 		<licenseUrl>http://www.opensource.org/licenses/bsd-license.php</licenseUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -17,7 +17,7 @@
 		<dependencies>
 			<dependency id="testing.commons" version="1.1.0.0" />
 			<dependency id="ExpectedObjects" version="1.1.1" />
-			<dependency id="NUnit" version="2.6.3" />
+			<dependency id="NUnit" version="2.6.4" />
 		</dependencies>
 	</metadata>
 	<files>
