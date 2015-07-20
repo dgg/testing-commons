@@ -13,6 +13,6 @@ function Main () {
     # get first directory
     $psake_dir = $psake_dir[0]
 
-    & $psake_dir\tools\psake.ps1 $base_dir\Testing.Commons.build.ps1 $task -properties @{"configuration"=$configuration}
+    & $psake_dir\tools\psake.ps1 $base_dir\build\Testing.Commons.build.ps1 $task -properties @{"configuration"=$configuration}
 }
 Main

@@ -1,26 +1,15 @@
 ﻿namespace Testing.Commons.Builders
 {
+	/// <summary>
+	/// Simple interface for objects that create complex objects for testing purposes.
+	/// </summary>
+	/// <typeparam name="T">Type to be built</typeparam>
 	public interface IBuilder<out T>
 	{
+		/// <summary>
+		/// Creates a instance of a complex object as the final step of the building process.
+		/// </summary>
+		/// <returns>Instance built.</returns>
 		T Build();
-	}
-
-	public static class Builder
-	{
-		public class OfEntryPoint
-		{
-			internal OfEntryPoint() { }
-		}
-
-		public class ForEntryPoint
-		{
-			internal ForEntryPoint() { }
-		}
-
-		public static readonly OfEntryPoint _ofEntryPoint = new OfEntryPoint();
-		public static OfEntryPoint Of { get { return _ofEntryPoint; } }
-
-		public static readonly ForEntryPoint _forEntryPoint = new ForEntryPoint();
-		public static ForEntryPoint For { get { return _forEntryPoint; } }
 	}
 }

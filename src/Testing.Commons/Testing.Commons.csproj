@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="Anonymous.Extensions.cs" />
     <Compile Include="Async\PseudoTask.cs" />
+    <Compile Include="Builders\Builder.cs" />
+    <Compile Include="Builders\IBuilder.cs" />
     <Compile Include="Configuration\ConfigurationAssemblyAttribute.cs" />
     <Compile Include="Configuration\ExceptionMessagePart.cs" />
     <Compile Include="Configuration\ExternalConfiguration.cs" />
@@ -95,6 +97,7 @@
       <LastGenOutput>Exceptions.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

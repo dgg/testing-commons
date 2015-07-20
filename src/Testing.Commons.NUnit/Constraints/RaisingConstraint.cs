@@ -20,7 +20,7 @@ namespace Testing.Commons.NUnit.Constraints
 		private bool _eventRaised;
 
 		/// <summary>
-		/// Return value of <see cref="Constraint.Matches(ActualValueDelegate)"/>.
+		/// Return value of <see cref="Constraint.Matches(ActualValueDelegate{T})"/>.
 		/// </summary>
 		protected bool Matched { get; private set; }
 
@@ -79,7 +79,7 @@ namespace Testing.Commons.NUnit.Constraints
 		/// <param name="writer">The writer on which the description is displayed.</param>
 		public override void WriteDescriptionTo(MessageWriter writer)
 		{
-			writer.Write(string.Format("raise event '{0}' and ", EventName));
+			writer.Write("raise event '{0}' and ", EventName);
 			_matchingPropertyName.WriteDescriptionTo(writer);
 		}
 
@@ -94,7 +94,7 @@ namespace Testing.Commons.NUnit.Constraints
 		{
 			if (!_eventRaised)
 			{
-				writer.Write(string.Format("event '{0}' not raised", EventName));
+				writer.Write("event '{0}' not raised", EventName);
 			}
 			else
 			{

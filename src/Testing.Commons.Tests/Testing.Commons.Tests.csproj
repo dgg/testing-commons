@@ -52,6 +52,12 @@
     <Compile Include="Async\PseudoTaskTester.cs" />
     <Compile Include="Async\Support\AsyncConsumer.cs" />
     <Compile Include="Async\Support\IProviderStuff.cs" />
+    <Compile Include="Builders\BuilderTester.cs" />
+    <Compile Include="Builders\Support\ArgumentExceptionBuilder.cs" />
+    <Compile Include="Builders\Support\BuilderExtensions.cs" />
+    <Compile Include="Builders\Support\ExceptionBuilder.cs" />
+    <Compile Include="Builders\Support\Product.cs" />
+    <Compile Include="Builders\Support\ProductBuilder.cs" />
     <Compile Include="Configuration\ConfigurationTester.cs" />
     <Compile Include="Configuration\ExceptionMessagesTester.cs" />
     <Compile Include="Configuration\Support\CachingConfiguration.cs" />

@@ -10,6 +10,9 @@ namespace Testing.Commons.NUnit.Constraints
 	public class ConjunctionConstraint : Constraint
 	{
 		private readonly IEnumerable<Constraint> _constraints;
+		/// <summary>
+		/// Prefix added when writing the constraint
+		/// </summary>
 		public static readonly string Pfx_Specific = "\tSpecifically: ";
 
 		/// <summary>
@@ -69,6 +72,12 @@ namespace Testing.Commons.NUnit.Constraints
 			aggregate.WriteDescriptionTo(writer);
 		}
 
+		/// <summary>
+		/// Write the actual value for a failing constraint test to a MessageWriter.
+		/// The default implementation simply writesthe raw value of actual, leaving it to the writer to
+		/// perform any formatting.
+		/// </summary>
+		/// <param name="writer">The writer on which the actual value is displayed</param>
 		public override void WriteActualValueTo(MessageWriter writer)
 		{
 			base.WriteActualValueTo(writer);
