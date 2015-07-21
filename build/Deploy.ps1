@@ -1,7 +1,7 @@
 $script_directory = Split-Path -parent $PSCommandPath
 $base_dir = Resolve-Path $script_directory\..
 
-Remove-Module [N]Moneys
+Remove-Module [T]esting.Commons
 Import-Module "$script_directory\Testing.Commons.psm1" -DisableNameChecking
 
 function Push-Package($package)
@@ -12,7 +12,7 @@ function Push-Package($package)
 	$pkg = Get-ChildItem -File "$release_dir\$package*.nupkg" |
 		? { $_.Name -match "$package\.(\d(?:\.\d){3})" }  | 
 		% { 
-			Write-Host "& $nuget push $_.FullName"
+			& $nuget push $_.FullName
 			Throw-If-Error
 		}
 }
