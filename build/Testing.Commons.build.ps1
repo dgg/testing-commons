@@ -15,29 +15,29 @@ task Compile {
 	exec { msbuild "$base_dir\Testing.Commons.sln" /p:configuration=$configuration /m }
 }
 
-task EnsureRelease -depends ImportModule {
+task ensureRelease -depends importModule {
 	Ensure-Release-Folders $base_dir
 }
 
-task ImportModule {
+task importModule {
 	Remove-Module [T]esting.Commons
 	Import-Module "$base_dir\build\Testing.Commons.psm1" -DisableNameChecking
 }
 
-task Test -depends EnsureRelease {
-	$commons = Test-Assembly $base_dir $configuration 'Testing.Commons'
-	$nunit = Test-Assembly $base_dir $configuration 'Testing.Commons.NUnit'
-	$serviceStack = Test-Assembly $base_dir $configuration 'Testing.Commons.ServiceStack'
+task Test -depends ensureRelease {
+	$commons = get-test-assembly-name $base_dir $configuration 'Testing.Commons'
+	$nunit = get-test-assembly-name $base_dir $configuration 'Testing.Commons.NUnit'
+	$serviceStack = get-test-assembly-name $base_dir $configuration 'Testing.Commons.ServiceStack'
 	
-	Run-Tests $base_dir $release_dir ($commons, $nunit, $serviceStack)
-	Report-On-Test-Results $base_dir $release_dir
+	run-tests $base_dir $release_dir ($commons, $nunit, $serviceStack)
+	report-on-test-results $base_dir $release_dir
 }
 
-task CopyArtifacts -depends EnsureRelease {
+task CopyArtifacts -depends ensureRelease {
 	Copy-Artifacts $base_dir $configuration
 }
 
-task BuildArtifacts -depends EnsureRelease {
+task BuildArtifacts -depends ensureRelease {
 	Generate-Packages $base_dir
 }
 
@@ -45,18 +45,18 @@ task ? -Description "Helper to display task info" {
 	Write-Documentation
 }
 
-function Test-Assembly($base, $config, $name)
+function get-test-assembly-name($base, $config, $name)
 {
 	return "$base\src\$name.Tests\bin\$config\$name.Tests.dll"
 }
 
-function Run-Tests($base, $release, $test_assemblies){
+function run-tests($base, $release, $test_assemblies){
 	$nunit_console = "$base\tools\NUnit.Runners.lite\nunit-console.exe"
 
 	exec { & $nunit_console $test_assemblies /nologo /nodots /result="$release\TestResult.xml"  }
 }
 
-function Report-On-Test-Results($base, $release)
+function report-on-test-results($base, $release)
 {
 	$nunit_summary_path = "$base\tools\NUnitSummary"
 	$nunit_summary = Join-Path $nunit_summary_path "nunit-summary.exe"

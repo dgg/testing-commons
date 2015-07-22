@@ -4,7 +4,7 @@ $base_dir = Resolve-Path $script_directory\..
 Remove-Module [T]esting.Commons
 Import-Module "$script_directory\Testing.Commons.psm1" -DisableNameChecking
 
-function Push-Package($package)
+function push-package($package)
 {
 	$nuget = Join-Path $base_dir tools\nuget\nuget.exe
 	$release_dir = Join-Path $base_dir release
@@ -35,7 +35,7 @@ $options = [System.Management.Automation.Host.ChoiceDescription[]]($yes, $no)
 	{
 		0 {
 			"Pushing $package package..."
-			Push-Package $package
+			push-package $package
 		}
 		1 {"No-op."}
 	}

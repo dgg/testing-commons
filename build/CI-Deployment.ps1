@@ -1,12 +1,12 @@
-function PushPackageArtifact($packageFragment, $artifactName)
+function push-zip-artifact($packageFragment, $artifactName)
 {
 	$pkg = Get-ChildItem -File ".\release\$packageFragment*.nupkg" |
 		? { $_.Name -match "$packageFragment\.(\d(?:\.\d){3})" }
 	Push-AppveyorArtifact $pkg -DeploymentName $artifactName
 }
 
-PushPackageArtifact 'Testing.Commons' 'testing_commons'
+push-zip-artifact 'Testing.Commons' 'testing_commons'
 
-PushPackageArtifact 'Testing.Commons.NUnit' 'testing_commons_nunit'
+push-zip-artifact 'Testing.Commons.NUnit' 'testing_commons_nunit'
 
-PushPackageArtifact 'Testing.Commons.ServiceStack' 'testing_commons_service_stack'
+push-zip-artifact 'Testing.Commons.ServiceStack' 'testing_commons_service_stack'

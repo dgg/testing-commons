@@ -17,36 +17,31 @@ function Ensure-Release-Folders($base)
 
 function Copy-Artifacts($base, $configuration)
 {
-	CopyBinaries $base $configuration
-	CopySources $base $configuration
-	CopyPackageManifests $base
+	copy-binaries $base $configuration
+	copy-sources $base $configuration
+	copy-package-manifests $base
 }
 
-function CopyBinaries($base, $configuration)
+function copy-binaries($base, $configuration)
 {
 	$release_bin_dir = Join-Path $base release\lib\Net40
-	
-	<#Copy-Item $base\src\Testing.Commons\bin\$configuration\Testing.Commons.dll $release_bin_dir
-	Copy-Item $base\src\Testing.Commons\bin\$configuration\Testing.Commons.XML $release_bin_dir
-	Copy-Item $base\src\Testing.Commons.NUnit\bin\$configuration\Testing.Commons.NUnit.dll $release_bin_dir
-	Copy-Item $base\src\Testing.Commons.NUnit\bin\$configuration\Testing.Commons.NUnit.XML $release_bin_dir#>
 	
 	$commons = Join-Path $base \src\Testing.Commons\bin\$configuration\
 	$nunit = Join-Path $base \src\Testing.Commons.NUnit\bin\$configuration\
 	Get-ChildItem -Path ($commons, $nunit) -filter 'Testing.*' |
-		? {$_.Name -match '.dll|.XML'} |
+		? { $_.Name -match '.dll|.XML' } |
 		Copy-Item -Destination $release_bin_dir
 	
 }
 
-function CopyPackageManifests($base){
+function copy-package-manifests($base){
     $release_dir = Join-Path $base release
 	
 	Get-ChildItem $base -Filter '*.nuspec' |
 		Copy-Item -Destination $release_dir
 }
 
-function CopySources()
+function copy-sources()
 {
 	$src = Join-Path $base src\Testing.Commons.ServiceStack\v3
 	$release_src_dir = Join-Path $base release\content\Support
@@ -67,18 +62,7 @@ function Generate-Packages($base)
 		}
 }
 
-function Generate-Zip-Files($base)
-{
-	$version = GetVersionFromPackage $base 'Testing.Commons'
-	('Testing.Commons.dll', 'Testing.Commons.XML') |
-		% { ZipBin $base $version 'Testing.Commons' $_ | Out-Null }
-		
-	$version = GetVersionFromPackage $base 'Testing.Commons.NUnit'
-	('Testing.Commons.NUnit.dll', 'Testing.Commons.NUnit.XML') |
-		% { ZipBin $base $version 'Testing.Commons.NUnit' $_ | Out-Null }
-}
-
-function GetVersionFromPackage($base, $packageFragment)
+function get-version-from-package($base, $packageFragment)
 {
 	$pkgVersion = Get-ChildItem -File "$base\release\$packageFragment*.nupkg" |
 		? { $_.Name -match "$packageFragment\.(\d(?:\.\d){3})" } |
