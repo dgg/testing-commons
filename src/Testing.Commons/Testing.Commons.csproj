@@ -70,6 +70,8 @@
     <Compile Include="Serialization\BinaryRoundtripSerializer.cs" />
     <Compile Include="Serialization\DataContractRoundtripSerializer.cs" />
     <Compile Include="Serialization\JsonRoundtripSerializer.cs" />
+    <Compile Include="Serialization\JsonString.cs" />
+    <Compile Include="Serialization\JsonString.Extensions.cs" />
     <Compile Include="Serialization\XmlDeserializer.cs" />
     <Compile Include="Serialization\XmlRoundtripSerializer.cs" />
     <Compile Include="StringGenerator.cs" />
