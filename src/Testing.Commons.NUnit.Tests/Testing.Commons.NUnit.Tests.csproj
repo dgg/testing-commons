@@ -55,6 +55,7 @@
     <Compile Include="Constraints\DeserializationConstraintTester.cs" />
     <Compile Include="Constraints\ImplementsComparisonConstraintTester.cs" />
     <Compile Include="Constraints\ImplementsEquatableConstraintTester.cs" />
+    <Compile Include="Constraints\JsonEqualConstraintTester.cs" />
     <Compile Include="Constraints\SerializationConstraintTester.cs" />
     <Compile Include="Constraints\JsonSerializationConstraintTester.cs" />
     <Compile Include="Constraints\DataContractDeserializationConstraintTester.cs" />

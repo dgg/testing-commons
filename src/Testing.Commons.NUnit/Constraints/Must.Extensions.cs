@@ -267,5 +267,9 @@ namespace Testing.Commons.NUnit.Constraints
 			return new ConjunctionConstraint(constraints);
 		}
 
+	    public static Constraint Json(this Must.BeEntryPoint entry, string expected)
+	    {
+	        return new JsonEqualConstraint(expected);
+	    }
 	}
 }
