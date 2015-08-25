@@ -68,5 +68,26 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			var actual = "{\"prop\"=\"value\"}";
 			Assert.That(actual, Must.Be.Json("{'prop'='value'}"));
 		}
-    }
+
+		[Test]
+		public void EqualsCanBeUsed_WithAComparer()
+		{
+			var actual = "{\"prop\"=\"value\"}";
+			Assert.That(actual, Is.EqualTo("{'prop'='value'}").Using(JsonString.Comparer));
+		}
+
+		[Test]
+		public void CanBeUsed_WithUsing()
+		{
+			var actual = "{\"prop\"=\"value\"}";
+			Assert.That(actual, Is.EqualTo("{'prop'='value'}").Using(JsonString.Comparer));
+		}
+
+		[Test]
+		public void CanBeUsed_WithExtension()
+		{
+			var actual = "{\"prop\"=\"value\"}";
+			Assert.That(actual, Is.EqualTo("{'prop'='value'}").AsJson());
+		}
+	}
 }
