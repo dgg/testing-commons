@@ -1,3 +1,5 @@
+Framework 4.5.2
+
 properties {
 	$configuration = 'Debug'
 	$base_dir  = resolve-path ..
