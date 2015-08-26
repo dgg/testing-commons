@@ -31,9 +31,7 @@ namespace Testing.Commons.Serialization
 		/// <summary>
 		/// Returns the non-compact version of the compact JSON string provided.
 		/// </summary>
-		/// <returns>
-		/// The expanded JSON.
-		/// </returns>
+		/// <returns>The expanded JSON.</returns>
 		public override string ToString()
 		{
 			return _json;
