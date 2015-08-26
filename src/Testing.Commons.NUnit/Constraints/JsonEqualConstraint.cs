@@ -8,7 +8,7 @@ namespace Testing.Commons.NUnit.Constraints
 	/// </summary>
 	/// <remarks>A compact JSON string notation uses single quotes for names and string values instead
 	/// of double quotes, removing the need to escape such double quotes.
-	/// <para>A non-compact JSON string uses the canonical double quote style for names an string values.</para>
+	/// <para>An expanded JSON string uses the canonical double quote style for names an string values.</para>
 	/// </remarks>
 	/// <example><code>Assert.That("{\"prop\"=\"value\"}", new JsonConstraint("{'prop'='value'}"))</code></example>
 	public class JsonEqualConstraint : EqualConstraint

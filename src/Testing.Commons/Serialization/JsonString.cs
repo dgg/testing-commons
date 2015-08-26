@@ -7,7 +7,7 @@ namespace Testing.Commons.Serialization
 	/// </summary>
 	/// <remarks>A compact JSON string notation uses single quotes for names and string values instead
 	/// of double quotes, removing the need to escape such double quotes.
-	/// <para>A non-compact JSON string uses the canonical double quote style for names an string values.</para>
+	/// <para>And expanded JSON string uses the canonical double quote style for names an string values.</para>
 	/// </remarks>
 	/// <example>The string <code>"{\"property\"=\"value\"}"</code> can be written
 	/// as <code>"{'property'='value'}"</code></example>
@@ -29,10 +29,10 @@ namespace Testing.Commons.Serialization
 		}
 
 		/// <summary>
-		/// Returns a <see cref="string"/> that represents the current <see cref="object"/>.
+		/// Returns the non-compact version of the compact JSON string provided.
 		/// </summary>
 		/// <returns>
-		/// A <see cref="string"/> that represents the current <see cref="object"/>.
+		/// The expanded JSON.
 		/// </returns>
 		public override string ToString()
 		{
@@ -40,7 +40,7 @@ namespace Testing.Commons.Serialization
 		}
 
 		/// <summary>
-		/// Returns the non-compact version of the compact JSON string provided.
+		/// Returns the expanded version of the compact JSON string provided.
 		/// </summary>
 		/// <param name="instance">The compact JSON string.</param>
 		public static implicit operator string(JsonString instance)
@@ -49,11 +49,11 @@ namespace Testing.Commons.Serialization
 		}
 
 		/// <summary>
-		/// Allows comparing non-compact JSON strings to compact JSON notations.
+		/// Allows comparing expanded JSON strings to compact JSON ones.
 		/// </summary>
 		/// <remarks>A compact JSON string notation uses single quotes for names and string values instead
 		/// of double quotes, removing the need to escape such double quotes.
-		/// <para>A non-compact JSON string uses the canonical double quote style for names an string values.</para>
+		/// <para>An expanded JSON string uses the canonical double quote style for names an string values.</para>
 		/// </remarks>
 		public static IEqualityComparer<string> Comparer = new JsonStringComparer();
 
