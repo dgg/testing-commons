@@ -42,12 +42,15 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Extensions" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArrangingTestTester.cs" />
     <Compile Include="Constraints\BinarySerializationConstraintTester.cs" />
     <Compile Include="Constraints\ConjunctionContraintTester.cs" />
+    <Compile Include="Constraints\DataContractJsonDeserializationConstraintTester.cs" />
+    <Compile Include="Constraints\DataContractJsonSerializationConstraintTester.cs" />
     <Compile Include="Constraints\DateConstraintsTester.cs" />
     <Compile Include="Constraints\DelegatingConstraintTester.cs" />
     <Compile Include="Constraints\ImplementsComparableConstraintTester.cs" />
