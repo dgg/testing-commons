@@ -64,6 +64,8 @@
       <DependentUpon>Exceptions.resx</DependentUpon>
     </Compile>
     <Compile Include="Serialization\DataContractDeserializer.cs" />
+    <Compile Include="Serialization\DataContractJsonDeserializer.cs" />
+    <Compile Include="Serialization\DataContractJsonRoundtripSerializer.cs" />
     <Compile Include="Serialization\JsonDeserializer.cs" />
     <Compile Include="Serialization\IDeserializer.cs" />
     <Compile Include="Serialization\IRoundtripSerializer.cs" />

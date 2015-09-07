@@ -24,5 +24,12 @@ namespace Testing.Commons.Tests.Serialization.Subjects
 		{
 			return string.Format("{{\"S\":\"{0}\",\"D\":{1}}}", s, d);
 		}
+
+		public static string DataContractJsonString(string s, decimal d)
+		{
+			return string.Format(
+				"{{\"<D>k__BackingField\":{0},\"<S>k__BackingField\":\"{1}\"}}",
+				d, s);
+		}
 	}
 }
