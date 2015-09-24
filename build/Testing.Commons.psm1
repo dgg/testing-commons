@@ -19,7 +19,6 @@ function Copy-Artifacts($base, $configuration)
 {
 	copy-binaries $base $configuration
 	copy-sources $base $configuration
-	copy-package-manifests $base
 }
 
 function copy-binaries($base, $configuration)
@@ -32,13 +31,6 @@ function copy-binaries($base, $configuration)
 		? { $_.Name -match '.dll|.XML' } |
 		Copy-Item -Destination $release_bin_dir
 	
-}
-
-function copy-package-manifests($base){
-    $release_dir = Join-Path $base release
-	
-	Get-ChildItem $base -Filter '*.nuspec' |
-		Copy-Item -Destination $release_dir
 }
 
 function copy-sources()
@@ -55,9 +47,9 @@ function Generate-Packages($base)
 	$nuget = Join-Path $base tools\nuget\nuget.exe
 	$release_dir = Join-Path $base release
 
-	Get-ChildItem -File -Filter '*.nuspec' -Path $release_dir  | 
+	Get-ChildItem -File -Filter '*.nuspec' -Path $base  | 
 		% { 
-			& $nuget pack $_.FullName /o $release_dir /verbosity quiet
+			& $nuget pack $_.FullName -OutputDirectory $release_dir -BasePath $release_dir /verbosity quiet
 			Throw-If-Error
 		}
 }
