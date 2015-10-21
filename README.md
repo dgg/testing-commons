@@ -1,6 +1,7 @@
 
 # What
 **Testing.Commons** contains classes and extensions that help testing code in general and more specific areas such as configuration and web artifacts.
+
 ![testing.commons build status](https://ci.appveyor.com/api/projects/status/1unblo2mfubl2but?svg=true&amp;passingText=testing-commons)
 
 # Why
@@ -13,7 +14,7 @@ When some help to perform certain tasks was needed helpers, techniques and exten
 **Testing.Commons** (the project) is made up of three (so far) differentiated libraries
 
 ## Testing.Commons
-*_Testing.Commons*_ (the library) contains shared artifacts that can be applied to any testing framework. It contains no external dependencies outside the .NET Framework itself.
+**_Testing.Commons_** (the library) contains shared artifacts that can be applied to any testing framework. It contains no external dependencies outside the .NET Framework itself.
 
 ## Testing.Commons.NUnit
 Most of the work that has given born to this project has been developed using [NUnit](http://www.nunit.com).
