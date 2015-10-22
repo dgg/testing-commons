@@ -3,7 +3,7 @@
 	<metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 		<id>Testing.Commons.ServiceStack</id>
 		<title>Testing Commons ServiceStack</title>
-		<version>2.0.0.0</version>
+		<version>2.0.0.20151022</version>
 		<authors>Daniel González García</authors>
 		<licenseUrl>http://www.opensource.org/licenses/bsd-license.php</licenseUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -11,8 +11,8 @@
 		<summary>
 			Testing.Commons.ServiceStack contains infrastructure for integration-testing ServiceStack 3.9.* services.
 		</summary>
-		<projectUrl>http://www.assembla.com/spaces/testing-commons</projectUrl>
-		<iconUrl>https://www.assembla.com/spaces/testing-commons/documents/aqHSekF3ur46ZcacwqjQYw/download/aqHSekF3ur46ZcacwqjQYw</iconUrl>
+		<projectUrl>https://github.com/dgg/testing-commons</projectUrl>
+		<iconUrl>https://raw.githubusercontent.com/wiki/dgg/testing-commons/img/Testing.Commons.ServiceStack.logo.png</iconUrl>
 		<tags>.net C# testing NUnit ServiceStack</tags>
 		<dependencies>
 			<dependency id="NUnit" version="2.6.4" />
