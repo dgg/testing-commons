@@ -2,7 +2,7 @@
 # What
 **Testing.Commons** contains classes and extensions that help testing code in general and more specific areas such as configuration and web artifacts.
 
-![testing.commons build status](https://ci.appveyor.com/api/projects/status/1unblo2mfubl2but?svg=true&amp;passingText=testing-commons)
+![testing.commons build status](https://ci.appveyor.com/api/projects/status/sy7ay9i97l28f1s3?svg=true&passingText=testing-commons)
 
 # Why
 For some time now I have been testing code from different applications using different testing frameworks.
