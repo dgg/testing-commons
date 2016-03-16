@@ -62,6 +62,9 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Testing.Commons.ServiceStack\Properties\ServiceStack_AssemblyInfo.cs">
+      <Link>Properties\ServiceStack_AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Example\Infrastructure\AppHostBootstrapper.cs" />
     <Compile Include="Example\Infrastructure\ApplicationsAppHost.cs" />
     <Compile Include="Example\Infrastructure\Shared\HostInfo.cs" />

@@ -46,6 +46,9 @@
     <Reference Include="System.Web.Extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Testing.Commons.NUnit\Properties\NUnit_AssemblyInfo.cs">
+      <Link>Properties\NUnit_AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="ArrangingTestTester.cs" />
     <Compile Include="Constraints\BinarySerializationConstraintTester.cs" />
     <Compile Include="Constraints\ConjunctionContraintTester.cs" />
