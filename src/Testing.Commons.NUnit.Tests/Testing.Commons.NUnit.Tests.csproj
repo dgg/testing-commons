@@ -50,34 +50,6 @@
       <Link>Properties\NUnit_AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ArrangingTestTester.cs" />
-    <Compile Include="Constraints\BinarySerializationConstraintTester.cs" />
-    <Compile Include="Constraints\ConjunctionContraintTester.cs" />
-    <Compile Include="Constraints\DataContractJsonDeserializationConstraintTester.cs" />
-    <Compile Include="Constraints\DataContractJsonSerializationConstraintTester.cs" />
-    <Compile Include="Constraints\DateConstraintsTester.cs" />
-    <Compile Include="Constraints\DelegatingConstraintTester.cs" />
-    <Compile Include="Constraints\ImplementsComparableConstraintTester.cs" />
-    <Compile Include="Constraints\ConstrainedEnumerableTester.cs" />
-    <Compile Include="Constraints\DeserializationConstraintTester.cs" />
-    <Compile Include="Constraints\ImplementsComparisonConstraintTester.cs" />
-    <Compile Include="Constraints\ImplementsEquatableConstraintTester.cs" />
-    <Compile Include="Constraints\JsonEqualConstraintTester.cs" />
-    <Compile Include="Constraints\SerializationConstraintTester.cs" />
-    <Compile Include="Constraints\JsonSerializationConstraintTester.cs" />
-    <Compile Include="Constraints\DataContractDeserializationConstraintTester.cs" />
-    <Compile Include="Constraints\DataContractSerializationConstraintTester.cs" />
-    <Compile Include="Constraints\JsonDeserializationConstraintTester.cs" />
-    <Compile Include="Constraints\Support\UppercaseConstraint.cs" />
-    <Compile Include="Constraints\XmlDeserializationConstraintTester.cs" />
-    <Compile Include="Constraints\XmlSerializationConstraintTester.cs" />
-    <Compile Include="Constraints\EnumerableCountTester.cs" />
-    <Compile Include="Constraints\PropertyChangingConstraintTester.cs" />
-    <Compile Include="Constraints\LambdaPropertyConstraintTester.cs" />
-    <Compile Include="Constraints\MatchingConstraintTester.ProblemExploration.cs" />
-    <Compile Include="Constraints\PropertyChangedConstraintTester.cs" />
-    <Compile Include="Constraints\Subjects\NonSerializable.cs" />
-    <Compile Include="Constraints\Subjects\Serializable.cs" />
-    <Compile Include="Constraints\Support\ConstraintTesterBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Subjects\Address.cs" />
     <Compile Include="Subjects\Comparisons\ComparableSubject.cs" />
@@ -92,7 +64,6 @@
     <Compile Include="Subjects\Equality\Offending\EqualsToNull.cs" />
     <Compile Include="Subjects\Equality\Offending\NotEqualToItself.cs" />
     <Compile Include="Subjects\FlatCustomer.cs" />
-    <Compile Include="Constraints\MatchingConstraintTester.cs" />
     <Compile Include="Subjects\IRaisingSubject.cs" />
     <Compile Include="Subjects\SubjectWithDependencies.cs" />
   </ItemGroup>
@@ -108,6 +79,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Constraints\Subjects\" />
+    <Folder Include="Constraints\Support\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
