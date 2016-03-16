@@ -49,6 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Testing.Commons\Properties\Commons_AssemblyInfo.cs">
+      <Link>Properties\Commons_AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Async\PseudoTaskTester.cs" />
     <Compile Include="Async\Support\AsyncConsumer.cs" />
     <Compile Include="Async\Support\IProviderStuff.cs" />
