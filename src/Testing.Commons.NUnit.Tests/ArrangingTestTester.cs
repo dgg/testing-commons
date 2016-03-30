@@ -27,7 +27,7 @@ namespace Testing.Commons.NUnit.Tests
 		[Test]
 		public void ArrangingMethod_AndBeforeThisTest() { }
 
-		[TestFixtureTearDown]
+		[OneTimeTearDown]
 		public void AfterAllTestAreRun()
 		{
 			Assert.That(COUNTER, Is.EqualTo(3), "run for every test in the fixture");

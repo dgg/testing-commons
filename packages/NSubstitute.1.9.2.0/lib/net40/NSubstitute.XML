@@ -259,6 +259,24 @@
             <param name="argument"></param>
             <returns></returns>
         </member>
+        <member name="M:NSubstitute.Extensions.ReturnsForAllExtensions.ReturnsForAll``1(System.Object,``0)">
+            <summary>
+            Configure default return value for all methods that return the specified type
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name = "substitute"></param>
+            <param name="returnThis"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NSubstitute.Extensions.ReturnsForAllExtensions.ReturnsForAll``1(System.Object,System.Func{NSubstitute.Core.CallInfo,``0})">
+            <summary>
+            Configure default return value for all methods that return the specified type, calculated by a function
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="substitute"></param>
+            <param name="returnThis"></param>
+            <returns></returns>
+        </member>
         <member name="M:NSubstitute.Received.InOrder(System.Action)">
             <summary>
             Asserts the calls to the substitutes contained in the given Action were
@@ -337,7 +355,7 @@
         <member name="M:NSubstitute.Raise.Event``1(System.Object[])">
             <summary>
             Raise an event of type <typeparamref name="THandler" /> with the provided arguments. If no arguments are provided
-            NSubstitute will try and provide reasonble defaults.
+            NSubstitute will try to provide reasonable defaults.
             </summary>
         </member>
         <member name="T:NSubstitute.Substitute">
@@ -414,6 +432,46 @@
         <member name="M:NSubstitute.SubstituteExtensions.Returns``1(``0,System.Func{NSubstitute.Core.CallInfo,``0},System.Func{NSubstitute.Core.CallInfo,``0}[])">
             <summary>
             Set a return value for this call, calculated by the provided function.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <param name="returnThis">Function to calculate the return value</param>
+            <param name="returnThese">Optionally use these functions next</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSubstitute.SubstituteExtensions.Returns``1(System.Threading.Tasks.Task{``0},``0,``0[])">
+            <summary>
+            Set a return value for this call. The value(s) to be returned will be wrapped in Tasks.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <param name="returnThis">Value to return. Will be wrapped in a Task</param>
+            <param name="returnThese">Optionally use these functions next</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSubstitute.SubstituteExtensions.Returns``1(System.Threading.Tasks.Task{``0},System.Func{NSubstitute.Core.CallInfo,``0},System.Func{NSubstitute.Core.CallInfo,``0}[])">
+            <summary>
+            Set a return value for this call, calculated by the provided function. The value(s) to be returned will be wrapped in Tasks.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <param name="returnThis">Function to calculate the return value</param>
+            <param name="returnThese">Optionally use these functions next</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSubstitute.SubstituteExtensions.ReturnsForAnyArgs``1(System.Threading.Tasks.Task{``0},``0,``0[])">
+            <summary>
+            Set a return value for this call made with any arguments. The value(s) to be returned will be wrapped in Tasks.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <param name="returnThis">Value to return</param>
+            <param name="returnThese">Optionally return these values next</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSubstitute.SubstituteExtensions.ReturnsForAnyArgs``1(System.Threading.Tasks.Task{``0},System.Func{NSubstitute.Core.CallInfo,``0},System.Func{NSubstitute.Core.CallInfo,``0}[])">
+            <summary>
+            Set a return value for this call made with any arguments, calculated by the provided function. The value(s) to be returned will be wrapped in Tasks.
             </summary>
             <typeparam name="T"></typeparam>
             <param name="value"></param>

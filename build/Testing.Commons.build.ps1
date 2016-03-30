@@ -31,8 +31,10 @@ task Test -depends ensureRelease {
 	$nunit = get-test-assembly-name $base_dir $configuration 'Testing.Commons.NUnit'
 	$serviceStack = get-test-assembly-name $base_dir $configuration 'Testing.Commons.ServiceStack'
 	
-	run-tests $base_dir $release_dir ($commons, $nunit, $serviceStack)
+	run_v2_tests $base_dir $release_dir ($commons, $serviceStack)
 	report-on-test-results $base_dir $release_dir
+
+	run_v3_tests $base_dir $release_dir ($nunit)
 }
 
 task CopyArtifacts -depends ensureRelease {
@@ -52,10 +54,19 @@ function get-test-assembly-name($base, $config, $name)
 	return "$base\src\$name.Tests\bin\$config\$name.Tests.dll"
 }
 
-function run-tests($base, $release, $test_assemblies){
+function run_v2_tests($base, $release, $test_assemblies){
 	$nunit_console = "$base\tools\NUnit.Runners.lite\nunit-console.exe"
 
-	exec { & $nunit_console $test_assemblies /nologo /nodots /result="$release\TestResult.xml"  }
+	exec { & $nunit_console $test_assemblies /nologo /nodots /result="$release\TestResult_v2.xml"  }
+}
+
+function run_v3_tests($base, $release, $test_assemblies){
+	$console_dir = Get-ChildItem $base\tools\* -Directory | where {$_.Name.StartsWith('NUnit.ConsoleRunner')}
+    # get first directory
+    $console_dir = $console_dir[0]
+
+	$nunit_console = Join-Path $console_dir tools\nunit3-console.exe
+	exec { & $nunit_console $test_assemblies --result:"$release\TestResult_v3.xml" --noheader  }
 }
 
 function report-on-test-results($base, $release)
@@ -66,6 +77,6 @@ function report-on-test-results($base, $release)
 	$alternative_details = Join-Path $nunit_summary_path "AlternativeNUnitDetails.xsl"
 	$alternative_details = "-xsl=" + $alternative_details
 
-	exec { & $nunit_summary $release_dir\TestResult.xml -html -o="$release\TestSummary.htm" }
-	exec { & $nunit_summary $release_dir\TestResult.xml -html -o="$release\TestDetails.htm" $alternative_details -noheader }
+	exec { & $nunit_summary $release\TestResult.xml -html -o="$release\TestSummary.htm" }
+	exec { & $nunit_summary $release\TestResult.xml -html -o="$release\TestDetails.htm" $alternative_details -noheader }
 }
