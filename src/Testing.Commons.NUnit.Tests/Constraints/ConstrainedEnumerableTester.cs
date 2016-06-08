@@ -52,6 +52,14 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			notEvaluated.DidNotReceive().ApplyTo(Arg.Any<int>());
 		}
 
+		[Test]
+		public void ApplyTo_SecondItemDoesNotMatchConstraint_False()
+		{
+			var subject = new ConstrainedEnumerable(Is.EqualTo(1), Is.EqualTo(2), Is.EqualTo(3));
+
+			Assert.That(matches(subject, new[] { 1, -2, 3 }), Is.False);
+		}
+
 		#endregion
 
 		#region WriteMessageTo
@@ -77,13 +85,23 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		}
 
 		[Test]
-		public void WriteMessageTo_FirstItemDoesNotMatchConstraint_DescriptionContainsIndexOfFailingItem_ExpectedIsValueOfFailingConstraint_ActualIsValueOfOffendingItem()
+		public void WriteMessageTo_FirstItemDoesNotMatchConstraint_DescriptionContainsIndexOfFailingItem_ExpectedIsOfFailingConstraint_ActualIsValueOfOffendingItem()
 		{
 			var subject = new ConstrainedEnumerable(Is.GreaterThan(0), Is.EqualTo(2));
 
 			Assert.That(getMessage(subject, new[] { -1, 2 }), Does.Contain("# 0").And
 				.Contain(TextMessageWriter.Pfx_Expected + "greater than 0").And
 				.Contain(TextMessageWriter.Pfx_Actual + "-1"));
+		}
+
+		[Test]
+		public void WriteMessageTo_SecondItemDoesNotMatchConstraint_DescriptionContainsIndexOfFailingItem_ExpectedIsOfFailingConstraint_ActualIsValueOfOffendingItem()
+		{
+			var subject = new ConstrainedEnumerable(Is.EqualTo('1'), Is.GreaterThan('3'));
+
+			Assert.That(getMessage(subject, new[] { '1', '2' }), Does.Contain("# 1").And
+				.Contain(TextMessageWriter.Pfx_Expected + "greater than '3'").And
+				.Contain(TextMessageWriter.Pfx_Actual + "'2'"));
 		}
 
 		#endregion
