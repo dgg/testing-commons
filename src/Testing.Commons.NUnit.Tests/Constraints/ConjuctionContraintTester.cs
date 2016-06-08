@@ -2,13 +2,12 @@
 using NUnit.Framework.Constraints;
 using NUnit.Framework.Internal;
 using Testing.Commons.NUnit.Constraints;
-using Testing.Commons.NUnit.Tests.Constraints.Support;
 using Testing.Commons.NUnit.Tests.Subjects;
 
 namespace Testing.Commons.NUnit.Tests.Constraints
 {
 	[TestFixture]
-	public class ConjuctionContraintTester : ConstraintTesterBase
+	public class ConjuctionContraintTester : Support.ConstraintTesterBase
 	{
 		#region ApplyTo
 

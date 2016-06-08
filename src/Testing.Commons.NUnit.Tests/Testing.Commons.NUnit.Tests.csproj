@@ -51,6 +51,7 @@
     </Compile>
     <Compile Include="ArrangingTestTester.cs" />
     <Compile Include="Constraints\ConjuctionContraintTester.cs" />
+    <Compile Include="Constraints\ConstrainedEnumerableTester.cs" />
     <Compile Include="Constraints\Support\ConstraintTesterBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Subjects\Address.cs" />
