@@ -50,6 +50,8 @@
       <Link>Properties\NUnit_AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ArrangingTestTester.cs" />
+    <Compile Include="Constraints\ConjuctionContraintTester.cs" />
+    <Compile Include="Constraints\Support\ConstraintTesterBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Subjects\Address.cs" />
     <Compile Include="Subjects\Comparisons\ComparableSubject.cs" />
@@ -82,7 +84,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Constraints\Subjects\" />
-    <Folder Include="Constraints\Support\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
