@@ -50,6 +50,7 @@
     <Compile Include="ArrangingTest.cs" />
     <Compile Include="Constraints\ComposablePropertyConstraint.cs" />
     <Compile Include="Constraints\ConjunctionConstraint.cs" />
+    <Compile Include="Constraints\ConstrainedEnumerable.cs" />
     <Compile Include="Constraints\Must.Extensions.Time.cs" />
     <Compile Include="Constraints\Name.cs" />
     <Compile Include="Constraints\Support\Operator.cs" />
