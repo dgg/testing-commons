@@ -45,7 +45,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 				notEvaluated = Substitute.For<Constraint>();
 
 			var subject = new ConstrainedEnumerable(failing, notEvaluated);
-			failing.ApplyTo(-1).Returns(new ConstraintResult(failing, -1, false));
+			failing.ApplyTo(-1).Returns(new ConstraintResult(null, null, false));
 
 			subject.ApplyTo(new[] { -1, 2 });
 
@@ -58,6 +58,23 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			var subject = new ConstrainedEnumerable(Is.EqualTo(1), Is.EqualTo(2), Is.EqualTo(3));
 
 			Assert.That(matches(subject, new[] { 1, -2, 3 }), Is.False);
+		}
+
+		[Test]
+		public void apply_SecondItemDoesNotMatchConstraint_SubsequentConstraintsNotEvaluated()
+		{
+			Constraint
+				passing = Substitute.For<Constraint>(),
+				failing = Substitute.For<Constraint>(),
+				notEvaluated = Substitute.For<Constraint>();
+
+			var subject = new ConstrainedEnumerable(failing, notEvaluated);
+			passing.ApplyTo(1).Returns(new ConstraintResult(null, null, false));
+			failing.ApplyTo(-2).Returns(new ConstraintResult(null, null, false));
+
+			subject.ApplyTo(new[] { 1, -2, 3 });
+
+			notEvaluated.DidNotReceive().ApplyTo(Arg.Any<int>());
 		}
 
 		#endregion
@@ -272,9 +289,5 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		{
 			return new ConstrainedEnumerable(constraints);
 		}
-
-		
 	}
-
-	
 }
