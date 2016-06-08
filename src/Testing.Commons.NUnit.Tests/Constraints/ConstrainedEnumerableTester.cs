@@ -21,6 +21,14 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			Assert.That(matches(subject, new[] { 1 }), Is.False);
 		}
 
+		[Test]
+		public void applyTo_SubjectHasMoreItemsThanConstraintsProvided_Failure()
+		{
+			var subject = new ConstrainedEnumerable(Is.EqualTo(1));
+
+			Assert.That(matches(subject, new[] { 1, 2 }), Is.False);
+		}
+
 		#endregion
 
 		#region WriteMessageTo
@@ -33,6 +41,16 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			Assert.That(getMessage(subject, new[] { 1 }), 
 				Does.Contain(TextMessageWriter.Pfx_Expected + 1).And
 				.Contain(TextMessageWriter.Pfx_Actual + 2));
+		}
+
+		[Test]
+		public void WriteMessageTo_SubjectHasMoreItemsThanConstraintsProvided_ExpectedIsLengthOfSubjectAndActualIsNumberOfConstraints()
+		{
+			var subject = new ConstrainedEnumerable(Is.EqualTo(1));
+
+			Assert.That(getMessage(subject, new[] { 1, 2 }),
+				Does.Contain(TextMessageWriter.Pfx_Expected + 2).And
+				.Contain(TextMessageWriter.Pfx_Actual + 1));
 		}
 
 		#endregion
