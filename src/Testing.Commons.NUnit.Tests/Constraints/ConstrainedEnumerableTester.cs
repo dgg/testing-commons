@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using NSubstitute;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using NUnit.Framework.Internal;
@@ -35,6 +36,20 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			var subject = new ConstrainedEnumerable(Is.GreaterThan(0), Is.EqualTo(2));
 
 			Assert.That(matches(subject, new[] { -1, 2 }), Is.False);
+		}
+
+		[Test]
+		public void ApplyTo_FirstItemDoesNotMatchConstraint_SubsequentConstraintsNotEvaluated()
+		{
+			Constraint failing = Substitute.For<Constraint>(),
+				notEvaluated = Substitute.For<Constraint>();
+
+			var subject = new ConstrainedEnumerable(failing, notEvaluated);
+			failing.ApplyTo(-1).Returns(new ConstraintResult(failing, -1, false));
+
+			subject.ApplyTo(new[] { -1, 2 });
+
+			notEvaluated.DidNotReceive().ApplyTo(Arg.Any<int>());
 		}
 
 		#endregion
