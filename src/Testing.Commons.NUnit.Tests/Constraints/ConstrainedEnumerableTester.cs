@@ -85,7 +85,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 
 			Assert.That(getMessage(subject, new[] { 1 }), 
 				Does.Contain(TextMessageWriter.Pfx_Expected + 1).And
-				.Contain(TextMessageWriter.Pfx_Actual + 2));
+				.Contains(TextMessageWriter.Pfx_Actual + 2));
 		}
 
 		[Test]
@@ -95,7 +95,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 
 			Assert.That(getMessage(subject, new[] { 1, 2 }),
 				Does.Contain(TextMessageWriter.Pfx_Expected + 2).And
-				.Contain(TextMessageWriter.Pfx_Actual + 1));
+				.Contains(TextMessageWriter.Pfx_Actual + 1));
 		}
 
 		[Test]
@@ -105,7 +105,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 
 			Assert.That(getMessage(subject, new[] { -1, 2 }), Does.Contain("# 0").And
 				.Contain(TextMessageWriter.Pfx_Expected + "greater than 0").And
-				.Contain(TextMessageWriter.Pfx_Actual + "-1"));
+				.Contains(TextMessageWriter.Pfx_Actual + "-1"));
 		}
 
 		[Test]
@@ -115,7 +115,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 
 			Assert.That(getMessage(subject, new[] { '1', '2' }), Does.Contain("# 1").And
 				.Contain(TextMessageWriter.Pfx_Expected + "greater than '3'").And
-				.Contain(TextMessageWriter.Pfx_Actual + "'2'"));
+				.Contains(TextMessageWriter.Pfx_Actual + "'2'"));
 		}
 
 		#endregion

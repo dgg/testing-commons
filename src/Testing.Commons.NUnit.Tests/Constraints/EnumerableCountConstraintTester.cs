@@ -1,13 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
+using NUnit.Framework.Internal;
+using Testing.Commons.NUnit.Constraints.Support;
 
 namespace Testing.Commons.NUnit.Tests.Constraints
 {
 	[TestFixture]
-	public class EnumerableCountConstraintTester
+	public class EnumerableCountConstraintTester : Support.ConstraintTesterBase
 	{
 		#region Exploratory
 
@@ -51,6 +54,31 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 
 		#endregion
 
+		#region ApplyTo
+
+		[Test]
+		public void ApplyTo_NotAnEnumerable_False()
+		{
+			var subject = new EnumerableCountConstraint(null);
+			Assert.That(matches(subject, 3), Is.False);
+		}
+
+		#endregion
+
+		#region WriteMessageTo
+
+		[Test]
+		public void WriteMessageTo_NotAnEnumerable_ExpectedEnumerable_ActualContainsTypeAndValue()
+		{
+			var subject = new EnumerableCountConstraint(null);
+			Assert.That(getMessage(subject, PlatformID.MacOSX), Does
+				.StartWith(TextMessageWriter.Pfx_Expected + "instance of <System.Collections.IEnumerable>").And
+				.Contains(TextMessageWriter.Pfx_Actual + "instance of <System.PlatformID>").And
+				.Contains("MacOSX"));
+		}
+
+		#endregion
+
 		[Test]
 		public void CanBeNewedUp()
 		{
@@ -75,9 +103,58 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			_constraint = constraint;
 		}
 
+		private Constraint _inner;
 		public override ConstraintResult ApplyTo<TActual>(TActual actual)
 		{
-			return new ConstraintResult(this, actual, true);
+			var result = new ConstraintResult(this, actual, true);
+			_inner = new TypeRevealingConstraint(typeof(IEnumerable));
+			result = _inner.ApplyTo(actual);
+			if (result.IsSuccess)
+			{
+				
+			}
+			return result;
+		}
+
+		/// <summary>
+		/// Used to test that an object is of the same type provided or derived from it and extend the information given for the actual failing value.
+		/// </summary>
+		/// <remarks></remarks>
+		internal class TypeRevealingConstraint : InstanceOfTypeConstraint
+		{
+			public TypeRevealingConstraint(Type type) : base(type) { }
+
+			public override ConstraintResult ApplyTo<TActual>(TActual actual)
+			{
+				return new TypeRevealingResult(this, actual, base.ApplyTo(actual));
+			}
+
+			class TypeRevealingResult : ConstraintResult
+			{
+				private readonly object _actual;
+
+				public TypeRevealingResult(IConstraint constraint, object actual, ConstraintResult result)
+					: base(constraint, result.ActualValue, result.IsSuccess)
+				{
+					_actual = actual;
+				}
+
+				public override void WriteActualValueTo(MessageWriter writer)
+				{
+					if (ActualValue != null)
+					{
+						writer.WritePredicate("instance of");
+						// ActualValue cannot be used since it contains the type itself
+						writer.WriteActualValue(_actual.GetType());
+						writer.WriteActualConnector();
+						writer.WriteValue(_actual);
+					}
+					else
+					{
+						writer.WriteActualValue(null);
+					}
+				}
+			}
 		}
 	}
 
