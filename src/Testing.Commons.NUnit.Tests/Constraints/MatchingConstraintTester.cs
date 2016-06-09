@@ -136,6 +136,13 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			Assert.That(matches(subject, new { A = "b" }), Is.False);
 		}
 
+		[Test]
+		public void Matches_ExpectedIsSubsetOfActual_True()
+		{
+			var subject = new MatchingConstraint(new { A = "a" });
+			Assert.That(matches(subject, new { A = "a", B = 1 }), Is.True);
+		}
+
 		#endregion
 
 		#region WriteMessageTo
