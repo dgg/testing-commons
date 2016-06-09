@@ -64,10 +64,26 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		}
 
 		[Test]
-		public void Matches_NullEnumerable_False()
+		public void ApplyTo_NullEnumerable_False()
 		{
 			var subject = new EnumerableCountConstraint(null);
 			Assert.That(matches(subject, (IEnumerable)null), Is.False);
+		}
+
+		[Test]
+		public void ApplyTo_EnumerableWithNotMatchingCount_False()
+		{
+			IEnumerable e = new[] { 1, 2, 3 }.Where(i => i <= 2);
+			var subject = new EnumerableCountConstraint(Is.GreaterThan(4));
+			Assert.That(matches(subject, e), Is.False);
+		}
+
+		[Test]
+		public void ApplyTo_EnumerableWithMatchingCount_True()
+		{
+			IEnumerable e = new[] { 1, 2, 3 }.Where(i => i <= 2);
+			var subject = new EnumerableCountConstraint(Is.EqualTo(2));
+			Assert.That(matches(subject, e), Is.True);
 		}
 
 		#endregion
@@ -93,6 +109,16 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 				.Contains(TextMessageWriter.Pfx_Actual + "null"));
 		}
 
+		[Test]
+		public void WriteMessageTo_EnumerableWithNotMatchingCount_ExpectedContainsCount_ActualContainsCollectionValues()
+		{
+			IEnumerable e = new[] { '1', '2', '3' }.Where(i => i <= '2');
+			var subject = new EnumerableCountConstraint(Is.GreaterThan(4));
+			Assert.That(getMessage(subject, e), Does
+				.StartWith(TextMessageWriter.Pfx_Expected + "number of elements greater than 4").And
+				.Contains(TextMessageWriter.Pfx_Actual + "2 -> < '1', '2' >"));
+		}
+
 		#endregion
 
 		[Test]
@@ -112,11 +138,11 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 
 	public class EnumerableCountConstraint : Constraint
 	{
-		private readonly Constraint _constraint;
+		private readonly Constraint _countConstraint;
 
-		public EnumerableCountConstraint(Constraint constraint)
+		public EnumerableCountConstraint(Constraint countConstraint)
 		{
-			_constraint = constraint;
+			_countConstraint = countConstraint;
 		}
 
 		private Constraint _inner;
@@ -127,10 +153,27 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			result = _inner.ApplyTo(actual);
 			if (result.IsSuccess)
 			{
-				
+				var collection = (IEnumerable)actual;
+				// ReSharper disable PossibleMultipleEnumeration
+				ushort count = calculateCount(collection);
+				_inner = new CountConstraint(_countConstraint, collection);
+				// ReSharper restore PossibleMultipleEnumeration
+				result = _inner.ApplyTo(count);
 			}
 			return result;
 		}
+
+		private ushort calculateCount(IEnumerable current)
+		{
+			ushort num = 0;
+			IEnumerator enumerator = current.GetEnumerator();
+			while (enumerator.MoveNext())
+			{
+				num++;
+			}
+			return num;
+		}
+
 
 		/// <summary>
 		/// Used to test that an object is of the same type provided or derived from it and extend the information given for the actual failing value.
@@ -169,6 +212,48 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 					{
 						writer.WriteActualValue(null);
 					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// Wraps a constraint when used on the number of elements of an enumerable.
+		/// </summary>
+		internal class CountConstraint : Constraint
+		{
+			private readonly Constraint _decoree;
+			private readonly IEnumerable _enumerable;
+
+			public CountConstraint(Constraint decoree, IEnumerable enumerable)
+			{
+				_decoree = decoree;
+				_enumerable = enumerable;
+			}
+
+			public override ConstraintResult ApplyTo<TActual>(TActual actual)
+			{
+				// actual is the count of the enumerable
+				return new CountResult(this, _enumerable, _decoree.ApplyTo(actual));
+			}
+
+			public override string Description => "number of elements " + _decoree.Description;
+
+			class CountResult : ConstraintResult
+			{
+				private readonly IEnumerable _collection;
+				private readonly ConstraintResult _result;
+
+				public CountResult(IConstraint constraint, IEnumerable collection, ConstraintResult result) : base(constraint, result.ActualValue, result.IsSuccess)
+				{
+					_collection = collection;
+					_result = result;
+				}
+
+				public override void WriteActualValueTo(MessageWriter writer)
+				{
+					_result.WriteActualValueTo(writer);
+					writer.WriteActualConnector();
+					writer.WriteActualValue(_collection.Cast<object>().ToArray());
 				}
 			}
 		}
