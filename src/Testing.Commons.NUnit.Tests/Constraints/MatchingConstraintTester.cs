@@ -4,6 +4,7 @@ using System.Linq;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using NUnit.Framework.Internal;
+using Testing.Commons.NUnit.Constraints;
 using Testing.Commons.NUnit.Tests.Subjects;
 
 namespace Testing.Commons.NUnit.Tests.Constraints
@@ -117,5 +118,17 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		}
 
 		#endregion
+
+		[Test]
+		public void CanBeNewedUp()
+		{
+			Assert.That(new { A = "a", B = "b" }, new MatchingConstraint(new { A = "a" }));
+		}
+
+		[Test]
+		public void CanBeCreatedWithExtension()
+		{
+			Assert.That(new { A = "a", B = "b" }, Must.Match.Expected(new { A = "a" }));
+		}
 	}
 }
