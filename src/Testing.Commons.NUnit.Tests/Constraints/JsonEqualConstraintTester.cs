@@ -7,6 +7,53 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 	[TestFixture]
 	public class JsonEqualConstraintTester : Support.ConstraintTesterBase
 	{
+		#region ApplyTo
+
+		[Test]
+		public void ApplyTo_SameProperJson_True()
+		{
+			string properJson = "{\"prop\"=\"value\"}";
+			var subject = new JsonEqualConstraint("{'prop'='value'}");
+
+			Assert.That(matches(subject, properJson), Is.True);
+		}
+
+		[Test]
+		public void Matches_SameJsonified_False()
+		{
+			string jsonified = "{'prop'='value'}";
+			var subject = new JsonEqualConstraint("{'prop'='value'}");
+
+			Assert.That(matches(subject, jsonified), Is.False);
+		}
+
+		[Test]
+		public void Matches_NotSame_False()
+		{
+			string notSame = "{\"abc\"=123}";
+			var subject = new JsonEqualConstraint("{'prop'='value'}");
+
+			Assert.That(matches(subject, notSame), Is.False);
+		}
+
+		#endregion
+
+		#region WriteMessageTo
+
+		[Test]
+		public void WriteMessageTo_DifferentJson_DelegateToEquals()
+		{
+			string expected = "{'prop'='value'}",
+			   actual = "{\"abcd\"=\"12345\"}";
+			var subject = new JsonEqualConstraint(expected);
+			var equals = new EqualConstraint(expected.Jsonify());
+
+			Assert.That(getMessage(subject, actual),
+				Is.EqualTo(getMessage(equals, actual)));
+		}
+
+		#endregion
+
 		[Test]
 		public void CanBeNewedUp()
 		{
@@ -51,23 +98,13 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 	/// <para>An expanded JSON string uses the canonical double quote style for names an string values.</para>
 	/// </remarks>
 	/// <example><code>Assert.That("{\"prop\"=\"value\"}", new JsonConstraint("{'prop'='value'}"))</code></example>
-	public class JsonEqualConstraint : Constraint
+	public class JsonEqualConstraint : EqualConstraint
 	{
 		/// <summary>
 		/// Initializes a new instance of the <see cref="JsonEqualConstraint"/> class. 
 		/// </summary>
 		/// <param name="expected">The expected value in JSON compact notation.</param>
-		public JsonEqualConstraint(string expected) { }
-
-		/// <summary>
-		/// Applies the constraint to an actual value, returning a ConstraintResult.
-		/// </summary>
-		/// <param name="actual">The value to be tested</param>
-		/// <returns>A ConstraintResult</returns>
-		public override ConstraintResult ApplyTo<TActual>(TActual actual)
-		{
-			return new ConstraintResult(this, null, true);
-		}
+		public JsonEqualConstraint(string expected) : base(expected.Jsonify()) { }
 	}
 
 	/// <summary>
