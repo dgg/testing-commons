@@ -288,6 +288,56 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			Assert.That(matches(subject, complex), Is.False);
 		}
 
+		[Test]
+		public void Matches_WithCollectionMemberAgainstAnonymousWithoutCollection_True()
+		{
+			var withAddresses = new CustomerWithCollection
+			{
+				Name = "name",
+				PhoneNumber = "number",
+				Addresses = new[]
+				{
+					new Address { AddressLineOne = "1_1", AddressLineTwo = "1_2", City = "city_1", State = "state_1", Zipcode = "zip_1"},
+					new Address { AddressLineOne = "2_1", AddressLineTwo = "2_2", City = "city_2", State = "state_2", Zipcode = "zip_2"}
+				}
+			};
+
+			var withoutAddresses = new
+			{
+				Name = "name",
+				PhoneNumber = "number",
+			};
+
+			var subject = new MatchingConstraint(withoutAddresses);
+
+			Assert.That(matches(subject, withAddresses), Is.True);
+		}
+
+		[Test]
+		public void Matches_WithCollectionMemberAgainstSameTypeWithoutCollection_False()
+		{
+			var withAddresses = new CustomerWithCollection
+			{
+				Name = "name",
+				PhoneNumber = "number",
+				Addresses = new[]
+				{
+					new Address { AddressLineOne = "1_1", AddressLineTwo = "1_2", City = "city_1", State = "state_1", Zipcode = "zip_1"},
+					new Address { AddressLineOne = "2_1", AddressLineTwo = "2_2", City = "city_2", State = "state_2", Zipcode = "zip_2"}
+				}
+			};
+
+			var withoutAddresses = new CustomerWithCollection
+			{
+				Name = "name",
+				PhoneNumber = "number",
+			};
+
+			var subject = new MatchingConstraint(withoutAddresses);
+
+			Assert.That(matches(subject, withAddresses), Is.False);
+		}
+
 		#endregion
 
 		#region WriteMessageTo
@@ -414,6 +464,62 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 				);
 		}
 
+		[Test]
+		public void WriteMessageTo_WithCollectionMemberAgainstSameTypeWithoutCollection_ContainsMemberDiscrepancy()
+		{
+			var withAddresses = new CustomerWithCollection
+			{
+				Name = "name",
+				PhoneNumber = "number",
+				Addresses = new[]
+				{
+					new Address { AddressLineOne = "1_1", AddressLineTwo = "1_2", City = "city_1", State = "state_1", Zipcode = "zip_1"},
+					new Address { AddressLineOne = "2_1", AddressLineTwo = "2_2", City = "city_2", State = "state_2", Zipcode = "zip_2"}
+				}
+			};
+
+			var withoutAddresses = new CustomerWithCollection
+			{
+				Name = "name",
+				PhoneNumber = "number",
+			};
+
+			var subject = new MatchingConstraint(withoutAddresses);
+			Assert.That(getMessage(subject, withAddresses),
+				memberContainer("Addresses") &
+				expectedValue(null) &
+				actualValue(Does.Contain("<")));
+		}
+
+		[Test]
+		public void WriteMessageTo_WithCollectionMemberWithLessMembers_ContainsIndexedDiscrepancy()
+		{
+			var withAddresses = new CustomerWithCollection
+			{
+				Name = "name",
+				PhoneNumber = "number",
+				Addresses = new[]
+				{
+					new Address { AddressLineOne = "1_1", AddressLineTwo = "1_2", City = "city_1", State = "state_1", Zipcode = "zip_1"},
+					new Address { AddressLineOne = "2_1", AddressLineTwo = "2_2", City = "city_2", State = "state_2", Zipcode = "zip_2"}
+				}
+			};
+
+			var lessAddresses = new
+			{
+				Name = "name",
+				PhoneNumber = "number",
+				Addresses = new object[] { new { AddressLineOne = "1_1" } }
+			};
+
+			var subject = new MatchingConstraint(lessAddresses);
+			Assert.That(getMessage(subject, withAddresses),
+				memberContainer("Addresses") &
+				indexOfOffendingCollectionItem(1) &
+				missingExpectedMember() &
+				actualValue(Does.Contain("Address")));
+		}
+
 		private Constraint offendingMember(string memberName)
 		{
 			return Does.Contain("." + memberName);
@@ -462,6 +568,16 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		private Constraint indexOfOffendingCollectionItem(int i)
 		{
 			return Does.Contain($"[{i}]");
+		}
+
+		private Constraint actualValue(Constraint constraint)
+		{
+			return Does.Contain(TextMessageWriter.Pfx_Actual) & constraint;
+		}
+
+		private Constraint missingExpectedMember()
+		{
+			return Does.Contain(TextMessageWriter.Pfx_Expected + "nothing");
 		}
 
 		#endregion
