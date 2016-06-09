@@ -177,6 +177,33 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			Assert.That(matches(subject, actual), Is.True);
 		}
 
+		[Test]
+		public void Matches_DifferentDeepValue_False()
+		{
+			var actual = new
+			{
+				A = "a",
+				B = new
+				{
+					C = 1,
+					D = new { E = TimeSpan.Zero }
+				}
+			};
+
+			var expected = new
+			{
+				A = "a",
+				B = new
+				{
+					C = 1,
+					D = new { E = TimeSpan.MaxValue }
+				}
+			};
+
+			var subject = new MatchingConstraint(expected);
+			Assert.That(matches(subject, actual), Is.False);
+		}
+
 		#endregion
 
 		#region WriteMessageTo
@@ -203,6 +230,36 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 				expectedValue(1) &
 				missingActualMember()
 				);
+		}
+
+		[Test]
+		public void WriteMessageTo_DifferentDeepValue_ContainsMemberDiscrepancy()
+		{
+			var actual = new
+			{
+				A = "a",
+				B = new
+				{
+					C = 1,
+					D = new { E = TimeSpan.Zero }
+				}
+			};
+
+			var expected = new
+			{
+				A = "a",
+				B = new
+				{
+					C = 1,
+					D = new { E = TimeSpan.MaxValue }
+				}
+			};
+
+			var subject = new MatchingConstraint(expected);
+			Assert.That(getMessage(subject, actual),
+				offendingMember("E") &
+				actualValue(TimeSpan.Zero) &
+				expectedValue(TimeSpan.MaxValue));
 		}
 
 		private Constraint offendingMember(string memberName)
@@ -238,6 +295,11 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		private Constraint missingActualMember()
 		{
 			return Does.Contain(TextMessageWriter.Pfx_Actual + "member was missing");
+		}
+
+		private Constraint actualValue(object value)
+		{
+			return Does.Contain(TextMessageWriter.Pfx_Actual + valueOf(value));
 		}
 
 		#endregion
