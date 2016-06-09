@@ -51,6 +51,7 @@
     <Compile Include="Constraints\ComposablePropertyConstraint.cs" />
     <Compile Include="Constraints\ConjunctionConstraint.cs" />
     <Compile Include="Constraints\ConstrainedEnumerable.cs" />
+    <Compile Include="Constraints\EnumerableCountConstraint.cs" />
     <Compile Include="Constraints\Must.Extensions.Time.cs" />
     <Compile Include="Constraints\Name.cs" />
     <Compile Include="Constraints\Support\MessageWriterExtensions.cs" />
