@@ -24,6 +24,11 @@ namespace Testing.Commons.NUnit.Constraints
 			});
 		}
 
+		/// <summary>
+		/// Applies the constraint to an actual value, returning a ConstraintResult.
+		/// </summary>
+		/// <param name="actual">The value to be tested</param>
+		/// <returns>A ConstraintResult</returns>
 		public override ConstraintResult ApplyTo<TActual>(TActual actual)
 		{
 			bool matched = _expected.Equals(actual);
@@ -35,6 +40,10 @@ namespace Testing.Commons.NUnit.Constraints
 			return new MatchingResult(_exposed, this, actual, matched);
 		}
 
+		/// <summary>
+		/// The Description of what this constraint tests, for
+		/// use in messages and in the ConstraintResult.
+		/// </summary>
 		public override string Description => _exposed.WriteExpected();
 
 		class MatchingResult : ConstraintResult
