@@ -54,6 +54,7 @@
     <Compile Include="Constraints\EnumerableCountConstraint.cs" />
     <Compile Include="Constraints\JsonEqualConstraint.cs" />
     <Compile Include="Constraints\JsonExtensions.cs" />
+    <Compile Include="Constraints\MatchingConstraint.cs" />
     <Compile Include="Constraints\Must.Extensions.Time.cs" />
     <Compile Include="Constraints\Name.cs" />
     <Compile Include="Constraints\Support\MessageWriterExtensions.cs" />
