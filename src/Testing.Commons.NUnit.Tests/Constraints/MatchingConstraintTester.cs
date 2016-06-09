@@ -143,6 +143,13 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			Assert.That(matches(subject, new { A = "a", B = 1 }), Is.True);
 		}
 
+		[Test]
+		public void Matches_ExpectedIsSupersetOfActual_False()
+		{
+			var subject = new MatchingConstraint(new { A = "a", B = 1 });
+			Assert.That(matches(subject, new { A = "a" }), Is.False);
+		}
+
 		#endregion
 
 		#region WriteMessageTo
@@ -157,6 +164,18 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 				offendingMember("A") &
 				expectedValue("differentValue") &
 				actualValue("b"));
+		}
+
+		[Test]
+		public void WriteMessageTo_ExpectedIsSupersetOfActual_ContainsMemberDiscrepancy()
+		{
+			var subject = new MatchingConstraint(new { A = "a", B = 1 });
+
+			Assert.That(getMessage(subject, new { A = "a" }),
+				offendingMember("B") &
+				expectedValue(1) &
+				missingActualMember()
+				);
 		}
 
 		private Constraint offendingMember(string memberName)
@@ -177,6 +196,21 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		private Constraint actualValue(string value)
 		{
 			return Does.Contain(TextMessageWriter.Pfx_Actual + valueOf(value));
+		}
+
+		private Constraint expectedValue(object value)
+		{
+			return Does.Contain(TextMessageWriter.Pfx_Expected + valueOf(value));
+		}
+
+		private string valueOf(object i)
+		{
+			return i == null ? "null" : $"{i}";
+		}
+
+		private Constraint missingActualMember()
+		{
+			return Does.Contain(TextMessageWriter.Pfx_Actual + "member was missing");
 		}
 
 		#endregion
