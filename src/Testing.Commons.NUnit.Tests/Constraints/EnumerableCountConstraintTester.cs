@@ -63,6 +63,13 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			Assert.That(matches(subject, 3), Is.False);
 		}
 
+		[Test]
+		public void Matches_NullEnumerable_False()
+		{
+			var subject = new EnumerableCountConstraint(null);
+			Assert.That(matches(subject, (IEnumerable)null), Is.False);
+		}
+
 		#endregion
 
 		#region WriteMessageTo
@@ -75,6 +82,15 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 				.StartWith(TextMessageWriter.Pfx_Expected + "instance of <System.Collections.IEnumerable>").And
 				.Contains(TextMessageWriter.Pfx_Actual + "instance of <System.PlatformID>").And
 				.Contains("MacOSX"));
+		}
+
+		[Test]
+		public void WriteMessageTo_NullEnumerable_ExpectedContainsIEnumerable_ActualConstainsNull()
+		{
+			var subject = new EnumerableCountConstraint(null);
+			Assert.That(getMessage(subject, (IEnumerable)null), Does.
+				StartWith(TextMessageWriter.Pfx_Expected + "instance of <System.Collections.IEnumerable>").And
+				.Contains(TextMessageWriter.Pfx_Actual + "null"));
 		}
 
 		#endregion
