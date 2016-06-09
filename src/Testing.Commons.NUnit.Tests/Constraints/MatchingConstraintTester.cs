@@ -150,6 +150,33 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			Assert.That(matches(subject, new { A = "a" }), Is.False);
 		}
 
+		[Test]
+		public void Matches_PrettyDeepWithSameValues_True()
+		{
+			var actual = new
+			{
+				A = "a",
+				B = new
+				{
+					C = 1,
+					D = new { E = TimeSpan.Zero }
+				}
+			};
+
+			var expected = new
+			{
+				A = "a",
+				B = new
+				{
+					C = 1,
+					D = new { E = TimeSpan.Zero }
+				}
+			};
+
+			var subject = new MatchingConstraint(expected);
+			Assert.That(matches(subject, actual), Is.True);
+		}
+
 		#endregion
 
 		#region WriteMessageTo
