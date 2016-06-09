@@ -204,6 +204,62 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			Assert.That(matches(subject, actual), Is.False);
 		}
 
+		[Test]
+		public void Matches_WithCollectionMemberWithSameShapeAndValues_True()
+		{
+			var complex = new CustomerWithCollection
+			{
+				Name = "name",
+				PhoneNumber = "number",
+				Addresses = new[]
+				{
+					new Address { AddressLineOne = "1_1", AddressLineTwo = "1_2", City = "city_1", State = "state_1", Zipcode = "zip_1"},
+					new Address { AddressLineOne = "2_1", AddressLineTwo = "2_2", City = "city_2", State = "state_2", Zipcode = "zip_2"}
+				}
+			};
+
+			var expected = new
+			{
+				Name = "name",
+				Addresses = new object[]
+				{
+					new { State = "state_1"},
+					new { Zipcode = "zip_2"}
+				}
+			};
+
+			var subject = new MatchingConstraint(expected);
+			Assert.That(matches(subject, complex), Is.True);
+		}
+
+		[Test]
+		public void Matches_WithCollectionMemberWithDifferentShape_False()
+		{
+			var complex = new CustomerWithCollection
+			{
+				Name = "name",
+				PhoneNumber = "number",
+				Addresses = new[]
+				{
+					new Address { AddressLineOne = "1_1", AddressLineTwo = "1_2", City = "city_1", State = "state_1", Zipcode = "zip_1"},
+					new Address { AddressLineOne = "2_1", AddressLineTwo = "2_2", City = "city_2", State = "state_2", Zipcode = "zip_2"}
+				}
+			};
+
+			var expected = new
+			{
+				Name = "name",
+				Addresses = new object[]
+				{
+					new { State = "state_1"},
+					new { NotThere = 0}
+				}
+			};
+
+			var subject = new MatchingConstraint(expected);
+			Assert.That(matches(subject, complex), Is.False);
+		}
+
 		#endregion
 
 		#region WriteMessageTo
@@ -262,6 +318,40 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 				expectedValue(TimeSpan.MaxValue));
 		}
 
+		[Test]
+		public void WriteMessageTo_WithCollectionMemberWithDifferentShape_ContainsIndexedDiscrepancy()
+		{
+			var complex = new CustomerWithCollection
+			{
+				Name = "name",
+				PhoneNumber = "number",
+				Addresses = new[]
+				{
+					new Address { AddressLineOne = "1_1", AddressLineTwo = "1_2", City = "city_1", State = "state_1", Zipcode = "zip_1"},
+					new Address { AddressLineOne = "2_1", AddressLineTwo = "2_2", City = "city_2", State = "state_2", Zipcode = "zip_2"}
+				}
+			};
+
+			var expected = new
+			{
+				Name = "name",
+				Addresses = new object[]
+				{
+					new { State = "state_1"},
+					new { NotThere = 0}
+				}
+			};
+
+			var subject = new MatchingConstraint(expected);
+			Assert.That(getMessage(subject, complex),
+				memberContainer("CustomerWithCollection.Addresses") &
+				indexOfOffendingCollectionItem(1) &
+				offendingMember("NotThere") &
+				expectedValue(0) &
+				missingActualMember()
+				);
+		}
+
 		private Constraint offendingMember(string memberName)
 		{
 			return Does.Contain("." + memberName);
@@ -300,6 +390,16 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		private Constraint actualValue(object value)
 		{
 			return Does.Contain(TextMessageWriter.Pfx_Actual + valueOf(value));
+		}
+
+		private Constraint memberContainer(string containerName)
+		{
+			return Does.Contain(containerName);
+		}
+
+		private Constraint indexOfOffendingCollectionItem(int i)
+		{
+			return Does.Contain($"[{i}]");
 		}
 
 		#endregion
