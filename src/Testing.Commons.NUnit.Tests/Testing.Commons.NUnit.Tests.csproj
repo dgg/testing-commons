@@ -52,10 +52,12 @@
     <Compile Include="ArrangingTestTester.cs" />
     <Compile Include="Constraints\ConjuctionContraintTester.cs" />
     <Compile Include="Constraints\ConstrainedEnumerableTester.cs" />
+    <Compile Include="Constraints\DelegatingConstraintTester.cs" />
     <Compile Include="Constraints\EnumerableCountConstraintTester.cs" />
     <Compile Include="Constraints\JsonEqualConstraintTester.cs" />
     <Compile Include="Constraints\MatchingConstraintTester.cs" />
     <Compile Include="Constraints\Support\ConstraintTesterBase.cs" />
+    <Compile Include="Constraints\Support\UppercaseConstraint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Subjects\Address.cs" />
     <Compile Include="Subjects\Comparisons\ComparableSubject.cs" />

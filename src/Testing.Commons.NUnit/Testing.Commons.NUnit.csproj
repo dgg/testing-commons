@@ -51,6 +51,7 @@
     <Compile Include="Constraints\ComposablePropertyConstraint.cs" />
     <Compile Include="Constraints\ConjunctionConstraint.cs" />
     <Compile Include="Constraints\ConstrainedEnumerable.cs" />
+    <Compile Include="Constraints\DelegatingConstraint.cs" />
     <Compile Include="Constraints\EnumerableCountConstraint.cs" />
     <Compile Include="Constraints\JsonEqualConstraint.cs" />
     <Compile Include="Constraints\JsonExtensions.cs" />
