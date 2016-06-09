@@ -260,6 +260,34 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 			Assert.That(matches(subject, complex), Is.False);
 		}
 
+		[Test]
+		public void Matches_WithCollectionMemberWithSameShapeAndDifferentValues_False()
+		{
+			var complex = new CustomerWithCollection
+			{
+				Name = "name",
+				PhoneNumber = "number",
+				Addresses = new[]
+				{
+					new Address { AddressLineOne = "1_1", AddressLineTwo = "1_2", City = "city_1", State = "state_1", Zipcode = "zip_1"},
+					new Address { AddressLineOne = "2_1", AddressLineTwo = "2_2", City = "city_2", State = "state_2", Zipcode = "zip_2"}
+				}
+			};
+
+			var expected = new
+			{
+				Name = "name",
+				Addresses = new object[]
+				{
+					new { State = "state_1"},
+					new { Zipcode = "notSameValue"}
+				}
+			};
+
+			var subject = new MatchingConstraint(expected);
+			Assert.That(matches(subject, complex), Is.False);
+		}
+
 		#endregion
 
 		#region WriteMessageTo
@@ -349,6 +377,40 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 				offendingMember("NotThere") &
 				expectedValue(0) &
 				missingActualMember()
+				);
+		}
+
+		[Test]
+		public void WriteMessageTo_WithCollectionMemberWithSameShapeAndDifferentValues_ContainsIndexedDiscrepancy()
+		{
+			var complex = new CustomerWithCollection
+			{
+				Name = "name",
+				PhoneNumber = "number",
+				Addresses = new[]
+				{
+					new Address { AddressLineOne = "1_1", AddressLineTwo = "1_2", City = "city_1", State = "state_1", Zipcode = "zip_1"},
+					new Address { AddressLineOne = "2_1", AddressLineTwo = "2_2", City = "city_2", State = "state_2", Zipcode = "zip_2"}
+				}
+			};
+
+			var expected = new
+			{
+				Name = "name",
+				Addresses = new object[]
+				{
+					new { State = "state_1"},
+					new { Zipcode = "notSameValue"}
+				}
+			};
+
+			var subject = new MatchingConstraint(expected);
+			Assert.That(getMessage(subject, complex),
+				memberContainer("CustomerWithCollection.Addresses") &
+				indexOfOffendingCollectionItem(1) &
+				offendingMember("Zipcode") &
+				expectedValue("notSameValue") &
+				actualValue("zip_2")
 				);
 		}
 
