@@ -57,8 +57,10 @@
     <Compile Include="Constraints\MatchingConstraint.cs" />
     <Compile Include="Constraints\Must.Extensions.Time.cs" />
     <Compile Include="Constraints\Name.cs" />
+    <Compile Include="Constraints\Support\ExposingWriter.cs" />
     <Compile Include="Constraints\Support\MessageWriterExtensions.cs" />
     <Compile Include="Constraints\Support\Operator.cs" />
+    <Compile Include="Constraints\Support\WritableEqualityResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\NUnit_AssemblyInfo.cs" />
     <Compile Include="Resources\Exceptions.Designer.cs">

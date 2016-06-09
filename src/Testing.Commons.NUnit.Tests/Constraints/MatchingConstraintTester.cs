@@ -119,6 +119,61 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 
 		#endregion
 
+		#region Matches
+
+		[Test]
+		public void ApplyTo_ExpectedWithSameShapeAndSameValues_True()
+		{
+			var subject = new MatchingConstraint(new { A = "a" });
+			Assert.That(matches(subject, new { A = "a" }), Is.True);
+		}
+
+		[TestCase("a"), TestCase("B")]
+		public void Matches_ExpectedWithSameShapeAndDifferentValues_FalseRegardlessOfCasing(string differentValue)
+		{
+			var subject = new MatchingConstraint(new { A = differentValue });
+
+			Assert.That(matches(subject, new { A = "b" }), Is.False);
+		}
+
+		#endregion
+
+		#region WriteMessageTo
+
+		[Test]
+		public void WriteMessageTo_ExpectedWithSameShapeAndDifferentValues_ContainsMemberDiscrepancy()
+		{
+			var subject = new MatchingConstraint(new { A = "differentValue" });
+
+			string message = getMessage(subject, new { A = "b" });
+			Assert.That(message,
+				offendingMember("A") &
+				expectedValue("differentValue") &
+				actualValue("b"));
+		}
+
+		private Constraint offendingMember(string memberName)
+		{
+			return Does.Contain("." + memberName);
+		}
+
+		private Constraint expectedValue(string value)
+		{
+			return Does.Contain(TextMessageWriter.Pfx_Expected + valueOf(value));
+		}
+
+		private string valueOf(string str)
+		{
+			return str == null ? "null" : $"\"{str}\"";
+		}
+
+		private Constraint actualValue(string value)
+		{
+			return Does.Contain(TextMessageWriter.Pfx_Actual + valueOf(value));
+		}
+
+		#endregion
+
 		[Test]
 		public void CanBeNewedUp()
 		{
