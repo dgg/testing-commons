@@ -129,7 +129,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		}
 
 		[TestCase("a"), TestCase("B")]
-		public void Matches_ExpectedWithSameShapeAndDifferentValues_FalseRegardlessOfCasing(string differentValue)
+		public void ApplyTo_ExpectedWithSameShapeAndDifferentValues_FalseRegardlessOfCasing(string differentValue)
 		{
 			var subject = new MatchingConstraint(new { A = differentValue });
 
@@ -137,21 +137,21 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		}
 
 		[Test]
-		public void Matches_ExpectedIsSubsetOfActual_True()
+		public void ApplyTo_ExpectedIsSubsetOfActual_True()
 		{
 			var subject = new MatchingConstraint(new { A = "a" });
 			Assert.That(matches(subject, new { A = "a", B = 1 }), Is.True);
 		}
 
 		[Test]
-		public void Matches_ExpectedIsSupersetOfActual_False()
+		public void ApplyTo_ExpectedIsSupersetOfActual_False()
 		{
 			var subject = new MatchingConstraint(new { A = "a", B = 1 });
 			Assert.That(matches(subject, new { A = "a" }), Is.False);
 		}
 
 		[Test]
-		public void Matches_PrettyDeepWithSameValues_True()
+		public void ApplyTo_PrettyDeepWithSameValues_True()
 		{
 			var actual = new
 			{
@@ -178,7 +178,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		}
 
 		[Test]
-		public void Matches_DifferentDeepValue_False()
+		public void ApplyTo_DifferentDeepValue_False()
 		{
 			var actual = new
 			{
@@ -205,7 +205,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		}
 
 		[Test]
-		public void Matches_WithCollectionMemberWithSameShapeAndValues_True()
+		public void ApplyTo_WithCollectionMemberWithSameShapeAndValues_True()
 		{
 			var complex = new CustomerWithCollection
 			{
@@ -233,7 +233,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		}
 
 		[Test]
-		public void Matches_WithCollectionMemberWithDifferentShape_False()
+		public void ApplyTo_WithCollectionMemberWithDifferentShape_False()
 		{
 			var complex = new CustomerWithCollection
 			{
@@ -261,7 +261,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		}
 
 		[Test]
-		public void Matches_WithCollectionMemberWithSameShapeAndDifferentValues_False()
+		public void ApplyTo_WithCollectionMemberWithSameShapeAndDifferentValues_False()
 		{
 			var complex = new CustomerWithCollection
 			{
@@ -289,7 +289,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		}
 
 		[Test]
-		public void Matches_WithCollectionMemberAgainstAnonymousWithoutCollection_True()
+		public void ApplyTo_WithCollectionMemberAgainstAnonymousWithoutCollection_True()
 		{
 			var withAddresses = new CustomerWithCollection
 			{
@@ -314,7 +314,7 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		}
 
 		[Test]
-		public void Matches_WithCollectionMemberAgainstSameTypeWithoutCollection_False()
+		public void ApplyTo_WithCollectionMemberAgainstSameTypeWithoutCollection_False()
 		{
 			var withAddresses = new CustomerWithCollection
 			{
