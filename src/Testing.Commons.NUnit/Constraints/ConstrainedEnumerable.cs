@@ -25,7 +25,7 @@ namespace Testing.Commons.NUnit.Constraints
 			_constraints = constraints.ToArray();
 		}
 
-		private Constraint _inner;
+		private Constraint _beingMatched;
 
 		/// <summary>
 		/// Applies the constraint to an actual value, returning a ConstraintResult.
@@ -44,8 +44,8 @@ namespace Testing.Commons.NUnit.Constraints
 			{
 				for (int i = 0; i < collection.Length && result.IsSuccess; i++)
 				{
-					_inner = new IndexedConstraint(collection, i, _constraints[i]);
-					result = _inner.ApplyTo(collection.GetValue(i));
+					_beingMatched = new IndexedConstraint(collection, i, _constraints[i]);
+					result = _beingMatched.ApplyTo(collection.GetValue(i));
 				}	
 			}
 
@@ -56,12 +56,12 @@ namespace Testing.Commons.NUnit.Constraints
 		/// The Description of what this constraint tests, for
 		/// use in messages and in the ConstraintResult.
 		/// </summary>
-		public override string Description => _inner.Description;
+		public override string Description => _beingMatched.Description;
 
 		private ConstraintResult sameNumberOfElementsAndConstraints(Array current, int numberOfConstraints)
 		{
-			_inner = new MatchingLength(current, current.Length);
-			var result = _inner.ApplyTo(numberOfConstraints);
+			_beingMatched = new MatchingLength(current, current.Length);
+			var result = _beingMatched.ApplyTo(numberOfConstraints);
 			return result;
 		}
 

@@ -30,7 +30,7 @@ namespace Testing.Commons.NUnit.Constraints
 				.Where(c => c != null);
 		}
 
-		private Constraint _failing;
+		private Constraint _beingMatched;
 
 		/// <summary>
 		/// Applies the constraint to an actual value, returning a ConstraintResult.
@@ -44,7 +44,7 @@ namespace Testing.Commons.NUnit.Constraints
 				ConstraintResult result = constraint.ApplyTo(actual);
 				if (!result.IsSuccess)
 				{
-					_failing = constraint;
+					_beingMatched = constraint;
 					return new ConjuctionConstraintResult(this, actual, result);
 				}
 			}
@@ -63,7 +63,7 @@ namespace Testing.Commons.NUnit.Constraints
 				StringBuilder sb = new StringBuilder(aggregate.Description);
 				sb.AppendLine();
 				sb.Append(Pfx_Specific);
-				sb.Append(_failing.Description);
+				sb.Append(_beingMatched.Description);
 				return sb.ToString();
 			}
 			protected set {  }

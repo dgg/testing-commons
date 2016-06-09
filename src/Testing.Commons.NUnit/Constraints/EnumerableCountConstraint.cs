@@ -6,29 +6,42 @@ using Testing.Commons.NUnit.Constraints.Support;
 
 namespace Testing.Commons.NUnit.Constraints
 {
+	/// <summary>
+	/// Allows asserting on the number of elements of any instance of <see cref="IEnumerable"/>.
+	/// </summary>
+	/// <remarks>When evaluating linq queries NUnit does not provide a way of aserting on the element count.</remarks>
 	public class EnumerableCountConstraint : Constraint
 	{
 		private readonly Constraint _countConstraint;
 
+		/// <summary>
+		/// Creates the instance of the constraint.
+		/// </summary>
+		/// <param name="countConstraint">The constraint to be applied to the element count.</param>
 		public EnumerableCountConstraint(Constraint countConstraint)
 		{
 			_countConstraint = countConstraint;
 		}
 
-		private Constraint _inner;
+		private Constraint _beingMatched;
+
+		/// <summary>
+		/// Applies the constraint to an actual value, returning a ConstraintResult.
+		/// </summary>
+		/// <param name="actual">The value to be tested</param>
+		/// <returns>A ConstraintResult</returns>
 		public override ConstraintResult ApplyTo<TActual>(TActual actual)
 		{
-			var result = new ConstraintResult(this, actual, true);
-			_inner = new TypeRevealingConstraint(typeof(IEnumerable));
-			result = _inner.ApplyTo(actual);
+			_beingMatched = new TypeRevealingConstraint(typeof(IEnumerable));
+			ConstraintResult result = _beingMatched.ApplyTo(actual);
 			if (result.IsSuccess)
 			{
 				var collection = (IEnumerable)actual;
 				// ReSharper disable PossibleMultipleEnumeration
 				ushort count = calculateCount(collection);
-				_inner = new CountConstraint(_countConstraint, collection);
+				_beingMatched = new CountConstraint(_countConstraint, collection);
 				// ReSharper restore PossibleMultipleEnumeration
-				result = _inner.ApplyTo(count);
+				result = _beingMatched.ApplyTo(count);
 			}
 			return result;
 		}
