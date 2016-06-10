@@ -59,8 +59,10 @@
     <Compile Include="Constraints\Must.Extensions.Time.cs" />
     <Compile Include="Constraints\Name.cs" />
     <Compile Include="Constraints\NoPropertyChangedConstraint.cs" />
+    <Compile Include="Constraints\NoPropertyChangingConstraint.cs" />
     <Compile Include="Constraints\NoRaisingConstraint.cs" />
     <Compile Include="Constraints\PropertyChangedConstraint.cs" />
+    <Compile Include="Constraints\PropertyChangingConstraint.cs" />
     <Compile Include="Constraints\RaisingConstraint.cs" />
     <Compile Include="Constraints\Support\ExposingWriter.cs" />
     <Compile Include="Constraints\Support\MessageWriterExtensions.cs" />

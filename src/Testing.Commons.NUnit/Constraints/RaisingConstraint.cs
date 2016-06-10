@@ -67,11 +67,6 @@ namespace Testing.Commons.NUnit.Constraints
 
 		public override string Description => $"raise event '{EventName}' and {_matchingPropertyName.Description}";
 
-		protected ConstraintResult result()
-		{
-			return new RaisingResult(_eventRaised, EventName, this, Matched);
-		}
-
 		class RaisingResult : ConstraintResult
 		{
 			private readonly bool _eventRaised;

@@ -39,7 +39,7 @@ namespace Testing.Commons.NUnit.Constraints
 		{
 			Subject.PropertyChanged += (sender, e) => onEventRaised(e);
 			del();
-			return result();
+			return base.ApplyTo(del);
 		}
 
 		/// <summary>

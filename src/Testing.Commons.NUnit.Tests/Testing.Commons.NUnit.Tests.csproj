@@ -57,7 +57,9 @@
     <Compile Include="Constraints\JsonEqualConstraintTester.cs" />
     <Compile Include="Constraints\MatchingConstraintTester.cs" />
     <Compile Include="Constraints\NoPropertyChangedConstraintTester.cs" />
+    <Compile Include="Constraints\NoPropertyChangingConstraintTester.cs" />
     <Compile Include="Constraints\PropertyChangedConstraintTester.cs" />
+    <Compile Include="Constraints\PropertyChangingConstraintTester.cs" />
     <Compile Include="Constraints\Support\ConstraintTesterBase.cs" />
     <Compile Include="Constraints\Support\UppercaseConstraint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
