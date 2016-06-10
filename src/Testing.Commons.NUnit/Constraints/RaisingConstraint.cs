@@ -35,21 +35,7 @@ namespace Testing.Commons.NUnit.Constraints
 		/// <param name="subject"> Instance of the event raising type.</param>
 		/// <param name="property">Expression that represents the name of a property.</param>
 		/// <param name="eventArgs">Constraint on the property name.</param>
-		protected RaisingConstraint(TSubject subject, string property, Func<Constraint, ComposablePropertyConstraint> eventArgs)
-		{
-			Subject = subject;
-			_matchingPropertyName = eventArgs(Is.EqualTo(property));
-			// failing is no event raised
-			Matched = new ConstraintResult(this, null, false);
-		}
-
-		/// <summary>
-		/// Instantiate the constraint
-		/// </summary>
-		/// <param name="subject"> Instance of the event raising type.</param>
-		/// <param name="property">Expression that represents the name of a property.</param>
-		/// <param name="eventArgs">Constraint on the property name.</param>
-		protected RaisingConstraint(TSubject subject, Expression<Func<TSubject, object>> property, Func<Constraint, ComposablePropertyConstraint> eventArgs) : this(subject, Name.Of(property), eventArgs) { }
+		protected RaisingConstraint(TSubject subject, Expression<Func<TSubject, object>> property, Func<Constraint, ComposablePropertyConstraint> eventArgs) : this(subject, Is.EqualTo(Name.Of(property)), eventArgs) { }
 
 		/// <summary>
 		/// Instantiate the constraint
@@ -61,7 +47,6 @@ namespace Testing.Commons.NUnit.Constraints
 		{
 			Subject = subject;
 			_matchingPropertyName = eventArgs(eventArgsConstraint);
-			// failing is no event raised
 			Matched = new ConstraintResult(this, null, false);
 		}
 

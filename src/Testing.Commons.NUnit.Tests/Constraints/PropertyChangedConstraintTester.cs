@@ -51,32 +51,15 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		#region WriteDescriptionTo
 
 		[Test]
-		public void WriteDescriptionTo_SetterDoesNotRaiseEvent_ExpectationWithEvent()
+		public void WriteDescriptionTo_SetterDoesNotRaiseEvent_ExpectationWithEvent_PropertyName_ActualWithEventNotRaised()
 		{
 			IRaisingSubject raising = Substitute.For<IRaisingSubject>();
 			var subject = new PropertyChangedConstraint<IRaisingSubject>(raising, r => r.I);
 
 			Assert.That(getMessage(subject, () => raising.I = 3),
-				Does.StartWith(TextMessageWriter.Pfx_Expected + "raise event 'PropertyChanged'"));
-		}
-
-		[Test]
-		public void WriteDescriptionTo_SetterDoesNotRaiseEvent_ExpectationWithPropertyName()
-		{
-			IRaisingSubject raising = Substitute.For<IRaisingSubject>();
-			var subject = new PropertyChangedConstraint<IRaisingSubject>(raising, r => r.I);
-
-			Assert.That(getMessage(subject, () => raising.I = 3), Does.Contain("PropertyName equal to \"I\""));
-		}
-
-		[Test]
-		public void WriteDescriptionTo_SetterDoesNotRaiseEvent_ActualWithEventNotRaised()
-		{
-			IRaisingSubject raising = Substitute.For<IRaisingSubject>();
-			var subject = new PropertyChangedConstraint<IRaisingSubject>(raising, r => r.I);
-
-			Assert.That(getMessage(subject, () => raising.I = 3),
-				Does.Contain(TextMessageWriter.Pfx_Actual + "event 'PropertyChanged' not raised"));
+				Does.StartWith(TextMessageWriter.Pfx_Expected + "raise event 'PropertyChanged'").And
+				.Contain("PropertyName equal to \"I\"").And
+				.Contain(TextMessageWriter.Pfx_Actual + "event 'PropertyChanged' not raised"));
 		}
 
 		[Test]
