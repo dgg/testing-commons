@@ -1,0 +1,180 @@
+﻿using System;
+using System.Runtime.Serialization;
+using System.Web.Script.Serialization;
+using NUnit.Framework.Constraints;
+using Testing.Commons.NUnit.Constraints.Support;
+using Testing.Commons.Serialization;
+
+namespace Testing.Commons.NUnit.Constraints
+{
+	/// <summary>
+	/// Used to check the serialization/deserialization of an object.
+	/// </summary>
+	/// <typeparam name="T">Type to be serialized and deserialized.</typeparam>
+	public class SerializationConstraint<T> : Constraint
+	{
+		private readonly IRoundtripSerializer<T> _serializer;
+		private readonly IConstraint _constraintOverDeserialized;
+
+		/// <summary>
+		/// Builds an instance with the provided serializer and constraint.
+		/// </summary>
+		/// <param name="serializer">Serializer used to serialize/deserialize the tested value.</param>
+		/// <param name="constraintOverDeserialized">Constraint to apply to the deserialized object.</param>
+		public SerializationConstraint(IRoundtripSerializer<T> serializer, Constraint constraintOverDeserialized)
+		{
+			_serializer = serializer;
+			_constraintOverDeserialized = ((IResolveConstraint)constraintOverDeserialized).Resolve();
+		}
+
+		private T getDeserializedObject(T toSerialize)
+		{
+			using (_serializer)
+			{
+				_serializer.Serialize(toSerialize);
+				return _serializer.Deserialize();
+			}
+		}
+
+		/// <summary>
+		/// Applies the constraint to an actual value, returning a ConstraintResult.
+		/// </summary>
+		/// <param name="actual">The value to be tested</param>
+		/// <returns>A ConstraintResult</returns>
+		public override ConstraintResult ApplyTo<TActual>(TActual actual)
+		{
+			ConstraintResult result = null;
+			Exception ex = null;
+			try
+			{
+				T deserialized = getDeserializedObject((T)((object)actual));
+				result = _constraintOverDeserialized.ApplyTo(deserialized);
+			}
+			catch (Exception caught)
+			{
+				ex = caught;
+			}
+			return new SerializationResult(ex, result, this, actual, (result?.IsSuccess).GetValueOrDefault());
+		}
+
+		/// <summary>
+		/// The Description of what this constraint tests, for
+		/// use in messages and in the ConstraintResult.
+		/// </summary>
+		public override string Description => "Deserialized object " + _constraintOverDeserialized.Description;
+
+		class SerializationResult : ConstraintResult
+		{
+			private readonly Exception _ex;
+			private readonly ConstraintResult _constraintOverDeserialized;
+
+			public SerializationResult(Exception ex, ConstraintResult constraintOverDeserialized, IConstraint constraint, object actualValue, bool isSuccess) : base(constraint, actualValue, isSuccess)
+			{
+				_ex = ex;
+				_constraintOverDeserialized = constraintOverDeserialized;
+			}
+
+			public override void WriteActualValueTo(MessageWriter writer)
+			{
+				if (_ex == null)
+				{
+					_constraintOverDeserialized.WriteActualValueTo(writer);
+					writer.WriteActualConnector();
+					writer.WriteValue(ActualValue);
+				}
+				else
+				{
+					writer.WritePredicate("Could not serialize/deserialize object because");
+					writer.WriteValue(_ex.Message);
+				}
+			}
+		}
+	}
+
+	public static partial class MustExtensions
+	{
+		/// <summary>
+		/// Builds an instance of <see cref="SerializationConstraint{T}"/> that allows checking the serialization/deserialization of an object.
+		/// </summary>
+		/// <typeparam name="T">Type to be serialized and deserialized.</typeparam>
+		/// <param name="entry">Extension entry point.</param>
+		/// <param name="serializer"></param>
+		/// <param name="constraintOverDeserialized">Constraint to apply to the deserialized object.</param>
+		/// <returns>Instance built.</returns>
+		public static Constraint Serializable<T>(this Must.BeEntryPoint entry, IRoundtripSerializer<T> serializer, Constraint constraintOverDeserialized)
+		{
+			return new SerializationConstraint<T>(serializer, constraintOverDeserialized);
+		}
+
+		/// <summary>
+		/// Builds an instance of <see cref="SerializationConstraint{T}"/> that allows checking the binary serialization/deserialization of an object.
+		/// </summary>
+		/// <typeparam name="T">Type to be serialized and deserialized.</typeparam>
+		/// <param name="entry">Extension entry point.</param>
+		/// <param name="constraintOverDeserialized">Constraint to apply to the deserialized object.</param>
+		/// <returns>Instance built.</returns>
+		public static Constraint BinarySerializable<T>(this Must.BeEntryPoint entry, Constraint constraintOverDeserialized)
+		{
+			return new SerializationConstraint<T>(new BinaryRoundtripSerializer<T>(), constraintOverDeserialized);
+		}
+
+		/// <summary>
+		/// Builds an instance of <see cref="SerializationConstraint{T}"/> that allows checking the XML serialization/deserialization of an object.
+		/// </summary>
+		/// <typeparam name="T">Type to be serialized and deserialized.</typeparam>
+		/// <param name="entry">Extension entry point.</param>
+		/// <param name="constraintOverDeserialized">Constraint to apply to the deserialized object.</param>
+		/// <returns>Instance built.</returns>
+		public static Constraint XmlSerializable<T>(this Must.BeEntryPoint entry, Constraint constraintOverDeserialized)
+		{
+			return new SerializationConstraint<T>(new XmlRoundtripSerializer<T>(), constraintOverDeserialized);
+		}
+
+		/// <summary>
+		/// Builds an instance of <see cref="SerializationConstraint{T}"/> that allows checking the data contract serialization/deserialization of an object.
+		/// </summary>
+		/// <typeparam name="T">Type to be serialized and deserialized.</typeparam>
+		/// <param name="entry">Extension entry point.</param>
+		/// <param name="constraintOverDeserialized">Constraint to apply to the deserialized object.</param>
+		/// <returns>Instance built.</returns>
+		public static Constraint DataContractSerializable<T>(this Must.BeEntryPoint entry, Constraint constraintOverDeserialized)
+		{
+			return new SerializationConstraint<T>(new DataContractRoundtripSerializer<T>(), constraintOverDeserialized);
+		}
+
+		/// <summary>
+		/// Builds an instance of <see cref="SerializationConstraint{T}"/> that allows checking the data contract serialization/deserialization of an object.
+		/// </summary>
+		/// <typeparam name="T">Type to be serialized and deserialized.</typeparam>
+		/// <param name="entry">Extension entry point.</param>
+		/// <param name="constraintOverDeserialized">Constraint to apply to the deserialized object.</param>
+		/// <param name="maxItemsInObjectGraph">The maximum number of items in the graph to serialize or deserialize. The default is <c>4</c>.</param>
+		/// <param name="ignoreExtensionDataObject">true to ignore the <see cref="IExtensibleDataObject"/> interface upon serialization and ignore unexpected data upon deserialization; otherwise, false. The default is false.</param>
+		/// <param name="dataContractSurrogate">An implementation of the <see cref="IDataContractSurrogate"/> to customize the serialization process.</param>
+		/// <param name="alwaysEmitTypeInformation">true to emit type information; otherwise, false. The default is false.</param>
+		/// <returns>Instance built.</returns>
+		public static Constraint DataContractJsonSerializable<T>(this Must.BeEntryPoint entry, Constraint constraintOverDeserialized, int maxItemsInObjectGraph = 4, bool ignoreExtensionDataObject = false, IDataContractSurrogate dataContractSurrogate = null, bool alwaysEmitTypeInformation = false)
+		{
+			return new SerializationConstraint<T>(
+				new DataContractJsonRoundtripSerializer<T>(
+					maxItemsInObjectGraph,
+					ignoreExtensionDataObject,
+					dataContractSurrogate,
+					alwaysEmitTypeInformation),
+				constraintOverDeserialized);
+		}
+
+		/// <summary>
+		/// Builds an instance of <see cref="SerializationConstraint{T}"/> that allows checking the JSON serialization/deserialization of an object.
+		/// </summary>
+		/// <typeparam name="T">Type to be serialized and deserialized.</typeparam>
+		/// <param name="entry">Extension entry point.</param>
+		/// <param name="constraintOverDeserialized">Constraint to apply to the deserialized object.</param>
+		/// <param name="converters">An array that contains the custom converters to be registered.</param>
+		/// <returns>Instance built.</returns>
+		public static Constraint JsonSerializable<T>(this Must.BeEntryPoint entry, Constraint constraintOverDeserialized, params JavaScriptConverter[] converters)
+		{
+			return new SerializationConstraint<T>(new JsonRoundtripSerializer<T>(converters), constraintOverDeserialized);
+		}
+	}
+}

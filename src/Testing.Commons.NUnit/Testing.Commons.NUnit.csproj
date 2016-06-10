@@ -52,6 +52,7 @@
     <Compile Include="Constraints\ConjunctionConstraint.cs" />
     <Compile Include="Constraints\ConstrainedEnumerable.cs" />
     <Compile Include="Constraints\DelegatingConstraint.cs" />
+    <Compile Include="Constraints\DeserializationConstraint.cs" />
     <Compile Include="Constraints\EnumerableCountConstraint.cs" />
     <Compile Include="Constraints\JsonEqualConstraint.cs" />
     <Compile Include="Constraints\JsonExtensions.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Constraints\PropertyChangedConstraint.cs" />
     <Compile Include="Constraints\PropertyChangingConstraint.cs" />
     <Compile Include="Constraints\RaisingConstraint.cs" />
+    <Compile Include="Constraints\SerializationConstraint.cs" />
     <Compile Include="Constraints\Support\ExposingWriter.cs" />
     <Compile Include="Constraints\Support\MessageWriterExtensions.cs" />
     <Compile Include="Constraints\Support\Operator.cs" />
