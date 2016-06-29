@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArrangingTest.cs" />
+    <Compile Include="Constraints\Closeness.cs" />
     <Compile Include="Constraints\ComposablePropertyConstraint.cs" />
     <Compile Include="Constraints\ConjunctionConstraint.cs" />
     <Compile Include="Constraints\ConstrainedEnumerable.cs" />
