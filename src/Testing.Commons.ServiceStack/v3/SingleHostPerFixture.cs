@@ -4,13 +4,13 @@ namespace Testing.Commons.Service_Stack.v3
 {
 	public abstract class SingleHostPerFixture : HostTesterBase
 	{
-		[TestFixtureSetUp]
+		[OneTimeSetUp]
 		public void SetUp()
 		{
 			StartHost();
 		}
 
-		[TestFixtureTearDown]
+		[OneTimeTearDown]
 		public void TearDown()
 		{
 			ShutdownHost();

@@ -31,10 +31,9 @@ task Test -depends ensureRelease {
 	$nunit = get-test-assembly-name $base_dir $configuration 'Testing.Commons.NUnit'
 	$serviceStack = get-test-assembly-name $base_dir $configuration 'Testing.Commons.ServiceStack'
 	
-	run_v2_tests $base_dir $release_dir ($serviceStack)
-	report-on-test-results $base_dir $release_dir
+	run_tests $base_dir $release_dir ($commons, $nunit, $serviceStack)
 
-	run_v3_tests $base_dir $release_dir ($commons, $nunit)
+	report-on-test-results $base_dir $release_dir
 }
 
 task CopyArtifacts -depends ensureRelease {
@@ -54,29 +53,20 @@ function get-test-assembly-name($base, $config, $name)
 	return "$base\src\$name.Tests\bin\$config\$name.Tests.dll"
 }
 
-function run_v2_tests($base, $release, $test_assemblies){
-	$nunit_console = "$base\tools\NUnit.Runners.lite\nunit-console.exe"
-
-	exec { & $nunit_console $test_assemblies /nologo /nodots /result="$release\TestResult_v2.xml"  }
-}
-
-function run_v3_tests($base, $release, $test_assemblies){
+function run_tests($base, $release, $test_assemblies){
 	$console_dir = Get-ChildItem $base\tools\* -Directory | where {$_.Name.StartsWith('NUnit.ConsoleRunner')}
     # get first directory
     $console_dir = $console_dir[0]
 
 	$nunit_console = Join-Path $console_dir tools\nunit3-console.exe
-	exec { & $nunit_console $test_assemblies --result:"$release\TestResult_v3.xml" --noheader  }
+	exec { & $nunit_console $test_assemblies --result:"$release\TestResult.xml" --noheader  }
 }
 
 function report-on-test-results($base, $release)
 {
-	$nunit_summary_path = "$base\tools\NUnitSummary"
-	$nunit_summary = Join-Path $nunit_summary_path "nunit-summary.exe"
-
-	$alternative_details = Join-Path $nunit_summary_path "AlternativeNUnitDetails.xsl"
-	$alternative_details = "-xsl=" + $alternative_details
-
-	exec { & $nunit_summary $release\TestResult_v2.xml -html -o="$release\TestSummary.htm" }
-	exec { & $nunit_summary $release\TestResult_v2.xml -html -o="$release\TestDetails.htm" $alternative_details -noheader }
+	$nunit_orange = Join-Path $base tools\NUnitOrange\NUnitOrange.exe
+	$input_xml = Join-Path $release TestResult.xml
+	$output_html = Join-Path $release TestResult.html
+	
+	exec { & $nunit_orange $input_xml $output_html }
 }

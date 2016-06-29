@@ -30,7 +30,7 @@ namespace Testing.Commons.Service_Stack.v3
 		protected override void Dispose(bool disposing)
 		{
 			base.Dispose(disposing);
-			if (_onDispose != null) _onDispose(disposing);
+			_onDispose?.Invoke(disposing);
 		}
 	}
 }

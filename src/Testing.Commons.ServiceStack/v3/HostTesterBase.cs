@@ -10,21 +10,15 @@ namespace Testing.Commons.Service_Stack.v3
 	public abstract class HostTesterBase
 	{
 		private TestHost _host;
-		protected TestHost Host { get { return _host; } }
+		protected TestHost Host => _host;
 
-		protected virtual ushort TestPort { get { return 49160; } }
+		protected virtual ushort TestPort => 49160;
 		protected abstract string ServiceName { get; }
 		protected abstract IEnumerable<Assembly> AssembliesWithServices { get; }
 		protected abstract void Boootstrap(IAppHost arg);
 		protected virtual void OnHostDispose(bool disposing) { }
 
-		public Uri BaseUrl
-		{
-			get
-			{
-				return new Uri(string.Format("http://localhost:{0}/", TestPort));
-			}
-		}
+		public Uri BaseUrl => new Uri($"http://localhost:{TestPort}/");
 
 		protected void StartHost()
 		{
