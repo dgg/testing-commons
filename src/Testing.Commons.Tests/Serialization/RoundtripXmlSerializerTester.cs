@@ -15,7 +15,7 @@ namespace Testing.Commons.Tests.Serialization
 			{
 				string representation = subject.Serialize(new Serializable { S = "s", D = 3m });
 
-				Assert.That(representation, Is.StringEnding("<S>s</S><D>3</D></Serializable>"));
+				Assert.That(representation, Does.Contain("<S>s</S><D>3</D></Serializable>"));
 			}
 		}
 

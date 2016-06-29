@@ -17,12 +17,11 @@ namespace Testing.Commons.Configuration
 		/// <returns>The full path to the fake configuration assembly.</returns>
 		public static string GetConfigurationAssemblyPath(MethodBase test)
 		{
-			var attribute = Attribute.GetCustomAttribute(test, typeof(ConfigurationAssemblyAttribute))
-				as ConfigurationAssemblyAttribute;
+			var attribute = (ConfigurationAssemblyAttribute) Attribute.GetCustomAttribute(test, typeof(ConfigurationAssemblyAttribute));
 
 			ensureConfigurationAssembly(attribute);
 
-			return Path.Combine(attribute.AssemblyPath, attribute.AssemblyName);
+			return attribute.FullPath;
 		}
 
 		private static void ensureConfigurationAssembly(ConfigurationAssemblyAttribute attribute)
@@ -34,10 +33,10 @@ namespace Testing.Commons.Configuration
 						typeof(ConfigurationAssemblyAttribute).Name));
 			}
 
-			if (!attribute.Exists) throw new ArgumentException(
+			if (!attribute.Exists()) throw new ArgumentException(
 				string.Format(Resources.Exceptions.MissingExternalConfigurationAssemblyFile_Template, attribute.FullPath),
 				"path");
-			if (!attribute.PointsToAnAssembly) throw new ArgumentException(
+			if (!attribute.PointsToAnAssembly()) throw new ArgumentException(
 				string.Format(Resources.Exceptions.NotAnExternalConfigurationAssembly_Template, attribute.FullPath),
 				"path");
 		}

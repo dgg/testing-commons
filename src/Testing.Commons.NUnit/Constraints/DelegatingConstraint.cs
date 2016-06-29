@@ -2,6 +2,10 @@
 
 namespace Testing.Commons.NUnit.Constraints
 {
+	/// <summary>
+	/// Provides a strongly-typed base class to implement custom constraints that
+	/// delegate matching and message formatting to another instance of <see cref="Constraint"/>
+	/// </summary>
 	public abstract class DelegatingConstraint : Constraint
 	{
 		/// <summary>

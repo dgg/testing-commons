@@ -44,7 +44,7 @@ namespace Testing.Commons.Tests
 		{
 			return Throws.InstanceOf<ArgumentOutOfRangeException>().With
 				.Property("ActualValue").EqualTo(upperBound)
-				.And.Message.StringContaining(upperBoundRepresentation);
+				.And.Message.Contain(upperBoundRepresentation);
 		}
 
 		[Test]

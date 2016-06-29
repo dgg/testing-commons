@@ -14,6 +14,10 @@ namespace Testing.Commons.NUnit.Constraints
 		private readonly ExposingWriter _writer;
 		private WritableEqualityResult _exposed;
 
+		/// <summary>
+		/// Creates the instance of the constraint.
+		/// </summary>
+		/// <param name="expected">The object to match the actual value against.</param>
 		public MatchingConstraint(object expected)
 		{
 			_writer = new ExposingWriter(new ShouldWriter());

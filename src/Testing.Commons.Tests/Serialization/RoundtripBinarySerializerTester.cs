@@ -15,7 +15,7 @@ namespace Testing.Commons.Tests.Serialization
 			{
 				string representation = subject.Serialize(new Serializable { S = "s", D = 3m });
 
-				Assert.That(representation, Is.StringContaining(".Serializable"));
+				Assert.That(representation, Does.Contain(".Serializable"));
 			}
 		}
 

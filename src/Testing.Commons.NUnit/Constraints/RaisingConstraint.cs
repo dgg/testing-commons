@@ -60,11 +60,20 @@ namespace Testing.Commons.NUnit.Constraints
 			Matched = new RaisingResult(_eventRaised, EventName,_matchingPropertyName, _matchingPropertyName.ApplyTo(e));
 		}
 
+		/// <summary>
+		/// Applies the constraint to an actual value, returning a ConstraintResult.
+		/// </summary>
+		/// <param name="actual">The value to be tested</param>
+		/// <returns>A ConstraintResult</returns>
 		public override ConstraintResult ApplyTo<TActual>(TActual actual)
 		{
 			return new RaisingResult(_eventRaised, EventName, this, Matched);
 		}
 
+		/// <summary>
+		/// The Description of what this constraint tests, for
+		/// use in messages and in the ConstraintResult.
+		/// </summary>
 		public override string Description => $"raise event '{EventName}' and {_matchingPropertyName.Description}";
 
 		class RaisingResult : ConstraintResult

@@ -29,10 +29,13 @@ namespace Testing.Commons.NUnit.Constraints
 		}
 	}
 
+	/// <summary>
+	/// Provides a set of static methods to create custom constraints.
+	/// </summary>
 	public static partial class MustExtensions
 	{
 		/// <summary>
-		/// Builds an instance of <see cref="ComposablePropertyConstraint"/> to check <paramref name="constraint"/> over the value of the property expressed by <paramref name="property"/>
+		/// Builds an instance of <see cref="ComposablePropertyConstraint"/> to check <paramref name="constraint"/> over the value of the property expressed by <paramref name="name"/>
 		/// </summary>
 		/// <param name="entry">Extension entry point.</param>
 		/// <param name="name">The name of the property.</param>

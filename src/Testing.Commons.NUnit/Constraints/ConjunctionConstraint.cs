@@ -10,7 +10,7 @@ namespace Testing.Commons.NUnit.Constraints
 	/// </summary>
 	public class ConjunctionConstraint : Constraint
 	{
-		public static readonly string Pfx_Specific = "\tSpecifically: ";
+		internal static readonly string Pfx_Specific = "\tSpecifically: ";
 
 		private readonly IEnumerable<Constraint> _constraints;
 

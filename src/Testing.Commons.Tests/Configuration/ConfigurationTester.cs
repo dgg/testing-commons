@@ -11,8 +11,8 @@ namespace Testing.Commons.Tests.Configuration
 	public class ConfigurationTester
 	{
 		[Test]
-		// both .dll and .config files needs to be copies to the ouput
-		[ConfigurationAssembly("..\\..\\Configuration\\ConfigFiles\\CachingCorrectConfig.dll")]
+		// both .dll and .config files needs to be copied to the ouput
+		[ConfigurationAssembly("Configuration\\ConfigFiles\\CachingCorrectConfig.dll")]
 		public void GetConfigurationAssemblyPath_TestDecoratedWithAssemblyFile_AllowsAccessToConfigurationValuesFromCustomConfiguration()
 		{
 			string assemblyPath = ExternalConfiguration.GetConfigurationAssemblyPath(MethodBase.GetCurrentMethod());
@@ -27,26 +27,26 @@ namespace Testing.Commons.Tests.Configuration
 
 		[Test]
 		// both .dll and .config files needs to be copies to the ouput
-		[ConfigurationAssembly("..\\..\\Configuration\\ConfigFiles\\notExisting.dll")]
+		[ConfigurationAssembly("Configuration\\ConfigFiles\\notExisting.dll")]
 		public void GetConfigurationAssemblyPath_AssemblyFileDoesNotExist_Exception()
 		{
 			// in order to get the test method, we have to execute outside the delegate
 			MethodBase testMethod = MethodBase.GetCurrentMethod();
 
 			Assert.That(() => ExternalConfiguration.GetConfigurationAssemblyPath(testMethod), Throws.InstanceOf<ArgumentException>()
-				.With.Message.StringContaining("\\notExisting.dll").And
+				.With.Message.Contain("\\notExisting.dll").And
 				.Property("ParamName").EqualTo("path"));
 		}
 
 		[Test]
 		// both .dll and .config files needs to be copies to the ouput
-		[ConfigurationAssembly("..\\..\\Configuration\\ConfigFiles\\notAnAssembly.txt")]
+		[ConfigurationAssembly("Configuration\\ConfigFiles\\notAnAssembly.txt")]
 		public void GetConfigurationAssemblyPath_AssemblyFileNotAnAssembly_Exception()
 		{
 			MethodBase testMethod = MethodBase.GetCurrentMethod();
 
 			Assert.That(() => ExternalConfiguration.GetConfigurationAssemblyPath(testMethod), Throws.InstanceOf<ArgumentException>()
-				.With.Message.StringContaining("\\notAnAssembly.txt").And
+				.With.Message.Contain("\\notAnAssembly.txt").And
 				.Property("ParamName").EqualTo("path"));
 		}
 
@@ -56,7 +56,7 @@ namespace Testing.Commons.Tests.Configuration
 			MethodBase testMethod = MethodBase.GetCurrentMethod();
 
 			Assert.That(() => ExternalConfiguration.GetConfigurationAssemblyPath(testMethod), Throws.InstanceOf<MissingMemberException>()
-				.With.Message.StringContaining(typeof(ConfigurationAssemblyAttribute).Name));
+				.With.Message.Contain(typeof(ConfigurationAssemblyAttribute).Name));
 		}
 	}
 }

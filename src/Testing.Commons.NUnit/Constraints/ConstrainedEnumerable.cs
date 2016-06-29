@@ -6,6 +6,9 @@ using NUnit.Framework.Constraints;
 
 namespace Testing.Commons.NUnit.Constraints
 {
+	/// <summary>
+	/// Used to check every item of an enumerable against a constraint.
+	/// </summary>
 	public class ConstrainedEnumerable : Constraint
 	{
 		private readonly Constraint[] _constraints;

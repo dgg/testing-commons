@@ -31,10 +31,10 @@ task Test -depends ensureRelease {
 	$nunit = get-test-assembly-name $base_dir $configuration 'Testing.Commons.NUnit'
 	$serviceStack = get-test-assembly-name $base_dir $configuration 'Testing.Commons.ServiceStack'
 	
-	run_v2_tests $base_dir $release_dir ($commons, $serviceStack)
+	run_v2_tests $base_dir $release_dir ($serviceStack)
 	report-on-test-results $base_dir $release_dir
 
-	run_v3_tests $base_dir $release_dir ($nunit)
+	run_v3_tests $base_dir $release_dir ($commons, $nunit)
 }
 
 task CopyArtifacts -depends ensureRelease {
@@ -77,6 +77,6 @@ function report-on-test-results($base, $release)
 	$alternative_details = Join-Path $nunit_summary_path "AlternativeNUnitDetails.xsl"
 	$alternative_details = "-xsl=" + $alternative_details
 
-	exec { & $nunit_summary $release\TestResult.xml -html -o="$release\TestSummary.htm" }
-	exec { & $nunit_summary $release\TestResult.xml -html -o="$release\TestDetails.htm" $alternative_details -noheader }
+	exec { & $nunit_summary $release\TestResult_v2.xml -html -o="$release\TestSummary.htm" }
+	exec { & $nunit_summary $release\TestResult_v2.xml -html -o="$release\TestDetails.htm" $alternative_details -noheader }
 }

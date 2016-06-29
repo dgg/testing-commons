@@ -54,8 +54,8 @@ namespace Testing.Commons.Tests
 
 			return Throws.InstanceOf<GuidBuilder.NotHexadecimalException>().With
 				.Property("ActualValue").EqualTo(notAFigure)
-				.And.Message.StringContaining(notAFigureRepresentation)
-				.And.Message.StringContaining(figureDomain);
+				.And.Message.Contain(notAFigureRepresentation)
+				.And.Message.Contain(figureDomain);
 		}
 
 		#endregion
@@ -108,8 +108,8 @@ namespace Testing.Commons.Tests
 
 			return Throws.InstanceOf<GuidBuilder.NotHexadecimalException>().With
 				.Property("ActualValue").EqualTo(notAFigure)
-				.And.Message.StringContaining(notAFigureRepresentation)
-				.And.Message.StringContaining(figureDomain);
+				.And.Message.Contain(notAFigureRepresentation)
+				.And.Message.Contain(figureDomain);
 		}
 
 		#endregion

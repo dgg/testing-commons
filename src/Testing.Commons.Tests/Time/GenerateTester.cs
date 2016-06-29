@@ -17,7 +17,7 @@ namespace Testing.Commons.Tests.Time
 				Throws.InstanceOf<ArgumentOutOfRangeException>()
 					.With.Property("ParamName").EqualTo("to").And
 					.Property("ActualValue").EqualTo(end).And
-					.Message.StringContaining(start.ToString()));
+					.Message.Contain(start.ToString()));
 		}
 
 		[Test]
@@ -38,7 +38,7 @@ namespace Testing.Commons.Tests.Time
 				Throws.InstanceOf<ArgumentOutOfRangeException>()
 					.With.Property("ParamName").EqualTo("to").And
 					.Property("ActualValue").EqualTo(end).And
-					.Message.StringContaining(start.ToString()));
+					.Message.Contain(start.ToString()));
 		}
 
 		[Test]

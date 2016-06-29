@@ -15,17 +15,12 @@ namespace Testing.Commons.Tests.Time.Support
 				Has.Property("Seconds").EqualTo(seconds) &
 				Has.Property("Milliseconds").EqualTo(milliseconds);
 		}
-
-		public override bool Matches(object current)
+		
+		public override ConstraintResult ApplyTo<TActual>(TActual actual)
 		{
-			actual = current;
-
-			return _composed.Matches(current);
+			return _composed.ApplyTo(actual);
 		}
 
-		public override void WriteDescriptionTo(MessageWriter writer)
-		{
-			_composed.WriteDescriptionTo(writer);
-		}
+		public override string Description => _composed.Description;
 	}
 }

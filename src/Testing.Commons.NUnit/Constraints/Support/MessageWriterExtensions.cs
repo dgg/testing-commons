@@ -2,7 +2,7 @@
 
 namespace Testing.Commons.NUnit.Constraints.Support
 {
-	public static class MessageWriterExtensions
+	internal static class MessageWriterExtensions
 	{
 		public static readonly string ActualConnector = "->";
 

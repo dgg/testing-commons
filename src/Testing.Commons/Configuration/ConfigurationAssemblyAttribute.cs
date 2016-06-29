@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Testing.Commons.Configuration
 {
@@ -12,40 +13,36 @@ namespace Testing.Commons.Configuration
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ConfigurationAssemblyAttribute"/> class. 
 		/// </summary>
-		/// <param name="path">Relative path to the fake configuration assembly.</param>
-		public ConfigurationAssemblyAttribute(string path)
+		/// <param name="relativePathToBinCopiedConfigFile">Relative path to the fake configuration assembly.</param>
+		public ConfigurationAssemblyAttribute(string relativePathToBinCopiedConfigFile)
 		{
-			Path = path;
+			RelativePath = relativePathToBinCopiedConfigFile;
+			var pathToCurrentAssembly = new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath;
+			string executingAssemlyDirectory = Path.GetDirectoryName(pathToCurrentAssembly);
+			FullPath = Path.Combine(executingAssemlyDirectory, RelativePath);
 		}
 
 		/// <summary>
 		/// Relative path to the fake configuration assembly.
 		/// </summary>
-		public string Path { get; private set; }
+		public string RelativePath { get; }
 
 		/// <summary>
 		/// Full path to the fake configuration assembly.
 		/// </summary>
-		public string FullPath { get{ return System.IO.Path.GetFullPath(Path);} }
+		public string FullPath { get; }
 
 		/// <summary>
 		/// true when the fake configuration assembly exists in the filesystem, false otherwise.
 		/// </summary>
-		public bool Exists { get { return System.IO.File.Exists(Path); } }
+		public bool Exists()
+		{
+			return File.Exists(FullPath);
+		}
 
 		/// <summary>
 		/// true if the path points to an assembly (.dll) file, false otherwise
 		/// </summary>
-		public bool PointsToAnAssembly { get { return Exists && System.IO.Path.GetExtension(Path) == ".dll"; } }
-
-		/// <summary>
-		/// Returns the file name and extension of the path string specified by <see cref="Path"/>.
-		/// </summary>
-		public string AssemblyName { get { return System.IO.Path.GetFileName(Path); } }
-
-		/// <summary>
-		/// Returns the directory information for the path string specified by <see cref="Path"/>.
-		/// </summary>
-		public string AssemblyPath { get { return System.IO.Path.GetDirectoryName(Path); } }
+		public bool PointsToAnAssembly() => Exists() && Path.GetExtension(RelativePath) == ".dll";
 	}
 }

@@ -15,9 +15,9 @@ namespace Testing.Commons.Tests.Serialization
 			{
 				string representation = subject.Serialize(new Serializable { S = "s", D = 3m });
 
-				Assert.That(representation, Is.StringContaining("__BackingField")
-					.And.StringContaining(":3")
-					.And.StringContaining(":\"s\""));
+				Assert.That(representation, Does.Contain("__BackingField")
+					.And.Contain(":3")
+					.And.Contain(":\"s\""));
 			}
 		}
 

@@ -31,6 +31,11 @@ namespace Testing.Commons.NUnit.Constraints
 			return _deserializer.Deserialize<T>(toDeserialize);
 		}
 
+		/// <summary>
+		/// Applies the constraint to an actual value, returning a ConstraintResult.
+		/// </summary>
+		/// <param name="actual">The value to be tested</param>
+		/// <returns>A ConstraintResult</returns>
 		public override ConstraintResult ApplyTo<TActual>(TActual actual)
 		{
 			Exception ex = null;

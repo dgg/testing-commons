@@ -119,13 +119,13 @@ namespace Testing.Commons.Tests.Globalization
 			
 		}
 
-		[TestCaseSource("cultureCombinations")]
+		[TestCaseSource(nameof(cultureCombinations))]
 		public void Set_BothCultures_CanBeNeutralOrNot(CultureInfo culture, CultureInfo uiCulture)
 		{
 			Assert.That(() => CultureReseter.Set(culture, uiCulture), Throws.Nothing);
 		}
 
-		protected IEnumerable<TestCaseData> cultureCombinations
+		private static IEnumerable<TestCaseData> cultureCombinations
 		{
 			get
 			{
@@ -136,13 +136,13 @@ namespace Testing.Commons.Tests.Globalization
 			}
 		}
 
-		[TestCaseSource("validCultureNameCombinations")]
+		[TestCaseSource(nameof(validCultureNameCombinations))]
 		public void Set_BothCultureNAmes_CultureMustBeNeutralAndUiCultureCanBeNeutralOrNot(string cultureName, string uiCultureName)
 		{
 			Assert.That(() => CultureReseter.Set(cultureName, uiCultureName), Throws.Nothing);
 		}
 
-		protected IEnumerable<TestCaseData> validCultureNameCombinations
+		private static IEnumerable<TestCaseData> validCultureNameCombinations
 		{
 			get
 			{
