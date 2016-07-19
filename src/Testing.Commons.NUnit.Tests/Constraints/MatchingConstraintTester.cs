@@ -5,12 +5,13 @@ using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using NUnit.Framework.Internal;
 using Testing.Commons.NUnit.Constraints;
+using Testing.Commons.NUnit.Constraints.Support;
 using Testing.Commons.NUnit.Tests.Subjects;
 
 namespace Testing.Commons.NUnit.Tests.Constraints
 {
 	[TestFixture]
-	public class MatchingConstraintTester : Support.ConstraintTesterBase
+	public class MatchingConstraintTester : ConstraintTesterBase
 	{
 		#region problem exploration
 

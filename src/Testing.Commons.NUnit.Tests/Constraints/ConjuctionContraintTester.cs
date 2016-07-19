@@ -2,12 +2,13 @@
 using NUnit.Framework.Constraints;
 using NUnit.Framework.Internal;
 using Testing.Commons.NUnit.Constraints;
+using Testing.Commons.NUnit.Constraints.Support;
 using Testing.Commons.NUnit.Tests.Subjects;
 
 namespace Testing.Commons.NUnit.Tests.Constraints
 {
 	[TestFixture]
-	public class ConjuctionContraintTester : Support.ConstraintTesterBase
+	public class ConjuctionContraintTester : ConstraintTesterBase
 	{
 		#region ApplyTo
 
@@ -19,6 +20,8 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 				Is.GreaterThan(5));
 
 			Assert.That(matches(subject, 6), Is.True);
+
+			Assert.That(getMessage(subject, 6), Is.Empty);
 		}
 
 		[Test]

@@ -72,7 +72,6 @@
     <Compile Include="Constraints\SerializationConstraintTester.cs" />
     <Compile Include="Constraints\Subjects\NonSerializable.cs" />
     <Compile Include="Constraints\Subjects\Serializable.cs" />
-    <Compile Include="Constraints\Support\ConstraintTesterBase.cs" />
     <Compile Include="Constraints\Support\UppercaseConstraint.cs" />
     <Compile Include="Constraints\XmlDeserializationConstraintTester.cs" />
     <Compile Include="Constraints\XmlSerializationConstraintTester.cs" />

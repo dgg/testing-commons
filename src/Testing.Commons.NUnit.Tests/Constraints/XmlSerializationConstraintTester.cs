@@ -1,13 +1,14 @@
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 using Testing.Commons.NUnit.Constraints;
+using Testing.Commons.NUnit.Constraints.Support;
 using Testing.Commons.NUnit.Tests.Constraints.Subjects;
 using Testing.Commons.Serialization;
 
 namespace Testing.Commons.NUnit.Tests.Constraints
 {
 	[TestFixture]
-	public class XmlSerializationConstraintTester : Support.ConstraintTesterBase
+	public class XmlSerializationConstraintTester : ConstraintTesterBase
 	{
 		#region ApplyTo
 

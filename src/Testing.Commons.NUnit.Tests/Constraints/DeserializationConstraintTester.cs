@@ -2,13 +2,14 @@ using NSubstitute;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using Testing.Commons.NUnit.Constraints;
+using Testing.Commons.NUnit.Constraints.Support;
 using Testing.Commons.NUnit.Tests.Constraints.Subjects;
 using Testing.Commons.Serialization;
 
 namespace Testing.Commons.NUnit.Tests.Constraints
 {
 	[TestFixture]
-	public class DeserializationConstraintTester : Support.ConstraintTesterBase
+	public class DeserializationConstraintTester : ConstraintTesterBase
 	{
 		#region ApplyTo
 

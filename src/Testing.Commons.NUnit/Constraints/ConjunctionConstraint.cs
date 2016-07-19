@@ -63,7 +63,7 @@ namespace Testing.Commons.NUnit.Constraints
 				StringBuilder sb = new StringBuilder(aggregate.Description);
 				sb.AppendLine();
 				sb.Append(Pfx_Specific);
-				sb.Append(_beingMatched.Description);
+				sb.Append(_beingMatched?.Description);
 				return sb.ToString();
 			}
 			protected set {  }

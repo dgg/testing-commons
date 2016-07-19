@@ -1,12 +1,13 @@
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using Testing.Commons.NUnit.Constraints;
+using Testing.Commons.NUnit.Constraints.Support;
 using Testing.Commons.Serialization;
 
 namespace Testing.Commons.NUnit.Tests.Constraints
 {
 	[TestFixture]
-	public class JsonEqualConstraintTester : Support.ConstraintTesterBase
+	public class JsonEqualConstraintTester : ConstraintTesterBase
 	{
 		#region ApplyTo
 

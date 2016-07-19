@@ -5,11 +5,12 @@ using System.Linq;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 using Testing.Commons.NUnit.Constraints;
+using Testing.Commons.NUnit.Constraints.Support;
 
 namespace Testing.Commons.NUnit.Tests.Constraints
 {
 	[TestFixture]
-	public class EnumerableCountConstraintTester : Support.ConstraintTesterBase
+	public class EnumerableCountConstraintTester : ConstraintTesterBase
 	{
 		#region Exploratory
 

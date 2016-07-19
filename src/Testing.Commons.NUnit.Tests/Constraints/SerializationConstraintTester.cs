@@ -4,13 +4,14 @@ using NSubstitute.Core;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using Testing.Commons.NUnit.Constraints;
+using Testing.Commons.NUnit.Constraints.Support;
 using Testing.Commons.NUnit.Tests.Constraints.Subjects;
 using Testing.Commons.Serialization;
 
 namespace Testing.Commons.NUnit.Tests.Constraints
 {
 	[TestFixture]
-	public class SerializationConstraintTester : Support.ConstraintTesterBase
+	public class SerializationConstraintTester : ConstraintTesterBase
 	{
 		#region ApplyTo
 

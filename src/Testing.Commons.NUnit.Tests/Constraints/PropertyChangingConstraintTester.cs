@@ -3,12 +3,13 @@ using NSubstitute;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 using Testing.Commons.NUnit.Constraints;
+using Testing.Commons.NUnit.Constraints.Support;
 using Testing.Commons.NUnit.Tests.Subjects;
 
 namespace Testing.Commons.NUnit.Tests.Constraints
 {
 	[TestFixture]
-	public class PropertyChangingConstraintTester : Support.ConstraintTesterBase
+	public class PropertyChangingConstraintTester : ConstraintTesterBase
 	{
 		#region ApplyTo
 
