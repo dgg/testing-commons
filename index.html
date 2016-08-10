@@ -2,31 +2,50 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<!--meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-		<title>reveal.js</title>
+
+		<title>Walking Through Testing.Commons</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
+		<link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
 		<link rel="stylesheet" href="css/theme/material.css">
 	</head>
-	<body>
+	<body class="grey lighten-3">
+		<nav>
+    <div class="nav-wrapper green darken-2">
+			<div class="container"><span class="brand-logo">Testing.Commons</span></div>
+    </div>
+  </nav>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
+				<section>
+					<div class="row">
+        <div class="col s8 push-s2">
+          <div class="card darken-1 small_">
+            <div class="card-content">
+              <span class="card-title"><h1>Walking Testing.Commons<h1></span>
+            </div>
+          </div>
+        </div>
+      </div></section>
 				<section>Slide 2</section>
 			</div>
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
-
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
 		<script>
 			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				controls: true,
 				progress: true,
 				history: true,
-				center: true,
+				center: false,
 				transition: 'slide',
 
 				// More info https://github.com/hakimel/reveal.js#dependencies
