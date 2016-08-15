@@ -15,23 +15,202 @@
 	</head>
 	<body class="grey lighten-3">
 		<nav>
-    <div class="nav-wrapper green darken-2">
-			<div class="container"><span class="brand-logo">Testing.Commons</span></div>
-    </div>
-  </nav>
+			<div class="nav-wrapper green darken-2">
+				<div class="container">
+					<a href="https://github.com/dgg/testing-commons/" class="brand-logo" target="_blank"><i><img src="https://raw.githubusercontent.com/wiki/dgg/testing-commons/img/Testing.Commons.logo.png" height="64" width="64" title="Testing.Commons" alt="Testing.Commons"/></i>Testing.Commons</a>
+					<ul id="nav-mobile" class="right hide-on-med-and-down">
+						<li><a href="https://github.com/dgg/testing-commons/wiki/_Testing.Commons" target="_blank" title="Docs"><i class="material-icons">library_books</i></a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 		<div class="reveal">
 			<div class="slides">
 				<section>
 					<div class="row">
-        <div class="col s8 push-s2">
-          <div class="card darken-1 small_">
-            <div class="card-content">
-              <span class="card-title"><h1>Walking Testing.Commons<h1></span>
-            </div>
-          </div>
-        </div>
-      </div></section>
-				<section>Slide 2</section>
+						<div class="col s8 push-s2">
+							<div class="card darken-1">
+								<div class="card-content">
+									<h1 class="card-title">Walking Testing.Commons</h1>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>&nbsp;</div>
+					<div class="row">
+						<div class="col s8 push-s2">
+							<ul class="collection z-depth-2">
+								<li class="collection-item deep-orange lighten-1">Structure</li>
+								<li class="collection-item teal lighten-1">Data</li>
+								<li class="collection-item light-blue lighten-1">Integration</li>
+								<li class="collection-item red lighten-1">Expresiveness</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div class="row">
+						<div class="col s8 push-s2">
+							<div class="card darken-1">
+								<div class="card-content">
+									<h2 class="card-title deep-orange-text text-darken-2">Builders</h2>
+									<p>Encapsulate complex object creation and setup.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>&nbsp;</div>
+					<div class="row">
+						<div class="col s8 push-s2">
+							<ul class="collection">
+								<li class="collection-item">Discoverability: <code>IBuilder<></code></li>
+								<li class="collection-item">Consistency: <code>Builder.For</code>, <code>Builder.For</code></li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				
+				<section>
+					<div class="row">
+						<div class="col s8 push-s2">
+							<div class="card darken-1">
+								<div class="card-content">
+									<h2 class="card-title deep-orange-text text-darken-2">Arrange-Act-Assert</h2>
+									<p>Triple-A is a very commons pattern:<br/><br/>
+									<ul>
+									<ol>Arrange: initialize <em>SUT</em> and dependencies</ol>
+									<ol>Act: exercise <em>SUT</em></ol>
+									<ol>Assert: verify post-conditions</ol>
+									</ul></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>&nbsp;</div>
+					<div class="row">
+						<div class="col s8 push-s2">
+							<ul class="collection">
+								<li class="collection-item">Inherit tests from <code>ArrangingTest<></code></li>
+								<li class="collection-item">Implement <code>initSubject()</code> with all dependencies.</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				
+				<section>
+					<div class="row">
+						<div class="col s8 push-s2">
+							<div class="card darken-1">
+								<div class="card-content">
+									<h2 class="card-title teal-text text-darken-2">Guids</h2>
+									<p>Use one of the "magnificent 16" to create predictable identifiers in an efficient manner.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>&nbsp;</div>
+					<div class="row">
+						<div class="col s8 push-s2">
+							<ul class="collection">
+								<li class="collection-item"><code>GuidBuilder.Build()</code></li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				
+				<section>
+					<div class="row">
+						<div class="col s8 push-s2">
+							<div class="card darken-1">
+								<div class="card-content">
+									<h2 class="card-title teal-text text-darken-2">Strings</h2>
+									<p>Repeat patterns and generate numeric sequences.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>&nbsp;</div>
+					<div class="row">
+						<div class="col s8 push-s2">
+							<ul class="collection">
+								<li class="collection-item"><code>StringGenerator.RepeatPatern()</code></li>
+								<li class="collection-item"><code>StringGenerator.Numeric()</code></li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				
+				<section>
+					<div class="row">
+						<div class="col s8 push-s2">
+							<div class="card darken-1">
+								<div class="card-content">
+									<h2 class="card-title teal-text text-darken-2">KeyValue</h2>
+									<p><code>KeyValuePair<,></code> is widely used, but a pain to generate due to generics.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>&nbsp;</div>
+					<div class="row">
+						<div class="col s8 push-s2">
+							<ul class="collection">
+								<li class="collection-item"><code>KeyValue.Pair.New()</code> leverages type inference.</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				
+				<section>
+					<div class="row">
+						<div class="col s8 push-s2">
+							<div class="card darken-1">
+								<div class="card-content">
+									<h2 class="card-title teal-text text-darken-2">Time</h2>
+									<p>When testing, BCL's API is verbose. We can do better for clarity's sake.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>&nbsp;</div>
+					<div class="row">
+						<div class="col s8 push-s2">
+							<ul class="collection">
+								<li class="collection-item"><code>2.January(2000)</code></li>
+								<li class="collection-item"><code>11.March(1977).At(12, 30)</code></li>
+								<li class="collection-item"><code>11.March(1977).At(13, 30, 45).InUtc())</code></li>
+								<li class="collection-item"><code>5.Days().Hours(4).Minutes(3).Seconds(2).Milliseconds(1)</code></li>
+								<li class="collection-item"><code>2.Hours().After(date)</code></li>
+								<li class="collection-item"><code>2.Hours().After(date)</code></li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				
+				<section>
+					<div class="row">
+						<div class="col s8 push-s2">
+							<div class="card darken-1">
+								<div class="card-content">
+									<h2 class="card-title light-blue-text text-darken-2">Configuration</h2>
+									<p>Complex configuration is easy enough, but far from straightforward to verify.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>&nbsp;</div>
+					<div class="row">
+						<div class="col s8 push-s2">
+							<ul class="collection">
+								<li class="collection-item">Provide testing seam by using <code>ConfigurationManager.OpenExeConfiguration()</code></li>
+								<li class="collection-item">Craft configuration examples</li>
+								<li class="collection-item">Decorate tests with <code>ConfigurationAssembly</code></li>
+								<li class="collection-item">Get fake assembly path with <code>ExternalConfiguration.GetConfigurationAssemblyPath()</code></li>
+								<li class="collection-item">Deal with success and configuration exceptions with extensible messages</li>
+							</ul>
+						</div>
+					</div>
+				</section>
 			</div>
 		</div>
 
