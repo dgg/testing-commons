@@ -181,7 +181,7 @@
 								<li class="collection-item"><code>11.March(1977).At(13, 30, 45).InUtc())</code></li>
 								<li class="collection-item"><code>5.Days().Hours(4).Minutes(3).Seconds(2).Milliseconds(1)</code></li>
 								<li class="collection-item"><code>2.Hours().After(date)</code></li>
-								<li class="collection-item"><code>2.Hours().After(date)</code></li>
+								<li class="collection-item"><code>Generate.Between(11.March(1977)).And(27.August(2011)).Stream(10)</code></li>
 							</ul>
 						</div>
 					</div>
@@ -207,6 +207,80 @@
 								<li class="collection-item">Decorate tests with <code>ConfigurationAssembly</code></li>
 								<li class="collection-item">Get fake assembly path with <code>ExternalConfiguration.GetConfigurationAssemblyPath()</code></li>
 								<li class="collection-item">Deal with success and configuration exceptions with extensible messages</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				
+				<section>
+					<div class="row">
+						<div class="col s8 push-s2">
+							<div class="card darken-1">
+								<div class="card-content">
+									<h2 class="card-title light-blue-text text-darken-2">ServiceStack</h2>
+									<p>Enables a flavor of integration testing for ServiceStack services that enables behavior injection and assertion of features during the whole pipeline.</p>
+									<p>It is <strong>real</strong> HTTP invocation</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>&nbsp;</div>
+					<div class="row">
+						<div class="col s8 push-s2">
+							<ul class="collection">
+								<li class="collection-item">Share bootstrapping</li>
+								<li class="collection-item">Choose a hosting style: <code>SingleHostPerFixture</code>, <code>SingleHostPerTest</code></li>
+								<li class="collection-item">Made use of facilities: <code>.Replace()</code>, <code>.TestPort</code>, <code>.BaseUrl</code>, <code>.UriFor()</code></li>
+								<li class="collection-item">Use your favorite HTTP client: EasyHttp, RestSharp or even HttpClient or ServiceStack.Client</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				
+				<section>
+					<div class="row">
+						<div class="col s8 push-s2">
+							<div class="card darken-1">
+								<div class="card-content">
+									<h2 class="card-title red-text text-darken-2">Must</h2>
+									<p>Enables extensibility of NUnit's constraint model without inheritance.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>&nbsp;</div>
+					<div class="row">
+						<div class="col s8 push-s2">
+							<ul class="collection">
+								<li class="collection-item">Why custom constraints?</li>
+								<li class="collection-item">Choose an entry point: <code>.BeEntryPoint</code>, <code>.HaveEntryPoint</code>, <code>.SatisfyEntryPoint</code>, <code>.MatchEntryPoint</code>, <code>.RaiseEntryPoint</code></li>
+								<li class="collection-item">Or negate any of the entry points.</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				
+				<section>
+					<div class="row">
+						<div class="col s8 push-s2">
+							<div class="card darken-1">
+								<div class="card-content">
+									<h2 class="card-title red-text text-darken-2">Custom Constraints</h2>
+									<p>Improve the readibility and error feedback with existing constraints.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>&nbsp;</div>
+					<div class="row">
+						<div class="col s8 push-s2">
+							<ul class="collection">
+								<li class="collection-item"><code>ConjuctionConstraint</code></li>
+								<li class="collection-item"><code>ConstrainedEnumerable</code></li>
+								<li class="collection-item"><code>MatchingConstraint</code></li>
+								<li class="collection-item"><code>JsonConstraint</code></li>
+								<li class="collection-item"><code>SerializationConstraint</code>, <code>DeserializationConstraint</code></li>
+								<li class="collection-item"><code>ChangingConstraint</code>, <code>ChangedConstraint</code></li>
 							</ul>
 						</div>
 					</div>
