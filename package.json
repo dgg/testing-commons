@@ -1,0 +1,29 @@
+{
+  "name": "testing.commons",
+  "version": "1.0.0",
+  "description": "Classes and extensions that help testing code in general and more specific areas such as configuration and web artifacts.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dgg/testing-commons.git"
+  },
+  "keywords": [
+    ".net",
+    "c#",
+    "testing",
+    "NUnit",
+    "ServiceStack"
+  ],
+  "author": "Daniel González García",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dgg/testing-commons/issues"
+  },
+  "homepage": "https://github.com/dgg/testing-commons#readme",
+  "devDependencies": {
+    "simple-autoreload-server": "^0.1.7"
+  }
+}
