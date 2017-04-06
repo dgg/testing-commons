@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Serialization;
 using System.Text;
 
 namespace Testing.Commons
@@ -7,7 +6,7 @@ namespace Testing.Commons
 	/// <summary>
 	/// Allows creation of deterministic <see cref="Guid"/> instances.
 	/// </summary>
-	public static class GuidBuilder
+	public static partial class GuidBuilder
 	{
 		private static readonly Range<char> _hexLetters = new Range<char>('a', 'f');
 
@@ -70,8 +69,7 @@ namespace Testing.Commons
 		/// The exception that is thrown when the value of an argument is outside the allowable range of values as defined by the invoked method.
 		/// </summary>
 		/// <remarks>When a number or a number representation is not a hexadecimal figure.</remarks>
-		[Serializable]
-		public class NotHexadecimalException : ArgumentOutOfRangeException
+		public partial class NotHexadecimalException : ArgumentOutOfRangeException
 		{
 			private static readonly string _allowedCharacters = new Range<char>('0', '9') + " U " + _hexLetters;
 			private static readonly string _allowedNumbers = new Range<byte>(0, 15).ToString();
@@ -108,14 +106,6 @@ namespace Testing.Commons
 			/// <param name="actualValue">The argument value.</param>
 			/// <param name="message">The error message string.</param>
 			public NotHexadecimalException(string paramName, object actualValue, string message) : base(paramName, actualValue, message) { }
-
-
-			/// <summary>
-			/// Initializes a new instance of the <see cref="ArgumentOutOfRangeException"/> class with serialized data.
-			/// </summary>
-			/// <param name="info">The object that holds the serialized object data.</param>
-			/// <param name="context">An object that describes the source or destination of the serialized data.</param>
-			protected NotHexadecimalException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
 			/// <summary>
 			/// Initializes a new instance of the <see cref="NotHexadecimalException"/> class with the parameter name and the value of the argument.

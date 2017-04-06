@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard1.6</TargetFramework>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="**\\*.net.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Runtime.Serialization.Xml" Version="4.3.0" />
+		<PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
+	</ItemGroup>
+
+</Project>

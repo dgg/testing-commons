@@ -56,7 +56,9 @@ namespace Testing.Commons.Serialization
 				}
 				finally
 				{
+#if NET
 					ms.Close();
+#endif
 				}
 			}
 		}

@@ -61,8 +61,11 @@ namespace Testing.Commons.Serialization
 		/// <remarks>Closes and disposes internal serialization stream.</remarks>
 		public void Dispose()
 		{
+#if NET
 			_stream.Close();
+#endif
 			_stream.Dispose();
+
 		}
 	}
 }
