@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Testing.Commons
+namespace Testing.Commons.Web.Support
 {
 	internal static class TypeExtensions
 	{

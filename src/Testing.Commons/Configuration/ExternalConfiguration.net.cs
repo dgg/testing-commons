@@ -29,15 +29,15 @@ namespace Testing.Commons.Configuration
 			if (attribute == null)
 			{
 				throw new MissingMemberException(
-					string.Format(Resources.Messages.MissingExternalConfigurationAssemblyAttribute_Template,
+					string.Format(Resources.Exceptions.MissingExternalConfigurationAssemblyAttribute_Template,
 						typeof(ConfigurationAssemblyAttribute).Name));
 			}
 
 			if (!attribute.Exists()) throw new ArgumentException(
-				string.Format(Resources.Messages.MissingExternalConfigurationAssemblyFile_Template, attribute.FullPath),
+				string.Format(Resources.Exceptions.MissingExternalConfigurationAssemblyFile_Template, attribute.FullPath),
 				"path");
 			if (!attribute.PointsToAnAssembly()) throw new ArgumentException(
-				string.Format(Resources.Messages.NotAnExternalConfigurationAssembly_Template, attribute.FullPath),
+				string.Format(Resources.Exceptions.NotAnExternalConfigurationAssembly_Template, attribute.FullPath),
 				"path");
 		}
 	}

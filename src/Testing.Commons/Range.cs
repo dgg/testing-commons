@@ -24,7 +24,7 @@ namespace Testing.Commons
 
 		public static void assertBounds(T lowerBound, T upperBound)
 		{
-			if (!checkBounds(lowerBound, upperBound)) throw new ArgumentOutOfRangeException("upperBound", upperBound, Resources.Messages.UnorderedRangeBounds);
+			if (!checkBounds(lowerBound, upperBound)) throw new ArgumentOutOfRangeException("upperBound", upperBound, Resources.Exceptions.UnorderedRangeBounds);
 		}
 
 		public T LowerBound { get { return _lowerBound; } }

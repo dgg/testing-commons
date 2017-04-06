@@ -52,7 +52,7 @@ namespace Testing.Commons.Web.Support
 				{
 					if (parser.tryParse(operationName, out name)) break;
 				}
-				if (name == null) throw new ArgumentException(Resources.Messages.ParseableEventOperation, "operationName");
+				if (name == null) throw new ArgumentException(Resources.Exceptions.ParseableEventOperation, "operationName");
 				return name;
 			}
 		}

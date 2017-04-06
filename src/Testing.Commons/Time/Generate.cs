@@ -47,7 +47,7 @@ namespace Testing.Commons.Time
 
 				private static void assertBounds(DateTime from, DateTime to)
 				{
-					if (to <= from) throw new ArgumentOutOfRangeException("to", to, string.Format(Messages.InvertedRange_Template, from));
+					if (to <= from) throw new ArgumentOutOfRangeException("to", to, string.Format(Exceptions.InvertedRange_Template, from));
 				}
 
 				private DateTime From { get; set; }

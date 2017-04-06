@@ -1,6 +1,6 @@
 ﻿namespace Testing.Commons.Resources
 {
-	public static class Messages
+	public static class Exceptions
 	{
 		public static readonly string InvertedRange_Template = "The end date has to occur later than the start date '{0}'.";
 		public static readonly string MissingExternalConfigurationAssemblyAttribute_Template ="The test method needs to be decorated with a '{0}' attribute.";

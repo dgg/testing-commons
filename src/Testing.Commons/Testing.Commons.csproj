@@ -61,7 +61,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Commons_AssemblyInfo.cs" />
     <Compile Include="Range.cs" />
-    <Compile Include="Resources\Messages.cs" />
+    <Compile Include="Resources\Exceptions.cs" />
     <Compile Include="Serialization\DataContractDeserializer.cs" />
     <Compile Include="Serialization\DataContractJsonDeserializer.net.cs" />
     <Compile Include="Serialization\DataContractJsonRoundtripSerializer.net.cs" />
