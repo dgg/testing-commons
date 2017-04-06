@@ -27,8 +27,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Commons.ServiceStac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Testing.Commons.netstandard", "src\Testing.Commons\Testing.Commons.netstandard.csproj", "{A284A202-5B2B-4811-B933-2C66076CAFAC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Testing.Commons.NUnit.netstandard", "src\Testing.Commons.NUnit\Testing.Commons.NUnit.netstandard.csproj", "{BF65F99B-D1CD-4F79-B015-1B86AE2784F3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,10 +61,6 @@ Global
 		{A284A202-5B2B-4811-B933-2C66076CAFAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A284A202-5B2B-4811-B933-2C66076CAFAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A284A202-5B2B-4811-B933-2C66076CAFAC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BF65F99B-D1CD-4F79-B015-1B86AE2784F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BF65F99B-D1CD-4F79-B015-1B86AE2784F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BF65F99B-D1CD-4F79-B015-1B86AE2784F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BF65F99B-D1CD-4F79-B015-1B86AE2784F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

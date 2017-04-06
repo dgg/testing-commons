@@ -17,7 +17,7 @@
 		<dependencies>
 			<dependency id="testing.commons" version="2.0.0" />
 			<dependency id="ExpectedObjects" version="1.2.3" />
-			<dependency id="NUnit" version="3.4.0" />
+			<dependency id="NUnit" version="3.6.1" />
 		</dependencies>
 	</metadata>
 	<files>
