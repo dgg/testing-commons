@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.26403.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Commons", "src\Testing.Commons\Testing.Commons.csproj", "{45732451-E1A2-4CAC-88C9-D52F055883D3}"
 EndProject
@@ -26,6 +26,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Commons.ServiceStack.Tests", "src\Testing.Commons.ServiceStack.Tests\Testing.Commons.ServiceStack.Tests.csproj", "{E1E90B34-C487-48A5-AC49-1D46F45674CB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Testing.Commons.netstandard", "src\Testing.Commons\Testing.Commons.netstandard.csproj", "{A284A202-5B2B-4811-B933-2C66076CAFAC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Testing.Commons.NUnit.netstandard", "src\Testing.Commons.NUnit\Testing.Commons.NUnit.netstandard.csproj", "{03651FD6-6BB0-4A44-87C6-74AA510DE199}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{A284A202-5B2B-4811-B933-2C66076CAFAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A284A202-5B2B-4811-B933-2C66076CAFAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A284A202-5B2B-4811-B933-2C66076CAFAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03651FD6-6BB0-4A44-87C6-74AA510DE199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03651FD6-6BB0-4A44-87C6-74AA510DE199}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03651FD6-6BB0-4A44-87C6-74AA510DE199}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03651FD6-6BB0-4A44-87C6-74AA510DE199}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

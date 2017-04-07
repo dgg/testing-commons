@@ -54,10 +54,11 @@
     <Compile Include="Constraints\ConstrainedEnumerable.cs" />
     <Compile Include="Constraints\DelegatingConstraint.cs" />
     <Compile Include="Constraints\DeserializationConstraint.cs" />
+    <Compile Include="Constraints\DeserializationConstraint.net.cs" />
     <Compile Include="Constraints\EnumerableCountConstraint.cs" />
     <Compile Include="Constraints\JsonEqualConstraint.cs" />
     <Compile Include="Constraints\JsonExtensions.cs" />
-    <Compile Include="Constraints\MatchingConstraint.cs" />
+    <Compile Include="Constraints\MatchingConstraint.net.cs" />
     <Compile Include="Constraints\Must.Extensions.Time.cs" />
     <Compile Include="Constraints\Name.cs" />
     <Compile Include="Constraints\NoPropertyChangedConstraint.cs" />
@@ -67,11 +68,12 @@
     <Compile Include="Constraints\PropertyChangingConstraint.cs" />
     <Compile Include="Constraints\RaisingConstraint.cs" />
     <Compile Include="Constraints\SerializationConstraint.cs" />
+    <Compile Include="Constraints\SerializationConstraint.net.cs" />
     <Compile Include="Constraints\Support\ConstraintTesterBase.cs" />
-    <Compile Include="Constraints\Support\ExposingWriter.cs" />
+    <Compile Include="Constraints\Support\ExposingWriter.net.cs" />
     <Compile Include="Constraints\Support\MessageWriterExtensions.cs" />
     <Compile Include="Constraints\Support\Operator.cs" />
-    <Compile Include="Constraints\Support\WritableEqualityResult.cs" />
+    <Compile Include="Constraints\Support\WritableEqualityResult.net.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\NUnit_AssemblyInfo.cs" />
     <Compile Include="Resources\Exceptions.cs" />
