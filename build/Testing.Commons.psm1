@@ -11,7 +11,10 @@ function Throw-If-Error
 
 function Ensure-Release-Folders($base)
 {
-	("$base\release\lib\net40", "$base\release\content\Support", "$base\release\lib\netstandard1.6") |
+	("$base\release\lib\net40", 
+		"$base\release\content\Support", 
+		"$base\release\lib\netstandard1.1", 
+		"$base\release\lib\netstandard1.6") |
 		% { New-Item -Type directory $_ -Force | Out-Null }
 }
 
@@ -30,10 +33,15 @@ function copy-binaries($base, $configuration)
 		? { $_.Name -match '.dll|.XML' } |
 		Copy-Item -Destination $release_bin_dir
 	
+	$release_bin_dir = Join-Path $base release\lib\netstandard1.1
+	$commons = Join-Path $commons netstandard1.1
+	Get-ChildItem -Path $commons -filter 'Testing.Commons.*' |
+		? { $_.Name -match '.dll|.XML' } |
+		Copy-Item -Destination $release_bin_dir
+
 	$release_bin_dir = Join-Path $base release\lib\netstandard1.6
-	$commons = Join-Path $commons netstandard1.6
 	$nunit = Join-Path $nunit netstandard1.6
-	Get-ChildItem -Path ($commons, $nunit) -filter 'Testing.*' |
+	Get-ChildItem -Path $nunit -filter 'Testing.Commons.NUnit*' |
 		? { $_.Name -match '.dll|.XML' } |
 		Copy-Item -Destination $release_bin_dir
 }

@@ -51,7 +51,10 @@ namespace Testing.Commons
 		{
 			ensureHexFigure(hexFigure);
 
-			return buildGuid(char.Parse(hexFigure.ToString("x")));
+			char safeChar;
+			// it is surely a char, and .Parse() is not netstandard1.1
+			char.TryParse(hexFigure.ToString("x"), out safeChar);
+			return buildGuid(safeChar);
 		}
 
 		private static void ensureHexFigure(byte hexFigure)

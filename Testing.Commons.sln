@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing.Commons.ServiceStac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Testing.Commons.netstandard", "src\Testing.Commons\Testing.Commons.netstandard.csproj", "{A284A202-5B2B-4811-B933-2C66076CAFAC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Testing.Commons.NUnit.netstandard", "src\Testing.Commons.NUnit\Testing.Commons.NUnit.netstandard.csproj", "{03651FD6-6BB0-4A44-87C6-74AA510DE199}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Testing.Commons.NUnit.netstandard", "src\Testing.Commons.NUnit\Testing.Commons.NUnit.netstandard.csproj", "{7F47CD2D-7855-4E94-A43B-F9DD20114649}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,10 +63,10 @@ Global
 		{A284A202-5B2B-4811-B933-2C66076CAFAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A284A202-5B2B-4811-B933-2C66076CAFAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A284A202-5B2B-4811-B933-2C66076CAFAC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{03651FD6-6BB0-4A44-87C6-74AA510DE199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{03651FD6-6BB0-4A44-87C6-74AA510DE199}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{03651FD6-6BB0-4A44-87C6-74AA510DE199}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{03651FD6-6BB0-4A44-87C6-74AA510DE199}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F47CD2D-7855-4E94-A43B-F9DD20114649}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F47CD2D-7855-4E94-A43B-F9DD20114649}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F47CD2D-7855-4E94-A43B-F9DD20114649}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F47CD2D-7855-4E94-A43B-F9DD20114649}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
