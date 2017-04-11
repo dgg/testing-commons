@@ -3,6 +3,8 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard1.6</TargetFramework>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<AssemblyName>Testing.Commons.NUnit</AssemblyName>
+		<RootNamespace>Testing.Commons.NUnit</RootNamespace>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

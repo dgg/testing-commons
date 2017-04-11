@@ -3,6 +3,8 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard1.6</TargetFramework>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<RootNamespace>Testing.Commons</RootNamespace>
+		<AssemblyName>Testing.Commons</AssemblyName>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
