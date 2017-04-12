@@ -1,4 +1,6 @@
-﻿using System;
+using NUnitLite;
+using System;
+using System.Reflection;
 
 namespace Testing.Commons.Tests.core
 {
@@ -6,7 +8,8 @@ namespace Testing.Commons.Tests.core
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+          var writter = new ExtendedTextWrapper(Console.Out);
+          new AutoRun(typeof(Program).GetTypeInfo().Assembly).Execute(args, writter, Console.In);
         }
     }
 }
