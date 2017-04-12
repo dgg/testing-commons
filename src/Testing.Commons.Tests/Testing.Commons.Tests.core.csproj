@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>Testing.Commons.Tests</AssemblyName>
+		<RootNamespace>Testing.Commons.Tests</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.6.1" />
+    <PackageReference Include="NUnitLite" Version="3.6.1" />
+    <PackageReference Include="NSubstitute" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <ProjectReference Include="..\Testing.Commons\Testing.Commons.netstandard.csproj" />
+	</ItemGroup>
+
+  <ItemGroup>
+		<Compile Remove="**\\*.net.cs" />
+	</ItemGroup>
+
+</Project>
