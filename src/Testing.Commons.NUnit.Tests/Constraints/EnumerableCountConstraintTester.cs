@@ -94,10 +94,10 @@ namespace Testing.Commons.NUnit.Tests.Constraints
 		public void WriteMessageTo_NotAnEnumerable_ExpectedEnumerable_ActualContainsTypeAndValue()
 		{
 			var subject = new EnumerableCountConstraint(null);
-			Assert.That(getMessage(subject, PlatformID.MacOSX), Does
+			Assert.That(getMessage(subject, ConsoleColor.Black), Does
 				.StartWith(TextMessageWriter.Pfx_Expected + "instance of <System.Collections.IEnumerable>").And
-				.Contains(TextMessageWriter.Pfx_Actual + "instance of <System.PlatformID>").And
-				.Contains("MacOSX"));
+				.Contains(TextMessageWriter.Pfx_Actual + "instance of <System.ConsoleColor>").And
+				.Contains("Black"));
 		}
 
 		[Test]
