@@ -27,7 +27,43 @@ namespace Testing.Commons.Globalization
 #else
 			CultureInfo.DefaultThreadCurrentCulture = threadCulture;
 			CultureInfo.DefaultThreadCurrentUICulture = threadUICulture;
+#endif
+		}
 
+		public static void SetOnThread(CultureInfo threadCulture)
+		{
+#if NET
+			Thread.CurrentThread.CurrentCulture = threadCulture;
+#else
+			CultureInfo.DefaultThreadCurrentCulture = threadCulture;
+#endif
+		}
+
+		public static void SetUIOnThread(CultureInfo threadUICulture)
+		{
+#if NET
+			Thread.CurrentThread.CurrentUICulture = threadUICulture;
+#else
+			CultureInfo.DefaultThreadCurrentUICulture = threadUICulture;
+#endif
+		}
+
+
+		public static CultureInfo GetFromThread()
+		{
+#if NET
+			return Thread.CurrentThread.CurrentCulture;
+#else
+			return CultureInfo.CurrentCulture;
+#endif
+		}
+
+		public static CultureInfo GetUIFromThread()
+		{
+#if NET
+			return Thread.CurrentThread.CurrentUICulture;
+#else
+			return CultureInfo.CurrentUICulture;
 #endif
 		}
 	}

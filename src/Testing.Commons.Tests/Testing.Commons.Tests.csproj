@@ -12,13 +12,14 @@
     <AssemblyName>Testing.Commons.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ResolveNuGetPackages>false</ResolveNuGetPackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NET</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -26,7 +27,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;NET</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -59,36 +60,37 @@
     <Compile Include="Builders\Support\ExceptionBuilder.cs" />
     <Compile Include="Builders\Support\Product.cs" />
     <Compile Include="Builders\Support\ProductBuilder.cs" />
-    <Compile Include="Configuration\ConfigurationTester.cs" />
-    <Compile Include="Configuration\ExceptionMessagesTester.cs" />
-    <Compile Include="Configuration\Support\CachingConfiguration.cs" />
-    <Compile Include="Configuration\Support\CachingConfigurationSection.cs" />
-    <Compile Include="Configuration\Support\CollectionCountValidator.cs" />
-    <Compile Include="Configuration\Support\DependantCacheElement.cs" />
-    <Compile Include="Configuration\Support\DependantCachesCollection.cs" />
-    <Compile Include="Configuration\Support\DependenciesCacheElement.cs" />
-    <Compile Include="Configuration\Support\DependenciesCollection.cs" />
-    <Compile Include="Configuration\Support\ExpirationElement.cs" />
-    <Compile Include="Configuration\Support\ExpirationsCollection.cs" />
-    <Compile Include="Configuration\Support\ICachingConfiguration.cs" />
+    <Compile Include="Configuration\ConfigurationTester.net.cs" />
+    <Compile Include="Configuration\ExceptionMessagesTester.net.cs" />
+    <Compile Include="Configuration\Support\CachingConfiguration.net.cs" />
+    <Compile Include="Configuration\Support\CachingConfigurationSection.net.cs" />
+    <Compile Include="Configuration\Support\CollectionCountValidator.net.cs" />
+    <Compile Include="Configuration\Support\DependantCacheElement.net.cs" />
+    <Compile Include="Configuration\Support\DependantCachesCollection.net.cs" />
+    <Compile Include="Configuration\Support\DependenciesCacheElement.net.cs" />
+    <Compile Include="Configuration\Support\DependenciesCollection.net.cs" />
+    <Compile Include="Configuration\Support\ExpirationElement.net.cs" />
+    <Compile Include="Configuration\Support\ExpirationsCollection.net.cs" />
+    <Compile Include="Configuration\Support\ICachingConfiguration.net.cs" />
     <Compile Include="EnumerableExtensionsTester.cs" />
     <Compile Include="Globalization\CultureReseterTester.cs" />
     <Compile Include="GuidBuilderTester.cs" />
-    <Compile Include="KeyValueTester.cs" />
+    <Compile Include="KeyValueTester.net.cs" />
     <Compile Include="MustTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RangeTester.cs" />
-    <Compile Include="Serialization\DataContractJsonDeserializerTester.cs" />
-    <Compile Include="Serialization\RoundtripDataContractJsonSerializerTester.cs" />
-    <Compile Include="Serialization\JsonDeserializerTester.cs" />
+    <Compile Include="Serialization\DataContractJsonDeserializerTester.net.cs" />
+    <Compile Include="Serialization\JsonDeserializerTester.net.cs" />
     <Compile Include="Serialization\JsonStringExtensionsTester.cs" />
     <Compile Include="Serialization\JsonStringTester.cs" />
+    <Compile Include="Serialization\RoundtripBinarySerializerTester.net.cs" />
+    <Compile Include="Serialization\RoundtripDataContractJsonSerializerTester.net.cs" />
+    <Compile Include="Serialization\RoundtripJsonSerializerTester.net.cs" />
+    <Compile Include="Serialization\Subjects\Serializable.net.cs" />
     <Compile Include="Serialization\XmlDeserializerTester.cs" />
     <Compile Include="Serialization\DataContractDeserializerTester.cs" />
-    <Compile Include="Serialization\RoundtripJsonSerializerTester.cs" />
     <Compile Include="Serialization\RoundtripDataContractSerializerTester.cs" />
     <Compile Include="Serialization\RoundtripXmlSerializerTester.cs" />
-    <Compile Include="Serialization\RoundtripBinarySerializerTester.cs" />
     <Compile Include="Serialization\Subjects\NonSerializable.cs" />
     <Compile Include="Serialization\Subjects\Serializable.cs" />
     <Compile Include="StringGeneratorTester.cs" />
@@ -101,24 +103,24 @@
     <Compile Include="Time\Support\MustExtensions.cs" />
     <Compile Include="Time\Support\SpanConstraint.cs" />
     <Compile Include="Time\TimeExtensionsTester.cs" />
-    <Compile Include="Web\ControlLifecycleTester.cs" />
-    <Compile Include="Web\Subjects\MessageHandler.cs" />
-    <Compile Include="Web\Subjects\DisplayNameLiteral.cs" />
-    <Compile Include="Web\HttpContextBuilderSamplesTester.cs" />
-    <Compile Include="Web\HttpContextBuilderTester.cs" />
-    <Compile Include="Web\HttpContextReseterTester.cs" />
-    <Compile Include="Web\QueryBuilderTester.cs" />
-    <Compile Include="Web\Subjects\ControlSpy.cs">
+    <Compile Include="Web\ControlLifecycleTester.net.cs" />
+    <Compile Include="Web\HttpContextBuilderSamplesTester.net.cs" />
+    <Compile Include="Web\HttpContextBuilderTester.net.cs" />
+    <Compile Include="Web\HttpContextReseterTester.net.cs" />
+    <Compile Include="Web\ProfileTestProviderTester.net.cs" />
+    <Compile Include="Web\QueryBuilderTester.net.cs" />
+    <Compile Include="Web\Subjects\ACustomEnum.cs" />
+    <Compile Include="Web\Subjects\ControlSpy.net.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Web\ProfileTestProviderTester.cs" />
-    <Compile Include="Web\Subjects\ACustomEnum.cs" />
+    <Compile Include="Web\Subjects\DisplayNameLiteral.net.cs" />
+    <Compile Include="Web\Subjects\MessageHandler.net.cs" />
     <Compile Include="Web\Subjects\Messages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
-    <Compile Include="Web\Subjects\ProfileSubjects.cs" />
+    <Compile Include="Web\Subjects\ProfileSubjects.net.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Testing.Commons\Testing.Commons.csproj">
@@ -187,7 +189,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

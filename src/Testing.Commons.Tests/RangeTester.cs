@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
+using Testing.Commons.Globalization;
 using Testing.Commons.Time;
 
 namespace Testing.Commons.Tests
@@ -16,7 +17,7 @@ namespace Testing.Commons.Tests
 			Assert.That(subject.UpperBound, Is.EqualTo('z'));
 		}
 
-		[Test, Culture("da-DK")]
+		[Test]
 		public void Ctor_PoorlyConstructed_Exception()
 		{
 			Assert.That(() => new Range<int>(5, 1), throwsBoundException(1, "1"));
@@ -25,7 +26,11 @@ namespace Testing.Commons.Tests
 
 			Assert.That(() => new Range<TimeSpan>(3.Seconds(), 2.Seconds()), throwsBoundException(2.Seconds(), "00:00:02"));
 
-			Assert.That(() => new Range<DateTime>(11.March(1977), 31.October(1952)), throwsBoundException(31.October(1952), "31-10-1952 00:00:00"));
+			using (CultureReseter.Set("da-DK"))
+			{
+				Assert.That(() => new Range<DateTime>(11.March(1977), 31.October(1952)),
+					throwsBoundException(31.October(1952), "31-10-1952 00:00:00"));
+			}
 		}
 
 		[Test]
