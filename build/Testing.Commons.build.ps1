@@ -36,17 +36,14 @@ task importModules {
 }
 
 task Test -depends ensureRelease {
-	$commons = get-test-assembly-name $base_dir $configuration 'Testing.Commons'
-	$nunit = get-test-assembly-name $base_dir $configuration 'Testing.Commons.NUnit'
-	$serviceStack = get-test-assembly-name $base_dir $configuration 'Testing.Commons.ServiceStack'
+	$commons = Get-Test-Assembly $base_dir $configuration 'Testing.Commons'
+	$nunit = Get-Test-Assembly $base_dir $configuration 'Testing.Commons.NUnit'
+	$serviceStack = Get-Test-Assembly $base_dir $configuration 'Testing.Commons.ServiceStack'
 	
 	run_tests $base_dir $release_dir ($commons, $nunit, $serviceStack)
 	
-	$commons = get-test-assembly-name $base_dir $configuration 'Testing.Commons' -target 'netcoreapp1.0'
-	$nunit = get-test-assembly-name $base_dir $configuration 'Testing.Commons.NUnit' -target 'netcoreapp1.0'
-	exec { dotnet $commons --result:"$release_dir\Testing.Commons.TestResult.core.xml" --noheader }
-	exec { dotnet $nunit --result:"$release_dir\Testing.Commons.NUnit.TestResult.core.xml" --noheader}
-
+	Run-Core-Tests $base_dir $configuration
+	
 	report-on-test-results $base_dir $release_dir
 }
 
@@ -60,14 +57,6 @@ task BuildArtifacts -depends ensureRelease {
 
 task ? -Description "Helper to display task info" {
 	Write-Documentation
-}
-
-function get-test-assembly-name($base, $config, $name, $target = '')
-{
-	$assembly_name = "$base\src\$name.Tests\bin\$config\"
-	$assembly_name = Join-Path $assembly_name $target
-	$assembly_name = Join-Path $assembly_name "$name.Tests.dll"
-	return $assembly_name
 }
 
 function run_tests($base, $release, $test_assemblies){

@@ -74,6 +74,22 @@ function Generate-Packages($base)
 		}
 }
 
+function Get-Test-Assembly($base, $config, $name, $target = '')
+{
+	$assembly_name = "$base\src\$name.Tests\bin\$config\"
+	$assembly_name = Join-Path $assembly_name $target
+	$assembly_name = Join-Path $assembly_name "$name.Tests.dll"
+	return $assembly_name
+}
+
+function Run-Core-Tests($base, $config)
+{
+	$commons = Get-Test-Assembly $base $config 'Testing.Commons' -target 'netcoreapp1.0'
+	$nunit = Get-Test-Assembly $base $config 'Testing.Commons.NUnit' -target 'netcoreapp1.0'
+	exec { dotnet $commons --result:"$base\release\Testing.Commons.TestResult.core.xml" --noheader }
+	exec { dotnet $nunit --result:"$base\release\Testing.Commons.NUnit.TestResult.core.xml" --noheader}
+}
+
 function get-version-from-package($base, $packageFragment)
 {
 	$pkgVersion = Get-ChildItem -File "$base\release\$packageFragment*.nupkg" |
@@ -83,4 +99,4 @@ function get-version-from-package($base, $packageFragment)
 	return $pkgVersion.value
 }
 
-export-modulemember -function Throw-If-Error, Ensure-Release-Folders, Copy-Artifacts, Generate-Packages, Restore-Packages
+export-modulemember -function Throw-If-Error, Ensure-Release-Folders, Copy-Artifacts, Generate-Packages, Restore-Packages, Get-Test-Assembly, Run-Core-Tests
