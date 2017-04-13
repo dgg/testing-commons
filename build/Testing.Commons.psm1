@@ -18,6 +18,13 @@ function Ensure-Release-Folders($base)
 		% { New-Item -Type directory $_ -Force | Out-Null }
 }
 
+function Restore-Packages($base)
+{
+	# restoring .core test projects, restores .netstandard projects as well
+	Get-ChildItem -File -Recurse -Path "$base\src" -Filter *Tests.core.csproj |
+	ForEach-Object { exec { dotnet restore $_.FullName } }
+}
+
 function Copy-Artifacts($base, $configuration)
 {
 	copy-binaries $base $configuration

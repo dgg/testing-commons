@@ -16,9 +16,7 @@ task Clean -depends importModules {
 }
 
 task Compile -depends importModules {
-	# restoring .core test projects, restores .netstandard projects as well
-	Get-ChildItem -File -Recurse -Path "$base_dir\src" -Filter *Tests.core.csproj |
-	ForEach-Object { exec { dotnet restore $_.FullName } }
+	Restore-Packages $base_dir
 
 	$msbuild = find_msbuild
 	exec { & $msbuild "$base_dir\Testing.Commons.sln" /p:configuration=$configuration /m /v:m }
