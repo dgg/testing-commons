@@ -83,4 +83,4 @@ function get-version-from-package($base, $packageFragment)
 	return $pkgVersion.value
 }
 
-export-modulemember -function Throw-If-Error, Ensure-Release-Folders, Copy-Artifacts, Generate-Packages
+export-modulemember -function Throw-If-Error, Ensure-Release-Folders, Copy-Artifacts, Generate-Packages, Restore-Packages
