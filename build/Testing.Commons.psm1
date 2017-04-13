@@ -22,7 +22,7 @@ function Restore-Packages($base)
 {
 	# restoring .core test projects, restores .netstandard projects as well
 	Get-ChildItem -File -Recurse -Path "$base\src" -Filter *Tests.core.csproj |
-	ForEach-Object { exec { dotnet restore $_.FullName } }
+	ForEach-Object { dotnet restore $_.FullName }
 }
 
 function Copy-Artifacts($base, $configuration)
