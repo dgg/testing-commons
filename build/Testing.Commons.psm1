@@ -86,9 +86,10 @@ function Run-Core-Tests($base, $config)
 {
 	$commons = Get-Test-Assembly $base $config 'Testing.Commons' -target 'netcoreapp1.0'
 	$nunit = Get-Test-Assembly $base $config 'Testing.Commons.NUnit' -target 'netcoreapp1.0'
-	dotnet $commons --result:"$base\release\Testing.Commons.TestResult.core.xml" --noheader
+	$release = Resolve-Path $base\release
+	dotnet $commons --result:"$release\Testing.Commons.TestResult.core.xml" --noheader
 	Throw-If-Error
-	dotnet $nunit --result:"$base\release\Testing.Commons.NUnit.TestResult.core.xml" --noheader
+	dotnet $nunit --result:"$release\Testing.Commons.NUnit.TestResult.core.xml" --noheader
 	Throw-If-Error
 }
 
