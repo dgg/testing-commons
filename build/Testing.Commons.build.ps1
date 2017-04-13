@@ -11,14 +11,17 @@ task default -depends Clean, Compile, Test, CopyArtifacts, BuildArtifacts
 task Clean -depends importModules {
 	$msbuild = find_msbuild
 
-	exec { & $msbuild "$base_dir\Testing.Commons.sln" /t:clean /p:configuration=$configuration /m }
+	exec { & $msbuild "$base_dir\Testing.Commons.sln" /t:clean /p:configuration=$configuration /m /v:m }
 	Remove-Item $release_dir -Recurse -Force -ErrorAction SilentlyContinue | Out-Null
 }
 
 task Compile -depends importModules {
-	$msbuild = find_msbuild
+	# restoring .core test projects, restores .netstandard projects as well
+	Get-ChildItem -File -Recurse -Path "$base_dir\src" -Filter *Tests.core.csproj |
+	ForEach-Object { exec { dotnet restore $_.FullName } }
 
-	exec { & $msbuild "$base_dir\Testing.Commons.sln" /p:configuration=$configuration /m }
+	$msbuild = find_msbuild
+	exec { & $msbuild "$base_dir\Testing.Commons.sln" /p:configuration=$configuration /m /v:m }
 }
 
 task ensureRelease -depends importModules {
@@ -40,6 +43,11 @@ task Test -depends ensureRelease {
 	$serviceStack = get-test-assembly-name $base_dir $configuration 'Testing.Commons.ServiceStack'
 	
 	run_tests $base_dir $release_dir ($commons, $nunit, $serviceStack)
+	
+	$commons = get-test-assembly-name $base_dir $configuration 'Testing.Commons' -target 'netcoreapp1.0'
+	$nunit = get-test-assembly-name $base_dir $configuration 'Testing.Commons.NUnit' -target 'netcoreapp1.0'
+	exec { dotnet $commons --result:"$release_dir\Testing.Commons.TestResult.core.xml" --noheader }
+	exec { dotnet $nunit --result:"$release_dir\Testing.Commons.NUnit.TestResult.core.xml" --noheader}
 
 	report-on-test-results $base_dir $release_dir
 }
@@ -56,9 +64,12 @@ task ? -Description "Helper to display task info" {
 	Write-Documentation
 }
 
-function get-test-assembly-name($base, $config, $name)
+function get-test-assembly-name($base, $config, $name, $target = '')
 {
-	return "$base\src\$name.Tests\bin\$config\$name.Tests.dll"
+	$assembly_name = "$base\src\$name.Tests\bin\$config\"
+	$assembly_name = Join-Path $assembly_name $target
+	$assembly_name = Join-Path $assembly_name "$name.Tests.dll"
+	return $assembly_name
 }
 
 function run_tests($base, $release, $test_assemblies){
@@ -70,10 +81,13 @@ function run_tests($base, $release, $test_assemblies){
 function report-on-test-results($base, $release)
 {
 	$nunit_orange = Join-Path $base tools\NUnitOrange\NUnitOrange.exe
-	$input_xml = Join-Path $release TestResult.xml
-	$output_html = Join-Path $release TestResult.html
-	
-	exec { & $nunit_orange $input_xml $output_html }
+
+	('TestResult', 'Testing.Commons.TestResult.core', 'Testing.Commons.NUnit.TestResult.core') |
+	% { 
+		$input_xml = Join-Path $release "$_.xml"
+		$output_html = Join-Path $release "$_.html"
+		exec { & $nunit_orange $input_xml $output_html } 
+	}
 }
 
 function find_versioned_dir($base, $beginning)

@@ -40,11 +40,8 @@ namespace Testing.Commons.Globalization
 		/// <summary>
 		/// Sets culture and UI culture in the current thread to the provided cultures.
 		/// </summary>
-#if NET
-		/// <remarks>Instances of <see cref="CultureInfo"/> will be created using <see cref="CultureInfo.GetCultureInfo(string)"/>.</remarks>
-#else
-		/// <remarks>Instances of <see cref="CultureInfo"/> will be created using <see cref="new CultureInfo(string)"/>.</remarks>
-#endif
+		/// <remarks>Instances of <see cref="CultureInfo"/> will be retrieved from a cache for the full .NET Framework
+		/// and instantiated otherwise.</remarks>
 		/// <param name="cultureName">Culture name for the current thread.</param>
 		/// <param name="uiCultureName">Culture name used by the <see cref="ResourceManager"/></param>
 		/// <returns>An instance of <see cref="CultureReseter"/> with the cultures set and able to restore the previous cultures.</returns>
@@ -66,11 +63,8 @@ namespace Testing.Commons.Globalization
 		/// <summary>
 		/// Sets culture and UI culture in the current thread to the provided culture.
 		/// </summary>
-#if NET
-		/// <remarks>Instances of <see cref="CultureInfo"/> will be created using <see cref="CultureInfo.GetCultureInfo(string)"/>.</remarks>
-#else
-		/// <remarks>Instances of <see cref="CultureInfo"/> will be created using <see cref="new CultureInfo(string)"/>.</remarks>
-#endif
+		/// <remarks>Instances of <see cref="CultureInfo"/> will be retrieved from a cache for the full .NET Framework
+		/// and instantiated otherwise.</remarks>
 		/// <param name="bothCultureName">Culture name for the current thread and used by the <see cref="ResourceManager"/></param>
 		/// <returns>An instance of <see cref="CultureReseter"/> with the cultures set and able to restore the previous cultures.</returns>
 		public static CultureReseter Set(string bothCultureName)

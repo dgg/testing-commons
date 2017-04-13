@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Testing.Commons.Tests.core"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Testing.Commons.NUnit.Tests.core", "src\Testing.Commons.NUnit.Tests\Testing.Commons.NUnit.Tests.core.csproj", "{96105D56-5FE7-4E0A-A14C-DB6F7C5D4084}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "netstandard", "netstandard", "{F7B836E8-16F8-4BF2-815B-9DE4AE855221}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,5 +84,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A284A202-5B2B-4811-B933-2C66076CAFAC} = {F7B836E8-16F8-4BF2-815B-9DE4AE855221}
+		{7F47CD2D-7855-4E94-A43B-F9DD20114649} = {F7B836E8-16F8-4BF2-815B-9DE4AE855221}
+		{16C36860-46AD-423C-89C3-F4ABE03ABA22} = {F7B836E8-16F8-4BF2-815B-9DE4AE855221}
+		{96105D56-5FE7-4E0A-A14C-DB6F7C5D4084} = {F7B836E8-16F8-4BF2-815B-9DE4AE855221}
 	EndGlobalSection
 EndGlobal
