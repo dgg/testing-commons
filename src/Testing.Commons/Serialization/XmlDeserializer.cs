@@ -27,7 +27,9 @@ namespace Testing.Commons.Serialization
 				}
 				finally
 				{
-					sr.Close();	
+#if NET
+					sr.Close();
+#endif
 				}
 			}
 		}

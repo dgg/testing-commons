@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard1.1</TargetFramework>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<RootNamespace>Testing.Commons</RootNamespace>
+		<AssemblyName>Testing.Commons</AssemblyName>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <DefineConstants>TRACE;NETSTANDARD1_1</DefineConstants>
+	  <DocumentationFile>bin\Release\netstandard1.1\Testing.Commons.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <DefineConstants>TRACE;DEBUG;NETSTANDARD1_1</DefineConstants>
+	  <DocumentationFile></DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="**\\*.net.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="System.Runtime.Serialization.Xml" Version="4.3.0" />
+	  <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
+	</ItemGroup>
+
+</Project>

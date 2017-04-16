@@ -11,8 +11,18 @@ function Throw-If-Error
 
 function Ensure-Release-Folders($base)
 {
-	("$base\release\lib\net40", "$base\release\content\Support") |
+	("$base\release\lib\net40", 
+		"$base\release\content\Support", 
+		"$base\release\lib\netstandard1.1", 
+		"$base\release\lib\netstandard1.6") |
 		% { New-Item -Type directory $_ -Force | Out-Null }
+}
+
+function Restore-Packages($base)
+{
+	# restoring .core test projects, restores .netstandard projects as well
+	Get-ChildItem -File -Recurse -Path "$base\src" -Filter *Tests.core.csproj |
+	ForEach-Object { dotnet restore $_.FullName }
 }
 
 function Copy-Artifacts($base, $configuration)
@@ -23,14 +33,24 @@ function Copy-Artifacts($base, $configuration)
 
 function copy-binaries($base, $configuration)
 {
-	$release_bin_dir = Join-Path $base release\lib\Net40
-	
+	$release_bin_dir = Join-Path $base release\lib\net40
 	$commons = Join-Path $base \src\Testing.Commons\bin\$configuration\
 	$nunit = Join-Path $base \src\Testing.Commons.NUnit\bin\$configuration\
 	Get-ChildItem -Path ($commons, $nunit) -filter 'Testing.*' |
 		? { $_.Name -match '.dll|.XML' } |
 		Copy-Item -Destination $release_bin_dir
 	
+	$release_bin_dir = Join-Path $base release\lib\netstandard1.1
+	$commons = Join-Path $commons netstandard1.1
+	Get-ChildItem -Path $commons -filter 'Testing.Commons.*' |
+		? { $_.Name -match '.dll|.XML' } |
+		Copy-Item -Destination $release_bin_dir
+
+	$release_bin_dir = Join-Path $base release\lib\netstandard1.6
+	$nunit = Join-Path $nunit netstandard1.6
+	Get-ChildItem -Path $nunit -filter 'Testing.Commons.NUnit*' |
+		? { $_.Name -match '.dll|.XML' } |
+		Copy-Item -Destination $release_bin_dir
 }
 
 function copy-sources()
@@ -54,6 +74,25 @@ function Generate-Packages($base)
 		}
 }
 
+function Get-Test-Assembly($base, $config, $name, $target = '')
+{
+	$assembly_name = "$base\src\$name.Tests\bin\$config\"
+	$assembly_name = Join-Path $assembly_name $target
+	$assembly_name = Join-Path $assembly_name "$name.Tests.dll"
+	return $assembly_name
+}
+
+function Run-Core-Tests($base, $config)
+{
+	$commons = Get-Test-Assembly $base $config 'Testing.Commons' -target 'netcoreapp1.0'
+	$nunit = Get-Test-Assembly $base $config 'Testing.Commons.NUnit' -target 'netcoreapp1.0'
+	$release = Resolve-Path $base\release
+	dotnet $commons --result:"$release\Testing.Commons.TestResult.core.xml" --noheader
+	Throw-If-Error
+	dotnet $nunit --result:"$release\Testing.Commons.NUnit.TestResult.core.xml" --noheader
+	Throw-If-Error
+}
+
 function get-version-from-package($base, $packageFragment)
 {
 	$pkgVersion = Get-ChildItem -File "$base\release\$packageFragment*.nupkg" |
@@ -63,4 +102,4 @@ function get-version-from-package($base, $packageFragment)
 	return $pkgVersion.value
 }
 
-export-modulemember -function Throw-If-Error, Ensure-Release-Folders, Copy-Artifacts, Generate-Packages
+export-modulemember -function Throw-If-Error, Ensure-Release-Folders, Copy-Artifacts, Generate-Packages, Restore-Packages, Get-Test-Assembly, Run-Core-Tests

@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>netcoreapp1.0</TargetFramework>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<AssemblyName>Testing.Commons.NUnit.Tests</AssemblyName>
+		<RootNamespace>Testing.Commons.NUnit.Tests</RootNamespace>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DefineConstants>TRACE;NETCOREAPP1_0</DefineConstants>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DefineConstants>TRACE;DEBUG;NETCOREAPP1_0</DefineConstants>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="NUnit" Version="3.6.1" />
+		<PackageReference Include="NUnitLite" Version="3.6.1" />
+		<PackageReference Include="NSubstitute" Version="2.0.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Testing.Commons\Testing.Commons.netstandard.csproj" />
+		<ProjectReference Include="..\Testing.Commons.NUnit\Testing.Commons.NUnit.netstandard.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Remove="**\\*.net.cs" />
+	</ItemGroup>
+
+</Project>

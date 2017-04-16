@@ -1,14 +1,19 @@
-﻿namespace Testing.Commons.NUnit.Tests.Constraints.Subjects
+﻿using System;
+using System.Runtime.Serialization;
+
+namespace Testing.Commons.NUnit.Tests.Constraints.Subjects
 {
-	[System.Serializable]
-	public class Serializable
+	[DataContract]
+	public partial class Serializable
 	{
+		[DataMember]
 		public string S { get; set; }
+		[DataMember]
 		public decimal D { get; set; }
 
 		public static string DataContractString(string s, decimal d)
 		{
-			return string.Format("<Serializable xmlns=\"http://schemas.datacontract.org/2004/07/Testing.Commons.NUnit.Tests.Constraints.Subjects\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><_x003C_D_x003E_k__BackingField>{1}</_x003C_D_x003E_k__BackingField><_x003C_S_x003E_k__BackingField>{0}</_x003C_S_x003E_k__BackingField></Serializable>",
+			return string.Format("<Serializable xmlns=\"http://schemas.datacontract.org/2004/07/Testing.Commons.NUnit.Tests.Constraints.Subjects\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><D>{1}</D><S>{0}</S></Serializable>",
 				s, d);
 		}
 
@@ -23,7 +28,7 @@
 
 		public static string DataContractJsonString(string s, decimal d)
 		{
-			return $"{{\"<D>k__BackingField\":{d},\"<S>k__BackingField\":\"{s}\"}}";
+			return $"{{\"D\":{d},\"S\":\"{s}\"}}";
 		}
 	}
 }
