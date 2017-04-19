@@ -65,6 +65,7 @@
     <Compile Include="Serialization\DataContractDeserializer.cs" />
     <Compile Include="Serialization\DataContractJsonDeserializer.net.cs" />
     <Compile Include="Serialization\DataContractJsonRoundtripSerializer.net.cs" />
+    <Compile Include="Serialization\IO.polyfill.cs" />
     <Compile Include="Serialization\JsonDeserializer.net.cs" />
     <Compile Include="Serialization\IDeserializer.cs" />
     <Compile Include="Serialization\IRoundtripSerializer.cs" />
