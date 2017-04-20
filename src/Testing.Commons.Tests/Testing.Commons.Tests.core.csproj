@@ -39,4 +39,8 @@
 		<None Remove="profile.config" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Include="..\Testing.Commons\Properties\Commons_AssemblyInfo.cs" Link="Properties\Commons_AssemblyInfo.cs" />
+	</ItemGroup>
+
 </Project>

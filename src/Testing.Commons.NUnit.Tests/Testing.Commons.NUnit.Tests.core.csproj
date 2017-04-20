@@ -31,4 +31,8 @@
 		<Compile Remove="**\\*.net.cs" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Include="..\Testing.Commons.NUnit\Properties\NUnit_AssemblyInfo.cs" Link="Properties\NUnit_AssemblyInfo.cs" />
+	</ItemGroup>
+
 </Project>
