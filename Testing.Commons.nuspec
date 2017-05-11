@@ -13,7 +13,7 @@
 		</summary>
 		<projectUrl>https://github.com/dgg/testing-commons</projectUrl>
 		<iconUrl>https://raw.githubusercontent.com/wiki/dgg/testing-commons/img/Testing.Commons.logo.png</iconUrl>
-		<tags>.net C# testing</tags>
+		<tags>.net C# testing unit-testing</tags>
 		<dependencies>
 			<group targetFramework="netstandard1.1">
 				<dependency id="System.Runtime.Serialization.Xml" version="4.3.0" />

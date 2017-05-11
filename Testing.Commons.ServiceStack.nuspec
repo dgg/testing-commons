@@ -13,7 +13,7 @@
 		</summary>
 		<projectUrl>https://github.com/dgg/testing-commons</projectUrl>
 		<iconUrl>https://raw.githubusercontent.com/wiki/dgg/testing-commons/img/Testing.Commons.ServiceStack.logo.png</iconUrl>
-		<tags>.net C# testing NUnit ServiceStack</tags>
+		<tags>.net C# testing unit-testing integration-testing NUnit ServiceStack</tags>
 		<dependencies>
 			<dependency id="NUnit" version="3.4.0" />
 		</dependencies>
