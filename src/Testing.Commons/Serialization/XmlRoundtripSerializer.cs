@@ -57,6 +57,12 @@ public class XmlRoundtripSerializer<T> : IRoundtripSerializer<T>
 		return deserialized;
 	}
 
+	/// <summary>
+	/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+	/// </summary>
+	/// <remarks>Closes and disposes internal serialization stream.</remarks>
+	/// <param name="disposing">Indicates whether the method call comes from a <see cref="IDisposable.Dispose"/> method (value <c>true</c>)
+	/// or from a finalizer (value <c>false</c>)</param>
 	protected virtual void Dispose(bool disposing)
 	{
 		if (!disposedValue)
@@ -74,7 +80,6 @@ public class XmlRoundtripSerializer<T> : IRoundtripSerializer<T>
 	/// <summary>
 	/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
 	/// </summary>
-	/// <remarks>Closes and disposes internal serialization stream.</remarks>
 	public void Dispose()
 	{
 		// Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
