@@ -33,6 +33,7 @@ public static class Generate
 		/// <summary>
 		/// Infrastructure class that allows access to the generation methods.
 		/// </summary>
+#pragma warning disable CA5394
 		public class DateGenerator
 		{
 			internal DateGenerator(DateTime from, DateTime to)
@@ -55,6 +56,7 @@ public static class Generate
 			/// Generates a single random date between the defined lower and upper bounds.
 			/// </summary>
 			/// <returns>A date between the defined ranges.</returns>
+#pragma warning disable CA1720
 			public DateTime Single()
 			{
 				Random rnd = new();
@@ -62,6 +64,7 @@ public static class Generate
 
 				return From.AddDays(rnd.Next(dayRange));
 			}
+#pragma warning restore CA1720
 
 			/// <summary>
 			/// Generated an infinite succession of random dates between the defined lower and upper bounds.
@@ -84,6 +87,7 @@ public static class Generate
 				return Stream().Take(count);
 			}
 		}
+#pragma warning restore CA5394
 	}
 
 	/// <summary>

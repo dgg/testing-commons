@@ -1,4 +1,6 @@
-﻿namespace Testing.Commons.Time;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Testing.Commons.Time;
 
 /// <summary>
 /// Allows expressive creation of <see cref="DateTime"/> instances that represent a date and a time.
@@ -67,12 +69,9 @@ public static class TimeExtensions
 	/// <param name="dt">The date that contains the years, months and days.</param>
 	/// <param name="timeOfDay">Represents a named time of the day.</param>
 	/// <returns>A new instance with the information provided.</returns>
-	public static DateTime At(this DateTime dt, Func<TimeOfDay, TimeSpan> timeOfDay)
+	public static DateTime At(this DateTime dt, [NotNull] Func<TimeOfDay, TimeSpan> timeOfDay)
 	{
-		if (timeOfDay is null)
-		{
-			throw new ArgumentNullException(nameof(timeOfDay));
-		}
+		ArgumentNullException.ThrowIfNull(timeOfDay, nameof(timeOfDay));
 
 		return At(dt, timeOfDay(TimeOfDay.Instance));
 	}

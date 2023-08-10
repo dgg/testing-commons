@@ -52,8 +52,8 @@ public static partial class GuidBuilder
 	{
 		ensureHex(hexFigure);
 
-		// it is surely a char, and .Parse() is not netstandard1.1
-		char.TryParse(hexFigure.ToString("x", CultureInfo.InvariantCulture), out char safeChar);
+		// TODO: check netstandard target
+		char safeChar = char.Parse(hexFigure.ToString("x", CultureInfo.InvariantCulture));
 		return buildGuid(safeChar);
 	}
 
