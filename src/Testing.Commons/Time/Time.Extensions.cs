@@ -43,19 +43,19 @@ public static class TimeExtensions
 		/// <summary>
 		/// Midday, twolve o'clock.
 		/// </summary>
-		public readonly TimeSpan Noon = new(0, 12, 0, 0, 0);
+		public TimeSpan Noon { get; } = new(0, 12, 0, 0, 0);
 		/// <summary>
 		/// Middle of the night, twelve o'clock at night.
 		/// </summary>
-		public readonly TimeSpan MidNight = TimeSpan.Zero;
+		public TimeSpan MidNight { get; } = TimeSpan.Zero;
 		/// <summary>
 		/// The last time of a given day to the millisecond
 		/// </summary>
-		public readonly TimeSpan EndOfDay = new(0, 23, 59, 59, 999);
+		public TimeSpan EndOfDay { get; } = new(0, 23, 59, 59, 999);
 		/// <summary>
 		/// Middle of the night, twelve o'clock at night.
 		/// </summary>
-		public readonly TimeSpan BeginningOfDay = TimeSpan.Zero;
+		public TimeSpan BeginningOfDay { get; } = TimeSpan.Zero;
 
 		internal static TimeOfDay Instance = new();
 	}
@@ -69,6 +69,11 @@ public static class TimeExtensions
 	/// <returns>A new instance with the information provided.</returns>
 	public static DateTime At(this DateTime dt, Func<TimeOfDay, TimeSpan> timeOfDay)
 	{
+		if (timeOfDay is null)
+		{
+			throw new ArgumentNullException(nameof(timeOfDay));
+		}
+
 		return At(dt, timeOfDay(TimeOfDay.Instance));
 	}
 }

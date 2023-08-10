@@ -1,4 +1,5 @@
-﻿using Testing.Commons.Resources;
+﻿using System.Globalization;
+using Testing.Commons.Resources;
 
 namespace Testing.Commons.Time;
 
@@ -44,7 +45,7 @@ public static class Generate
 
 			private static void assertBounds(DateTime from, DateTime to)
 			{
-				if (to <= from) throw new ArgumentOutOfRangeException("to", to, string.Format(Exceptions.InvertedRange_Template, from));
+				if (to <= from) throw new ArgumentOutOfRangeException(nameof(to), to, string.Format(CultureInfo.InvariantCulture, Exceptions.InvertedRange_Template, from));
 			}
 
 			private DateTime From { get; set; }

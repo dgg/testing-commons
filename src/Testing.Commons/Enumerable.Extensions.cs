@@ -13,6 +13,11 @@ public static class EnumerableExtensions
 	/// <param name="enumerable">Enumerable to be iterated.</param>
 	public static void Iterate<T>(this IEnumerable<T> enumerable)
 	{
+		if (enumerable is null)
+		{
+			throw new ArgumentNullException(nameof(enumerable));
+		}
+
 		foreach (var _ in enumerable) { }
 	}
 }

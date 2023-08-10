@@ -15,4 +15,13 @@ indent_style = space
 indent_size = 2
 
 [*.cs]
-dotnet_diagnostic.IDE1006.severity = warning
+dotnet_diagnostic.CA1034.severity = none
+
+# private fields
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+# camel_cased
+dotnet_naming_style.camel_cased.capitalization = camel_case
+# camel-cased private fields
+dotnet_naming_rule.private_fields_camel_cased.symbols = private_fields
+dotnet_naming_rule.private_fields_camel_cased.style = camel_cased
