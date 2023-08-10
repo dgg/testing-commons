@@ -1,11 +1,12 @@
-﻿using Testing.Commons.Time;
+﻿using System.Globalization;
+using Testing.Commons.Time;
 
 namespace Testing.Commons.Tests.Time;
 
 [TestFixture]
 public class GenerateTester
 {
-	[Test]
+	[Test, SetCulture("")]
 	public void Single_BoundsUnordered_Exception()
 	{
 		DateTime start = 11.March(1978), end = 11.March(1977);
@@ -26,7 +27,7 @@ public class GenerateTester
 			Is.GreaterThanOrEqualTo(start).And.LessThanOrEqualTo(end));
 	}
 
-	[Test]
+	[Test, SetCulture("")]
 	public void Stream_BoundsUnordered_Exception()
 	{
 		DateTime start = 11.March(1978), end = 11.March(1977);

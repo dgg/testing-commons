@@ -14,7 +14,7 @@ public class RangeTester
 		Assert.That(subject.UpperBound, Is.EqualTo('z'));
 	}
 
-	[Test, SetCulture("es-ES")]
+	[Test, SetCulture("")]
 	public void Ctor_PoorlyConstructed_Exception()
 	{
 		Assert.That(() => new Range<int>(5, 1), throwsBoundException(1, "1"));
@@ -23,11 +23,8 @@ public class RangeTester
 
 		Assert.That(() => new Range<TimeSpan>(3.Seconds(), 2.Seconds()), throwsBoundException(2.Seconds(), "00:00:02"));
 
-		//using (CultureReseter.Set("da-DK"))
-		//{
 		Assert.That(() => new Range<DateTime>(11.March(1977), 31.October(1952)),
-			throwsBoundException(31.October(1952), "31/10/1952"));
-		//}
+			throwsBoundException(31.October(1952), "10/31/1952"));
 	}
 
 	[Test]
