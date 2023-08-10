@@ -8,6 +8,32 @@
 
 		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 		<CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Description>Utility classes and extensions to facilitate common testing operations.</Description>
+		<Product>Testing.Commons</Product>
+		<Copyright>Copyright © Daniel Gonzalez Garcia 2011</Copyright>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Authors>Daniel González García</Authors>
+		<PackageProjectUrl>https://github.com/dgg/testing-commons</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/dgg/testing-commons.git</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageIconUrl>https://raw.githubusercontent.com/wiki/dgg/testing-commons/img/Testing.Commons.logo.png</PackageIconUrl>
+		<PackageIcon>Testing.Commons.logo.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageTags>.net;dotnet;C#;testing;unit-testing</PackageTags>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Version>3.0.0.0</Version>
+		<AssemblyVersion>3.0.0.0</AssemblyVersion>
+		<FileVersion>3.0.0.0</FileVersion>
+		<PackageVersion>3.0.0.0</PackageVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -17,6 +43,12 @@
 		<AssemblyAttribute Include="System.CLSCompliantAttribute">
 			<_Parameter1>false</_Parameter1>
 		</AssemblyAttribute>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="../../assets/Testing.Commons.logo.png" Pack="true" PackagePath="/"/>
+		<None Include="../../LICENSE" Pack="true" PackagePath=""/>
+		<None Include="../../README.md" Pack="true" PackagePath="/"/>
 	</ItemGroup>
 
 </Project>
