@@ -5,8 +5,10 @@ namespace Testing.Commons.Tests.Serialization.Subjects;
 [DataContract]
 public partial class Serializable
 {
+#pragma warning disable CS8618
 	[DataMember]
 	public string S { get; set; }
+#pragma warning restore
 	[DataMember]
 	public decimal D { get; set; }
 
