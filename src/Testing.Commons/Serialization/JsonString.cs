@@ -27,7 +27,7 @@ public class JsonString
 
 	internal static string jsonify([NotNull] string json)
 	{
-		ArgumentException.ThrowIfNullOrEmpty(json, nameof(json));
+		Arg.ThrowIfNullOrEmpty(json, nameof(json));
 		return json.Replace("'", "\"", false, CultureInfo.CurrentCulture);
 	}
 
@@ -62,7 +62,7 @@ public class JsonString
 	{
 		public bool Equals(string? x, string? y)
 		{
-			ArgumentException.ThrowIfNullOrEmpty(x, nameof(x));
+			Arg.ThrowIfNullOrEmpty(x, nameof(x));
 			return StringComparer.CurrentCulture.Equals(jsonify(x), y);
 		}
 
