@@ -20,6 +20,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Testing.Commons.NUnit\Testing.Commons.NUnit.csproj" />
+		<ProjectReference Include="..\..\src\Testing.Commons\Testing.Commons.csproj" />
 	</ItemGroup>
 
 </Project>
