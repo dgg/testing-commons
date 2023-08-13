@@ -80,4 +80,34 @@ public class DateConstraintsTester
 		Assert.That(Today, Is.Not.CloseTo(nearbyFutureTime, ms: 30));
 		Assert.That(Today, Is.Not.CloseTo(nearbyFutureTime, within: 30.Milliseconds()));
 	}
+
+	[Test]
+	public void Date_Components()
+	{
+		Assert.That(11.March(1977), Haz.Year(1977));
+		Assert.That(11.March(1977), Haz.Month(3));
+		Assert.That(11.March(1977), Haz.Day(11));
+		Assert.That(11.March(1977), Haz.Hour(0));
+		Assert.That(11.March(1977), Haz.Minute(0));
+		Assert.That(11.March(1977), Haz.Second(0));
+		Assert.That(11.March(1977), Haz.Millisecond(0));
+	}
+
+	[Test]
+	public void Negative_Date_Components()
+	{
+		Assert.That(11.March(1977), Has.No.Year(1978));
+		Assert.That(11.March(1977), Has.No.Month(1));
+		Assert.That(11.March(1977), Has.No.Day(10));
+		Assert.That(11.March(1977), Has.No.Hour(1));
+		Assert.That(11.March(1977), Has.No.Minute(1));
+		Assert.That(11.March(1977), Has.No.Second(1));
+		Assert.That(11.March(1977), Has.No.Millisecond(1));
+	}
+
+	[Test, Ignore("Open issue")]
+	public void Composable_Date_Components()
+	{
+		Assert.That(11.March(1977), Haz.Year(1977).And.Property("Month").EqualTo(3));
+	}
 }
