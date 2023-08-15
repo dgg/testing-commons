@@ -203,7 +203,7 @@ public static partial class ConstraintsExtensions
 }
 
 /// <summary>
-/// Custom date constraints.
+/// Custom constraints.
 /// </summary>
 public partial class Iz : Is
 {
@@ -278,7 +278,7 @@ public partial class Iz : Is
 }
 
 /// <summary>
-/// Custom date constraints.
+/// Custom constraints.
 /// </summary>
 public partial class Haz : Has
 {
