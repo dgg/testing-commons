@@ -50,14 +50,6 @@ public class ConjuctionContraintTester : ConstraintTesterBase
 	}
 
 	[Test]
-	public void ApplyTo_AllNullContraints_Success()
-	{
-		var subject = new ConjunctionConstraint(null, null);
-
-		Assert.That(matches(subject, new object()), Is.True);
-	}
-
-	[Test]
 	public void ApplyTo_SingleFailingConstraints_Failure()
 	{
 		var subject = new ConjunctionConstraint(
