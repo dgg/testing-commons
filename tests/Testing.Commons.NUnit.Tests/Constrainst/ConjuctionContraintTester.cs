@@ -127,7 +127,7 @@ public class ConjuctionContraintTester : ConstraintTesterBase
 	{
 		var customer = new FlatCustomer { Name = "name", PhoneNumber = "123456" };
 		var nameConstraint = Haz.Prop(nameof(FlatCustomer.Name), Is.EqualTo("name"));
-		var subject = Satisfies.Conjunction(
+		var subject = Doez.Satisfy.Conjunction(
 			Haz.Prop(nameof(FlatCustomer.Name), Does.Contain("me")),
 			Haz.Prop(nameof(FlatCustomer.PhoneNumber), Does.Contain("-")),
 			Is.Not.Null);

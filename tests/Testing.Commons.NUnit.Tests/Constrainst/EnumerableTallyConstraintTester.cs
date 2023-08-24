@@ -25,8 +25,8 @@ public class EnumerableTallyConstraintTester : ConstraintTesterBase
 	[Test]
 	public void Enumerable_FromArray_MustUseLength()
 	{
-#pragma warning disable NUnit2022
 		IEnumerable<int> e = new[] { 1, 2, 3 };
+#pragma warning disable NUnit2022
 		Assert.That(e, Has.Length.EqualTo(3));
 #pragma warning restore NUnit2022
 	}
@@ -34,8 +34,8 @@ public class EnumerableTallyConstraintTester : ConstraintTesterBase
 	[Test]
 	public void Enumerable_FromList_MustUseCount()
 	{
-#pragma warning disable NUnit2022
 		IEnumerable<int> e = new List<int> { 1, 2, 3 };
+#pragma warning disable NUnit2022
 		Assert.That(e, Has.Count.EqualTo(3));
 #pragma warning restore NUnit2022
 	}
@@ -43,8 +43,8 @@ public class EnumerableTallyConstraintTester : ConstraintTesterBase
 	[Test]
 	public void Enumereble_FromLinq_CannotUseLengthOrCount()
 	{
-#pragma warning disable NUnit2022
 		IEnumerable<int> e = new[] { 1, 2, 3 }.Where(i => i <= 2);
+#pragma warning disable NUnit2022
 		TestDelegate assertion = () => Assert.That(e, Has.Length.EqualTo(2));
 		Assert.That(assertion, Throws.ArgumentException.With.Message.Contain("Length"));
 
@@ -68,7 +68,9 @@ public class EnumerableTallyConstraintTester : ConstraintTesterBase
 	public void ApplyTo_NullEnumerable_False()
 	{
 		var subject = new EnumerableTallyConstraint(Is.AtLeast(0));
+#pragma warning disable CS8600
 		Assert.That(matches(subject, (IEnumerable)null), Is.False);
+#pragma warning restore
 	}
 
 	[Test]
@@ -105,9 +107,11 @@ public class EnumerableTallyConstraintTester : ConstraintTesterBase
 	public void WriteMessageTo_NullEnumerable_ExpectedContainsIEnumerable_ActualConstainsNull()
 	{
 		var subject = new EnumerableTallyConstraint(Is.AtLeast(0));
+#pragma warning disable CS8600
 		Assert.That(getMessage(subject, (IEnumerable)null), Does.
 			StartWith(TextMessageWriter.Pfx_Expected + "instance of <System.Collections.IEnumerable>").And
 			.Contains(TextMessageWriter.Pfx_Actual + "null"));
+#pragma warning restore
 	}
 
 	[Test]
