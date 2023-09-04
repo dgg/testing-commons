@@ -55,6 +55,10 @@
 	  <PackageReference Include="NUnit" Version="3.13.3" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Testing.Commons\Testing.Commons.csproj" />
+	</ItemGroup>
+
 	<Target Name="PostClean" AfterTargets="Clean">
 		<!-- obj -->
 		<RemoveDir Directories="$(BaseIntermediateOutputPath)" />
