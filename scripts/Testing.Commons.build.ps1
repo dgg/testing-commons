@@ -1,5 +1,5 @@
 properties {
-	$configuration = 'Debug'
+	$configuration = 'Release'
 	$verbosity = 'q'
 
 	$BASE_DIR
@@ -68,6 +68,14 @@ task Publish -depends Restore, Compile, Pack {
 	Get-ChildItem -Recurse |
 	Where-Object { $_.Name -match '.nupkg' } |
 	push
+}
+
+task VerifyCI {
+	exec { & act `
+			-P ubuntu-22.04=catthehacker/ubuntu:pwsh-22.04 `
+			--artifact-server-path ./release/artifacts `
+			-q
+	}
 }
 
 function push {
