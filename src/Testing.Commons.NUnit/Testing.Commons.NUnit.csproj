@@ -52,12 +52,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="ExpectedObjects" Version="1.3.1.0" />
-	  <PackageReference Include="NUnit" Version="3.13.3" />
+		<PackageReference Include="ExpectedObjects" Version="1.3.1.0" />
+		<PackageReference Include="NUnit" Version="[3.13.3]" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Testing.Commons\Testing.Commons.csproj" />
+		<ProjectReference Include="..\Testing.Commons\Testing.Commons.csproj" />
 	</ItemGroup>
 
 	<Target Name="PostClean" AfterTargets="Clean">
