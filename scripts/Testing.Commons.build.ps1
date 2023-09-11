@@ -1,6 +1,7 @@
 properties {
 	$configuration = 'Release'
 	$verbosity = 'q'
+	$nuget_apikey
 
 	$BASE_DIR
 	$RELEASE_DIR
@@ -86,6 +87,11 @@ function push {
 		[Parameter(ValueFromPipeline = $true)][System.IO.FileInfo]$nupkg
 	)
 	PROCESS {
-		exec { & dotnet nuget push -s nuget.org $nupkg.FullName }
+		if ($null -eq $Env:NUGET_KEY) {
+			Write-Error 'Environment variable $NUGET_KEY not set'
+		}
+		else {
+			exec { & dotnet nuget push -s nuget.org $nupkg.FullName --api-key $Env:NUGET_KEY }
+		}
 	}
 }
