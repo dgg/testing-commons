@@ -1,4 +1,6 @@
-﻿namespace Testing.Commons.Serialization
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Testing.Commons.Serialization
 {
 	/// <summary>
 	/// Provides extensions to facilite the usage of <see cref="JsonString"/>.
@@ -14,7 +16,7 @@
 		/// </remarks>
 		/// <param name="json">JSON string in compact form.</param>
 		/// <returns>The expanded JSON.</returns>
-		public static string Jsonify(this string json)
+		public static string Jsonify([NotNull] this string json)
 		{
 			return JsonString.jsonify(json);
 		}

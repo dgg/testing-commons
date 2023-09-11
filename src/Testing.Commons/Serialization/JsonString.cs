@@ -1,71 +1,74 @@
-﻿using System.Collections.Generic;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 
-namespace Testing.Commons.Serialization
+namespace Testing.Commons.Serialization;
+
+/// <summary>
+/// Allows easier creation of JSON strings by removing the need to scape quotes.
+/// </summary>
+/// <remarks>A compact JSON string notation uses single quotes for names and string values instead
+/// of double quotes, removing the need to escape such double quotes.
+/// <para>And expanded JSON string uses the canonical double quote style for names an string values.</para>
+/// <para>All string comparisons are performed using case-sensitive <see cref="CultureInfo.CurrentCulture"/>.</para>
+/// </remarks>
+/// <example>The string <code>"{\"property\"=\"value\"}"</code> can be written
+/// as <code>"{'property'='value'}"</code></example>
+public class JsonString
 {
+	private readonly string _json;
 	/// <summary>
-	/// Allows easier creation of JSON strings by removing the need to scape quotes.
+	/// Creates a instance of an easier to write JSON string.
+	/// </summary>
+	/// <param name="json">Compact JSON string (single quotes instead of scaped double quotes)</param>
+	public JsonString([NotNull] string json)
+	{
+		_json = jsonify(json);
+	}
+
+	internal static string jsonify([NotNull] string json)
+	{
+		Arg.ThrowIfNullOrEmpty(json, nameof(json));
+		return json.Replace("'", "\"", false, CultureInfo.CurrentCulture);
+	}
+
+	/// <summary>
+	/// Returns the non-compact version of the compact JSON string provided.
+	/// </summary>
+	/// <returns>The expanded JSON.</returns>
+	public override string ToString()
+	{
+		return _json;
+	}
+
+	/// <summary>
+	/// Returns the expanded version of the compact JSON string provided.
+	/// </summary>
+	/// <param name="instance">The compact JSON string.</param>
+	public static implicit operator string([NotNull] JsonString instance)
+	{
+		return instance._json;
+	}
+
+	/// <summary>
+	/// Allows comparing expanded JSON strings to compact JSON ones.
 	/// </summary>
 	/// <remarks>A compact JSON string notation uses single quotes for names and string values instead
 	/// of double quotes, removing the need to escape such double quotes.
-	/// <para>And expanded JSON string uses the canonical double quote style for names an string values.</para>
+	/// <para>An expanded JSON string uses the canonical double quote style for names an string values.</para>
 	/// </remarks>
-	/// <example>The string <code>"{\"property\"=\"value\"}"</code> can be written
-	/// as <code>"{'property'='value'}"</code></example>
-	public class JsonString
+	public static IEqualityComparer<string> Comparer { get; } = new JsonStringComparer();
+
+	private class JsonStringComparer : IEqualityComparer<string>
 	{
-		private readonly string _json;
-		/// <summary>
-		/// Creates a instance of an easier to write JSON string.
-		/// </summary>
-		/// <param name="json">Compact JSON string (single quotes instead of scaped double quotes)</param>
-		public JsonString(string json)
+		public bool Equals(string? x, string? y)
 		{
-			_json = jsonify(json);
+			Arg.ThrowIfNullOrEmpty(x, nameof(x));
+			return StringComparer.CurrentCulture.Equals(jsonify(x), y);
 		}
 
-		internal static string jsonify(string s)
+		public int GetHashCode(string obj)
 		{
-			return s == null ? null : s.Replace("'", "\"");
-		}
-
-		/// <summary>
-		/// Returns the non-compact version of the compact JSON string provided.
-		/// </summary>
-		/// <returns>The expanded JSON.</returns>
-		public override string ToString()
-		{
-			return _json;
-		}
-
-		/// <summary>
-		/// Returns the expanded version of the compact JSON string provided.
-		/// </summary>
-		/// <param name="instance">The compact JSON string.</param>
-		public static implicit operator string(JsonString instance)
-		{
-			return instance._json;
-		}
-
-		/// <summary>
-		/// Allows comparing expanded JSON strings to compact JSON ones.
-		/// </summary>
-		/// <remarks>A compact JSON string notation uses single quotes for names and string values instead
-		/// of double quotes, removing the need to escape such double quotes.
-		/// <para>An expanded JSON string uses the canonical double quote style for names an string values.</para>
-		/// </remarks>
-		public static IEqualityComparer<string> Comparer = new JsonStringComparer();
-
-		private class JsonStringComparer : IEqualityComparer<string>
-		{
-			public bool Equals(string x, string y)
-			{
-				return x.Jsonify().Equals(y);
-			}
-
-			public int GetHashCode(string obj)
-			{
-				return obj.Jsonify().GetHashCode();
-			}
+			return obj.Jsonify().GetHashCode(StringComparison.CurrentCulture);
 		}
 	}
 }

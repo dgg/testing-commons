@@ -1,4 +1,4 @@
-using System.IO;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 using System.Xml;
 
@@ -16,22 +16,22 @@ namespace Testing.Commons.Serialization
 		/// <param name="toDeserialize">String representation of the serialized object to be data contract-deserialized.</param>
 		/// <typeparam name="T">Type to be deserialized.</typeparam>
 		/// <returns>The deserialized object.</returns>
-		public T Deserialize<T>(string toDeserialize)
+		public T Deserialize<T>([NotNull] string toDeserialize)
 		{
-			using (StringReader sr = new StringReader(toDeserialize))
+			ArgumentNullException.ThrowIfNull(toDeserialize, nameof(toDeserialize));
+
+			using var sr = new StringReader(toDeserialize);
+			using XmlReader xr = XmlReader.Create(sr);
+			try
 			{
-				XmlReader xr = XmlReader.Create(sr);
-				try
-				{
-					var serializer = new DataContractSerializer(typeof(T));
-					T deserialized = (T)serializer.ReadObject(xr);
-					return deserialized;
-				}
-				finally
-				{
-					xr.Finalize();
-					sr.Finalize();
-				}
+				var serializer = new DataContractSerializer(typeof(T));
+				T deserialized = (T)(serializer.ReadObject(xr) ?? throw new SerializationException(Resources.Exceptions.CannotReadObject));
+				return deserialized;
+			}
+			finally
+			{
+				xr.Close();
+				sr.Close();
 			}
 		}
 	}

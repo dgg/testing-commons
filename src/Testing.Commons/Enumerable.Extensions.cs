@@ -1,23 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using System.Diagnostics.CodeAnalysis;
 
-namespace Testing.Commons
+namespace Testing.Commons;
+
+/// <summary>
+/// Allows extensions of IEnumerable that are useful for testing
+/// </summary>
+public static class EnumerableExtensions
 {
 	/// <summary>
-	/// Allows extensions of IEnumerable that are useful for testing
+	/// Iterates a given enumerable.
 	/// </summary>
-	public static class EnumerableExtensions
+	/// <remarks>When testing, the lazy nature of enumerables might give false positives. This provides an easy way to evaluate the enumerable.</remarks>
+	/// <typeparam name="T">The type of objects to enumerate</typeparam>
+	/// <param name="enumerable">Enumerable to be iterated.</param>
+	public static void Iterate<T>([NotNull] this IEnumerable<T> enumerable)
 	{
-		/// <summary>
-		/// Iterates a given enumerable.
-		/// </summary>
-		/// <remarks>When testing, the lazy nature of enumerables might give false positives. This provides an easy way to evaluate the enumerable.</remarks>
-		/// <typeparam name="T">The type of objects to enumerate</typeparam>
-		/// <param name="enumerable">Enumerable to be iterated.</param>
-		public static void Iterate<T>(this IEnumerable<T> enumerable)
-		{
-			// ReSharper disable UnusedVariable
-			foreach (var v in enumerable) { }
-			// ReSharper restore UnusedVariable
-		}
+		ArgumentNullException.ThrowIfNull(enumerable, nameof(enumerable));
+
+		foreach (var _ in enumerable) { }
 	}
 }

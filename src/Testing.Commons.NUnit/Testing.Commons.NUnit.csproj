@@ -1,99 +1,70 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D1EC2C82-5C90-43B7-BDAB-A37C8C355EF6}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Testing.Commons.NUnit</RootNamespace>
-    <AssemblyName>Testing.Commons.NUnit</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ResolveNuGetPackages>false</ResolveNuGetPackages>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;NET</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;NET</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Testing.Commons.NUnit.XML</DocumentationFile>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="ExpectedObjects, Version=1.3.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\ExpectedObjects.1.3.1\lib\net40\ExpectedObjects.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=3.6.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NUnit.3.6.1\lib\net40\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Web.Extensions" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ArrangingTest.cs" />
-    <Compile Include="Constraints\Closeness.cs" />
-    <Compile Include="Constraints\ComposablePropertyConstraint.cs" />
-    <Compile Include="Constraints\ConjunctionConstraint.cs" />
-    <Compile Include="Constraints\ConstrainedEnumerable.cs" />
-    <Compile Include="Constraints\DelegatingConstraint.cs" />
-    <Compile Include="Constraints\DeserializationConstraint.cs" />
-    <Compile Include="Constraints\DeserializationConstraint.net.cs" />
-    <Compile Include="Constraints\EnumerableCountConstraint.cs" />
-    <Compile Include="Constraints\JsonEqualConstraint.cs" />
-    <Compile Include="Constraints\JsonExtensions.cs" />
-    <Compile Include="Constraints\MatchingConstraint.cs" />
-    <Compile Include="Constraints\Must.Extensions.Time.cs" />
-    <Compile Include="Constraints\Name.cs" />
-    <Compile Include="Constraints\NoPropertyChangedConstraint.cs" />
-    <Compile Include="Constraints\NoPropertyChangingConstraint.cs" />
-    <Compile Include="Constraints\NoRaisingConstraint.cs" />
-    <Compile Include="Constraints\PropertyChangedConstraint.cs" />
-    <Compile Include="Constraints\PropertyChangingConstraint.cs" />
-    <Compile Include="Constraints\RaisingConstraint.cs" />
-    <Compile Include="Constraints\SerializationConstraint.cs" />
-    <Compile Include="Constraints\SerializationConstraint.net.cs" />
-    <Compile Include="Constraints\Support\ConstraintTesterBase.cs" />
-    <Compile Include="Constraints\Support\ExposingWriter.cs" />
-    <Compile Include="Constraints\Support\MessageWriterExtensions.cs" />
-    <Compile Include="Constraints\Support\Operator.cs" />
-    <Compile Include="Constraints\Support\WritableEqualityResult.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\NUnit_AssemblyInfo.cs" />
-    <Compile Include="Resources\Exceptions.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Testing.Commons\Testing.Commons.csproj">
-      <Project>{45732451-E1A2-4CAC-88C9-D52F055883D3}</Project>
-      <Name>Testing.Commons</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+		<CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Description>Utility classes and extensions to facilitate testing with NUnit.</Description>
+		<Product>Testing.Commons.NUnit</Product>
+		<Copyright>Copyright © Daniel Gonzalez Garcia 2011</Copyright>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Authors>Daniel González García</Authors>
+		<PackageProjectUrl>https://github.com/dgg/testing-commons</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/dgg/testing-commons.git</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageIconUrl>https://raw.githubusercontent.com/wiki/dgg/testing-commons/img/Testing.Commons.NUnit.logo.png</PackageIconUrl>
+		<PackageIcon>Testing.Commons.NUnit.logo.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageTags>.net;dotnet;C#;testing;unit-testing;NUnit;constraint</PackageTags>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Version>5.0.0.0</Version>
+		<AssemblyVersion>5.0.0.0</AssemblyVersion>
+		<FileVersion>5.0.0.0</FileVersion>
+		<PackageVersion>5.0.0.0</PackageVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+			<_Parameter1>$(AssemblyName).Tests</_Parameter1>
+		</AssemblyAttribute>
+		<AssemblyAttribute Include="System.CLSCompliantAttribute">
+			<_Parameter1>false</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="../../assets/Testing.Commons.NUnit.logo.png" Pack="true" PackagePath="/" />
+		<None Include="../../LICENSE" Pack="true" PackagePath="" />
+		<None Include="../../README.md" Pack="true" PackagePath="/" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="ExpectedObjects" Version="1.3.1.0" />
+		<PackageReference Include="NUnit" Version="[3.13.3]" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Testing.Commons\Testing.Commons.csproj" />
+	</ItemGroup>
+
+	<Target Name="PostClean" AfterTargets="Clean">
+		<!-- obj -->
+		<RemoveDir Directories="$(BaseIntermediateOutputPath)" />
+		<!-- bin -->
+		<RemoveDir Directories="$(BaseOutputPath)" />
+	</Target>
+
 </Project>
