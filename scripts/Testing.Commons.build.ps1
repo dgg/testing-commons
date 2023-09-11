@@ -71,9 +71,12 @@ task Publish -depends Restore, Compile, Pack {
 }
 
 task VerifyCI {
+	$artifacts_dir = Join-Path $RELEASE_DIR artifacts
+	$workflow = Join-Path $BASE_DIR .github workflows build.yml
 	exec { & act `
+			-W $workflow `
 			-P ubuntu-22.04=catthehacker/ubuntu:pwsh-22.04 `
-			--artifact-server-path ./release/artifacts `
+			--artifact-server-path $artifacts_dir `
 			-q
 	}
 }

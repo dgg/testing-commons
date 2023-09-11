@@ -37,9 +37,10 @@ jobs:
       #  shell: pwsh
       #  run: ./build.ps1
       - name: Test Reporter
+        if: ${{ !env.ACT }}
         uses: dorny/test-reporter@v1.6.0
         with:
-          name: dotnet Tests
+          name: Test Report
           path: "./release/TestResults/*.trx"
           reporter: dotnet-trx
           fail-on-error: true
