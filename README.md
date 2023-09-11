@@ -2,7 +2,7 @@
 # What
 **Testing.Commons** contains classes and extensions that help testing code in general and more specific areas such as configuration and web artifacts.
 
-[![testing.commons build status](https://ci.appveyor.com/api/projects/status/sy7ay9i97l28f1s3?svg=true&passingText=testing-commons)](https://ci.appveyor.com/project/dgg/testing-commons-5jvxr)
+[![testing.commons build](https://github.com/dgg/testing-commons/actions/workflows/build.yml/badge.svg)](https://github.com/dgg/testing-commons/actions/workflows/build.yml)
 
 # Why
 For some time now I have been testing code from different applications using different testing frameworks.
@@ -22,11 +22,14 @@ NUnit offers multiple extensibility points of which I have taken advantage to ex
 This library will contain NUnit-dependant code, mostly custom constraints.
 
 ## Testing.Commons.ServiceStack
-[ServiceStack](https://github.com/ServiceStackV3/ServiceStackV3) has turned into my default weapon of choice when developing services.
+> **DEPRECATED** <br/>
+> Having moved to target .NET 6 (previously .NET Core), _Testing.Commons.ServiceStack_ has been deprecated and __will not__ be receiving further improvements.
 
-Although it does not receive the focus on testing like other frameworks (such as [NancyFx](http://nancyfx.org/)),
+~~[ServiceStack](https://github.com/ServiceStackV3/ServiceStackV3) has turned into my default weapon of choice when developing services.~~
+
+~~Although it does not receive the focus on testing like other frameworks (such as [NancyFx](http://nancyfx.org/)),
 with very little extra work, you can test your services end to end (should you want to do so) or
-test a single feature of your services in an integrated manner.
+test a single feature of your services in an integrated manner.~~
 
-__Testing.Commons.ServiceStack__ provides that extra work, so that you only focus in what is important:
-the correctness of your services.
+~~__Testing.Commons.ServiceStack__ provides that extra work, so that you only focus in what is important:
+the correctness of your services.~~
