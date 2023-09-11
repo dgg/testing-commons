@@ -4,6 +4,14 @@
 
 [![testing.commons build](https://github.com/dgg/testing-commons/actions/workflows/build.yml/badge.svg)](https://github.com/dgg/testing-commons/actions/workflows/build.yml)
 
+![Nuget Testing.Commons](https://img.shields.io/nuget/v/testing.commons?logo=nuget&label=Testing.Commons)<br/>
+![Nuget Testing.Commons.NUnit](https://img.shields.io/nuget/v/testing.commons.nunit?logo=nuget&label=Testing.Commons.NUnit)
+
+
+![GitHub tag Testing.Commons)](https://img.shields.io/github/v/tag/dgg/testing-commons?logo=github&filter=v*&label=Testing.Commons)<br/>
+![GitHub tag Testing.Commons.NUnit)](https://img.shields.io/github/v/tag/dgg/testing-commons?logo=github&filter=nunit*&label=Testing.Commons.NUnit)
+
+
 # Why
 For some time now I have been testing code from different applications using different testing frameworks.
 Testing frameworks are awesome (some more than others) but they cannot cover all cases I found and sometimes they should not even try.
