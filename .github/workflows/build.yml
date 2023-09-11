@@ -36,6 +36,14 @@ jobs:
       #- name: Build-All
       #  shell: pwsh
       #  run: ./build.ps1
+      - name: Test Reporter
+        uses: dorny/test-reporter@v1.6.0
+        with:
+          name: dotnet Tests
+          path: "./release/TestResults/*.trx"
+          reporter: dotnet-trx
+          fail-on-error: true
+
       - name: Upload trx
         uses: actions/upload-artifact@v3
         with:
