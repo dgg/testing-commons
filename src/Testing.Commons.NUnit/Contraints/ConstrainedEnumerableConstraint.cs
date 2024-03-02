@@ -129,6 +129,8 @@ public class ConstrainedEnumerableConstraint : Constraint
 			return new IndexedResult(_items, _index, _constraint, _constraint.ApplyTo(actual));
 		}
 
+		public override string Description { get; }
+
 		class IndexedResult : ConstraintResult
 		{
 			private readonly Array _items;

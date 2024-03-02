@@ -50,7 +50,6 @@ public class ComposablePropertyConstraintTester : ConstraintTesterBase
 	}
 
 
-
 	[Test]
 	public void WriteMessageTo_FailingConstraint_ContainsSpecificMessage()
 	{
@@ -62,13 +61,12 @@ public class ComposablePropertyConstraintTester : ConstraintTesterBase
 	}
 
 
-
 	[Test]
 	public void WriteMessageTo_FailingConstraint_ActualContainsActual()
 	{
 		var subject = new ComposablePropertyConstraint(
-	nameof(FlatCustomer.Name),
-	Is.EqualTo("lol"));
+			nameof(FlatCustomer.Name),
+			Is.EqualTo("lol"));
 
 		Assert.That(getMessage(subject, new FlatCustomer { Name = "Bob" }),
 			Does.Contain(TextMessageWriter.Pfx_Actual + "\"Bob\"")
@@ -76,5 +74,4 @@ public class ComposablePropertyConstraintTester : ConstraintTesterBase
 	}
 
 	#endregion
-
 }

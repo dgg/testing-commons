@@ -119,6 +119,7 @@ public class EnumerableTallyConstraintTester : ConstraintTesterBase
 	{
 		IEnumerable e = new[] { '1', '2', '3' }.Where(i => i <= '2');
 		var subject = new EnumerableTallyConstraint(Is.GreaterThan(4));
+
 		Assert.That(getMessage(subject, e), Does
 			.StartWith(TextMessageWriter.Pfx_Expected + "number of elements greater than 4").And
 			.Contains(TextMessageWriter.Pfx_Actual + "2 -> < '1', '2' >"));

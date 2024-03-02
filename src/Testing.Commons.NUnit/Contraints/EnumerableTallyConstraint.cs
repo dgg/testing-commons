@@ -43,6 +43,8 @@ public class EnumerableTallyConstraint : Constraint
 		return result;
 	}
 
+	public override string Description { get; }
+
 	private static ushort calculateCount(IEnumerable current)
 	{
 		ushort num = 0;

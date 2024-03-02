@@ -42,7 +42,7 @@ public abstract class ArrangingTest<TSubject>
 	protected abstract TSubject initSubject();
 
 	/// <summary>
-	/// Override thos method to perform cleanup tasks after every test.
+	/// Override this method to perform cleanup tasks after every test.
 	/// </summary>
 	protected virtual void doCleanup() { }
 }

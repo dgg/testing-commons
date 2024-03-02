@@ -65,7 +65,6 @@ public class ConjunctionConstraint : Constraint
 			sb.Append(_beingMatched?.Description);
 			return sb.ToString();
 		}
-		protected set { }
 	}
 
 	internal class ConjuctionConstraintResult : ConstraintResult

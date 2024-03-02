@@ -7,7 +7,7 @@ using Testing.Commons.NUnit.Tests.Subjects;
 namespace Testing.Commons.NUnit.Tests.Constraints;
 
 [TestFixture]
-public class ConjuctionContraintTester : ConstraintTesterBase
+public class ConjuctionConstraintTester : ConstraintTesterBase
 {
 	#region ApplyTo
 
