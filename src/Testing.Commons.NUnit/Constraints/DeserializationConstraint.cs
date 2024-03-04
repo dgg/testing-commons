@@ -43,7 +43,7 @@ public class DeserializationConstraint<T> : Constraint
 		try
 		{
 			// do not know why we need to use null coalescing op
-			deserialized = getDeserializedObject(actual.ToString() ?? string.Empty);
+			deserialized = getDeserializedObject(actual!.ToString() ?? string.Empty);
 			result = _constraintOverDeserialized.ApplyTo(deserialized);
 		}
 		catch (Exception caught)
@@ -51,7 +51,7 @@ public class DeserializationConstraint<T> : Constraint
 			ex = caught;
 		}
 #pragma warning restore CA1031
-		return new DeserializationResult(ex, deserialized, result, this, actual, (result?.IsSuccess).GetValueOrDefault());
+		return new DeserializationResult(ex, deserialized, result, this, actual!, (result?.IsSuccess).GetValueOrDefault());
 	}
 
 

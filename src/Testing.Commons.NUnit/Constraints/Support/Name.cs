@@ -2,7 +2,7 @@
 using System.Reflection;
 using Testing.Commons.NUnit.Resources;
 
-namespace Testing.Commons.NUnit.Constraints
+namespace Testing.Commons.NUnit.Constraints.Support
 {
 	internal static class Name
 	{

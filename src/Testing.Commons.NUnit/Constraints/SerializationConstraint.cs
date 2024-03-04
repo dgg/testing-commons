@@ -46,7 +46,7 @@ public class SerializationConstraint<T> : Constraint
 #pragma warning disable CA1031
 		try
 		{
-			T deserialized = getDeserializedObject((T)((object)actual));
+			T deserialized = getDeserializedObject((T)((object)actual!));
 			result = _constraintOverDeserialized.ApplyTo(deserialized);
 		}
 		catch (Exception caught)
@@ -54,7 +54,7 @@ public class SerializationConstraint<T> : Constraint
 			ex = caught;
 		}
 #pragma warning restore CA1031
-		return new SerializationResult(ex, result, this, actual, (result?.IsSuccess).GetValueOrDefault());
+		return new SerializationResult(ex, result, this, actual!, (result?.IsSuccess).GetValueOrDefault());
 	}
 
 	/// <summary>

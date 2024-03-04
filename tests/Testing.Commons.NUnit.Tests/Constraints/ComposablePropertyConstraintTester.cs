@@ -1,4 +1,3 @@
-using NUnit.Framework.Constraints;
 using NUnit.Framework.Internal;
 using Testing.Commons.NUnit.Constraints;
 using Testing.Commons.NUnit.Constraints.Support;

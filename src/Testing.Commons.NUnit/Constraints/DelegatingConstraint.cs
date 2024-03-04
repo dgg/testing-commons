@@ -20,7 +20,7 @@ public abstract class DelegatingConstraint : Constraint
 	/// <returns>A ConstraintResult</returns>
 	public override ConstraintResult ApplyTo<TActual>(TActual actual)
 	{
-		return new DelegatingResult(Delegate, matches(actual));
+		return new DelegatingResult(Delegate, matches(actual!));
 	}
 
 	/// <summary>

@@ -45,7 +45,7 @@ public abstract class NoRaisingConstraint<TSubject, TEventArgs> : Constraint whe
 	/// <returns>A ConstraintResult</returns>
 	public override ConstraintResult ApplyTo<TActual>(TActual actual)
 	{
-		return new NoRaisingResult(EventName, this, actual, !_eventRaised);
+		return new NoRaisingResult(EventName, this, actual!, !_eventRaised);
 	}
 
 	/// <summary>

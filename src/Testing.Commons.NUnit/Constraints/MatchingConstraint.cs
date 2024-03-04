@@ -41,7 +41,7 @@ public class MatchingConstraint : Constraint
 			_writer.GetFormattedResults();
 			_exposed = _writer.Exposed;
 		}
-		return new MatchingResult(_exposed, this, actual, matched);
+		return new MatchingResult(_exposed, this, actual!, matched);
 	}
 
 	/// <summary>

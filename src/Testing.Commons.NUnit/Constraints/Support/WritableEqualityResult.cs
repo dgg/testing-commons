@@ -5,7 +5,7 @@ using NUnit.Framework.Internal;
 namespace Testing.Commons.NUnit.Constraints.Support;
 
 /// <summary>
-/// Adapter that allows writting an instance of <see cref="EqualityResult"/> to a <see cref="MessageWriter"/>.
+/// Adapter that allows writing an instance of <see cref="EqualityResult"/> to a <see cref="MessageWriter"/>.
 /// </summary>
 internal class WritableEqualityResult : EqualityResult
 {
@@ -32,9 +32,9 @@ internal class WritableEqualityResult : EqualityResult
 		{
 			writer.Write("element was missing");
 		}
-		else if (Actual is IUnexpectedElement)
+		else if (Actual is IUnexpectedElement element)
 		{
-			writer.WriteActualValue(((IUnexpectedElement)Actual).Element);
+			writer.WriteActualValue(element.Element);
 		}
 		else
 		{

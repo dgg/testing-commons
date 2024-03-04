@@ -35,14 +35,15 @@ public class EnumerableTallyConstraint : Constraint
 		ConstraintResult result = _beingMatched.ApplyTo(actual);
 		if (result.IsSuccess)
 		{
-			var collection = (IEnumerable)actual;
-			ushort count = calculateCount(collection);
+			var collection = (IEnumerable)actual!;
+			ushort count = calculateCount(collection!);
 			_beingMatched = new CountConstraint(_countConstraint, collection);
 			result = _beingMatched.ApplyTo(count);
 		}
 		return result;
 	}
 
+	/// <inheritdoc />
 	public override string Description { get; }
 
 	private static ushort calculateCount(IEnumerable current)
@@ -67,7 +68,7 @@ public class EnumerableTallyConstraint : Constraint
 
 		public override ConstraintResult ApplyTo<TActual>(TActual actual)
 		{
-			return new TypeRevealingResult(this, actual, base.ApplyTo(actual));
+			return new TypeRevealingResult(this, actual!, base.ApplyTo(actual));
 		}
 
 		class TypeRevealingResult : ConstraintResult

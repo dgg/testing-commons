@@ -44,7 +44,7 @@ public class ConjunctionConstraint : Constraint
 			if (!result.IsSuccess)
 			{
 				_beingMatched = constraint;
-				return new ConjuctionConstraintResult(this, actual, result);
+				return new ConjuctionConstraintResult(this, actual!, result);
 			}
 		}
 		return new ConstraintResult(this, actual, true);
