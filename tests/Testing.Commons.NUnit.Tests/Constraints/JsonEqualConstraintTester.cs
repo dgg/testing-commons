@@ -91,4 +91,11 @@ public class JsonEqualConstraintTester : ConstraintTesterBase
 		var actual = "{\"prop\"=\"value\"}";
 		Assert.That(actual, Is.EqualTo("{'prop'='value'}").AsJson());
 	}
+
+	[Test]
+	public void LessNeeded_WhenUsingStringLiterals()
+	{
+		var actual = """{"prop"="value"}""";
+		Assert.That(actual, Is.EqualTo("""{"prop"="value"}"""));
+	}
 }
