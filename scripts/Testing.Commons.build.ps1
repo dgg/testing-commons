@@ -29,18 +29,16 @@ task Compile {
 
 task Test {
 	$test_projects = @('Testing.Commons.Tests', 'Testing.Commons.NUnit.Tests')
+	$test_results_dir = Join-Path $RELEASE_DIR TestResults
+    $runsettings_path = Join-Path $BASE_DIR tests .runsettings
 	foreach ($test_project in $test_projects) {
 		$tests_dir = Join-Path $BASE_DIR tests $test_project
-		$trx = Join-Path TestResults "$test_project.trx"
-		$html = Join-Path TestResults "$test_project.html"
 
 		exec {
-			& dotnet test --no-build -c $configuration --nologo -v $verbosity $tests_dir `
-				--results-directory $RELEASE_DIR `
-				-l:"console;verbosity=minimal;NoSummary=true" `
-				-l:"trx;LogFileName=$trx" `
-				-l:"html;LogFileName=$html" `
-				-- NUnit.TestOutputXml=TestResults NUnit.OutputXmlFolderMode=RelativeToResultDirectory
+			& dotnet run --no-build -c $configuration -v $verbosity --project $tests_dir -- `
+            --results-directory $test_results_dir `
+            --coverage --coverage-output-format cobertura --coverage-output "$test_project.cobertura.xml" `
+            --settings $runsettings_path
 		}
 	}
 
