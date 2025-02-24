@@ -5,7 +5,7 @@ internal class UppercaseConstraint : Constraint
 {
 	public override ConstraintResult ApplyTo<TActual>(TActual actual)
 	{
-		return new ConstraintResult(this, actual, match(actual));
+		return new ConstraintResult(this, actual, match(actual!));
 	}
 
 	private bool match(object current)

@@ -19,7 +19,7 @@ public static class JsonExtensions
 	/// <param name="constraint">The constraint to modify.</param>
 	/// <returns>The modified constraint.</returns>
 	/// <example><code>Assert.That("{\"prop\"=\"value\"}", Is.EqualTo("{'prop'='value'}").AsJson())</code></example>
-	public static EqualConstraint AsJson([NotNull] this EqualConstraint constraint)
+	public static EqualUsingConstraint<string> AsJson([NotNull] this EqualStringConstraint constraint)
 	{
 		return constraint.Using(JsonString.Comparer);
 	}

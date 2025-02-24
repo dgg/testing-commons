@@ -20,6 +20,7 @@ public class EnumerableTallyConstraint : Constraint
 	public EnumerableTallyConstraint([NotNull] Constraint countConstraint)
 	{
 		_countConstraint = countConstraint;
+		Description = string.Empty;
 	}
 
 	private Constraint? _beingMatched;

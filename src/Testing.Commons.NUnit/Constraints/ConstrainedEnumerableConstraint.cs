@@ -122,6 +122,7 @@ public class ConstrainedEnumerableConstraint : Constraint
 			_items = items;
 			_index = index;
 			_constraint = constraint.Resolve();
+			Description = string.Empty;
 		}
 
 		public override ConstraintResult ApplyTo<TActual>(TActual actual)

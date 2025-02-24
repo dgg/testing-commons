@@ -44,7 +44,7 @@ public class ConstrainedEnumerableConstraintTester : ConstraintTesterBase
 			notEvaluated = Substitute.For<Constraint>();
 
 		var subject = new ConstrainedEnumerableConstraint(failing, notEvaluated);
-		failing.ApplyTo(-1).Returns(new ConstraintResult(null, null, false));
+		failing.ApplyTo(-1).Returns(new ConstraintResult(null!, null, false));
 
 		subject.ApplyTo(new[] { -1, 2 });
 
@@ -68,8 +68,8 @@ public class ConstrainedEnumerableConstraintTester : ConstraintTesterBase
 			notEvaluated = Substitute.For<Constraint>();
 
 		var subject = new ConstrainedEnumerableConstraint(failing, notEvaluated);
-		passing.ApplyTo(1).Returns(new ConstraintResult(null, null, false));
-		failing.ApplyTo(-2).Returns(new ConstraintResult(null, null, false));
+		passing.ApplyTo(1).Returns(new ConstraintResult(null!, null, false));
+		failing.ApplyTo(-2).Returns(new ConstraintResult(null!, null, false));
 
 		subject.ApplyTo(new[] { 1, -2, 3 });
 
