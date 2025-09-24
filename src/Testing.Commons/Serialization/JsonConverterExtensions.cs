@@ -65,7 +65,7 @@ public static class JsonConverterExtensions
 	/// </summary>
 	/// <param name="json">JSON text to parse.</param>
 	/// <returns>A <see cref="JsonObject"/> representation of the JSON value.</returns>
-	/// <exception cref="ArgumentException">The text provided by <paramref name="json"/> is not a <see cref="JsonObject"/>.</exception>
+	/// <exception cref="InvalidOperationException">The text provided by <paramref name="json"/> is not a <see cref="JsonObject"/>.</exception>
 	public static JsonObject ParseObject(this string json)
 	{
 		var nodeOpts = new JsonNodeOptions
@@ -76,7 +76,7 @@ public static class JsonConverterExtensions
 		JsonNode? objNode = JsonNode.Parse(json, nodeOpts);
 		if (objNode is null)
 		{
-			throw new ArgumentException($"String cannot be parsed as '{nameof(JsonObject)}'", nameof(json));
+			throw new InvalidOperationException($"The node must be of type '{nameof(JsonObject)}'");
 		}
 
 		JsonObject obj = objNode.AsObject();
