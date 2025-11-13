@@ -1,4 +1,5 @@
-﻿using NUnit.Framework.Constraints;
+﻿using Microsoft.VisualBasic;
+using NUnit.Framework.Constraints;
 
 namespace Testing.Commons.Tests.Time.Support
 {
@@ -58,5 +59,8 @@ namespace Testing.Commons.Tests.Time.Support
 			var constraint = new SpanConstraint(days, hours, minutes, seconds, milliseconds);
 			return constraint;
 		}
+
+		public static DateOnlyConstraint DateOnly(int year, int month, int day) => new(year, month, day);
+		public static TimeOnlyConstraint TimeOnly(int hour, int minute, int second, int millisecond) => new(hour, minute, second, millisecond);
 	}
 }

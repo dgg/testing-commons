@@ -18,7 +18,7 @@ public class DateConstraint : Constraint
 			Has.Property("Second").EqualTo(second) &
 			Has.Property("Millisecond").EqualTo(milliseconds) &
 			Has.Property("TimeOfDay").EqualTo(new TimeSpan(0, hour, minute, second, milliseconds)) &
-			Has.Property("Kind").EqualTo(DateTimeKind.Unspecified);
+			Has.Property("Kind").EqualTo(DateTimeKind.Utc);
 	}
 
 	public override ConstraintResult ApplyTo<TActual>(TActual actual)

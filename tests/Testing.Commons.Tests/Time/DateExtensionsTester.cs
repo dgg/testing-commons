@@ -14,7 +14,7 @@ public class DateExtensionsTester
 
 		Assert.That(birthday, Is.EqualTo(dtBirthday));
 	}
-
+	
 	[Test]
 	public void Date_Creation_CorrectData()
 	{
