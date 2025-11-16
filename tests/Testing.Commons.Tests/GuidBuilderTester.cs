@@ -50,7 +50,7 @@ public class GuidBuilderTester
 	{
 		string figureDomain = "[0..9] U [a..f]";
 
-		return Throws.InstanceOf<GuidBuilder.NotHexadecimalException>().With
+		return Throws.InstanceOf<NotHexadecimalException>().With
 			.Property("ActualValue").EqualTo(notAFigure)
 			.And.Message.Contain(notAFigureRepresentation)
 			.And.Message.Contain(figureDomain);
@@ -104,7 +104,7 @@ public class GuidBuilderTester
 	{
 		string figureDomain = "[0..15]";
 
-		return Throws.InstanceOf<GuidBuilder.NotHexadecimalException>().With
+		return Throws.InstanceOf<NotHexadecimalException>().With
 			.Property("ActualValue").EqualTo(notAFigure)
 			.And.Message.Contain(notAFigureRepresentation)
 			.And.Message.Contain(figureDomain);
