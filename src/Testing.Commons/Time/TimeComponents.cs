@@ -1,5 +1,16 @@
 namespace Testing.Commons.Time;
 
+/// <summary>
+/// Contains the components that represent several time-related types.
+/// </summary>
+/// <param name="Year">The year component</param>
+/// <param name="Month">The month component</param>
+/// <param name="Day">The day component</param>
+/// <param name="Hour">The hour component</param>
+/// <param name="Minute">The minute component</param>
+/// <param name="Second">The second component</param>
+/// <param name="Millisecond">The millisecond component</param>
+/// <param name="Offset"> The time's offset from Coordinated Universal Time (UTC)</param>
 public readonly record struct TimeComponents(
 	ushort Year = 1,
 	byte Month = 1,
@@ -10,23 +21,38 @@ public readonly record struct TimeComponents(
 	ushort Millisecond = 0,
 	TimeSpan Offset = default)
 {
+	/// <summary>
+	/// Converts the <see cref="TimeComponents"/> to a <see cref="DateOnly"/>.
+	/// </summary>
+	/// <param name="self">The time components to convert.</param>
+	/// <returns>A <see cref="DateOnly"/> instance.</returns>
 	public static implicit operator DateOnly(TimeComponents self) => new(self.Year, self.Month, self.Day);
 
+	/// <summary>
+	/// Converts the <see cref="TimeComponents"/> to a <see cref="TimeOnly"/>.
+	/// </summary>
+	/// <param name="self">The time components to convert.</param>
+	/// <returns>A <see cref="TimeOnly"/> instance.</returns>
 	public static implicit operator TimeOnly(TimeComponents self) =>
 		new(self.Hour, self.Minute, self.Second, self.Millisecond);
 
 	/// <summary>
-	///
+	/// Converts the <see cref="TimeComponents"/> to a <see cref="DateTime"/>.
 	/// </summary>
+	/// <param name="self">The time components to convert.</param>
+	/// <returns>A <see cref="DateTime"/> instance.</returns>
 	/// <remarks>The <see cref="DateTime.Kind"/> property is initialized to <see cref="DateTimeKind.Utc"/> when
 	/// <see cref="Offset"/> is 0, otherwise <see cref="DateTimeKind.Local"/>.</remarks>
-	/// <param name="self"></param>
-	/// <returns></returns>
 	public static implicit operator DateTime(TimeComponents self) => new(
 		self.Year, self.Month, self.Day,
 		self.Hour, self.Minute, self.Second, self.Millisecond,
 		self.Offset.Equals(TimeSpan.Zero) ? DateTimeKind.Utc : DateTimeKind.Local);
 
+	/// <summary>
+	/// Converts the <see cref="TimeComponents"/> to a <see cref="DateTimeOffset"/>.
+	/// </summary>
+	/// <param name="self">The time components to convert.</param>
+	/// <returns>A <see cref="DateTimeOffset"/> instance.</returns>
 	public static implicit operator DateTimeOffset(TimeComponents self) => new(
 		self.Year, self.Month, self.Day,
 		self.Hour, self.Minute, self.Second, self.Millisecond,
