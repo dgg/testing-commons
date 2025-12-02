@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace Testing.Commons.Serialization;
 
 /// <summary>
@@ -13,9 +15,13 @@ public static class SerializationExtensions
 	public static Stream AsStream(this string s)
 	{
 		var stream = new MemoryStream();
-		using var sw = new StreamWriter(stream);
+		var sw = new StreamWriter(stream, Encoding.Unicode);
 		sw.Write(s);
 		sw.Flush();
+
+		stream.Seek(0, SeekOrigin.Begin);
+
+
 		return stream;
 	}
 
@@ -27,13 +33,11 @@ public static class SerializationExtensions
 	/// <remarks>
 	/// The method flushes the stream and resets its position to the beginning before reading.
 	/// </remarks>
-	public static string? ReadString(this Stream stream)
+	public static string ReadString(this Stream stream)
 	{
-		if (stream.Length <= 0) return null;
-
 		stream.Flush();
-		stream.Position = 0;
-		using var sr = new StreamReader(stream);
+		stream.Seek(0, SeekOrigin.Begin);
+		using var sr = new StreamReader(stream, Encoding.Unicode);
 		return sr.ReadToEnd();
 	}
 }
